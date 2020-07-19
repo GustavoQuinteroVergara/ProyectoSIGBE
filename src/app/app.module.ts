@@ -2,15 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RegistrarConvocatoriaComponent } from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component';
-
+import { NavbarComponent } from './components/template/navbar/navbar.component';
+/*SE AÑADE PARA LAS RUTAS*/
+import {RouterModule} from '@angular/router';
+import { ROUTES } from './app.routes';
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrarConvocatoriaComponent
+    NavbarComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(ROUTES,{useHash: true})
   ],
   providers: [],
   bootstrap: [AppComponent]
