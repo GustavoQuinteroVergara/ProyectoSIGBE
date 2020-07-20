@@ -1,0 +1,48 @@
+.caja{
+    float: center;
+    width: 50%;
+    height: 100%;
+   
+    border: 1px solid gray;
+    color: black;
+    float: left;
+    margin: 20px;
+    margin-left: 30%;
+    margin-bottom: 30%;
+    margin-top: 20%;
+    text-align: center;
+    line-height:#444;
+    text-transform: uppercase;
+    border:none;
+    /* box-shadow: 5px 5px 5px black; */
+    
+  
+
+}
+img{
+    
+    text-align: center;
+}
+
+
+
+
+.row{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.btn{
+    background: red;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+h5{
+    color: slategrey;
+}
+
+.logo{
+    margin-top: 10px;
+}
