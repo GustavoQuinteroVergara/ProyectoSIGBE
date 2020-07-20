@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SIGBE-FrontEnd"
+    }
+  },
+  "defaultProject": "SIGBE-FrontEnd",
+  "cli": {
+    "analytics": false
+  }
 }

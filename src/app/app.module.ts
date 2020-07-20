@@ -6,10 +6,12 @@ import { NavbarComponent } from './components/template/navbar/navbar.component';
 /*SE AÑADE PARA LAS RUTAS*/
 import {RouterModule} from '@angular/router';
 import { ROUTES } from './app.routes';
+import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    CrearusuarioComponent
   ],
   imports: [
     BrowserModule,
