@@ -10,7 +10,7 @@ import {RegistrarConvocatoriaComponent} from './components/convocatoria/registra
 export const ROUTES: Routes = [
     /*en PATH : Se pone un nombre cualquiera para luego utilizarlo en el menu - 
     Component : el mismo nombre del import */
-    {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent}
+    {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
 
     /*
     {path: '', pathMatch:'full', redirectTo:'home'},
