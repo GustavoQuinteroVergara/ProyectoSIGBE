@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 
 import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
 
+import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { CrearusuarioComponent } from './components/crearusuario/crearusuario.co
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES,{useHash: true})
+    RouterModule.forRoot(ROUTES,{useHash: true}),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
