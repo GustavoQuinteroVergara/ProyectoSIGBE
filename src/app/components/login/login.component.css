@@ -1,0 +1,82 @@
+.rowImageLogin,
+.divImageInto {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+@keyframes entradalogin {
+    0% {
+        opacity: 0;
+        top: 0%;
+    }
+    100% {
+        opacity: 1;
+        top: 20%;
+    }
+}
+
+.rowform {
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    top: 20%;
+    background: white;
+    padding: 20px;
+    box-shadow: 1px 1px 24px #00000059;
+    animation-name: entradalogin;
+    animation-duration: 2s;
+}
+
+.waves-effect .waves-brown .waves-ripple {
+    /* The alpha value allows the text and background color
+    of the button to still show through. */
+    background-color: rgba(121, 0, 0, 0.65) !important;
+}
+
+.divemail:focus-within,
+.divcontrasena:focus-within {
+    color: #cd1f32;
+    text-shadow: 1px 1px 1px #00000059;
+}
+
+.iconoemailLogin,
+.iconocontrasenas {
+    font-size: 25px;
+    transition: all 400ms;
+}
+
+.divicoemail,
+.divicocontrasena {
+    margin-top: 28px;
+    padding-right: 0px !important;
+    width: 10% !important;
+}
+
+.divicocontrasena {
+    padding-left: 0px !important;
+    width: 7% !important;
+}
+
+
+/* label focus color */
+
+.input-field input:focus+label {
+    color: #cd1f32 !important;
+}
+
+
+/* label underline focus color */
+
+.row .input-field input:focus {
+    border-bottom: 1px solid #cd1f32 !important;
+    box-shadow: 0 1px 0 0 #cd1f32 !important
+}
+
+.containerForm {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #cd1f32;
+}
