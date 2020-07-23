@@ -11,13 +11,15 @@ import { LoginComponent } from './components/login/login.component';
 import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
 
 import {HttpClientModule} from '@angular/common/http';
+import { ListarconvocatoriaComponent } from './components/listarconvocatoria/listarconvocatoria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    CrearusuarioComponent
+    CrearusuarioComponent,
+    ListarconvocatoriaComponent
   ],
   imports: [
     BrowserModule,

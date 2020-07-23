@@ -5,7 +5,7 @@ import {Routes } from '@angular/router';
 import {CrearusuarioComponent} from './components/crearusuario/crearusuario.component';
 
 import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component';
-
+ import {ListarconvocatoriaComponent  } from './components/listarconvocatoria/listarconvocatoria.component';
 
 export const ROUTES: Routes = [
     /*en PATH : Se pone un nombre cualquiera para luego utilizarlo en el menu - 
@@ -15,7 +15,8 @@ export const ROUTES: Routes = [
     /*
     {path: '', pathMatch:'full', redirectTo:'home'},
     {path:'**',pathMatch:'full', redirectTo: 'home'}*/
-    {path:'crearUsuario', component: CrearusuarioComponent}
+    {path:'crearUsuario', component: CrearusuarioComponent},
+    {path:'listarConvocatoria',component: ListarconvocatoriaComponent}
 ]
 
 
