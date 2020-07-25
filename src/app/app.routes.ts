@@ -3,7 +3,7 @@ import {Routes } from '@angular/router';
 
 /*import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'*/
 import {CrearusuarioComponent} from './components/crearusuario/crearusuario.component';
-
+import {LoginComponent} from './components/login/login.component';
 import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component';
 
 
@@ -11,6 +11,8 @@ export const ROUTES: Routes = [
     /*en PATH : Se pone un nombre cualquiera para luego utilizarlo en el menu - 
     Component : el mismo nombre del import */
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
+    {path:'',component: LoginComponent},
+    {path:'**',component: LoginComponent},
 
     /*
     {path: '', pathMatch:'full', redirectTo:'home'},
