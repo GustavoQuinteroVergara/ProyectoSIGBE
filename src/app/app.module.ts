@@ -9,15 +9,18 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
-
+import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'
 import {HttpClientModule} from '@angular/common/http';
+import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    CrearusuarioComponent
+    CrearusuarioComponent,
+    ModificarusuarioComponent,
+    RegistrarConvocatoriaComponent
   ],
   imports: [
     BrowserModule,
