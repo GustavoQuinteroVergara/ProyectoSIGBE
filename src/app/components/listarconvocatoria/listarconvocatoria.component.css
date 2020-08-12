@@ -1,0 +1,36 @@
+.caja{
+    float: center;
+    width: 80%;
+    height: 100%;
+   
+    border: 1px solid gray;
+    color: black;
+    float: center;
+     margin: 20px;
+    margin-left: 10%;
+
+    margin-top: 10% ;
+    text-align: center;
+    line-height:#444;
+    text-transform: uppercase;
+    border:none;
+    /* box-shadow: 5px 5px 5px black; */
+    
+  
+
+}
+
+.logo{
+    padding-top: 10px;
+}
+
+table,td {
+    border: 1px solid darkslategray;
+    text-align: center;
+}
+
+.tabla{
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}

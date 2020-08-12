@@ -1,0 +1,37 @@
+<div class="containerForm">
+    <div class="row rowform">
+        <form class="col s12">
+            <div class="row center rowImageLogin">
+                <div class="input-field col s12 divImageInto">
+                    <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
+                </div>
+            </div>
+            <div class="row divemail">
+                <div class="col s2 divicoemail">
+                    <i class="icofont-ui-message iconoemailLogin"></i>
+                </div>
+                <div class="input-field col s10">
+                    <input #email id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row divcontrasena">
+
+                <div class="input-field col s12">
+                    <div class="col s2 divicocontrasena">
+                        <i class="icofont-key iconocontrasenas"></i>
+                    </div>
+                    <div class="input-field col s10">
+                        <input #contrasena id="password" type="password">
+                        <label for="password">Contraseña</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="input-field col s12">
+                    <a class="waves-effect waves-light btn red" (click)="buscarUsuario(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesion</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
