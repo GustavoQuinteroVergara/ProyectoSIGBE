@@ -12,6 +12,7 @@ import { CrearusuarioComponent } from './components/crearusuario/crearusuario.co
 import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'
 import {HttpClientModule} from '@angular/common/http';
 import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
+import { ListarconvocatoriaComponent } from './components/listarconvocatoria/listarconvocatoria.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ModificarusuarioComponent } from './components/modificarusuario/modific
     LoginComponent,
     CrearusuarioComponent,
     ModificarusuarioComponent,
-    RegistrarConvocatoriaComponent
+    RegistrarConvocatoriaComponent,
+    ListarconvocatoriaComponent
   ],
   imports: [
     BrowserModule,
