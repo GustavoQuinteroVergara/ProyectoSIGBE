@@ -10,14 +10,15 @@ export const ROUTES: Routes = [
     Component : el mismo nombre del import */
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
     {path:'modificarUsuario', component: ModificarusuarioComponent},
+    {path:'crearUsuario', component: CrearusuarioComponent},
+    {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
     {path:'',component: LoginComponent},
-    {path:'**',component: LoginComponent},
+    {path:'**',component: LoginComponent}
 
     /*
     {path: '', pathMatch:'full', redirectTo:'home'},
     {path:'**',pathMatch:'full', redirectTo: 'home'}*/
-    {path:'crearUsuario', component: CrearusuarioComponent},
-    {path:'listarConvocatoria',component: ListarconvocatoriaComponent}
+    
 ]
 
 
