@@ -16,10 +16,8 @@ export class LoginComponent {
 
   buscarUsuario(email:string, contrasena:string){
     this.logins.buscarUser(email).subscribe(result =>{ 
-      console.log(result[0].contrasena); 
-      console.log(contrasena);
-      if(result[0].contrasena == contrasena){
-        console.log("inicio exitoso");
+      console.log(result["roles"]); 
+      if(result["contrasena"] == contrasena){
         this.router.navigate(['/registroConvocatoria']);
       }else{
         console.log("error");

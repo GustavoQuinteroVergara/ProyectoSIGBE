@@ -9,9 +9,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
-
+import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'
 import {HttpClientModule} from '@angular/common/http';
-import { ListarconvocatoriaComponent } from './components/listarconvocatoria/listarconvocatoria.component';
+import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { ListarconvocatoriaComponent } from './components/listarconvocatoria/lis
     NavbarComponent,
     LoginComponent,
     CrearusuarioComponent,
-    ListarconvocatoriaComponent
+    ModificarusuarioComponent,
+    RegistrarConvocatoriaComponent
   ],
   imports: [
     BrowserModule,

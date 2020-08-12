@@ -8,7 +8,7 @@ export class ServiceloginService {
 
 
 
-  url='http://localhost/sigbewebservice/app/componentes/usuarios/list_useremail.php?'; // disponer url de su servidor que tiene las páginas PHP
+  url='http://localhost/sigbeweb/app/componentes/usuarios/list_useremail.php?'; // disponer url de su servidor que tiene las páginas PHP
 
 
   constructor(private http: HttpClient) { }
