@@ -14,6 +14,21 @@ import {HttpClientModule} from '@angular/common/http';
 import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
 import { ListarconvocatoriaComponent } from './components/listarconvocatoria/listarconvocatoria.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrarPostulacionComponent } from './components/postulacion/registrar-postulacion/registrar-postulacion.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+import { MatNativeDateModule } from '@angular/material/core';
+// import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
+
 
 @NgModule({
   declarations: [
@@ -23,15 +38,35 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CrearusuarioComponent,
     ModificarusuarioComponent,
     RegistrarConvocatoriaComponent,
-    ListarconvocatoriaComponent
+    ListarconvocatoriaComponent,
+    RegistrarPostulacionComponent
   ],
   imports: [
     BrowserModule,
+
+    // Angular material
+
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+
+    MatNativeDateModule,
+  // MatMomentDateModule,
+
     RouterModule.forRoot(ROUTES,{useHash: true}),
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

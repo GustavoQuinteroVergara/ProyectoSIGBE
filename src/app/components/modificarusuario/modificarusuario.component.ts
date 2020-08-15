@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatSliderModule } from '@angular/material/slider';
+
 @Component({
   selector: 'app-modificarusuario',
   templateUrl: './modificarusuario.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModificarusuarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(matslider: MatSliderModule) { }
 
   ngOnInit(): void {
   }
