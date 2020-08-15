@@ -13,6 +13,7 @@ import {RegistrarConvocatoriaComponent} from './components/convocatoria/registra
 import {HttpClientModule} from '@angular/common/http';
 import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
 import { ListarconvocatoriaComponent } from './components/listarconvocatoria/listarconvocatoria.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ListarconvocatoriaComponent } from './components/listarconvocatoria/lis
   imports: [
     BrowserModule,
     RouterModule.forRoot(ROUTES,{useHash: true}),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
