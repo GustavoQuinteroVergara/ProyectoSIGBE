@@ -10,14 +10,20 @@ import {Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  usuario= null;
+  usuario:any;
 
   constructor(private logins:ServiceloginService,private router:Router) { }
 
-  buscarUsuario(email:string, contrasena:string){
+  login(email:string, contrasena:string){
     this.logins.buscarUser(email).subscribe(result =>{ 
       console.log(result["roles"]); 
+      this.usuario = {'nombre':result["nombre"],
+                      'email':result["correo"],
+                      'identi':result["identificacion"],
+                      'codigoest':result["codigoestudiante"],
+                      'rol':result["roles"]};
       if(result["contrasena"] == contrasena){
+        localStorage.setItem('currentUser',JSON.stringify(this.usuario));
         this.router.navigate(['/registroConvocatoria']);
       }else{
         console.log("error");
@@ -25,5 +31,9 @@ export class LoginComponent {
       this.usuario = result; });
     console.log(this.usuario);
     
+  }
+
+  logout(){
+     localStorage.removeItem('currentUser');
   }
 }

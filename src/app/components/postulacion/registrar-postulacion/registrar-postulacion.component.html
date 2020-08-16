@@ -1,7 +1,78 @@
 <app-navbar></app-navbar>
-<form>
-	
-<div class="example-container">
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
-</div>
-</form>
+
+<h1 >BIENVENIDO {{this.$nombreusuario.nombre}}</h1>
+ <ng-template #mytemplate>
+    <div *ngIf="success" class="dialogSuccess" >
+        <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+        <h2 class="text-center textoSuccess">Registrado exitosamente</h2>
+    </div>   
+    <div *ngIf="!success" class="dialogSuccess" >
+        <i class="icofont-close-circled text-center iconErrRegister"></i>
+        <h2 class="text-center textoSuccess">Error al registrarse</h2>
+    </div>       
+    </ng-template>
+
+
+        <form class="col s12">
+            <div class="row center rowImageLogin">
+                <div class="input-field col s12 divImageInto">
+                    <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
+                </div>
+            </div>
+
+            <div class="row">
+                 <mat-form-field appearance="none">
+                  <mat-select #convo required>
+                    <mat-option>-- Selecciona una Convocatoria --</mat-option>
+                    <mat-option *ngFor="let convos of convoActivas" [value]="convos.consecutivoconvo">{{convos.beca}}</mat-option>
+                  </mat-select>
+                  <mat-label> <b> Fancy</b> <i> label</i></mat-label>
+                </mat-form-field>
+            </div>
+            <div class="row">
+            	<div class="input-field col s6">
+			        <i class="icofont-ui-message material-icons prefix"></i>
+			        <input #promedio id="icon_prefix" type="text" class="validate">
+			        <label for="icon_prefix">Promedio</label>
+			    </div>
+                <div class="input-field col s6">
+                     <mat-form-field appearance="none">
+                  <mat-select #semestre required>
+                    <mat-option>-- Selecciona una Un semestre --</mat-option>
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                    <mat-option value="4">4</mat-option>
+                    <mat-option value="5">5</mat-option>
+                    <mat-option value="6">6</mat-option>
+                    <mat-option value="7">7</mat-option>
+                    <mat-option value="8">8</mat-option>
+                    <mat-option value="9">9</mat-option>
+                    <mat-option value="10">10</mat-option>
+                    
+                  </mat-select>
+                  <mat-label> <b> Semestre</b> <i class="icofont-ui-message"></i></mat-label>
+                </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+               <div class="input-field col s6">
+                    <i class="icofont-ui-message material-icons prefix"></i>
+                    <input #estrato id="icon_prefix" type="text" class="validate">
+                    <label for="icon_prefix">Estrato</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="icofont-ui-message material-icons prefix"></i>
+                    <input #identificacion id="icon_prefix" value="{{this.$nombreusuario.identi}}" disabled="true" type="text" class="validate">
+                    <label for="icon_prefix">Identificacion</label>
+                </div>
+            </div>
+            
+
+
+            <div class="row center">
+                <div class="input-field col s12">
+                    <a (click)="registrarPostulacion(promedio.value,semestre.value,estrato.value,identificacion.value,convo.value,mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-login left"></i>Registrar Postulacion</a>
+                </div>
+            </div>
+        </form>
