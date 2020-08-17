@@ -4,46 +4,63 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
       <h3 class="tituloRegistroConvocatoria"> Crea una Convocatoria</h3>
       <div class="row ">
-        <div class="input-field col s12">
-          <select>
-            <option value="" disabled selected>Escoje tu opción</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-          <label>Selecciona una beca</label>
+        <mat-form-field appearance="none">
+          <mat-label>Seleccione una Beca</mat-label>
+          <mat-select #beca  required>
+          <mat-option>--</mat-option>
+            <mat-option *ngFor="let beca of convocatoriaBeca" [value]="beca.consecutivo_beca">
+              {{beca.descripcion}}
+            </mat-option>
+          </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="none">
+            <mat-label>Seleccione una periodo</mat-label>
+            <mat-select #periodo  required>
+            <mat-option>--</mat-option>
+              <mat-option *ngFor="let periodo of convocatoriaPeriodo" [value]="periodo.consecutivo_periodo">
+                {{periodo.consecutivo_periodo}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+          <mat-form-field appearance="none">
+            <input #fechainicial matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" [formControl]="dateControl"
+                [disabled]="disabled">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+            <ngx-mat-datetime-picker  #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+               [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+               [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
+            </ngx-mat-datetime-picker>
+         </mat-form-field>
+         <div>
+         <mat-form-field appearance="none">
+          <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" [formControl]="dateControl"
+              [disabled]="disabled">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+
+          <ngx-mat-datetime-picker  #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+             [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+             [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
+          </ngx-mat-datetime-picker>
+       </mat-form-field>
+       </div>
+       <mat-form-field class="example-full-width" appearance="none">
+        <mat-label>Cantidad de Cupos</mat-label>
+        <input #cupos id="cupos" matInput placeholder="cupos" value="">
+      </mat-form-field>
+          <mat-form-field style="float: right;" appearance="none">
+            <mat-label>Seleccione el estado</mat-label>
+            <mat-select #estadoconvocatoria  required>
+            <mat-option>--</mat-option>
+              <mat-option value="Activa">Activa</mat-option>
+              <mat-option value="Inactiva">Inactiva</mat-option>
+            </mat-select>
+            </mat-form-field>
         </div>
-        <div class="input-field col s6">
-          <input id="cupos" type="number" class="validate">
-          <label for="cupos">Cupos</label>
+        <div class="center-align">
+         <a class="btn waves-effect waves-light red darken-4 " (click)="registrarConvocatoria
+        (fechainicial.value,fechafinal.value,beca.value,cupos.value,periodo.value,estadoconvocatoria.value)"  name="action">Registrar</a>
         </div>
-        <div class="input-field col s6">
-          <input id="datepicker" type="text" class="datepicker">
-                <label for="fechaInicio">Elige la fecha inicial</label>  
-        </div>
-        <div class="input-field col s6">
-          <input id="datepicker" type="text" class="datepicker">
-                <label for="fechaFin">Elige la fecha final</label>  
-        </div>
-        <div class="input-field col s6">
-          <input type="text" class="timepicker">
-          <label for="horaInicio">Hora inicio</label>  
-        </div>
-        <div class="input-field col s6">
-          <input type="text" class="timepicker">
-          <label for="horaFin">Hora final</label>  
-        </div>
-        <div class="input-field col s6 ">
-          <select>
-            <option value="" disabled selected>Escoje tu opción</option>
-            <option value="1">Option 1</option>
-          </select>
-          <label>Selecciona periodo acádemico</label>
-        </div>
-      </div>
-      <div class="center-align">
-      <button class="btn waves-effect waves-light red darken-4 " type="submit" name="action">Registrar</button>
-      </div>
     </form>
   </div>
         
