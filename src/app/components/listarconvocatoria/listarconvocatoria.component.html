@@ -22,27 +22,19 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><i class="icofont-search-2"></i></td>
+      <tr *ngFor="let convoca of convocatorias">
+        <td>{{convoca.fecha_inicio.date}} </td>  
+        <td>{{convoca.fecha_fin.date}}</td>
+        <td>{{convoca.estado_convocatoria}}</td>
+        <td>{{convoca.beca}}</td>
+        <td>{{convoca.periodosacademicos.date}}</td>
+        <td>{{convoca.cupo}}</td>
+        <td> <a href=""> <i class="icofont-search-2"></i></a></td>
 
 
       </tr>
      
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><i class="icon icofont-search-2"></i></td>
-      </tr>
+      
     </tbody>
   </table>
 
