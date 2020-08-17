@@ -27,8 +27,15 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MatNativeDateModule } from '@angular/material/core';
 // import { MatMomentDateModule } from '@angular/material-moment-adapter';
-
-
+//import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+//import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  NgxMatDatetimePickerModule, 
+  NgxMatNativeDateModule, 
+  NgxMatTimepickerModule 
+} from '@angular-material-components/datetime-picker';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -58,7 +65,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 
     MatNativeDateModule,
   // MatMomentDateModule,
-
+  
+MatDatepickerModule,
+  MatInputModule,
+  NgxMatTimepickerModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatButtonModule,
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  
     RouterModule.forRoot(ROUTES,{useHash: true}),
     HttpClientModule,
     BrowserAnimationsModule
