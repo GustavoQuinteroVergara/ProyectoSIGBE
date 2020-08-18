@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
-
-<h1 >BIENVENIDO {{this.$nombreusuario.nombre}}</h1>
+<div class="containerRegisterPostu">
  <ng-template #mytemplate>
     <div *ngIf="success" class="dialogSuccess" >
         <i class="icofont-ui-check text-center iconSuccessRegister"></i>
@@ -13,7 +12,7 @@
     </ng-template>
 
 
-        <form class="col s12">
+        <form class="col s12 formPostuRegister">
             <div class="row center rowImageLogin">
                 <div class="input-field col s12 divImageInto">
                     <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
@@ -26,7 +25,7 @@
                     <mat-option>-- Selecciona una Convocatoria --</mat-option>
                     <mat-option *ngFor="let convos of convoActivas" [value]="convos.consecutivoconvo">{{convos.beca}}</mat-option>
                   </mat-select>
-                  <mat-label> <b> Fancy</b> <i> label</i></mat-label>
+                  <mat-label> <b> Convocatoria</b></mat-label>
                 </mat-form-field>
             </div>
             <div class="row">
@@ -72,7 +71,8 @@
 
             <div class="row center">
                 <div class="input-field col s12">
-                    <a (click)="registrarPostulacion(promedio.value,semestre.value,estrato.value,identificacion.value,convo.value,mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-login left"></i>Registrar Postulacion</a>
+                    <a (click)="registrarPostulacion(promedio.value,semestre.value,estrato.value,identificacion.value,convo.value,mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>Registrar Postulacion</a>
                 </div>
             </div>
         </form>
+    </div>

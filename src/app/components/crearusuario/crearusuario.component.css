@@ -7,18 +7,20 @@
     color: black;
     float: left;
     margin: 20px;
-    margin-left: 30%;
+    margin-left: 11%;
     margin-bottom: 30%;
-    margin-top: 20%;
+    margin-top: 1%;
     text-align: center;
     line-height:#444;
     text-transform: uppercase;
     border:none;
     /* box-shadow: 5px 5px 5px black; */
-    
-  
-
 }
+
+.divInputssrow{
+    margin-bottom: 0px !important;
+}
+
 img{
     
     text-align: center;

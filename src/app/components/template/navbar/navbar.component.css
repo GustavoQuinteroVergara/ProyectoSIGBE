@@ -1,0 +1,53 @@
+.navbarTemplate{
+	background-color:#f04c3e !important;
+	box-shadow:80px 14px 25px #ccc;
+}
+
+.barraLateral{
+	margin-top: 64px !important;
+}
+.ContenerBotonMenuLateral{
+	z-index: 0;
+	display: inline;
+	background: transparent !important;
+	color: white !important;
+}
+.barraLateral{
+	background-color:#f04c3e !important;
+	width: 140px;
+}
+
+.botonActivadorBarraLateral{
+	display: inline;
+}
+
+.buttonIconBarra{
+	border:none;
+	background: transparent;
+	cursor: pointer;
+}
+.iconoMenubar{
+	color: white !important;
+}
+
+.liMenuBarLateral{
+	padding: 10px;
+	border-left: 3px solid #f04c3e;
+	transition: all 1s;
+}
+
+.liMenuBarLateral:hover{
+	border-left: 3px solid white;
+}
+
+.BotonALiBar{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+
+}
+
+.iconoMenubar > img{
+margin-left: 15px;
+}

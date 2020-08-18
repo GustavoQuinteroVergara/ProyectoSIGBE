@@ -4,12 +4,16 @@
     border-radius: 5px;
 }
 .fondoConvocatoria{
-    width: 100%;
-    margin-left: 20%;
-    margin-top: 5%;
+	margin-left: 12%;
+    margin-top: 1%;
     
 }
 .tituloRegistroConvocatoria{
     font-size: 24px;
     margin-top: 0;
+}
+
+.formConvocatoria > .divFormConvo{
+	margin: 0 auto;
+    width: 65%;
 }
