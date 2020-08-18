@@ -1,31 +1,41 @@
-<ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
-    <li class="divider"></li>
-    <li><a href="#!">three</a></li>
-  </ul>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="">Usuarios</a></li>
-        <!--Usar Router link Active y Router Link para moverse entre los componentes - 
-            routerLink ="NOMBRE que se puso en el routes.ts"-->
-        <li routerLinkActive="active">
-            <a routerLink="/registroConvocatoria">Convocatorias</a>
+<mat-drawer #drawer  class="barraLateral">
+<div >
+      <ul class="hide-on-med-and-down">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/registroConvocatoria">Crear Convocatorias</a>
         </li>  
-        <li routerLinkActive="active">
-           <a routerLink="/crearUsuario">crear usuario</a>
+        <li class="liMenuBarLateral" routerLinkActive="active">
+           <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
         </li>
-        <li routerLinkActive="active">
-          <a routerLink="/modificarUsuario">Modificar Usuario</a>
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/modificarUsuario">Modificar Usuario</a>
        </li>    
-       <li routerLinkActive="active">
-        <a routerLink="/listarConvocatoria">Listar Convocatorias</a>
+       <li class="liMenuBarLateral" routerLinkActive="active">
+        <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar Convocatorias</a>
+     </li>      
+     <li class="liMenuBarLateral" routerLinkActive="active">
+        <a class="BotonALiBar" routerLink="/registrarPostulacion">Registrar postulacion</a>
      </li>     
-      <li routerLinkActive="active">
-        <a  routerLink="/">Listar Convocatorias</a>
-     </li>       
       </ul>
+
+</div>
+</mat-drawer>
+  <nav class="navbarTemplate">
+    <div class="nav-wrapper">
+
+        
+
+<mat-drawer-container class="ContenerBotonMenuLateral" >
+  
+  <mat-drawer-content class="botonActivadorBarraLateral">
+   <button  class="buttonIconBarra" (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon">
+        <i class="icofont-navigation-menu iconoMenubar"><img src="/assets/imgs/logosigbe2.png" width="80px"></i>
+
+      </button>
+  </mat-drawer-content>
+</mat-drawer-container>
+<div class="right">
+  <span>{{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido}}</span>
+</div>
     </div>
   </nav>

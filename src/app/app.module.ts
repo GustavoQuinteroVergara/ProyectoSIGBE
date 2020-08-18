@@ -24,6 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { MatNativeDateModule } from '@angular/material/core';
 // import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -57,6 +58,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatCheckboxModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatSidenavModule,
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
