@@ -16,11 +16,13 @@ export class LoginComponent {
 
   login(email:string, contrasena:string){
     this.logins.buscarUser(email).subscribe(result =>{ 
-      console.log(result["roles"]); 
+      console.log(result); 
       this.usuario = {'nombre':result["nombre"],
-                      'email':result["correo"],
+                      'apellido':result["apellido"],
+                      'correo':result["correo"],
                       'identi':result["identificacion"],
                       'codigoest':result["codigoestudiante"],
+                      'saldo':result["saldo"],
                       'rol':result["roles"]};
       if(result["contrasena"] == contrasena){
         localStorage.setItem('currentUser',JSON.stringify(this.usuario));

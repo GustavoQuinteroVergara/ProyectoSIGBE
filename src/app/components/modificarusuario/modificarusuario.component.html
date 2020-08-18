@@ -1,4 +1,14 @@
 <app-navbar></app-navbar>
+<ng-template #mytemplate>
+  <div *ngIf="success" class="dialogSuccess" >
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
+  </div>   
+  <div *ngIf="!success" class="dialogSuccess" >
+      <i class="icofont-close-circled text-center iconErrRegister"></i>
+      <h2 class="text-center textoSuccess">Error al actualizar</h2>
+  </div>       
+  </ng-template>
 <div class="fondo">
   <div class="caja z-depth-3">
     <div class="logo">
@@ -6,44 +16,37 @@
         width="50px" alt="LogoUV">
     </div>
     <form class="col s12">
-      <h5>Actualizar Usuario</h5>
+      <h3 class="tituloRegistroConvocatoria"> Actualiza Usuario</h3>
       <div class="row">
-        <div class="input-field col s12">
-          <input type="number" id="identificacion">
-          <label for="">Identificacion</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">Nombre</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Apellido</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="codigo" type="number" class="validate">
-          <label for="codigo">Codigo estudiante</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="password" type="password" class="validate">
-          <label for="password">Contraseña</label>
-        </div>
+        <mat-form-field  class="example-full-width" disabled appearance="none">
+          <mat-label>Identificacion</mat-label>
+          <input #identificacion id="identificacion" disabled matInput placeholder="Identificacion" type="number" [value]="$nombreusuario.identi">
+        </mat-form-field>     
+        <mat-form-field  class="example-full-width"  appearance="none">
+          <mat-label>Saldo Actual</mat-label>
+          <input #saldo id="saldo" matInput placeholder="Saldo" disabled type="number" [value]="$nombreusuario.saldo">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="none">
+          <mat-label>Nombre</mat-label>
+          <input #nombre id="nombre" matInput placeholder="Nombre" [value]="$nombreusuario.nombre">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="none">
+          <mat-label>Apellido</mat-label>
+          <input #apellido id="apellido" matInput placeholder="Apellido" [value]="$nombreusuario.apellido">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="none">
+          <mat-label>Email</mat-label>
+          <input #correo id="email" matInput placeholder="Correo" [value]="$nombreusuario.correo">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="none">
+          <mat-label>Codigo Estudiante</mat-label>
+          <input #codigoestudiante id="codigo" type="number" matInput placeholder="Codigo Estudiante" [value]="$nombreusuario.codigoest">
+        </mat-form-field>
       </div>
       <div>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Actualizar
-        </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Regresar
-        </button>
+        <a class="btn waves-effect waves-light red darken-4 " (click)="registrarSaldo
+        (identificacion.value,saldo.value,codigoestudiante.value,correo.value,
+        apellido.value,nombre.value,mytemplate)" name="action">Actualizar</a>
       </div>
     </form>
   </div>
