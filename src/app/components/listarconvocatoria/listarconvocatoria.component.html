@@ -29,7 +29,7 @@
         <td>{{convoca.beca}}</td>
         <td>{{convoca.periodosacademicos.date}}</td>
         <td>{{convoca.cupo}}</td>
-        <td> <a href=""> <i class="icofont-search-2"></i></a></td>
+        <td> <a [routerLink]="['/viewConvocatoria', convoca.consecutivo_convocatoria]" > <i class="icofont-search-2"></i></a></td>
 
 
       </tr>

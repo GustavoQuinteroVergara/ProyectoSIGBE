@@ -37,6 +37,8 @@ import {
   NgxMatTimepickerModule 
 } from '@angular-material-components/datetime-picker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ViewConvocatoriaComponent } from './components/convocatoria/view-convocatoria/view-convocatoria.component';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ModificarusuarioComponent,
     RegistrarConvocatoriaComponent,
     ListarconvocatoriaComponent,
-    RegistrarPostulacionComponent
+    RegistrarPostulacionComponent,
+    ViewConvocatoriaComponent
   ],
   imports: [
     BrowserModule,

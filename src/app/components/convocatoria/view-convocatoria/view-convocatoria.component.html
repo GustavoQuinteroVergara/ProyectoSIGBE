@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+<ng-template #mytemplate>
+<div >
+<form >
+	<h1>Info Estudiante</h1>
+	<mat-form-field class="example-full-width" disabled appearance="none">
+	<mat-label>Nombre estudiante</mat-label>
+	<input id="cupos" matInput placeholder="cupos" value="">
+	</mat-form-field>
+	<mat-form-field class="example-full-width" disabled appearance="none">
+	<mat-label>Codigo estudiante</mat-label>
+	<input #beca id="cupos" matInput placeholder="cupos" value="">
+	</mat-form-field>
+	<mat-form-field class="example-full-width" disabled appearance="none">
+	<mat-label>Saldo</mat-label>
+	<input #fechainicio id="cupos" matInput placeholder="cupos" value="">
+	</mat-form-field>
+	<mat-form-field class="example-full-width" disabled appearance="none">
+	<mat-label>Postulaciones realizadas</mat-label>
+	<input #fechafin id="cupos" matInput placeholder="cupos" value="">
+	</mat-form-field>
+	
+</form>
+<h1>Postulaciones Realizadas</h1>
+ <table>
+        <thead>
+          <tr>
+              <th>PostuId</th>
+              <th>Beca</th>
+              <th>Estado</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Almuerzo</td>
+            <td>Rechazado</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Almuerzo</td>
+            <td>En espera</td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>
+</ng-template>
+<div class="row rowViewConvo">
+<div class="col s12 m7">
+	<div class="card">
+		<div class="card-content">
+			<form *ngIf="loading">
+				<div class="card-content">
+					<h1>
+						Info Convocatoria
+						<div class="botonEditarForm">
+							<a href=""><i class="icofont-ui-edit iconSearchUser"></i></a>
+						</div>
+					</h1>
+
+					<mat-form-field class="example-full-width" disabled appearance="none">
+					<mat-label>Cantidad de Cupos</mat-label>
+					<input id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
+					</mat-form-field>
+					<mat-form-field class="example-full-width" disabled appearance="none">
+					<mat-label>Beca de la convocatoria</mat-label>
+					<input #beca id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.beca">
+					</mat-form-field>
+					<mat-form-field class="example-full-width" disabled appearance="none">
+					<mat-label>fecha inicio de la convocatoria</mat-label>
+					<input #fechainicio id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.fechainicio">
+					</mat-form-field>
+					<mat-form-field class="example-full-width" disabled appearance="none">
+					<mat-label>fecha fin de la convocatoria</mat-label>
+					<input #fechafin id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.fechafin">
+					</mat-form-field>
+				</div>
+				<div class="card-action">
+					<h1>Periodo Seleccionado</h1>
+					<mat-form-field class="example-full-width" disabled appearance="none">
+					<mat-label>fecha inicio de la convocatoria</mat-label>
+					<input #fechainicio id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.periodo.fechaInicioperiodo">
+					</mat-form-field>
+					<mat-form-field class="example-full-width" disabled appearance="none">
+					<mat-label>fecha fin de la convocatoria</mat-label>
+					<input #fechafin id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.periodo.fechaFinperiodo">
+					</mat-form-field>
+				</div>
+				
+			</form>
+		</div>
+		<div class="card-action">
+			<h1>Postulaciones</h1>
+			<table>
+				<thead>
+					<tr>
+						<th>Nombre estudiante</th>
+						<th>Estrato</th>
+						<th>Promedio</th>
+						<th>Fecha postulacion</th>
+						<th>Semestre</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let postu of $postuByIdArray">
+						<td>{{postu.estudiante.nombreestudiante + ' '}}<a (click)="buscarEstPostuByIden(mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
+						<td>{{postu.estrato}}</td>
+						<td>{{postu.promedio}}</td>
+						<td>{{postu.fechapostulacion}}</td>
+						<td>{{postu.semestre}}</td>
+						<td>
+							<a href=""><i class="icofont-checked iconcheckAprobar"></i></a>
+							<a href=""><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+</div>
+</div>
