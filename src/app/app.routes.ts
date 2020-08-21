@@ -6,6 +6,7 @@ import {RegistrarConvocatoriaComponent} from './components/convocatoria/registra
 import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
 import {ListarconvocatoriaComponent} from './components/listarconvocatoria/listarconvocatoria.component';
 import {RegistrarPostulacionComponent} from './components/postulacion/registrar-postulacion/registrar-postulacion.component';
+import {ListarticketsComponent} from './components/listartickets/listartickets.component';
 export const ROUTES: Routes = [
     /*en PATH : Se pone un nombre cualquiera para luego utilizarlo en el menu - 
     Component : el mismo nombre del import */
@@ -14,6 +15,7 @@ export const ROUTES: Routes = [
     {path:'modificarUsuario', component: ModificarusuarioComponent},
     {path:'crearUsuario', component: CrearusuarioComponent},
     {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
+    {path:'listarTickets',component: ListarticketsComponent},
     {path:'',component: LoginComponent},
     {path:'**',component: LoginComponent}
 
