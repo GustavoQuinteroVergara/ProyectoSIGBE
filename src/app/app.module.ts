@@ -7,6 +7,7 @@ import { ROUTES } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import {MatTableModule} from '@angular/material/table';
 
 import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
 import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'
@@ -67,6 +68,7 @@ import { ViewConvocatoriaComponent } from './components/convocatoria/view-convoc
     MatSelectModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatTableModule,
 
     MatNativeDateModule,
   // MatMomentDateModule,
