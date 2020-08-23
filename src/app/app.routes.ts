@@ -7,12 +7,14 @@ import { ModificarusuarioComponent } from './components/modificarusuario/modific
 import {ListarconvocatoriaComponent} from './components/listarconvocatoria/listarconvocatoria.component';
 import {RegistrarPostulacionComponent} from './components/postulacion/registrar-postulacion/registrar-postulacion.component';
 import {ViewConvocatoriaComponent} from './components/convocatoria/view-convocatoria/view-convocatoria.component';
+import {ListarpostuestComponent} from './components/postulacion/listarpostuest/listarpostuest.component';
 export const ROUTES: Routes = [
     /*en PATH : Se pone un nombre cualquiera para luego utilizarlo en el menu - 
     Component : el mismo nombre del import */
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
     {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent},
     {path:'registrarPostulacion',component: RegistrarPostulacionComponent},
+    {path:'listarPostulacionesEst',component: ListarpostuestComponent},
     {path:'modificarUsuario', component: ModificarusuarioComponent},
     {path:'crearUsuario', component: CrearusuarioComponent},
     {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
