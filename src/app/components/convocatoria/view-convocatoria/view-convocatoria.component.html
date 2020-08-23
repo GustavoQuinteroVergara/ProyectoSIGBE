@@ -56,16 +56,16 @@
                     <h1>
                         Info Convocatoria
                         <div class="botonEditarForm">
-                            <a href=""><i class="icofont-ui-edit iconSearchUser"></i></a>
+                            <a (click)="activeFormActualizar()" data-title="Editar convocatoria"><i class="icofont-ui-edit iconSearchUser"></i></a>
                         </div>
                     </h1>
-                    <mat-form-field class="example-full-width" disabled appearance="none">
+                    <mat-form-field class="example-full-width"  appearance="none">
                     <mat-label>Consecutivo Convocatoria</mat-label>
-                    <input #consecutivo_convocatoria id="consecutivo" matInput placeholder="consecutivo" [value]="$convoBuscada.consecutivo_convocatoria">
+                    <input #consecutivo_convocatoria [disabled]="disabledActualizar" id="consecutivo" matInput placeholder="consecutivo" [value]="$convoBuscada.consecutivo_convocatoria">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width" disabled appearance="none">
+                    <mat-form-field class="example-full-width" appearance="none">
                     <mat-label>Cantidad de Cupos</mat-label>
-                    <input #cupo id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
+                    <input #cupo [disabled]="disabledActualizar" id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
                     </mat-form-field>
                     <!--<mat-form-field class="example-full-width" disabled appearance="none">
                     <mat-label>Beca de la convocatoria</mat-label>
@@ -73,7 +73,7 @@
                     </mat-form-field>-->
                     <mat-form-field appearance="none">
                         <mat-label>{{$convoBuscada.beca}}</mat-label>
-                        <mat-select #becas  required>
+                        <mat-select #becas [disabled]="disabledActualizar" required>
                         <mat-option ></mat-option>
                           <mat-option *ngFor="let beca of convocatoriaBeca" [value]="$convoBuscada.beca">
                             {{$convoBuscada.beca}}
@@ -82,7 +82,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="none">
                             <mat-label>{{$convoBuscada.periodosacademicos}}</mat-label>
-                            <mat-select #periodosacademicos  required>
+                            <mat-select #periodosacademicos [disabled]="disabledActualizar" required>
                             <mat-option>--</mat-option>
                               <mat-option *ngFor="let periodos of convocatoriaPeriodo" [value]="$convoBuscada.periodosacademicos">
                                 {{$convoBuscada.periodosacademicos}}
@@ -94,7 +94,7 @@
                     <h1>Horario Convocatoria</h1>
                     
                     <mat-form-field appearance="none">
-                        <input #fecha_inicio matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" 
+                        <input #fecha_inicio [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" 
                              [value]="$convoBuscada.fechainicio">
                              Fecha inicio Convocatoria:  {{$convoBuscada.fechainicio}}
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -104,7 +104,7 @@
                      </mat-form-field>
                      <div>
                      <mat-form-field appearance="none">
-                      <input #fecha_fin matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" 
+                      <input #fecha_fin [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" 
                       [value]="$convoBuscada.fechafin">
                       Fecha fin Convocatoria: {{$convoBuscada.fechafin}}
                       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -114,7 +114,7 @@
                    </mat-form-field>
                    <mat-form-field style="float: right;" appearance="none">
                     <mat-label>Seleccione el estado</mat-label>
-                    <mat-select #estado_convocatoria  required>
+                    <mat-select #estado_convocatoria [disabled]="disabledActualizar" required>
                     <mat-option>--</mat-option>
                       <mat-option value="Activo">Activo</mat-option>
                       <mat-option value="Inactivo">Inactivo</mat-option>
@@ -131,7 +131,7 @@
                         <input #fechafin id="fechafin" matInput placeholder="fechafin" [value]="$convoBuscada.fechafin">
                         </mat-form-field>-->
                 </div>
-                <div>
+                <div *ngIf="activeButton">
                     <a class="btn waves-effect waves-light red darken-4 " (click)="actualizarConvocatoria
                     (consecutivo_convocatoria.value, cupo.value, becas.value,periodosacademicos.value,fecha_inicio.value,fecha_fin.value,estado_convocatoria.value)" name="action">Actualizar</a>
                   </div>
@@ -147,6 +147,7 @@
                         <th>Promedio</th>
                         <th>Fecha postulacion</th>
                         <th>Semestre</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -157,14 +158,14 @@
                         <td>{{postu.promedio}}</td>
                         <td>{{postu.fechapostulacion}}</td>
                         <td>{{postu.semestre}}</td>
+                        <td>{{postu.estado_postulacion}}</td>
                         <td>
-                            <a href=""><i class="icofont-checked iconcheckAprobar"></i></a>
-                            <a href=""><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>
+                            <a (click)="cambiarEstadoPostu(postu.consecutivo_postulacion,postu.estado_postulacion,true)"><i class="icofont-checked iconcheckAprobar"></i></a>
+                            <a (click)="cambiarEstadoPostu(postu.consecutivo_postulacion,postu.estado_postulacion,false)"><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            
         </div>
     </div>
 </div>
