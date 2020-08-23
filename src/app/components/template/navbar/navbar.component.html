@@ -1,41 +1,43 @@
-<mat-drawer #drawer  class="barraLateral">
+<nav class="navbarTemplate">
+  <div class="nav-wrapper">
+    <mat-drawer-container class="ContenerBotonMenuLateral">
+    <mat-drawer-content class="botonActivadorBarraLateral">
+        <button (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon" class="buttonIconBarra">
+          <i class="icofont-navigation-menu iconoMenubar">
+            <img src="/assets/imgs/logosigbe2.png" width="80px"/>
+          </i>
+        </button>
+    </mat-drawer-content>
+    </mat-drawer-container>
+    <div class="right">
+      <span>
+        {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
+      </span>
+      <a class="buttonCerrarse" (click)="cerrarSesion()">Cerrar sesion</a>
+    </div>
+  </div>
+</nav>
+<mat-drawer #drawer mode="push" opened class="barraLateral">
 <div >
-      <ul class="hide-on-med-and-down">
-        <li class="liMenuBarLateral" routerLinkActive="active">
-            <a class="BotonALiBar" routerLink="/registroConvocatoria">Crear Convocatorias</a>
-        </li>  
-        <li class="liMenuBarLateral" routerLinkActive="active">
-           <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
-        </li>
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/modificarUsuario">Modificar Usuario</a>
-       </li>    
-       <li class="liMenuBarLateral" routerLinkActive="active">
-        <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar Convocatorias</a>
-     </li>      
-     <li class="liMenuBarLateral" routerLinkActive="active">
-        <a class="BotonALiBar" routerLink="/registrarPostulacion">Registrar postulacion</a>
-     </li>     
-      </ul>
-
+  <ul class="hide-on-med-and-down">
+    <li class="liMenuBarLateral" routerLinkActive="active">
+      <a class="BotonALiBar" routerLink="/registroConvocatoria">Crear Convocatorias</a>
+    </li>
+    <li class="liMenuBarLateral" routerLinkActive="active">
+      <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
+    </li>
+    <li class="liMenuBarLateral" routerLinkActive="active">
+      <a class="BotonALiBar" routerLink="/modificarUsuario">Modificar Usuario</a>
+    </li>
+    <li class="liMenuBarLateral" routerLinkActive="active">
+      <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar Convocatorias</a>
+    </li>
+    <li class="liMenuBarLateral" routerLinkActive="active">
+      <a class="BotonALiBar" routerLink="/registrarPostulacion">Registrar postulacion</a>
+    </li>
+    <li class="liMenuBarLateral" routerLinkActive="active">
+      <a class="BotonALiBar" routerLink="/listarPostulacionesEst">Mis postulaciones</a>
+    </li>
+  </ul>
 </div>
 </mat-drawer>
-  <nav class="navbarTemplate">
-    <div class="nav-wrapper">
-
-        
-
-<mat-drawer-container class="ContenerBotonMenuLateral" >
-  
-  <mat-drawer-content class="botonActivadorBarraLateral">
-   <button  class="buttonIconBarra" (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon">
-        <i class="icofont-navigation-menu iconoMenubar"><img src="/assets/imgs/logosigbe2.png" width="80px"></i>
-
-      </button>
-  </mat-drawer-content>
-</mat-drawer-container>
-<div class="right">
-  <span>{{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido}}</span>
-</div>
-    </div>
-  </nav>

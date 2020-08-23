@@ -39,6 +39,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ViewConvocatoriaComponent } from './components/convocatoria/view-convocatoria/view-convocatoria.component';
+import { ListarpostuestComponent } from './components/postulacion/listarpostuest/listarpostuest.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ViewConvocatoriaComponent } from './components/convocatoria/view-convoc
     RegistrarConvocatoriaComponent,
     ListarconvocatoriaComponent,
     RegistrarPostulacionComponent,
-    ViewConvocatoriaComponent
+    ViewConvocatoriaComponent,
+    ListarpostuestComponent
   ],
   imports: [
     BrowserModule,

@@ -2,14 +2,10 @@
     float: center;
     width: 80%;
     height: 100%;
-   
     border: 1px solid gray;
     color: black;
     float: center;
-     margin: 20px;
-    margin-left: 10%;
-
-    margin-top: 10% ;
+    margin-left: 11%;
     text-align: center;
     line-height:#444;
     text-transform: uppercase;
@@ -18,6 +14,10 @@
     
   
 
+}
+
+.wraplistarconvo{
+    padding-top: 5.5%;
 }
 
 .logo{

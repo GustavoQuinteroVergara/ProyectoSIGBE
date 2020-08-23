@@ -3,8 +3,17 @@
 	box-shadow:80px 14px 25px #ccc;
 }
 
+.buttonCerrarse{
+	cursor: pointer;
+}
+
 .barraLateral{
 	margin-top: 64px !important;
+}
+
+.navbarTemplate, .barraLateral{
+	position: fixed;
+	z-index: 1;
 }
 .ContenerBotonMenuLateral{
 	z-index: 0;

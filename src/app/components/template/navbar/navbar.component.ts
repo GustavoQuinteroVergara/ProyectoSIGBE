@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent {
 	  $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 showFiller = false;
-  constructor() { }
+  constructor(private router:Router) { }
+
+  cerrarSesion(){
+  localStorage.removeItem('currentUser');
+  this.router.navigate(['/']);
+
+  }
 
 
 }
