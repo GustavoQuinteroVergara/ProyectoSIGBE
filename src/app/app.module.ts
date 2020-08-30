@@ -40,7 +40,9 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ViewConvocatoriaComponent } from './components/convocatoria/view-convocatoria/view-convocatoria.component';
 import { ListarpostuestComponent } from './components/postulacion/listarpostuest/listarpostuest.component';
+
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
+import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { CrearperiodoComponent } from './components/periodoacademico/crearperiod
     RegistrarPostulacionComponent,
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
-    CrearperiodoComponent
+    CrearperiodoComponent,
+    TipobecaComponent
   ],
   imports: [
     BrowserModule,
