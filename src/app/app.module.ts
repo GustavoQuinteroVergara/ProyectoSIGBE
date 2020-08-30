@@ -41,6 +41,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ViewConvocatoriaComponent } from './components/convocatoria/view-convocatoria/view-convocatoria.component';
 import { ListarpostuestComponent } from './components/postulacion/listarpostuest/listarpostuest.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
+import { BecaComponent } from './components/beca/beca.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
     RegistrarPostulacionComponent,
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
-    TipobecaComponent
+    TipobecaComponent,
+    BecaComponent
   ],
   imports: [
     BrowserModule,
