@@ -43,6 +43,7 @@ import { ListarpostuestComponent } from './components/postulacion/listarpostuest
 
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
+import { BecaComponent } from './components/beca/beca.component';
 
 
 @NgModule({
@@ -57,6 +58,8 @@ import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
     RegistrarPostulacionComponent,
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
+    TipobecaComponent,
+    BecaComponent
     CrearperiodoComponent,
     TipobecaComponent
   ],

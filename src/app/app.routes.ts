@@ -9,6 +9,8 @@ import {ViewConvocatoriaComponent} from './components/convocatoria/view-convocat
 import {ListarpostuestComponent} from './components/postulacion/listarpostuest/listarpostuest.component';
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
+import { BecaComponent } from './components/beca/beca.component';
+
 export const ROUTES: Routes = [
     
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
@@ -20,6 +22,7 @@ export const ROUTES: Routes = [
     {path:'crearUsuario', component: CrearusuarioComponent},
     {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
     {path:'crearTBeca',component:TipobecaComponent},
+    {path:'crearBeca', component:BecaComponent},
     {path:'',component: LoginComponent},
     {path:'**',component: LoginComponent}
 

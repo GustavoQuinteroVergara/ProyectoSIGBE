@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="row fondoConvocatoria center-align ">
+    <form class="col s6 formConvocatoria z-depth-3">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+      <h3 class="tituloRegistroConvocatoria"> Registra una Beca</h3>
+      <div class="row divFormConvo">
+        <mat-form-field appearance="none">
+            <mat-label>Seleccione un Tipo de Beca</mat-label>
+            <mat-select #tipobeca  required>
+            <mat-option>--</mat-option>
+              <mat-option *ngFor="let TBeca of ListTBeca" [value]="TBeca.consecutivo_TipoBeca">
+                {{TBeca.descripcion}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+       <mat-form-field class="example-full-width" appearance="none">
+        <mat-label>Descripción</mat-label>
+        <input #descripcion id="descripcion" matInput placeholder="Añade una descripcion.." value="">
+        <div class="center-align">
+         <a class="btn waves-effect waves-light red darken-4 " (click)="registrarBeca(tipobeca.value,descripcion.value)"  name="action">Registrar</a>
+        </div>
+       </mat-form-field>
+      </div>
+    </form>
+  </div>
