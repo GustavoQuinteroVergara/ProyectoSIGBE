@@ -1,0 +1,65 @@
+<div class="containerForm"> 
+    <div class="rowform  z-depth-3">
+        <div class="logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+        </div>
+        <form class="col s12">
+          <h5>Registro estudiantil</h5>
+            <div class="row divInputssrow"> 
+                <div class="input-field col s12">
+                    <input #identificacion type="number"  id="identificacion">
+                     <label for="">Identificacion</label> 
+                   
+                    </div> 
+            </div>
+          <div class="row divInputssrow">
+            <div class="input-field col s6">
+              <input #nombre id="first_name" type="text" class="validate">
+               <label for="first_name">Nombre</label>
+            </div>
+            <div class="input-field col s6">
+              <input #apellido id="last_name" type="text" class="validate">
+              <label for="last_name">Apellido</label>
+            </div>
+          </div>
+          <div class="row divInputssrow">
+            <div class="input-field col s12">
+              <input #email id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+         
+          <div class="row divInputssrow">
+            <div class="input-field col s6">
+              <input #codigo  id="codigo" type="number" class="validate">
+              <label for="codigo">Codigo estudiante</label>
+            </div>
+            <div class="input-field col s6">
+                <input #contrasena id="password" type="password" class="validate">
+                <label for="password">Contraseña</label>
+              </div>
+              
+              
+          </div>
+         
+         
+        
+          
+            <div class="row center" style="text-align: center;float: unset;" >
+              <div class="input-field col s12">
+                  <a (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,1)" class="waves-effect waves-light btn red" >Registrar</a>
+              </div>
+              <div class="input-field col s12"routerLinkActive="active">
+                <a routerLink="/**" class="waves-effect waves-light btn red">Regresar</a>
+            </div>
+              
+         
+         
+            
+            
+       
+              
+          </div>
+        </form>
+      </div>
+    </div>
