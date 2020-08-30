@@ -40,11 +40,13 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ViewConvocatoriaComponent } from './components/convocatoria/view-convocatoria/view-convocatoria.component';
 import { ListarpostuestComponent } from './components/postulacion/listarpostuest/listarpostuest.component';
+import { CrearusuariologinComponent } from './components/crearusuariologin/crearusuariologin.component';
 
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
 import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
 import {Globals} from './global';
+import { BecaComponent } from './components/beca/beca.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,10 @@ import {Globals} from './global';
     RegistrarPostulacionComponent,
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
+    registrarlogin,
+    CrearusuariologinComponent,
+    TipobecaComponent,
+    BecaComponent
     CrearperiodoComponent,
     TipobecaComponent,
     CrearTicketComponent

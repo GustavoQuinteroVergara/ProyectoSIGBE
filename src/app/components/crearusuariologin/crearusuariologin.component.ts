@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import  {ServiciocrearuserService } from './serviciocrearuser.service';
+import  {ServiciocrearuserService } from '../crearusuario/serviciocrearuser.service'
+
 @Component({
-  selector: 'app-crearusuario',
-  templateUrl: './crearusuario.component.html',
-  styleUrls: ['./crearusuario.component.css']
+  selector: 'app-crearusuariologin',
+  templateUrl: './crearusuariologin.component.html',
+  styleUrls: ['./crearusuariologin.component.css']
 })
-export class CrearusuarioComponent  {
+export class CrearusuariologinComponent{
 
   usuario:any;
   succes:any;
