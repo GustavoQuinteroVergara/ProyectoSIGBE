@@ -43,7 +43,8 @@ import { ListarpostuestComponent } from './components/postulacion/listarpostuest
 
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
-
+import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
+import {Globals} from './global';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
     CrearperiodoComponent,
-    TipobecaComponent
+    TipobecaComponent,
+    CrearTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,8 @@ MatDatepickerModule,
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule  
+    MatNativeDateModule,
+    Globals  
   ],
   bootstrap: [AppComponent]
 })

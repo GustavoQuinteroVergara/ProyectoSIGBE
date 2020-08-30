@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="row rowRegistroTicket">
+<div class="col s12 m4">
+ <ng-template #mytemplate>
+    <div *ngIf="success" class="dialogSuccess" >
+        <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+        <h2 class="text-center textoSuccess">Comprado exitosamente</h2>
+    </div>   
+    <div *ngIf="!success" class="dialogSuccess" >
+        <i class="icofont-close-circled text-center iconErrRegister"></i>
+        <h2 class="text-center textoSuccess">Horario no permitido</h2>
+    </div>       
+    </ng-template>
+	<div class="card">
+		<div class="card-content">
+			<h1>Comprar ticket</h1>
+			<hr>
+			<form>
+				<div class="row">
+					<div class="input-field col s12">
+						
+						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
+						<label for="icon_prefix"><i class="icofont-ui-message"></i> Nombre estudiante</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="$nombreusuario.identi">
+						<label for="icon_prefix"><i class="icofont-ui-message"></i> Identificacion</label>
+					</div>
+					<div class="input-field col s6">
+						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="tipoBeca">
+						<label for="icon_prefix"><i class="icofont-ui-message"></i> Tipo ticket</label>
+					</div>
+				</div>
+				<div class="row center">
+					<div class="input-field col s12">
+						<a (click)="comprarTicket(mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
