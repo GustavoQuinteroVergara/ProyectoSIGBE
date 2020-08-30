@@ -1,0 +1,11 @@
+.rowRegistroPeriodo{
+	padding-left: 11%;
+	padding-top: 5%;
+}
+.inputFechas{
+	width: 100%;
+}
+.inputFechaIni{
+	position: inherit !important;
+	padding-top: 12px !important;
+}

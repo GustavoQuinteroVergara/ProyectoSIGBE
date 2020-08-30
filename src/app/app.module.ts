@@ -42,6 +42,9 @@ import { ViewConvocatoriaComponent } from './components/convocatoria/view-convoc
 import { ListarpostuestComponent } from './components/postulacion/listarpostuest/listarpostuest.component';
 import { CrearusuariologinComponent } from './components/crearusuariologin/crearusuariologin.component';
 
+import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
+import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { CrearusuariologinComponent } from './components/crearusuariologin/crear
     RegistrarPostulacionComponent,
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
-    CrearusuariologinComponent
+    registrarlogin,
+    CrearusuariologinComponent,
+    CrearperiodoComponent,
+    TipobecaComponent
   ],
   imports: [
     BrowserModule,
