@@ -10,14 +10,15 @@ import {ListarpostuestComponent} from './components/postulacion/listarpostuest/l
 import { CrearusuariologinComponent } from './components/crearusuariologin/crearusuariologin.component';
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
+import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
 import { BecaComponent } from './components/beca/beca.component';
-
 export const ROUTES: Routes = [
     
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
     {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent},
     {path:'registrarPostulacion',component: RegistrarPostulacionComponent},
     {path:'registrarPeriodo',component: CrearperiodoComponent},
+    {path:'comprarTicket',component: CrearTicketComponent},
     {path:'listarPostulacionesEst',component: ListarpostuestComponent},
     {path:'modificarUsuario', component: ModificarusuarioComponent},
     {path:'crearUsuario', component: CrearusuarioComponent},

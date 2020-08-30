@@ -44,8 +44,9 @@ import { CrearusuariologinComponent } from './components/crearusuariologin/crear
 
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
+import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
+import {Globals} from './global';
 import { BecaComponent } from './components/beca/beca.component';
-
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { BecaComponent } from './components/beca/beca.component';
     TipobecaComponent,
     BecaComponent
     CrearperiodoComponent,
-    TipobecaComponent
+    TipobecaComponent,
+    CrearTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +103,8 @@ MatDatepickerModule,
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule  
+    MatNativeDateModule,
+    Globals  
   ],
   bootstrap: [AppComponent]
 })

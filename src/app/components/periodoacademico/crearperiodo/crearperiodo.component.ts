@@ -12,6 +12,7 @@ export class CrearperiodoComponent{
 
   periodoArray:any;
 
+
   constructor(private periodoService:PeriodoServiceService) { }
 
   registrarPeriodo(descripcion:any,fechaini:any,fechafin:any){
