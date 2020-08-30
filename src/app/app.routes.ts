@@ -8,6 +8,7 @@ import {ListarconvocatoriaComponent} from './components/listarconvocatoria/lista
 import {RegistrarPostulacionComponent} from './components/postulacion/registrar-postulacion/registrar-postulacion.component';
 import {ViewConvocatoriaComponent} from './components/convocatoria/view-convocatoria/view-convocatoria.component';
 import {ListarpostuestComponent} from './components/postulacion/listarpostuest/listarpostuest.component';
+import { CrearusuariologinComponent } from './components/crearusuariologin/crearusuariologin.component';
 export const ROUTES: Routes = [
     /*en PATH : Se pone un nombre cualquiera para luego utilizarlo en el menu - 
     Component : el mismo nombre del import */
@@ -18,6 +19,7 @@ export const ROUTES: Routes = [
     {path:'modificarUsuario', component: ModificarusuarioComponent},
     {path:'crearUsuario', component: CrearusuarioComponent},
     {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
+    {path:'crearusuariologin',component: CrearusuariologinComponent},
     {path:'',component: LoginComponent},
     {path:'**',component: LoginComponent}
 
