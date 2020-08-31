@@ -1,17 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NavbarComponent } from './components/template/navbar/navbar.component';
-/*SE AÑADE PARA LAS RUTAS*/
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import {MatTableModule} from '@angular/material/table';
-
+import { MatTableModule } from '@angular/material/table';
 import { CrearusuarioComponent } from './components/crearusuario/crearusuario.component';
-import {RegistrarConvocatoriaComponent} from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'
-import {HttpClientModule} from '@angular/common/http';
+import { RegistrarConvocatoriaComponent } from './components/convocatoria/registrar-convocatoria/registrar-convocatoria.component'
+import { HttpClientModule } from '@angular/common/http';
 import { ModificarusuarioComponent } from './components/modificarusuario/modificarusuario.component';
 import { ListarconvocatoriaComponent } from './components/listarconvocatoria/listarconvocatoria.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,27 +22,18 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatSidenavModule} from '@angular/material/sidenav';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatNativeDateModule } from '@angular/material/core';
-// import { MatMomentDateModule } from '@angular/material-moment-adapter';
-//import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
-//import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  NgxMatDatetimePickerModule, 
-  NgxMatNativeDateModule, 
-  NgxMatTimepickerModule 
-} from '@angular-material-components/datetime-picker';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgxMatDatetimePickerModule,NgxMatNativeDateModule,NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewConvocatoriaComponent } from './components/convocatoria/view-convocatoria/view-convocatoria.component';
 import { ListarpostuestComponent } from './components/postulacion/listarpostuest/listarpostuest.component';
 import { CrearusuariologinComponent } from './components/crearusuariologin/crearusuariologin.component';
-
 import { CrearperiodoComponent } from './components/periodoacademico/crearperiodo/crearperiodo.component';
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
 import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
-import {Globals} from './global';
+import { Globals } from './global';
 import { BecaComponent } from './components/beca/beca.component';
 
 @NgModule({
@@ -60,19 +48,17 @@ import { BecaComponent } from './components/beca/beca.component';
     RegistrarPostulacionComponent,
     ViewConvocatoriaComponent,
     ListarpostuestComponent,
-    registrarlogin,
+    /*registrarlogin,*/
     CrearusuariologinComponent,
     TipobecaComponent,
-    BecaComponent
+    BecaComponent,
     CrearperiodoComponent,
     TipobecaComponent,
     CrearTicketComponent
   ],
   imports: [
     BrowserModule,
-
     // Angular material
-
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -84,27 +70,24 @@ import { BecaComponent } from './components/beca/beca.component';
     MatSliderModule,
     MatSlideToggleModule,
     MatTableModule,
-
     MatNativeDateModule,
-  // MatMomentDateModule,
-  
-MatDatepickerModule,
-  MatInputModule,
-  NgxMatTimepickerModule,
-  FormsModule,
-  ReactiveFormsModule,
-  MatButtonModule,
-  NgxMatDatetimePickerModule,
-  NgxMatNativeDateModule,
-  
-    RouterModule.forRoot(ROUTES,{useHash: true}),
+    MatDatepickerModule,
+    MatInputModule,
+    NgxMatTimepickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+
+    RouterModule.forRoot(ROUTES, { useHash: true }),
     HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
-    Globals  
+    Globals
   ],
   bootstrap: [AppComponent]
 })
