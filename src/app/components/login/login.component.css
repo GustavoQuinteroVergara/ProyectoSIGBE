@@ -15,6 +15,18 @@
     }
 }
 
+.botonRegistrate{
+    color: black;
+    font-weight: bold;
+    transition: all 0.5s ;
+    padding: 10px;
+}
+
+.botonRegistrate:hover{
+    background: #cccccc5e;
+    box-shadow: 2px 2px 2px #ccc;
+}
+
 .rowform {
     position: absolute;
     width: 30%;
