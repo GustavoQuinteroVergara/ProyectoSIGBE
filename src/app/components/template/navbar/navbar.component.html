@@ -2,49 +2,170 @@
   <div class="nav-wrapper">
     <mat-drawer-container class="ContenerBotonMenuLateral">
     <mat-drawer-content class="botonActivadorBarraLateral">
-        <button (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon" class="buttonIconBarra">
-          <i class="icofont-navigation-menu iconoMenubar">
-            <img src="/assets/imgs/logosigbe2.png" width="80px"/>
-          </i>
-        </button>
+    <button (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon" class="buttonIconBarra">
+    <i class="icofont-navigation-menu iconoMenubar">
+    <img src="/assets/imgs/logosigbe2.png" width="80px"/>
+    </i>
+    </button>
     </mat-drawer-content>
     </mat-drawer-container>
     <div class="right">
-      <span>
-        <!--{{this.$nombreusuario.rol + ' '+ this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}-->
-        {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
-      </span>
-      <a class="buttonCerrarse" (click)="cerrarSesion()">Cerrar sesion</a>
+      <li class="liMenuBarLateral liExterno liNombreext" routerLinkActive="active">
+        <a class="BotonALiBar" routerLink="/registroConvocatoria">
+          {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
+          <div class="right">
+            <i class="icofont-caret-down iconoMenubar iconDown iconNombree"></i>
+            <i class="icofont-caret-up iconoMenubar iconUp iconNombree"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down ulInternoMenu ulNombreInt">
+          <li class="liMenuBarLateral liNombreIntt" routerLinkActive="active">
+            <a class="buttonCerrarse" routerLink="/modificarUsuario">Actualizar mis datos</a>
+          </li>
+          <li class="liMenuBarLateral liNombreIntt" routerLinkActive="active">
+            <a class="buttonCerrarse" (click)="cerrarSesion()">Cerrar sesion</a>
+          </li>
+        </ul>
+      </li>
+      <!--       <div class="MenuDesplegablenombre">
+        <span>
+          {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
+          <i class="icofont-arrow-down iconoMenubar iconDownNombre"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUpNombre"></i>
+        </span>
+        <div class="contenidoMenuDesplegable">
+          <p>Hello World!</p>
+        </div>
+      </div> -->
+      
+      
     </div>
   </div>
 </nav>
 <mat-drawer #drawer mode="push" opened class="barraLateral">
 <div >
   <ul class="hide-on-med-and-down">
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/registroConvocatoria">Crear Convocatorias</a>
+    <!-- Convocatoria botones -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar" >
+        Convocatorias
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/registroConvocatoria">Crear convocatoria</a>
+        </li>
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar convocatorias</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
+    <!-- Fin convocatoria -->
+    <!-- Postulacion Botones -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar" >
+        Postulacion
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/registrarPostulacion">Crear postulacion</a>
+        </li>
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/listarPostulacionesEst">Mis postulaciones</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/modificarUsuario">Modificar Usuario</a>
+    <!-- Fin Postulacion -->
+    <!-- Incio Usuarios -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar" >
+        Usuarios
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar Convocatorias</a>
+    <!-- Fin botones usuarios -->
+    <!-- Inicio botones becas -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar">
+        Becas
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/crearBeca">Crear Beca</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/registrarPostulacion">Registrar postulacion</a>
+    <!-- Fin botones becas -->
+    <!-- Inicio tickets -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar">
+        Tickets
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/comprarTicket">Comprar ticket</a>
+        </li>
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" disabled="true" routerLink="/registroConvocatoria">Listar tickets</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/listarPostulacionesEst">Mis postulaciones</a>
+    <!-- Fin botones tickets -->
+    <!-- Inicio botones Periodos -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar" >
+        Periodo academico
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/registrarPeriodo">Crear periodo</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/crearTBeca">Registar Tipo Beca</a>
+    <!-- Fin botones periodos -->
+    <!-- Inicio botones Tipo becas -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+      <a class="BotonALiBar" >
+        Tipos becas
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/crearTBeca">Crear tipo beca</a>
+        </li>
+      </ul>
     </li>
-    <li class="liMenuBarLateral" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/crearBeca">Registar Beca</a>
-    </li>
+    <!-- Fin botones Tipo becas -->
   </ul>
   
 </div>

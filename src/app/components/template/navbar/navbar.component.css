@@ -41,12 +41,7 @@
 
 .liMenuBarLateral{
 	padding: 10px;
-	border-left: 3px solid #f04c3e;
 	transition: all 1s;
-}
-
-.liMenuBarLateral:hover{
-	border-left: 3px solid white;
 }
 
 .BotonALiBar{
@@ -54,9 +49,88 @@
 	color: white;
 	font-weight: bold;
 	font-size: 15px;
+	border-left: 3px solid #f04c3e;
+    padding-left: 3px;
+}
 
+.BotonALiBar:hover{
+	border-left: 3px solid white;
+    padding-left: 3px;
+}
+
+.BotonALiBar:hover > .ulInternoMenu > li{
+	border-left: 3px solid #f04c3e;
+    padding-left: 3px;
+}
+
+.BotonALiBar:hover > .ulInternoMenu > li:hover{
+	border-left: 3px solid white;
+    padding-left: 3px;
+}
+
+.iconUp{
+	display: none;
+	transition: all 1s;
+	animation: entradaMenu 0.5s linear;
+}
+.iconDown{
+	display: inline-block;
+	animation: entradaMenu 0.5s linear;
+}
+
+.liExterno:hover .iconDown{
+	display: none;
+}
+
+.liExterno:hover .iconUp{
+	display: inline-block;
+}
+
+.liExterno:hover > .ulInternoMenu{
+	display: block;
+}
+
+@keyframes entradaMenu {
+	to{
+opacity: 1;
+	}
+	from{
+opacity: 0;
+	}
+}
+
+.ulInternoMenu{
+	display: none;
+	animation: entradaMenu 0.5s linear;
+	transition: all 0.5s;
 }
 
 .iconoMenubar > img{
-margin-left: 15px;
+	margin-left: 15px;
 }
+
+/*Dropdown cerrar sesion*/
+.liNombreext{
+	position: relative;
+	display: inline-block;
+	padding: 0;
+	margin-right: 30px;
+}
+
+.iconNombree{
+	font-size: 15px;	
+}
+
+.ulNombreInt{
+	position: absolute;
+	z-index: 1;
+	top: 64px;
+}
+
+.liNombreIntt{
+	width: 200px;
+	background: #f04c3e !important;
+	padding: 0;
+	font-weight: bold;
+}
+/*Fin dropdown*/
