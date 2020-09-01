@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
 import{ActualizarSaldoService} from './actualizar-saldo.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-modificarusuario',
   templateUrl: './modificarusuario.component.html',
@@ -13,9 +14,24 @@ export class ModificarusuarioComponent implements OnInit {
   saldoRegistrado:any;
   success:any;
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
-  constructor(matslider: MatSliderModule, private serviceSaldo:ActualizarSaldoService, public dialog: MatDialog) { }
+  public updateForm: FormGroup;
+  constructor(matslider: MatSliderModule, private serviceSaldo:ActualizarSaldoService, public dialog: MatDialog) { 
+    
+  }
 
   ngOnInit(): void {
+    
+      this.updateForm = new FormGroup({
+        nombre: new FormControl(this.$nombreusuario.nombre,[Validators.required, Validators.maxLength(30), Validators.pattern("[a-zA-Z ]*")  , Validators.minLength(3),]),
+        apellido: new FormControl(this.$nombreusuario.apellido,[Validators.required,Validators.maxLength(40),Validators.minLength(5),Validators.pattern("[a-zA-Z ]*")]),
+        correo: new FormControl(this.$nombreusuario.correo,[Validators.required]),
+        codigoestudiante: new FormControl(this.$nombreusuario.codigoest,[Validators.required,Validators.maxLength(9),Validators.minLength(7)])
+      });
+    
+  }
+ 
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.updateForm.controls[controlName].hasError(errorName);
   }
   registrarSaldo(identificacion:any,saldo:any,codigoestudiante:any,correo:any,apellido:any,  
     nombre:any,templateRef){
