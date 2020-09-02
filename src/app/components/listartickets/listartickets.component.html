@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="wraplistarconvo">
+<div class="caja z-depth-3">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+      </div>
+      <div class="titulo">
+          <h5>Lista de Tickets</h5>
+      </div>
+      <div class="buscar" style="float: left;  width: 100%;text-align: left;padding-left: 10px;">
+        
+            <div class="input-group">
+              <input #identificacion  style="width: 300px;" type="text" class="form-control" placeholder="Ingresar identificacion">
+              <span class="input-group-btn">
+                <button style="width: 75px; height: 35px;" class="waves-effect waves-light btn-small" type="button"(click)="buscartickets(identificacion.value)" >Buscar</button>
+              </span>
+            </div>
+        
+        
+        
+      </div>
+      
+      
+      <div class="tabla">
+<table class="striped">
+    <thead>
+      <tr >
+          <th>Fecha <br>Compra ticket</th>
+          <th>Identificacion</th>
+          <th>Codigo de <br> estudiante</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let ticket of ticketes">
+        <td>{{ticket.fecha_compra.date}}</td>
+        <td>{{ticket.identificacion_estudiante}}</td>
+        <td>{{ticket.codigo_estudiante}}</td>
+        <td>{{ticket.nombre_estudiate}}</td>
+        <td>{{ticket.apellido_estudiate}}</td>
+        
+        
+
+      </tr>
+     
+     
+    </tbody>
+  </table>
+
+</div>
+
+</div>
+</div>
