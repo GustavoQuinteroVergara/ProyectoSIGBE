@@ -12,6 +12,7 @@ import { CrearperiodoComponent } from './components/periodoacademico/crearperiod
 import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
 import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
 import { BecaComponent } from './components/beca/beca.component';
+import { ListarticketsComponent } from './components/listartickets/listartickets.component';
 export const ROUTES: Routes = [
     
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
@@ -24,6 +25,7 @@ export const ROUTES: Routes = [
     {path:'crearUsuario', component: CrearusuarioComponent},
     {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
     {path:'crearusuariologin',component: CrearusuariologinComponent},
+    {path:'listarTickets',component: ListarticketsComponent},
     {path:'crearTBeca',component:TipobecaComponent},
     {path:'crearBeca', component:BecaComponent},
     {path:'',component: LoginComponent},

@@ -35,6 +35,7 @@ import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
 import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
 import { Globals } from './global';
 import { BecaComponent } from './components/beca/beca.component';
+import { ListarticketsComponent } from './components/listartickets/listartickets.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { BecaComponent } from './components/beca/beca.component';
     BecaComponent,
     CrearperiodoComponent,
     TipobecaComponent,
-    CrearTicketComponent
+    CrearTicketComponent,
+    ListarticketsComponent
   ],
   imports: [
     BrowserModule,
