@@ -13,9 +13,15 @@ import { TipobecaComponent } from './components/tipobeca/tipobeca.component';
 import { CrearTicketComponent } from './components/crear-ticket/crear-ticket.component';
 import { BecaComponent } from './components/beca/beca.component';
 import { ListarticketsComponent } from './components/listartickets/listartickets.component';
+import { HomeComponent } from './components/home/home.component';
+import {ValidacionRutasGuard} from './guard/validacion-rutas.guard';
 export const ROUTES: Routes = [
     
-    {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent},
+    {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      } 
+},
     {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent},
     {path:'registrarPostulacion',component: RegistrarPostulacionComponent},
     {path:'registrarPeriodo',component: CrearperiodoComponent},
@@ -28,6 +34,7 @@ export const ROUTES: Routes = [
     {path:'listarTickets',component: ListarticketsComponent},
     {path:'crearTBeca',component:TipobecaComponent},
     {path:'crearBeca', component:BecaComponent},
+    {path:'bienvenida', component:HomeComponent},
     {path:'',component: LoginComponent},
     {path:'**',component: LoginComponent}
 
