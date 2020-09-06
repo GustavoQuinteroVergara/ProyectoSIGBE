@@ -14,11 +14,12 @@ export class ModificarusuarioComponent implements OnInit {
   saldoRegistrado:any;
   success:any;
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
+  /*VALIDACION FORM*/
   public updateForm: FormGroup;
   constructor(matslider: MatSliderModule, private serviceSaldo:ActualizarSaldoService, public dialog: MatDialog) { 
     
   }
-
+/*INICIO VALIDACIONES*/ 
   ngOnInit(): void {
     
       this.updateForm = new FormGroup({
@@ -33,6 +34,7 @@ export class ModificarusuarioComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) =>{
     return this.updateForm.controls[controlName].hasError(errorName);
   }
+  /*FIN VALIDACIONES*/ 
   registrarSaldo(identificacion:any,saldo:any,codigoestudiante:any,correo:any,apellido:any,  
     nombre:any,templateRef){
     this.saldoRegistrado= {saldo:saldo,

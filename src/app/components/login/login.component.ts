@@ -11,7 +11,7 @@ import {Router } from '@angular/router';
 export class LoginComponent {
 
   usuario:any;
-
+  ruta:any;
   constructor(private logins:ServiceloginService,private router:Router) { }
 
   login(email:string, contrasena:string){
@@ -26,11 +26,12 @@ export class LoginComponent {
                       'rol':result["roles"]};
       if(result["contrasena"] == contrasena){
         localStorage.setItem('currentUser',JSON.stringify(this.usuario));
-        this.router.navigate(['/registroConvocatoria']);
+        this.router.navigate(['/bienvenida']);
       }else{
         console.log("error");
       }
       this.usuario = result; });
+
     console.log(this.usuario);
     
   }
