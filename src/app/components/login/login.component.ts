@@ -12,7 +12,9 @@ export class LoginComponent {
 
   usuario:any;
   ruta:any;
-  constructor(private logins:ServiceloginService,private router:Router) { }
+  constructor(private logins:ServiceloginService,private router:Router) {
+    
+   }
 
   login(email:string, contrasena:string){
     this.logins.buscarUser(email).subscribe(result =>{ 

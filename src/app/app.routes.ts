@@ -20,20 +20,49 @@ export const ROUTES: Routes = [
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
     ,data: { 
         expectedRole: '2'
-      } 
-},
-    {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent},
-    {path:'registrarPostulacion',component: RegistrarPostulacionComponent},
-    {path:'registrarPeriodo',component: CrearperiodoComponent},
-    {path:'comprarTicket',component: CrearTicketComponent},
-    {path:'listarPostulacionesEst',component: ListarpostuestComponent},
+      }},
+    {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
+    {path:'registrarPostulacion',component: RegistrarPostulacionComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '1'
+      }},
+    {path:'registrarPeriodo',component: CrearperiodoComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
+    {path:'comprarTicket',component: CrearTicketComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '1'
+      }},
+    {path:'listarPostulacionesEst',component: ListarpostuestComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '1'
+      }},
     {path:'modificarUsuario', component: ModificarusuarioComponent},
-    {path:'crearUsuario', component: CrearusuarioComponent},
-    {path:'listarConvocatoria',component: ListarconvocatoriaComponent},
+    {path:'crearUsuario', component: CrearusuarioComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
+    {path:'listarConvocatoria',component: ListarconvocatoriaComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
     {path:'crearusuariologin',component: CrearusuariologinComponent},
-    {path:'listarTickets',component: ListarticketsComponent},
-    {path:'crearTBeca',component:TipobecaComponent},
-    {path:'crearBeca', component:BecaComponent},
+    {path:'listarTickets',component: ListarticketsComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
+    {path:'crearTBeca',component:TipobecaComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
+    {path:'crearBeca', component:BecaComponent, canActivate:[ValidacionRutasGuard]
+    ,data: { 
+        expectedRole: '2'
+      }},
     {path:'bienvenida', component:HomeComponent},
     {path:'',component: LoginComponent},
     {path:'**',component: LoginComponent}

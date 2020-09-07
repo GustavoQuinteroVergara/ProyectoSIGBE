@@ -122,7 +122,7 @@
     </li>
     <!-- Fin botones becas -->
     <!-- Inicio tickets -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active" >
       <a class="BotonALiBar">
         Tickets
         <div class="right">
@@ -131,10 +131,10 @@
         </div>
       </a>
       <ul class="hide-on-med-and-down ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='1'"  >
+        <li class="liMenuBarLateral" routerLinkActive="active"  *ngIf="this.$nombreusuario.rol =='1'" >
           <a class="BotonALiBar" routerLink="/comprarTicket">Comprar ticket</a>
         </li>
-        <li class="liMenuBarLateral" routerLinkActive="active">
+        <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
           <a class="BotonALiBar" disabled="true" routerLink="/listarTickets">Listar tickets</a>
         </li>
       </ul>

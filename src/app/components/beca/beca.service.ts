@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BecaService {
-  urlCreateBeca=  'http://localhost/SIGBEWEB/app/componentes/becas/create_becas.php';
-  urlListTBeca = 'http://localhost/SIGBEWEB/app/componentes/tipobecas/list_tipobecas.php';
+  urlCreateBeca=  'http://localhost/sigbeweb/app/componentes/becas/create_becas.php';
+  urlListTBeca = 'http://localhost/sigbeweb/app/componentes/tipobecas/list_tipobecas.php';
   constructor(private http: HttpClient) { }
 
   
