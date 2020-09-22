@@ -18,9 +18,7 @@
 		<i class="icofont-close-circled text-center iconErrRegister"></i>
 		<h2 class="text-center textoSuccess">ERROR A LA COMPRA</h2>
 	</div>
-
 	</ng-template>
-
 	<div class="card">
 		<div class="card-content">
 			<h1>Comprar ticket</h1>
@@ -28,23 +26,32 @@
 			<form>
 				<div class="row">
 					<div class="input-field col s6">
-						
-						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
-						<label for="icon_prefix"><i class="icofont-ui-message"></i> Nombre estudiante</label>
+						<mat-form-field class="example-full-width" appearance="none">
+						<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
+						<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
+						</mat-form-field>
 					</div>
 					<div class="input-field col s6">
-						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="$nombreusuario.saldo">
-						<label for="icon_prefix"><i class="icofont-ui-message"></i> Saldo</label>
+						<mat-form-field class="example-full-width" appearance="none">
+						<mat-label><i class="icofont-wallet"></i>Saldo actual</mat-label>
+						<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="$nombreusuario.saldo">
+						</mat-form-field>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="$nombreusuario.identi">
-						<label for="icon_prefix"><i class="icofont-ui-message"></i> Identificacion</label>
+						<mat-form-field class="example-full-width" appearance="none">
+						<mat-label><h3><i class="icofont-card"></i>Identificacion</h3></mat-label>
+						<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
+						</mat-form-field>
 					</div>
 					<div class="input-field col s6">
-						<input #descripcion id="icon_prefix" disabled="true" type="text" class="validate" [value]="tipoBeca">
-						<label for="icon_prefix"><i class="icofont-ui-message"></i> Tipo ticket</label>
+						<mat-form-field class="example-full-width" appearance="none">
+						<mat-label><i class="icofont-lunch"></i>Tipo ticket</mat-label>
+						<input disabled="true" #descripcion id="tipobeca" matInput placeholder="Tipo beca" [value]="tipoBeca">
+						</mat-form-field>
+
+
 					</div>
 				</div>
 				<div class="row center">

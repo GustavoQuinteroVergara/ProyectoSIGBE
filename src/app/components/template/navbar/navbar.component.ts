@@ -12,8 +12,11 @@ showFiller = false;
   constructor(private router:Router) { }
 
   cerrarSesion(){
-  localStorage.removeItem('currentUser');
-  this.router.navigate(['/']);
+	  localStorage.removeItem('currentUser');
+// 	  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+//     this.router.navigate(['']);
+// }); 
+	  this.router.navigate(['/']);
 
   }
 
