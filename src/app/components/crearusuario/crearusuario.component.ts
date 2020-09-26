@@ -10,7 +10,7 @@ export class CrearusuarioComponent implements OnInit  {
 
 formulariologin:FormGroup;
 usuario:any;
-  succes:any;
+succes:any;
 
   
 
@@ -40,7 +40,7 @@ usuario:any;
 console.log(this.formulariologin.value);
    }
 
-  registrouser(identificacion:any,nombre:any,apellido:any,email:any,codigo:any,contrasena:any,roles:any){
+  registrouser(identificacion:any,nombre:any,apellido:any,email:any,codigo:any,contrasena:any,roles:any,estadouser:any){
     this.usuario={
    identificacion:identificacion,
    nombre:nombre,
@@ -48,7 +48,8 @@ console.log(this.formulariologin.value);
    correo:email,
    codigoestudiante:codigo,
    contrasena:contrasena,
-   roles:roles 
+   roles:roles,
+   estadouser:estadouser
     };
     this.registraruser.registrarUsuario(this.usuario)
     .subscribe(res =>{
