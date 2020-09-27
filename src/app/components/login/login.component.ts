@@ -25,12 +25,14 @@ export class LoginComponent {
                       'identi':result["identificacion"],
                       'codigoest':result["codigoestudiante"],
                       'saldo':result["saldo"],
-                      'rol':result["roles"]};
-      if(result["contrasena"] == contrasena){
+                      'rol':result["roles"],
+                      'estadouser':result["estadouser"]};
+      if((result["contrasena"] == contrasena) && (result["estadouser"]=='Activo') ) {
         localStorage.setItem('currentUser',JSON.stringify(this.usuario));
         this.router.navigate(['/bienvenida']);
       }else{
         console.log("error");
+        console.log("No esta activo");
       }
       this.usuario = result; });
 
