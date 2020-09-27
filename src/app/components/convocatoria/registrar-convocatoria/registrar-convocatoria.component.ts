@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {RegistrarConvoServiceService} from './registrar-convo-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
@@ -7,12 +7,14 @@ import { ThemePalette } from '@angular/material/core';
   templateUrl: './registrar-convocatoria.component.html',
   styleUrls: ['./registrar-convocatoria.component.css']
 })
-export class RegistrarConvocatoriaComponent {
+export class RegistrarConvocatoriaComponent implements OnInit {
   convocatoriaBeca: any;
   registroConvo:any[]=[];
   convocatoriaPeriodo: any;
   convocatoriaRegistrar:any;
   success:any;
+  public formularioConvocatoria: FormGroup;
+  
   public disabled = false;
   public showSpinners = false;
   public showSeconds = false;
@@ -31,7 +33,9 @@ export class RegistrarConvocatoriaComponent {
   })
   public dateControl = new FormControl(new Date('now'));
   public dateControlMinMax = new FormControl(new Date());
-
+  date = new Date(2020, 1, 1);
+  minDate = new Date();
+  
   public options = [
     { value: true, label: 'True' },
     { value: false, label: 'False' }
@@ -47,25 +51,17 @@ constructor(private serviceConvocatoria:RegistrarConvoServiceService) {
   this.buscarBeca();
   this.buscarPeriodo();
 }
-/*registroConvocatoria(){
-    this.registroConvo =[
-      {
-        fechainicio:fechainicial,
-        fechafin:fechafinal,
-        becaArray:beca,
-        cuposArray:cupos,
-        periodoacademico:periodo,
-        horainicio:horainicial,
-        horafin:horafinal,
-        estadoconvocatoriaArray:estadoconvocatoria
-      }
-    ];
-    console.log(this.registroConvo);
-    /*this.serviceConvocatoria.registrarConvocatoria(this.registroConvo).subscribe(result=>{
-      console.log(result);
-    })
-    
-}*/
+  ngOnInit(): void {
+    this.formularioConvocatoria = new FormGroup({
+      beca: new FormControl('',Validators.required),
+      estadoConvocatoria: new FormControl('',Validators.required),
+      fechaInicial: new FormControl('',Validators.required),
+      cupos: new FormControl('',Validators.required),
+    });
+  }
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.formularioConvocatoria.controls[controlName].hasError(errorName);
+  }
 buscarBeca(){
   this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
     console.log(convocatoriaBeca);

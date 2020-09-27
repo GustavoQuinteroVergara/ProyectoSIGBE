@@ -1,39 +1,35 @@
 <app-navbar></app-navbar>
 <div class="row fondoConvocatoria center-align ">
-    <form class="col s6 formConvocatoria z-depth-3">
+    <form class="col s6 formConvocatoria z-depth-3"  [formGroup]="formularioConvocatoria" novalidate>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
       <h3 class="tituloRegistroConvocatoria"> Crea una Convocatoria</h3>
       <div class="row divFormConvo">
         <mat-form-field appearance="none">
           <mat-label>Seleccione una Beca</mat-label>
-          <mat-select #beca  required>
+          <mat-select #beca  required  formControlName="beca">
           <mat-option>--</mat-option>
             <mat-option *ngFor="let beca of convocatoriaBeca" [value]="beca.consecutivo_beca">
               {{beca.descripcion}}
             </mat-option>
           </mat-select>
+          <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['beca'].hasError('required') &&
+          formularioConvocatoria.controls['beca'].touched">Seleccionar una beca</mat-error>
           </mat-form-field>
           <mat-form-field  class="estadoConvo" appearance="none">
             <mat-label>Seleccione el estado</mat-label>
-            <mat-select #estadoconvocatoria  required>
+            <mat-select #estadoconvocatoria  required formControlName="estadoConvocatoria">
             <mat-option>--</mat-option>
               <mat-option value="Activo">Activo</mat-option>
               <mat-option value="Inactivo">Inactivo</mat-option>
             </mat-select>
-            </mat-form-field>
-<!--          <mat-form-field appearance="none" disable>
-            <mat-label>Seleccione una periodo</mat-label>
-            <mat-select #periodo  required>
-            <mat-option>--</mat-option>
-              <mat-option *ngFor="let periodo of convocatoriaPeriodo" [value]="periodo.consecutivo_periodo">
-                {{periodo.consecutivo_periodo}}
-              </mat-option>
-            </mat-select>
-            </mat-form-field>-->
-            
+            <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['estadoConvocatoria'].hasError('required') &&
+          formularioConvocatoria.controls['estadoConvocatoria'].touched">Selecciona un estado</mat-error>
+            </mat-form-field>  
+            <div class="row contendorFechas">
+              <div class="col s6">
           <mat-form-field appearance="none">
-            <input #fechainicial matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" [formControl]="dateControl"
-                [disabled]="disabled">
+            <input #fechainicial matInput [ngxMatDatetimePicker]="picker" [min]="minDate"  placeholder="Selecciona Fecha Inicial" [formControl]="dateControl"
+                [disabled]="disabled" >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
             <ngx-mat-datetime-picker  #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
@@ -41,9 +37,11 @@
                [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
             </ngx-mat-datetime-picker>
          </mat-form-field>
-         
+        </div>
+        
+        <div class="col s6">
          <mat-form-field appearance="none">
-          <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" [formControl]="dateControl"
+          <input #fechafinal matInput [ngxMatDatetimePicker]="picker2"  [min]="minDate" placeholder="Selecciona Fecha final" [formControl]="dateControl"
               [disabled]="disabled">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
 
@@ -52,9 +50,17 @@
              [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
           </ngx-mat-datetime-picker>
        </mat-form-field>
+      </div>
+      </div>          
        <mat-form-field class="example-full-width" appearance="none">
         <mat-label>Cantidad de Cupos</mat-label>
-        <input #cupos id="cupos" matInput placeholder="cupos" value="">
+        <input #cupos id="cupos" matInput placeholder="cupos" value=""  pattern="^[0-9]+" formControlName="cupos">
+        <mat-error class="help-block form-error text-danger small"
+        *ngIf="formularioConvocatoria.controls['cupos'].hasError('required') && formularioConvocatoria.controls['cupos'].touched">
+        Los cupos son requeridos </mat-error>
+        <mat-error class="help-block form-error text-danger small"
+        *ngIf="formularioConvocatoria.controls['cupos'].hasError('pattern') && formularioConvocatoria.controls['cupos'].touched">
+        Solo números positivos</mat-error>
       </mat-form-field>
             <mat-form-field class="example-full-width"  appearance="none">
               <mat-label>Periodo Actual</mat-label>
