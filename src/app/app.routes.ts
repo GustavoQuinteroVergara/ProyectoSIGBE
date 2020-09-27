@@ -15,6 +15,7 @@ import { BecaComponent } from './components/beca/beca.component';
 import { ListarticketsComponent } from './components/listartickets/listartickets.component';
 import { HomeComponent } from './components/home/home.component';
 import {ValidacionRutasGuard} from './guard/validacion-rutas.guard';
+import {HabilitaruserComponent} from './components/habilitaruser/habilitaruser.component';
 export const ROUTES: Routes = [
     
     {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
@@ -63,6 +64,7 @@ export const ROUTES: Routes = [
     ,data: { 
         expectedRole: '2'
       }},
+      {path:'habilitarUser', component:HabilitaruserComponent},
     {path:'bienvenida', component:HomeComponent},
     {path:'',component: LoginComponent},
     {path:'**',component: LoginComponent}
