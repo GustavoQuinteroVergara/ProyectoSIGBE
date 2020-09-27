@@ -17,3 +17,41 @@
 	margin: 0 auto;
     width: 65%;
 }
+.estadoConvo{
+    float: right;
+}
+@media (max-width: 1317px) {
+    .fondoConvocatoria{
+        width: 90%;
+    }
+}
+@media (max-width: 1290px) {
+    .fondoConvocatoria{
+        width: 98%;
+    }
+}
+@media (max-width: 1160px) {
+    .fondoConvocatoria{
+        width: 108%;
+    }
+}
+@media (max-width: 1062px) {
+    .fondoConvocatoria{
+        width: 118%;
+    }
+}
+@media (max-width: 972px) {
+    .fondoConvocatoria{
+        width: 128%;
+    }
+}
+@media (max-width: 896px){
+    .estadoConvo{
+        float: none;
+    }
+}
+@media (max-width: 460px) {
+    .fondoConvocatoria{
+        width: 135%;
+    }
+}

@@ -14,7 +14,7 @@ export class RegistrarConvocatoriaComponent {
   convocatoriaRegistrar:any;
   success:any;
   public disabled = false;
-  public showSpinners = true;
+  public showSpinners = false;
   public showSeconds = false;
   public touchUi = false;
   public enableMeridian = false;
@@ -79,12 +79,12 @@ buscarPeriodo(){
   });
 }
 
-registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,periodo:any,estadoconvocatoria:any){
+registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estadoconvocatoria:any){
   this.convocatoriaRegistrar= {fechainicio:fechainicial,
     fechafin:fechafinal,
     becas:becas,
     cupo:cupos,
-    periodo:periodo,
+    periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
     estadoconvocatoria:estadoconvocatoria};
   this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
     console.log(res);
