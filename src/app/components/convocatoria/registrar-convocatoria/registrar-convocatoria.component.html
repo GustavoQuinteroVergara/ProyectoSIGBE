@@ -13,7 +13,15 @@
             </mat-option>
           </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="none">
+          <mat-form-field  class="estadoConvo" appearance="none">
+            <mat-label>Seleccione el estado</mat-label>
+            <mat-select #estadoconvocatoria  required>
+            <mat-option>--</mat-option>
+              <mat-option value="Activo">Activo</mat-option>
+              <mat-option value="Inactivo">Inactivo</mat-option>
+            </mat-select>
+            </mat-form-field>
+<!--          <mat-form-field appearance="none" disable>
             <mat-label>Seleccione una periodo</mat-label>
             <mat-select #periodo  required>
             <mat-option>--</mat-option>
@@ -21,7 +29,8 @@
                 {{periodo.consecutivo_periodo}}
               </mat-option>
             </mat-select>
-            </mat-form-field>
+            </mat-form-field>-->
+            
           <mat-form-field appearance="none">
             <input #fechainicial matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" [formControl]="dateControl"
                 [disabled]="disabled">
@@ -32,7 +41,7 @@
                [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
             </ngx-mat-datetime-picker>
          </mat-form-field>
-         <div>
+         
          <mat-form-field appearance="none">
           <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" [formControl]="dateControl"
               [disabled]="disabled">
@@ -43,23 +52,18 @@
              [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
           </ngx-mat-datetime-picker>
        </mat-form-field>
-       </div>
        <mat-form-field class="example-full-width" appearance="none">
         <mat-label>Cantidad de Cupos</mat-label>
         <input #cupos id="cupos" matInput placeholder="cupos" value="">
       </mat-form-field>
-          <mat-form-field style="float: right;" appearance="none">
-            <mat-label>Seleccione el estado</mat-label>
-            <mat-select #estadoconvocatoria  required>
-            <mat-option>--</mat-option>
-              <mat-option value="Activo">Activo</mat-option>
-              <mat-option value="Inactivo">Inactivo</mat-option>
-            </mat-select>
-            </mat-form-field>
+            <mat-form-field class="example-full-width"  appearance="none">
+              <mat-label>Periodo Actual</mat-label>
+              <input disabled matInput placeholder="consecutivo" [value]="convocatoriaPeriodo[0].descripcion">
+              </mat-form-field>
         </div>
         <div class="center-align">
          <a class="btn waves-effect waves-light red darken-4 " (click)="registrarConvocatoria
-        (fechainicial.value,fechafinal.value,beca.value,cupos.value,periodo.value,estadoconvocatoria.value)"  name="action">Registrar</a>
+        (fechainicial.value,fechafinal.value,beca.value,cupos.value,estadoconvocatoria.value)"  name="action">Registrar</a>
         </div>
     </form>
   </div>
