@@ -11,6 +11,10 @@
     color: red;
 }
 
+.icoselectCalendar{
+    font-size: 20px;
+}
+
 .textoSuccess{
 	margin-top: 20px;
 }
@@ -22,8 +26,8 @@
 
 .containerRegisterPostu{
     width: 50%;
-    margin-left: 11%;
-    padding-top: 5.5%;
+    margin-left: 12%;
+    padding-top: 6%;
 }
 
 .formPostuRegister{
