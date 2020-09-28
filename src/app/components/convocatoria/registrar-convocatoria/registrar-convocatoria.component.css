@@ -20,6 +20,11 @@
 .estadoConvo{
     float: right;
 }
+.contendorFechas{
+    display: inline-flex;
+    width: 125%;
+    margin-left: -10%;
+}
 @media (max-width: 1317px) {
     .fondoConvocatoria{
         width: 90%;
@@ -40,6 +45,11 @@
         width: 118%;
     }
 }
+@media (max-width: 1052px){
+    .contendorFlex{
+        display: inline-flex;
+    }
+}
 @media (max-width: 972px) {
     .fondoConvocatoria{
         width: 128%;
@@ -48,6 +58,61 @@
 @media (max-width: 896px){
     .estadoConvo{
         float: none;
+    }
+    .contendorFechas{
+        flex: auto;
+        flex-flow: column;
+        margin-left: -65%;
+    }
+}
+@media (max-width: 800px){
+    .estadoConvo{
+        float: none;
+    }
+    .contendorFechas{
+        flex: auto;
+        flex-flow: column;
+        margin-left: -71%;
+    }
+}
+@media (max-width: 715px){
+    .estadoConvo{
+        float: none;
+    }
+    .contendorFechas{
+        flex: auto;
+        flex-flow: column;
+        margin-left: -77%;
+    }
+}
+@media (max-width: 615px){
+    .estadoConvo{
+        float: none;
+    }
+    .contendorFechas{
+        flex: auto;
+        flex-flow: column;
+        margin-left: -94%;
+    }
+}
+@media (max-width: 520px){
+    .estadoConvo{
+        float: none;
+    }
+    .contendorFechas{
+        flex: auto;
+        flex-flow: column;
+        margin-left: -108%;
+    }
+}
+@media (max-width: 406px){
+    .estadoConvo{
+        float: none;
+    }
+    .contendorFechas{
+        flex: auto;
+        flex-flow: column;
+        margin-left: -127%;
     }
 }
 @media (max-width: 460px) {
