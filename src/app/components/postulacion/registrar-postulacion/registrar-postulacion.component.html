@@ -35,16 +35,30 @@
             </div>
             </div>
             <div class="row">
-            	<div class="input-field col s6">
-			        <i class="icofont-data material-icons prefix"></i>
-			        <input #promedio formControlName="promedio" id="icon_prefix" type="text" class="validate" required>
-			        <label for="icon_prefix">Promedio</label>
-                <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
-                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Minimo 1 caracter</p>
-                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Maximo 3 caracteres</p>
+
+
+<!-- estratp -->
+
+               <div class="input-field col s6">
+
+                  <mat-form-field appearance="fill">
+                  <mat-select #estrato required formControlName="estrato">
+                    <mat-option>-- Selecciona su estrato --</mat-option>
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                    <mat-option value="4">4</mat-option>
+                    <mat-option value="5">5</mat-option>
+                    <mat-option value="6">6</mat-option>
+                  </mat-select>
+                  <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Semestre</b> </mat-label>
+                </mat-form-field>
+                <div *ngIf="myForm.get('estrato').errors && myForm.get('estrato').dirty">
+                    <p class="red-text" *ngIf="myForm.get('estrato').hasError('required')">Por favor, no dejar el campo estrato vacio.</p>
                 </div>
-			    </div>
+                </div>
+<!-- fin estrato -->
+
                 <div class="input-field col s6">
                      <mat-form-field appearance="fill">
                   <mat-select #semestre required formControlName="semestre">
@@ -69,23 +83,23 @@
                 </div>
             </div>
             <div class="row">
-               <div class="input-field col s6">
-                    <i class="icofont-home material-icons prefix"></i>
-                    <input #estrato formControlName="estrato" id="icon_prefix" type="text" class="validate" required>
-                    <label for="icon_prefix">Estrato</label>
-                <div *ngIf="myForm.get('estrato').errors && myForm.get('estrato').dirty">
-                    <p class="red-text" *ngIf="myForm.get('estrato').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                    <p class="red-text" *ngIf="myForm.get('estrato').hasError('minlength')">Minimo 1 numero</p>
-                    <p class="red-text" *ngIf="myForm.get('estrato').hasError('maxlength')">Maximo 1 numero</p>
+
+<!-- PROMEDIO -->
+                <div class="input-field col s6">
+                    <i class="icofont-data material-icons prefix"></i>
+                    <input #promedio formControlName="promedio" id="icon_prefix" type="text" class="validate" required>
+                    <label for="icon_prefix">Promedio</label>
+                <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
+                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
+                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Minimo 1 caracter</p>
+                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Maximo 3 caracteres</p>
                 </div>
                 </div>
+<!-- FIN PROMEDIO -->
                 <div class="input-field col s6">
                     <i class="icofont-id material-icons prefix"></i>
-                    <input #identificacion formControlName="identificacion" id="icon_prefix" value="{{this.$nombreusuario.identi}}" disabled="true" type="text" class="validate">
+                    <input #identificacion id="icon_prefix" value="{{this.$nombreusuario.identi}}" disabled="true" type="text" class="validate">
                     <label for="icon_prefix">Identificacion</label>
-                <div *ngIf="myForm.get('identificacion').errors && myForm.get('identificacion').dirty">
-                    <p class="red-text" *ngIf="myForm.get('identificacion').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                </div>
                 </div>
             </div>
             

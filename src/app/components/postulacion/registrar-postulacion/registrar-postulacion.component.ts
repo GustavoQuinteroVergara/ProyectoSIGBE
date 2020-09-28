@@ -22,10 +22,9 @@ export class RegistrarPostulacionComponent  {
   	this.buscarConvoActivas();
      this.myForm = this.fb.group({
       convo: ['', [Validators.required]],
-      promedio: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(4)]],
+      promedio: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(2)]],
       semestre: ['', [Validators.required]],
-      estrato: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(1)]],
-      identificacion: ['', [Validators.required]],
+      estrato: ['', [Validators.required]],
     });
 
   }
