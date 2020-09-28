@@ -75,17 +75,18 @@
 }
 .iconDown{
 	display: inline-block;
-	animation: entradaMenu 0.5s linear;
+	transition: all 1s;
+	/*animation: entradaMenu 0.5s linear;*/
 }
 
 .liExterno:hover .iconDown{
-	display: none;
+	transform: rotate(180deg);
 }
 
-.liExterno:hover .iconUp{
+/*.liExterno:hover .iconUp{
 	display: inline-block;
 }
-
+*/
 .liExterno:hover > .ulInternoMenu{
 	display: block;
 }

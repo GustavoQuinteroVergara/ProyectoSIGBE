@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';  
 import {ListconvoactivasService} from './listconvoactivas.service';
 import {ServRegPostuService} from './serv-reg-postu.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -15,11 +15,18 @@ export class RegistrarPostulacionComponent  {
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
   postulacionRegistrar:any;
   success:any;
+  myForm: FormGroup;
 
 
-
-  constructor(private listconvoactivas:ListconvoactivasService,private registrarpostu:ServRegPostuService,public dialog: MatDialog) { 
+  constructor(private listconvoactivas:ListconvoactivasService,public fb: FormBuilder,private registrarpostu:ServRegPostuService,public dialog: MatDialog) { 
   	this.buscarConvoActivas();
+     this.myForm = this.fb.group({
+      convo: ['', [Validators.required]],
+      promedio: ['', [Validators.required,Validators.minLength(1),Validators.maxLength(2)]],
+      semestre: ['', [Validators.required]],
+      estrato: ['', [Validators.required]],
+    });
+
   }
 
     buscarConvoActivas(){
