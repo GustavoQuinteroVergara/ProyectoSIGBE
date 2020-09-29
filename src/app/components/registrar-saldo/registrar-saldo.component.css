@@ -1,0 +1,21 @@
+.cajaPrincipal{
+    padding-top: 10%;
+    width: 50%;
+    margin-left: 25%;
+    height: 100vh;
+}
+.logo{
+    margin-left: 50%;
+}
+.titulo{
+    margin-left: 40%;
+}
+.buscar{
+    float: left;  
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
+}
+.btn-saldo{
+    margin-top: 5%;
+}
