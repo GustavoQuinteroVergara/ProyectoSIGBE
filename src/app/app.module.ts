@@ -38,6 +38,7 @@ import { BecaComponent } from './components/beca/beca.component';
 import { ListarticketsComponent } from './components/listartickets/listartickets.component';
 import { HomeComponent } from './components/home/home.component';
 import { HabilitaruserComponent } from './components/habilitaruser/habilitaruser.component';
+import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-saldo.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { HabilitaruserComponent } from './components/habilitaruser/habilitaruser
     CrearTicketComponent,
     ListarticketsComponent,
     HomeComponent,
-    HabilitaruserComponent
+    HabilitaruserComponent,
+    RegistrarSaldoComponent
   ],
   imports: [
     BrowserModule,
