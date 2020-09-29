@@ -50,6 +50,7 @@ export class RegistrarPostulacionComponent  {
 
 
     },(err)=>{
+      console.log(err.error);
      this.success = false;
      let dialogRef = this.dialog.open( templateRef,{
         height: '200px',
