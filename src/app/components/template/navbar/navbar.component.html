@@ -18,7 +18,7 @@
             <i class="icofont-caret-up iconoMenubar iconUp iconNombree"></i>
           </div>
         </a>
-        <ul class="hide-on-med-and-down ulInternoMenu ulNombreInt">
+        <ul class="hide-on-med-and-down-menu ulInternoMenu ulNombreInt">
           <li class="liMenuBarLateral liNombreIntt" routerLinkActive="active">
             <a class="buttonCerrarse" routerLink="/modificarUsuario">Actualizar mis datos</a>
           </li>
@@ -44,7 +44,7 @@
 </nav>
 <mat-drawer #drawer mode="push" opened class="barraLateral">
 <div >
-  <ul class="hide-on-med-and-down">
+  <ul class="hide-on-med-and-down-menu">
     <!-- Inicio Botón bienvenida -->
     <li class="liMenuBarLateral liExterno" routerLinkActive="active">
       <a class="BotonALiBar" routerLink="/bienvenida">
@@ -60,7 +60,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active">
           <a class="BotonALiBar" routerLink="/registroConvocatoria" >Crear convocatoria</a>
         </li>
@@ -79,7 +79,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active" >
           <a class="BotonALiBar" routerLink="/registrarPostulacion">Crear postulacion</a>
         </li>
@@ -98,7 +98,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active">
           <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
         </li>
@@ -120,7 +120,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
           <a class="BotonALiBar" routerLink="/crearBeca">Crear Beca</a>
         </li>
@@ -136,7 +136,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active"  *ngIf="this.$nombreusuario.rol =='1'" >
           <a class="BotonALiBar" routerLink="/comprarTicket">Comprar ticket</a>
         </li>
@@ -155,7 +155,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active">
           <a class="BotonALiBar" routerLink="/registrarPeriodo">Crear periodo</a>
         </li>
@@ -171,7 +171,7 @@
           <i class="icofont-arrow-up iconoMenubar iconUp"></i>
         </div>
       </a>
-      <ul class="hide-on-med-and-down ulInternoMenu">
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
         <li class="liMenuBarLateral" routerLinkActive="active">
           <a class="BotonALiBar" routerLink="/crearTBeca">Crear tipo beca</a>
         </li>

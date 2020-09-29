@@ -135,3 +135,26 @@ opacity: 0;
 	font-weight: bold;
 }
 /*Fin dropdown*/
+
+/* Inicio RESPONSIVE BARRA LATERAL*/
+@media only screen and (max-width: 1326px){
+	.liNombreext{
+		margin-left: -39%;
+	}
+}
+@media only screen and (max-width: 1264px){
+		.liNombreext{
+			margin-left: -39%;
+		}
+	}
+@media only screen and (max-width: 600px){
+	.barraLateral {
+		margin-top: 56px !important;
+	}
+	.ulNombreInt {
+		top: 56px;
+	}
+
+}
+
+/* Fin RESPONSIVE BARRA LATERAL*/
