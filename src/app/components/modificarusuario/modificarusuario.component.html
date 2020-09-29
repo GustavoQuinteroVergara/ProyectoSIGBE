@@ -17,20 +17,45 @@
     </div>
     <form class="col s12" [formGroup]="updateForm" novalidate>
       <h3 class="tituloRegistroConvocatoria"> Actualiza Usuario</h3>
-      <div class="row">
-        <mat-form-field class="example-full-width" disabled appearance="none">
-          <mat-label>Identificacion</mat-label>
-          <input #identificacion id="identificacion" disabled matInput placeholder="Identificacion" type="number"
-            [value]="$nombreusuario.identi">
-        </mat-form-field>
+      <div class="row fondoActualizar">
+        <div class="col s6">
+          <mat-form-field class="example-full-width" disabled appearance="none">
+            <mat-label>Identificacion</mat-label>
+            <input #identificacion id="identificacion" disabled matInput placeholder="Identificacion" type="number"
+              [value]="$nombreusuario.identi">
+          </mat-form-field>
+        </div>
+        <div class="col s6">
         <mat-form-field class="example-full-width" appearance="none">
           <mat-label>Saldo Actual</mat-label>
           <input #saldo id="saldo" matInput placeholder="Saldo" disabled type="number" [value]="$nombreusuario.saldo">
         </mat-form-field>
+      </div>
+      <div class="col s6">
+        <mat-form-field class="example-full-width" appearance="none">
+          <mat-label>Codigo Estudiante</mat-label>
+          <input #codigoestudiante id="codigoestudiante" type="number" matInput placeholder="Codigo Estudiante"
+            [value]="$nombreusuario.codigoest" formControlName="codigoestudiante" pattern="^[0-9]+" minlength="7"
+            maxlength="9">
+          <mat-error class="help-block form-error text-danger small"
+            *ngIf="updateForm.controls['codigoestudiante'].hasError('required') && updateForm.controls['codigoestudiante'].touched">
+            Código estudiante es requerido</mat-error>
+          <mat-error class="help-block form-error text-danger small"
+            *ngIf="updateForm.controls['codigoestudiante'].hasError('pattern') && updateForm.controls['codigoestudiante'].touched">
+            Solo números positivos</mat-error>
+          <mat-error class="help-block form-error text-danger small"
+            *ngIf="updateForm.controls['codigoestudiante'].hasError('minlength') && updateForm.controls['codigoestudiante'].touched">
+            Mínimo 7 Números</mat-error>
+          <mat-error class="help-block form-error text-danger small"
+            *ngIf="updateForm.controls['codigoestudiante'].hasError('maxlength') && updateForm.controls['codigoestudiante'].touched">
+            Máximo 7 Números</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col s6">
         <mat-form-field class="example-full-width" appearance="none">
           <mat-label>Nombre</mat-label>
           <input #nombre id="nombre" matInput type="text" placeholder="Nombre" [value]="$nombreusuario.nombre"
-            formControlName="nombre" >
+            formControlName="nombre">
           <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('required') &&
           updateForm.controls['nombre'].touched">Nombre es requerido</mat-error>
           <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('minlength') &&
@@ -42,6 +67,8 @@
           <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('pattern') &&
           updateForm.controls['nombre'].touched">Solo se aceptan letras.</mat-error>
         </mat-form-field>
+      </div>
+      <div class="col s6">
         <mat-form-field class="example-full-width" appearance="none">
           <mat-label>Apellido</mat-label>
           <input #apellido id="apellido" matInput placeholder="Apellido" [value]="$nombreusuario.apellido"
@@ -55,9 +82,11 @@
           <mat-error class="help-block form-error text-danger small"
             *ngIf="updateForm.controls['apellido'].hasError('maxlength') &&updateForm.controls['apellido'].touched">
             Máximo 3 Letras</mat-error>
-            <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['apellido'].hasError('pattern') &&
+          <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['apellido'].hasError('pattern') &&
             updateForm.controls['apellido'].touched">Solo se aceptan letras.</mat-error>
         </mat-form-field>
+      </div>
+      <div class="col s6">
         <mat-form-field class="example-full-width" appearance="none">
           <mat-label>Email</mat-label>
           <input #correo id="email" matInput placeholder="Correo" [value]="$nombreusuario.correo"
@@ -66,29 +95,15 @@
             *ngIf="updateForm.controls['correo'].hasError('required') && updateForm.controls['correo'].touched">Correo
             es requerido</mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="none">
-          <mat-label>Codigo Estudiante</mat-label>
-          <input #codigoestudiante id="codigoestudiante" type="number" matInput placeholder="Codigo Estudiante"
-            [value]="$nombreusuario.codigoest" formControlName="codigoestudiante" pattern="^[0-9]+" minlength="7" maxlength="9" >
-          <mat-error class="help-block form-error text-danger small"
-            *ngIf="updateForm.controls['codigoestudiante'].hasError('required') && updateForm.controls['codigoestudiante'].touched">
-            Código estudiante es requerido</mat-error>
-            <mat-error class="help-block form-error text-danger small"
-            *ngIf="updateForm.controls['codigoestudiante'].hasError('pattern') && updateForm.controls['codigoestudiante'].touched">
-            Solo números positivos</mat-error>
-          <mat-error class="help-block form-error text-danger small"
-            *ngIf="updateForm.controls['codigoestudiante'].hasError('minlength') && updateForm.controls['codigoestudiante'].touched">
-            Mínimo 7 Números</mat-error>
-          <mat-error class="help-block form-error text-danger small"
-            *ngIf="updateForm.controls['codigoestudiante'].hasError('maxlength') && updateForm.controls['codigoestudiante'].touched">
-            Máximo 7 Números</mat-error>
-        </mat-form-field>
       </div>
-      <div>
+      
+      <div class="col s6">
         <a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!updateForm.valid" (click)="registrarSaldo
-        (identificacion.value,saldo.value,codigoestudiante.value,correo.value,
-        apellido.value,nombre.value,mytemplate)" name="action">Actualizar</a>
+            (identificacion.value,saldo.value,codigoestudiante.value,correo.value,
+            apellido.value,nombre.value,mytemplate)" name="action">Actualizar</a>
       </div>
-    </form>
+      
   </div>
+  </form>
+</div>
 </div>
