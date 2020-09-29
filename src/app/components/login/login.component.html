@@ -28,8 +28,11 @@
             </div>
             <div class="row center">
                 <div class="input-field col s12">
-                    <a class="waves-effect waves-light btn red" (click)="buscarUsuario(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesion</a>
+                    <a class="waves-effect waves-light btn red" (click)="login(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesion</a>
                 </div>
+            </div>
+            <div class="row center" routerLinkActive="active">
+                <a class="botonRegistrate" routerLink="/crearusuariologin">¿Aun sin cuenta? Registrate!</a>
             </div>
         </form>
     </div>

@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<ng-template #mytemplate>
+    <div *ngIf="success" class="dialogSuccess">
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
+    </div>
+    <div *ngIf="!success" class="dialogSuccess">
+      <i class="icofont-close-circled text-center iconErrRegister"></i>
+      <h2 class="text-center textoSuccess">Error al actualizar</h2>
+    </div>
+  </ng-template>
+<div class="cajaPrincipal z-depth-3">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+      </div>
+      <div class="titulo">
+          <h1>Buscar Estudiante</h1>
+      </div>
+      <div class="buscar" >
+            <div class="input-group">
+              <input #codigo style="width: 300px;" type="text" class="form-control" placeholder="Ingresar Codigo estudiante">
+              <span class="input-group-btn">
+                <button style="width: 75px; height: 35px;" class="waves-effect waves-light btn-small" type="button"(click)="buscarEstudiante(codigo.value)" >Buscar</button>
+              </span>
+            </div>        
+      </div>
+
+      <div class="row"  >
+        <div class="col s6" *ngFor="let est of estudiante">
+            <mat-form-field class="example-full-width" disabled appearance="none">
+                <mat-label>Identificacion</mat-label>
+                <input id="identificacion" disabled matInput placeholder="Identificacion" type="number" [ngModel]="est.identificacion"
+                  >
+              </mat-form-field>
+        </div>
+        <div class="col s6"  *ngFor="let est of estudiante">
+        <mat-form-field class="example-full-width" appearance="none">
+            <mat-label>Nombre</mat-label>
+            <input id="nombre" matInput type="text" disabled placeholder="Nombre"   [ngModel]="est.nombre">
+          </mat-form-field>
+        </div>
+        <div class="col s6"  *ngFor="let est of estudiante">
+          <mat-form-field class="example-full-width" appearance="none">
+            <mat-label>Apellido</mat-label>
+            <input  id="apellido" matInput placeholder="Apellido" disabled [ngModel]="est.apellido">
+          </mat-form-field>
+        </div>
+        <div class="col s6"  *ngFor="let est of estudiante">
+          <mat-form-field class="example-full-width" appearance="none">
+            <mat-label>Email</mat-label>
+            <input  id="email" matInput placeholder="Correo" disabled [ngModel]="est.correo" >
+          </mat-form-field>
+        </div>
+        
+        <div class="col s6"  *ngFor="let est of estudiante">
+          <mat-form-field class="example-full-width" appearance="none">
+            <mat-label>Codigo Estudiante</mat-label>
+            <input   disabled type="number" matInput placeholder="Codigo Estudiante"
+             [ngModel]="est.codigoestudiante"  >
+          </mat-form-field>
+        </div>
+          <div class="col s6"  *ngFor="let est of estudiante" >
+            <mat-form-field class="example-full-width" appearance="none" >
+              <mat-label>Saldo Actual</mat-label>
+              <input  id="saldo"  disabled #saldo type="number" matInput placeholder="Saldo"
+              [ngModel]="est.saldo" >
+
+            </mat-form-field>
+          </div>
+          <div class="col s6">
+            <mat-form-field class="example-full-width" appearance="none" >
+              <mat-label>Nuevo Saldo</mat-label>
+              <input  id="saldo"   #nuevoSaldo type="number"  matInput placeholder="Saldo"
+              [value]=""  >
+              <span>Restar saldo incluyendo el signo - (ejemplo -5000)</span>
+            </mat-form-field>
+          </div>
+          <div class="col s6 btn-saldo">
+            <a class="btn waves-effect waves-light red darken-4 "  (click)="actualizarSaldo(nuevoSaldo.value,mytemplate)"  name="action">Actualizar</a>
+          </div>
+      </div>
+      
+</div>      

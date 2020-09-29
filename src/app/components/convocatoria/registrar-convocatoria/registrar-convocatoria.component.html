@@ -1,49 +1,76 @@
 <app-navbar></app-navbar>
 <div class="row fondoConvocatoria center-align ">
-    <form class="col s6 formConvocatoria z-depth-3">
+    <form class="col s6 formConvocatoria z-depth-3"  [formGroup]="formularioConvocatoria" novalidate>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
       <h3 class="tituloRegistroConvocatoria"> Crea una Convocatoria</h3>
-      <div class="row ">
-        <div class="input-field col s12">
-          <select>
-            <option value="" disabled selected>Escoje tu opción</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-          <label>Selecciona una beca</label>
+      <div class="row divFormConvo">
+        <mat-form-field appearance="none">
+          <mat-label>Seleccione una Beca</mat-label>
+          <mat-select #beca  required  formControlName="beca">
+          <mat-option>--</mat-option>
+            <mat-option *ngFor="let beca of convocatoriaBeca" [value]="beca.consecutivo_beca">
+              {{beca.descripcion}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['beca'].hasError('required') &&
+          formularioConvocatoria.controls['beca'].touched">Seleccionar una beca</mat-error>
+          </mat-form-field>
+          <mat-form-field  class="estadoConvo" appearance="none">
+            <mat-label>Seleccione el estado</mat-label>
+            <mat-select #estadoconvocatoria  required formControlName="estadoConvocatoria">
+            <mat-option>--</mat-option>
+              <mat-option value="Activo">Activo</mat-option>
+              <mat-option value="Inactivo">Inactivo</mat-option>
+            </mat-select>
+            <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['estadoConvocatoria'].hasError('required') &&
+          formularioConvocatoria.controls['estadoConvocatoria'].touched">Selecciona un estado</mat-error>
+            </mat-form-field>  
+            <div class="row contendorFechas">
+              <div class="col s6">
+          <mat-form-field appearance="none">
+            <input #fechainicial matInput [ngxMatDatetimePicker]="picker" [min]="minDate"  placeholder="Selecciona Fecha Inicial" [formControl]="dateControl"
+                [disabled]="disabled" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+            <ngx-mat-datetime-picker  #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+               [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+               [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
+            </ngx-mat-datetime-picker>
+         </mat-form-field>
         </div>
-        <div class="input-field col s6">
-          <input id="cupos" type="number" class="validate">
-          <label for="cupos">Cupos</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="datepicker" type="text" class="datepicker">
-                <label for="fechaInicio">Elige la fecha inicial</label>  
-        </div>
-        <div class="input-field col s6">
-          <input id="datepicker" type="text" class="datepicker">
-                <label for="fechaFin">Elige la fecha final</label>  
-        </div>
-        <div class="input-field col s6">
-          <input type="text" class="timepicker">
-          <label for="horaInicio">Hora inicio</label>  
-        </div>
-        <div class="input-field col s6">
-          <input type="text" class="timepicker">
-          <label for="horaFin">Hora final</label>  
-        </div>
-        <div class="input-field col s6 ">
-          <select>
-            <option value="" disabled selected>Escoje tu opción</option>
-            <option value="1">Option 1</option>
-          </select>
-          <label>Selecciona periodo acádemico</label>
-        </div>
+        
+        <div class="col s6">
+         <mat-form-field appearance="none">
+          <input #fechafinal matInput [ngxMatDatetimePicker]="picker2"  [min]="minDate" placeholder="Selecciona Fecha final" [formControl]="dateControl"
+              [disabled]="disabled">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+
+          <ngx-mat-datetime-picker  #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+             [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+             [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" >
+          </ngx-mat-datetime-picker>
+       </mat-form-field>
       </div>
-      <div class="center-align">
-      <button class="btn waves-effect waves-light red darken-4 " type="submit" name="action">Registrar</button>
-      </div>
+      </div>          
+       <mat-form-field class="example-full-width" appearance="none">
+        <mat-label>Cantidad de Cupos</mat-label>
+        <input #cupos id="cupos" matInput placeholder="cupos" value=""  pattern="^[0-9]+" formControlName="cupos">
+        <mat-error class="help-block form-error text-danger small"
+        *ngIf="formularioConvocatoria.controls['cupos'].hasError('required') && formularioConvocatoria.controls['cupos'].touched">
+        Los cupos son requeridos </mat-error>
+        <mat-error class="help-block form-error text-danger small"
+        *ngIf="formularioConvocatoria.controls['cupos'].hasError('pattern') && formularioConvocatoria.controls['cupos'].touched">
+        Solo números positivos</mat-error>
+      </mat-form-field>
+            <mat-form-field class="example-full-width"  appearance="none">
+              <mat-label>Periodo Actual</mat-label>
+              <input disabled matInput placeholder="consecutivo" [value]="convocatoriaPeriodo[0].descripcion">
+              </mat-form-field>
+        </div>
+        <div class="center-align">
+         <a class="btn waves-effect waves-light red darken-4 " (click)="registrarConvocatoria
+        (fechainicial.value,fechafinal.value,beca.value,cupos.value,estadoconvocatoria.value)"  name="action">Registrar</a>
+        </div>
     </form>
   </div>
         

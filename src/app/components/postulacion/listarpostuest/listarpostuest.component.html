@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+<ng-template #mytemplate >
+    <div>
+        <small>Postu</small>
+        <small>Postu</small>
+        <small>Postu</small>
+        <small>Postu</small>
+        <small>Postu</small>
+    </div>
+
+</ng-template>
+<div class="row rowViewPostest">
+<div class="col s12 m7">
+    <div class="card">
+        <div class="card-content">
+        	<h1>Mis postulaciones</h1>
+        	<hr>
+        	<table>
+                <thead>
+                    <tr>
+                        <th>Nombre estudiante</th>
+                        <th>Estrato</th>
+                        <th>Promedio</th>
+                        <th>Fecha postulacion</th>
+                        <th>Semestre</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let postu of postusBuscadas">
+                        <td>{{postu.estudiante.nombreestudiante}}</td>
+                        <td>{{postu.estrato}}</td>
+                        <td>{{postu.promedio}}</td>
+                        <td>{{postu.fechapostulacion}}</td>
+                        <td>{{postu.semestre}}</td>
+                        <td>{{postu.estado_postulacion}}</td>
+                        <td>
+                            <a (click)="abrirPostu(mytemplate)"><i class="icofont-search-document iconcheckAprobar"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

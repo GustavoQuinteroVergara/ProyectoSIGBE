@@ -7,18 +7,20 @@
     color: black;
     float: left;
     margin: 20px;
-    margin-left: 30%;
+    margin-left: 11%;
     margin-bottom: 30%;
-    margin-top: 20%;
+    margin-top: 5.5%;
     text-align: center;
     line-height:#444;
     text-transform: uppercase;
     border:none;
     /* box-shadow: 5px 5px 5px black; */
-    
-  
-
 }
+
+.DivsInputsRows{
+    margin-bottom: 0px !important;
+}
+
 img{
     
     text-align: center;
@@ -45,4 +47,56 @@ h5{
 
 .logo{
     margin-top: 10px;
+}
+
+.iconSuccessRegister{
+    font-size: 44px;
+    color: green;
+    border: 2px solid green;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.iconErrRegister{
+	font-size: 44px;
+    color: red;
+}
+
+.textoSuccess{
+	margin-top: 20px;
+}
+
+.dialogSuccess{
+	text-align: center;
+    padding-top: 7px;
+}
+
+.tituloRegistroConvocatoria{
+    font-size: 24px;
+    margin-top: 0;
+}
+
+@media only screen and (max-width: 828px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 26%;
+    }
+}
+@media only screen and (max-width: 708px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 18%;
+    }
+}
+@media only screen and (max-width: 539px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 5%;
+    }
+}
+@media only screen and (max-width: 460px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 0%;
+    }
 }

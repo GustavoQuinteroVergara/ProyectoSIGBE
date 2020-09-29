@@ -1,5 +1,5 @@
-
 <app-navbar></app-navbar>
+<div class="wraplistarconvo">
 <div class="caja z-depth-3">
     <div class="logo">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
@@ -22,30 +22,23 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><i class="icofont-search-2"></i></td>
+      <tr *ngFor="let convoca of convocatorias">
+        <td>{{convoca.fecha_inicio.date}} </td>  
+        <td>{{convoca.fecha_fin.date}}</td>
+        <td>{{convoca.estado_convocatoria}}</td>
+        <td>{{convoca.beca}}</td>
+        <td>{{convoca.periodosacademicos.date}}</td>
+        <td>{{convoca.cupo}}</td>
+        <td> <a [routerLink]="['/viewConvocatoria', convoca.consecutivo_convocatoria]" > <i class="icofont-search-2"></i></a></td>
 
 
       </tr>
      
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><i class="icon icofont-search-2"></i></td>
-      </tr>
+      
     </tbody>
   </table>
 
 </div>
 
+</div>
 </div>
