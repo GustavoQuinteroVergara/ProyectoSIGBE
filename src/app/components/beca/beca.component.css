@@ -17,3 +17,36 @@
 	margin: 0 auto;
     width: 65%;
 }
+.inputsEspacio{
+    width: 60%;
+}
+
+@media (max-width: 1200px) {
+    .inputsEspacio{
+        width: 80%;
+    }
+}
+@media (max-width: 911px) {
+    .inputsEspacio{
+        width: 108%;
+    }
+}
+@media (max-width: 687px) {
+    .inputsEspacio{
+        width: 130%;
+    }
+    .formConvocatoria .divFormConvo {
+        margin-left: 12%;
+    }
+}
+@media (max-width: 578px) {
+    .inputsEspacio{
+        width: 130%;
+    }
+    .formConvocatoria .divFormConvo {
+        margin-left: 12%;
+    }
+    .formConvocatoria {
+        width: 70% !important;
+    }
+}
