@@ -39,6 +39,7 @@ import { ListarticketsComponent } from './components/listartickets/listartickets
 import { HomeComponent } from './components/home/home.component';
 import { HabilitaruserComponent } from './components/habilitaruser/habilitaruser.component';
 import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-saldo.component';
+import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-
     ListarticketsComponent,
     HomeComponent,
     HabilitaruserComponent,
-    RegistrarSaldoComponent
+    RegistrarSaldoComponent,
+    ConfiguracionComponent
   ],
   imports: [
     BrowserModule,

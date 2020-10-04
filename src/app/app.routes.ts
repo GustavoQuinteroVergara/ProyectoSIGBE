@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
 import {ValidacionRutasGuard} from './guard/validacion-rutas.guard';
 import {HabilitaruserComponent} from './components/habilitaruser/habilitaruser.component';
 import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-saldo.component';
+import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 
 export const ROUTES: Routes = [
     
@@ -67,6 +68,10 @@ export const ROUTES: Routes = [
         expectedRole: '2'
       }},
       {path:'registrarSaldo',component:RegistrarSaldoComponent, canActivate:[ValidacionRutasGuard]
+      ,data: { 
+          expectedRole: '2'
+        }},
+        {path:'configuracion',component:ConfiguracionComponent, canActivate:[ValidacionRutasGuard]
       ,data: { 
           expectedRole: '2'
         }},
