@@ -1,4 +1,14 @@
 <app-navbar></app-navbar>
+<ng-template #mytemplate>
+    <div *ngIf="success" class="dialogSuccess">
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Registro exitoso </h2>
+    </div>
+    <div *ngIf="!success" class="dialogSuccess">
+      <i class="icofont-close-circled text-center iconErrRegister"></i>
+      <h2 class="text-center textoSuccess">Error al Registrar</h2>
+    </div>
+  </ng-template>
 
 <div class="fondo"> 
 <div class="caja z-depth-3">
@@ -47,7 +57,7 @@
       </div>
       <div class="row divInputssrow">
         <div class="input-field col s12">
-          <input #email formControlName="email" pattern="[a-z]+@correounivalle.edu.co" id="email" type="email" class="validate">
+          <input #email formControlName="email" pattern="[a-z]+.+[a-z]+@correounivalle.edu.co" id="email" type="email" class="validate">
           <label for="email">Email</label>
           <div *ngIf="formulariologin.get('email').errors && formulariologin.get('email').dirty">
             <mat-error *ngIf="formulariologin.get('email').hasError('email')"><br>Correo no valido</mat-error>
@@ -94,7 +104,7 @@
       <div>
         <div class="row center" style="text-align: center;float: unset;" >
           <div class="input-field col s12">
-              <a class="btn waves-effect waves-light red darken-4 "  [class.disabled]="!formulariologin.valid" (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,roles.value,'Activo')" >Registrar</a>
+              <a class="btn waves-effect waves-light red darken-4 "  [class.disabled]="!formulariologin.valid" (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,roles.value,'Activo',mytemplate)" >Registrar</a>
           </div>
           
       </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import  {ServiciocrearuserService } from '../crearusuario/serviciocrearuser.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-crearusuariologin',
   templateUrl: './crearusuariologin.component.html',
@@ -10,10 +10,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CrearusuariologinComponent{
 
   usuario:any;
-  succes:any;
+  success:any;
   formulariologin:FormGroup;
 
-  constructor(private registraruser:ServiciocrearuserService,  public form:FormBuilder) { 
+  constructor(private registraruser:ServiciocrearuserService,  public form:FormBuilder,public dialog: MatDialog) { 
     this.formulariologin= this.form.group({
       identificacion:['', [Validators.required,Validators.minLength(6)]],
       nombre:['', [Validators.required,Validators.minLength(3),Validators.pattern("[a-zA-Z ]*")] ],
@@ -29,7 +29,7 @@ export class CrearusuariologinComponent{
 
 
   }
-  registrouser(identificacion:any,nombre:any,apellido:any,email:any,codigo:any,contrasena:any,roles:any,estadouser:any){
+  registrouser(identificacion:any,nombre:any,apellido:any,email:any,codigo:any,contrasena:any,roles:any,estadouser:any,templateRef){
     this.usuario={
    identificacion:identificacion,
    nombre:nombre,
@@ -41,18 +41,21 @@ export class CrearusuariologinComponent{
    estadouser:estadouser 
     };
     this.registraruser.registrarUsuario(this.usuario)
-    .subscribe(res =>{
-     console.log(res);
- 
- 
-     },(err)=>{
-     
- 
-        console.log('ERROR: ' + err.error.text);
-     });
-   console.log(this.usuario);
-    
-    }
-
-
+    .subscribe(res=>{
+      this.success = true;
+      let dialogRef = this.dialog.open( templateRef,{
+         height: '200px',
+         width: '200px',
+       })
+    },(err)=>{
+      //console.log('ERROR: ' + err.error.text);
+      this.success = false;
+      let dialogRef = this.dialog.open( templateRef,{
+         height: '200px',
+         width: '200px',
+       });
+    });
+    console.log(this.usuario);
+  
+  }
 }
