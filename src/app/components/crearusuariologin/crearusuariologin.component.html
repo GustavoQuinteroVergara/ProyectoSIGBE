@@ -1,3 +1,14 @@
+<ng-template #mytemplate>
+  <div *ngIf="success" class="dialogSuccess">
+    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+    <h2 class="text-center textoSuccess">Registro exitoso (espere activacion de bienestar)</h2>
+  </div>
+  <div *ngIf="!success" class="dialogSuccess">
+    <i class="icofont-close-circled text-center iconErrRegister"></i>
+    <h2 class="text-center textoSuccess">Error al registrar</h2>
+  </div>
+</ng-template>
+
 <div class="fondo"> 
     <div class="caja z-depth-3">
         <div class="logo">
@@ -80,7 +91,7 @@
           
             <div class="row center" style="text-align: center;float: unset; display: flex; margin-top: 60px;" >
               <div class="input-field col s12">
-                  <a [class.disabled]="!formulariologin.valid"    (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,1,'Inactivo')" class="waves-effect waves-light btn red" >Registrar</a>
+                  <a [class.disabled]="!formulariologin.valid"    (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,1,'Inactivo',mytemplate)" class="waves-effect waves-light btn red" >Registrar</a>
               </div>
               <div class="input-field col s12"routerLinkActive="active">
                 <a routerLink="/**" class="waves-effect waves-light btn red">Regresar</a>
