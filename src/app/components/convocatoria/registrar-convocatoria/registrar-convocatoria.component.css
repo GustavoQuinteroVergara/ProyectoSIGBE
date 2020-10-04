@@ -25,6 +25,10 @@
     width: 125%;
     margin-left: -10%;
 }
+.inputsEspacio{
+    width: 80%;
+}
+
 @media (max-width: 1317px) {
     .fondoConvocatoria{
         width: 90%;

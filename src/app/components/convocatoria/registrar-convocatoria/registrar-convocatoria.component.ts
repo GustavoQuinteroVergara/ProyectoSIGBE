@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RegistrarConvoServiceService} from './registrar-convo-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-registrar-convocatoria',
   templateUrl: './registrar-convocatoria.component.html',
@@ -47,7 +48,7 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   public stepMinutes = [1, 5, 10, 15, 20, 25];
   public stepSeconds = [1, 5, 10, 15, 20, 25];
 
-constructor(private serviceConvocatoria:RegistrarConvoServiceService) { 
+constructor(private serviceConvocatoria:RegistrarConvoServiceService,public dialog: MatDialog) { 
   this.buscarBeca();
   this.buscarPeriodo();
 }
@@ -75,7 +76,7 @@ buscarPeriodo(){
   });
 }
 
-registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estadoconvocatoria:any){
+registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estadoconvocatoria:any,templateRef){
   this.convocatoriaRegistrar= {fechainicio:fechainicial,
     fechafin:fechafinal,
     becas:becas,
@@ -83,13 +84,18 @@ registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estado
     periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
     estadoconvocatoria:estadoconvocatoria};
   this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
+    this.success = true;
+      let dialogRef = this.dialog.open( templateRef,{
+         height: '200px',
+         width: '200px',
+       });
     console.log(res);
-
-
     },(err)=>{
-    
-
-       console.log('ERROR: ' + err.error.text);
+      this.success = false;
+      let dialogRef = this.dialog.open( templateRef,{
+         height: '200px',
+         width: '200px',
+       });
     });
   console.log(this.convocatoriaRegistrar);
    
