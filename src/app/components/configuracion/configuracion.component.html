@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+<ng-template #mytemplate>
+  <div *ngIf="success" class="dialogSuccess">
+    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+    <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
+  </div>
+  <div *ngIf="!success" class="dialogSuccess">
+    <i class="icofont-close-circled text-center iconErrRegister"></i>
+    <h2 class="text-center textoSuccess">Error al actualizar</h2>
+  </div>
+</ng-template>
+<div class="fondo">
+  <div class="caja z-depth-3">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png "
+        width="50px" alt="LogoUV">
+    </div>
+    <div class="fondoConvocatoria center-align">
+      <form class="formConvocatoria">
+        <h3 class="tituloConfiguracion"> Modificar Configuración</h3>
+        <div class="column">
+          <div class="col s6">
+            <mat-form-field appearance="none" >
+              <mat-label>Opción a modificar</mat-label>
+              <mat-select #variable required [(ngModel)]="selection" (ngModelChange)="opcionSeleccionada($event)"
+                name="selection">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor=" let option of options" [value]="option.id">
+                  {{option.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <form *ngIf="showvalor" [formGroup]="formPrecios" novalidate>
+            <div class="col s6">
+              <mat-form-field class="example-full-width" appearance="none" type="number">
+                <mat-label>Nuevo precio</mat-label>
+                <input #valorNuevo id="valorNuevo" matInput placeholder="Valor nuevo" [value]="" pattern="^[0-9]+" formControlName="precios">
+                <mat-error class="help-block form-error text-danger small"
+                *ngIf="formPrecios.controls['precios'].hasError('pattern') && formPrecios.controls['precios'].touched">
+                Solo números. </mat-error>
+                <mat-error class="help-block form-error text-danger small"
+                *ngIf="formPrecios.controls['precios'].hasError('required') && formPrecios.controls['precios'].touched">
+                El campo es obligatorio.</mat-error>
+    
+              </mat-form-field>
+            </div>
+            <div>
+              <a class="btn waves-effect waves-light red darken-4 " (click)="actualizarConfiguracion
+              (variable.value,valorNuevo.value,mytemplate)" name="action">Actualizar</a>
+            </div>
+          </form>
+
+          <form  *ngIf="showfecha">
+             <div class="col s6">
+              <mat-form-field class="example-full-width" appearance="none">
+                <mat-label>Descripción</mat-label>
+                <input #valorNuevo  matInput type="time" class="tiempoCss" style=" font-size: 29px;
+                font-weight: lighter;">
+              </mat-form-field>
+            </div>
+              <div>
+                <a class="btn waves-effect waves-light red darken-4 " (click)="actualizarConfiguracion
+                (variable.value,valorNuevo.value,mytemplate)" name="action">Actualizar</a>
+              </div>
+          </form>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -176,6 +176,24 @@
           <a class="BotonALiBar" routerLink="/crearTBeca">Crear tipo beca</a>
         </li>
       </ul>
+      
+    </li>
+    <!-- Fin botones Tipo becas -->
+    <!-- Inicio Modificaciones -->
+    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+      <a class="BotonALiBar" >
+        Configuración
+        <div class="right">
+          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+        </div>
+      </a>
+      <ul class="hide-on-med-and-down-menu ulInternoMenu">
+        <li class="liMenuBarLateral" routerLinkActive="active">
+          <a class="BotonALiBar" routerLink="/configuracion">Actualizar Configuración</a>
+        </li>
+      </ul>
+      
     </li>
     <!-- Fin botones Tipo becas -->
   </ul>
