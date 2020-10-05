@@ -51,7 +51,7 @@
 <div class="col s12 m7">
     <div class="card">
         <div class="card-content">
-            <form *ngIf="loading">
+            <form [formGroup]="formularioConvocatoria" *ngIf="loading">
                 <div class="card-content">
                     <h1>
                         Info Convocatoria
@@ -65,7 +65,9 @@
                     </mat-form-field>
                     <mat-form-field class="example-full-width" appearance="none">
                     <mat-label>Cantidad de Cupos</mat-label>
-                    <input #cupo [disabled]="disabledActualizar" id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
+                    <input #cupo formControlName="cupo" [disabled]="disabledActualizar" id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
+                    <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['cupo'].hasError('required') &&
+          formularioConvocatoria.controls['cupo'].touched">Por favor, escriba un numero de cupos</mat-error>
                     </mat-form-field>
                     <!--<mat-form-field class="example-full-width" disabled appearance="none">
                     <mat-label>Beca de la convocatoria</mat-label>
@@ -73,21 +75,25 @@
                     </mat-form-field>-->
                     <mat-form-field appearance="none">
                         <mat-label>{{$convoBuscada.beca}}</mat-label>
-                        <mat-select #becas [disabled]="disabledActualizar" required>
+                        <mat-select #becas [disabled]="disabledActualizar" required formControlName="beca">
                         <mat-option ></mat-option>
                           <mat-option *ngFor="let beca of convocatoriaBeca" [value]="$convoBuscada.beca">
                             {{$convoBuscada.beca}}
                           </mat-option>
                         </mat-select>
+                        <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['beca'].hasError('required') &&
+          formularioConvocatoria.controls['beca'].touched">Por favor, seleccione una beca</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="none">
                             <mat-label>{{$convoBuscada.periodosacademicos}}</mat-label>
-                            <mat-select #periodosacademicos [disabled]="disabledActualizar" required>
+                            <mat-select #periodosacademicos [disabled]="disabledActualizar" required formControlName="periodos">
                             <mat-option>--</mat-option>
                               <mat-option *ngFor="let periodos of convocatoriaPeriodo" [value]="$convoBuscada.periodosacademicos">
                                 {{$convoBuscada.periodosacademicos}}
                               </mat-option>
                             </mat-select>
+                            <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['periodos'].hasError('required') &&
+          formularioConvocatoria.controls['periodos'].touched">Por favor, Indique un periodo</mat-error>
                             </mat-form-field>
                 </div>
                 <div class="card-action">
@@ -95,30 +101,36 @@
                     
                     <mat-form-field appearance="none">
                         <input #fecha_inicio [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" 
-                             [value]="$convoBuscada.fechainicio">
+                             [value]="$convoBuscada.fechainicio" formControlName="fechaini">
                              Fecha inicio Convocatoria:  {{$convoBuscada.fechainicio}}
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             
                         <ngx-mat-datetime-picker  #picker  >
                         </ngx-mat-datetime-picker>
+                        <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['fechaini'].hasError('required') &&
+          formularioConvocatoria.controls['fechaini'].touched">Por favor, Indique una fecha inicio</mat-error>
                      </mat-form-field>
                      <div>
                      <mat-form-field appearance="none">
                       <input #fecha_fin [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" 
-                      [value]="$convoBuscada.fechafin">
+                      [value]="$convoBuscada.fechafin" formControlName="fechafin">
                       Fecha fin Convocatoria: {{$convoBuscada.fechafin}}
                       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             
                       <ngx-mat-datetime-picker  #picker2  >
                       </ngx-mat-datetime-picker>
+                      <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['fechafin'].hasError('required') &&
+          formularioConvocatoria.controls['fechafin'].touched">Por favor, Indique una fecha fin</mat-error>
                    </mat-form-field>
                    <mat-form-field style="float: right;" appearance="none">
                     <mat-label>Seleccione el estado</mat-label>
-                    <mat-select #estado_convocatoria [disabled]="disabledActualizar" required>
+                    <mat-select #estado_convocatoria [disabled]="disabledActualizar" required formControlName="estado">
                     <mat-option>--</mat-option>
                       <mat-option value="Activo">Activo</mat-option>
                       <mat-option value="Inactivo">Inactivo</mat-option>
                     </mat-select>
+                    <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['estado'].hasError('required') &&
+          formularioConvocatoria.controls['estado'].touched">Por favor, seleccione una beca</mat-error>
                     </mat-form-field>
                    </div>
                     <!--<mat-form-field class="example-full-width" disabled appearance="none">

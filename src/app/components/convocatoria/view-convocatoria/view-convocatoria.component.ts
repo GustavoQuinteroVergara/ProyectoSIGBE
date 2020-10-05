@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {ServicesViewConvocatoriaService} from './services-view-convocatoria.service';
 import {ServiciolistarconvoService} from './../../listarconvocatoria/serviciolistarconvo.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -26,6 +27,7 @@ export class ViewConvocatoriaComponent {
   activeButton=false;
   estado=true;
   disabledActualizar=true;
+  public formularioConvocatoria: FormGroup;
   constructor(private rutaActiva: ActivatedRoute,
    private serviceviewconvocatoria:ServicesViewConvocatoriaService,public dialog: MatDialog, 
    private serviceConvocatoria:RegistrarConvoServiceService,
@@ -36,6 +38,15 @@ export class ViewConvocatoriaComponent {
 
     this.buscarBeca();
     this.buscarPeriodo();
+    this.formularioConvocatoria = new FormGroup({
+      beca: new FormControl('',Validators.required),
+      estadoConvocatoria: new FormControl('',Validators.required),
+      periodos: new FormControl('',Validators.required),
+      fechaini: new FormControl('',Validators.required),
+      fechafin: new FormControl('',Validators.required),
+      estado: new FormControl('',Validators.required),
+      cupo: new FormControl('',Validators.required),
+    });
   }
 
   activeFormActualizar(){
