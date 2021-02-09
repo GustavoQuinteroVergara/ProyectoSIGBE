@@ -1,66 +1,77 @@
 <app-navbar></app-navbar>
-<div class="row rowRegistroTicket">
-<div class="col s12 m4">
-	<ng-template #mytemplate>
-	<div *ngIf="success " class="dialogSuccess" >
-		<i class="icofont-ui-check text-center iconSuccessRegister"></i>
-		<h2 class="text-center textoSuccess">Comprado exitosamente</h2>
-	</div>
-	<div *ngIf="!confSaldo" class="dialogSuccess" >
-		<i class="icofont-close-circled text-center iconErrRegister"></i>
-		<h2 class="text-center textoSuccess">No tienes saldo suficiente</h2>
-	</div>
-	<div *ngIf="!confHorario" class="dialogSuccess" >
-		<i class="icofont-close-circled text-center iconErrRegister"></i>
-		<h2 class="text-center textoSuccess">Horario no permitido</h2>
-	</div>
-	<div *ngIf="confErr" class="dialogSuccess" >
-		<i class="icofont-close-circled text-center iconErrRegister"></i>
-		<h2 class="text-center textoSuccess">ERROR A LA COMPRA</h2>
-	</div>
-	</ng-template>
-	<div class="card">
-		<div class="card-content">
-			<h1>Comprar ticket</h1>
-			<hr>
-			<form>
-				<div class="row">
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
-						<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
-						</mat-form-field>
-					</div>
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><i class="icofont-wallet"></i>Saldo actual</mat-label>
-						<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="$nombreusuario.saldo">
-						</mat-form-field>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><h3><i class="icofont-card"></i>Identificacion</h3></mat-label>
-						<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
-						</mat-form-field>
-					</div>
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><i class="icofont-lunch"></i>Tipo ticket</mat-label>
-						<input disabled="true" #descripcion id="tipobeca" matInput placeholder="Tipo beca" [value]="tipoBeca">
-						</mat-form-field>
+<div *ngIf="asignacionBuscada == '-'" class="row rowRegistroTicket">
+	<div class="col s12 m4">
+		<div class="card">
+			<div class="card-content">
+				No hay asignaciones para venta de tickets hoy
+			</div>
+			
 
-
-					</div>
-				</div>
-				<div class="row center">
-					<div class="input-field col s12">
-						<a (click)="comprarTicket(mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
-					</div>
-				</div>
-			</form>
 		</div>
 	</div>
+
+
 </div>
+<div *ngIf="asignacionBuscada != '-'" class="row rowRegistroTicket">
+	<div class="col s12 m4">
+		<ng-template #mytemplate>
+			<div *ngIf="success " class="dialogSuccess" >
+				<i class="icofont-ui-check text-center iconSuccessRegister"></i>
+				<h2 class="text-center textoSuccess">Comprado exitosamente</h2>
+			</div>
+			<div *ngIf="!confSaldo" class="dialogSuccess" >
+				<i class="icofont-close-circled text-center iconErrRegister"></i>
+				<h2 class="text-center textoSuccess">No tienes saldo suficiente</h2>
+			</div>
+			<div *ngIf="!confHorario" class="dialogSuccess" >
+				<i class="icofont-close-circled text-center iconErrRegister"></i>
+				<h2 class="text-center textoSuccess">Horario no permitido</h2>
+			</div>
+			<div *ngIf="confErr" class="dialogSuccess" >
+				<i class="icofont-close-circled text-center iconErrRegister"></i>
+				<h2 class="text-center textoSuccess">ERROR A LA COMPRA</h2>
+			</div>
+		</ng-template>
+		<div class="card">
+			<div class="card-content">
+				<h1 class="center">Reservar ticket</h1>
+				<hr>
+				<form>
+					<div class="row">
+						<div class="input-field col s6">
+							<mat-form-field class="example-full-width" appearance="none">
+								<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
+								<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
+							</mat-form-field>
+						</div>
+						<div class="input-field col s6">
+							<mat-form-field class="example-full-width" appearance="none">
+								<mat-label><i class="icofont-wallet"></i>Fecha de compra</mat-label>
+								<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="fechaActual">
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<mat-form-field class="example-full-width" appearance="none">
+								<mat-label><h3><i class="icofont-card"></i>Identificacion</h3></mat-label>
+								<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
+							</mat-form-field>
+						</div>
+						<div class="input-field col s6">
+							<mat-form-field class="example-full-width" appearance="none">
+								<mat-label><i class="icofont-lunch"></i>Beneficiario</mat-label>
+								<input disabled="true" #beneficiario id="tipobeca" matInput placeholder="Beneficiario" [value]="tipoBeca">
+							</mat-form-field>
+						</div>
+					</div>
+					<div class="row center">
+						<div class="input-field col s12">
+							<a (click)="comprarTicket(mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

@@ -1,15 +1,17 @@
 <nav class="navbarTemplate">
   <div class="nav-wrapper">
     <mat-drawer-container class="ContenerBotonMenuLateral">
-    <mat-drawer-content class="botonActivadorBarraLateral">
-    <button (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon" class="buttonIconBarra">
-    <i class="icofont-navigation-menu iconoMenubar">
-    <img src="/assets/imgs/logosigbe2.png" width="80px"/>
-    </i>
-    </button>
-    </mat-drawer-content>
+      <mat-drawer-content class="botonActivadorBarraLateral">
+        <button (click)="drawer.toggle()" aria-label="Example icon button with a vertical three dot icon" class="buttonIconBarra">
+          <i class="icofont-navigation-menu iconoMenubar">
+            <img src="/assets/imgs/logosigbe2.png" width="80px"/>
+          </i>
+        </button>
+      </mat-drawer-content>
     </mat-drawer-container>
+    <span>Cupos disponibles almuerzo hoy: {{asignacionBuscada.cuposdisponibles}}</span>
     <div class="right">
+
       <li class="liMenuBarLateral liExterno liNombreext" routerLinkActive="active">
         <a class="BotonALiBar" routerLink="/registroConvocatoria">
           {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
@@ -43,160 +45,176 @@
   </div>
 </nav>
 <mat-drawer #drawer mode="push" opened class="barraLateral">
-<div >
-  <ul class="hide-on-med-and-down-menu">
-    <!-- Inicio Botón bienvenida -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active">
-      <a class="BotonALiBar" routerLink="/bienvenida">
-        Inicio
-      </a>
-    </li>
-    <!-- Convocatoria botones -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-      <a class="BotonALiBar" >
-        Convocatorias
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/registroConvocatoria" >Crear convocatoria</a>
-        </li>
-        <li class="liMenuBarLateral" routerLinkActive="active"  >
-          <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar convocatorias</a>
-        </li>
-      </ul>
-    </li>
-    <!-- Fin convocatoria -->
-    <!-- Postulacion Botones -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='1'">
-      <a class="BotonALiBar" >
-        Postulacion
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active" >
-          <a class="BotonALiBar" routerLink="/registrarPostulacion">Crear postulacion</a>
-        </li>
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/listarPostulacionesEst">Mis postulaciones</a>
-        </li>
-      </ul>
-    </li>
-    <!-- Fin Postulacion -->
-    <!-- Incio Usuarios -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-      <a class="BotonALiBar" >
-        Usuarios
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
-        </li>
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/habilitarUser">Inhabilitar usuario</a>
-        </li>
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/registrarSaldo">Registrar Saldo</a>
-        </li>
-      </ul>
-    </li>
-    <!-- Fin botones usuarios -->
-    <!-- Inicio botones becas -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-      <a class="BotonALiBar">
-        Becas
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-          <a class="BotonALiBar" routerLink="/crearBeca">Crear Beca</a>
-        </li>
-      </ul>
-    </li>
-    <!-- Fin botones becas -->
-    <!-- Inicio tickets -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" >
-      <a class="BotonALiBar">
-        Tickets
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active"  *ngIf="this.$nombreusuario.rol =='1'" >
-          <a class="BotonALiBar" routerLink="/comprarTicket">Comprar ticket</a>
-        </li>
-        <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-          <a class="BotonALiBar" disabled="true" routerLink="/listarTickets">Listar tickets</a>
-        </li>
-      </ul>
-    </li>
-    <!-- Fin botones tickets -->
-    <!-- Inicio botones Periodos -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-      <a class="BotonALiBar" >
-        Periodo academico
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/registrarPeriodo">Crear periodo</a>
-        </li>
-      </ul>
-    </li>
-    <!-- Fin botones periodos -->
-    <!-- Inicio botones Tipo becas -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-      <a class="BotonALiBar" >
-        Tipos becas
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/crearTBeca">Crear tipo beca</a>
-        </li>
-      </ul>
-      
-    </li>
-    <!-- Fin botones Tipo becas -->
-    <!-- Inicio Modificaciones -->
-    <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
-      <a class="BotonALiBar" >
-        Configuración
-        <div class="right">
-          <i class="icofont-arrow-down iconoMenubar iconDown"></i>
-          <i class="icofont-arrow-up iconoMenubar iconUp"></i>
-        </div>
-      </a>
-      <ul class="hide-on-med-and-down-menu ulInternoMenu">
-        <li class="liMenuBarLateral" routerLinkActive="active">
-          <a class="BotonALiBar" routerLink="/configuracion">Actualizar Configuración</a>
-        </li>
-      </ul>
-      
-    </li>
-    <!-- Fin botones Tipo becas -->
-  </ul>
-  
-</div>
+  <div >
+    <ul class="hide-on-med-and-down-menu">
+      <!-- Inicio Botón bienvenida -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active">
+        <a class="BotonALiBar" routerLink="/bienvenida">
+          Inicio
+        </a>
+      </li>
+      <!-- Convocatoria botones -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar" >
+          Convocatorias
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/registroConvocatoria" >Crear convocatoria</a>
+          </li>
+          <li class="liMenuBarLateral" routerLinkActive="active"  >
+            <a class="BotonALiBar" routerLink="/listarConvocatoria">Listar convocatorias</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin convocatoria -->
+      <!-- Postulacion Botones -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='1'">
+        <a class="BotonALiBar" >
+          Postulacion
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active" >
+            <a class="BotonALiBar" routerLink="/registrarPostulacion">Crear postulacion</a>
+          </li>
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/listarPostulacionesEst">Mis postulaciones</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin Postulacion -->
+      <!-- Crear Cupos asignacion Botones -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar" >
+          Crear asignación de cupos
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active" >
+            <a class="BotonALiBar" routerLink="/crearAsignacion">Crear Asignación</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin Cupos asignacio -->
+      <!-- Incio Usuarios -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar" >
+          Usuarios
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/crearUsuario">Crear usuario</a>
+          </li>
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/habilitarUser">Inhabilitar usuario</a>
+          </li>
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/registrarSaldo">Registrar Saldo</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin botones usuarios -->
+      <!-- Inicio botones becas -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar">
+          Becas
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+            <a class="BotonALiBar" routerLink="/crearBeca">Crear Beca</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin botones becas -->
+      <!-- Inicio tickets -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" >
+        <a class="BotonALiBar">
+          Tickets
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active"  *ngIf="this.$nombreusuario.rol =='1'" >
+            <a class="BotonALiBar" routerLink="/comprarTicket">Reservar ticket</a>
+          </li>
+          <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+            <a class="BotonALiBar" disabled="true" routerLink="/listarTickets">Listar tickets</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin botones tickets -->
+      <!-- Inicio botones Periodos -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar" >
+          Periodo academico
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/registrarPeriodo">Crear periodo</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Fin botones periodos -->
+      <!-- Inicio botones Tipo becas -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar" >
+          Tipos becas
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/crearTBeca">Crear tipo beca</a>
+          </li>
+        </ul>
+        
+      </li>
+      <!-- Fin botones Tipo becas -->
+      <!-- Inicio Modificaciones -->
+      <li class="liMenuBarLateral liExterno" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+        <a class="BotonALiBar" >
+          Configuración
+          <div class="right">
+            <i class="icofont-arrow-down iconoMenubar iconDown"></i>
+            <i class="icofont-arrow-up iconoMenubar iconUp"></i>
+          </div>
+        </a>
+        <ul class="hide-on-med-and-down-menu ulInternoMenu">
+          <li class="liMenuBarLateral" routerLinkActive="active">
+            <a class="BotonALiBar" routerLink="/configuracion">Actualizar Configuración</a>
+          </li>
+        </ul>
+        
+      </li>
+      <!-- Fin botones Tipo becas -->
+    </ul>
+    
+  </div>
 </mat-drawer>

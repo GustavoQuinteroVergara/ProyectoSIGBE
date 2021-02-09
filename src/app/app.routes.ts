@@ -18,67 +18,72 @@ import {ValidacionRutasGuard} from './guard/validacion-rutas.guard';
 import {HabilitaruserComponent} from './components/habilitaruser/habilitaruser.component';
 import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-saldo.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
+import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
 
 export const ROUTES: Routes = [
-    
-    {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'registrarPostulacion',component: RegistrarPostulacionComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '1'
-      }},
-    {path:'registrarPeriodo',component: CrearperiodoComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'comprarTicket',component: CrearTicketComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '1'
-      }},
-    {path:'listarPostulacionesEst',component: ListarpostuestComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '1'
-      }},
-    {path:'modificarUsuario', component: ModificarusuarioComponent},
-    {path:'crearUsuario', component: CrearusuarioComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'listarConvocatoria',component: ListarconvocatoriaComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'crearusuariologin',component: CrearusuariologinComponent},
-    {path:'listarTickets',component: ListarticketsComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'crearTBeca',component:TipobecaComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-    {path:'crearBeca', component:BecaComponent, canActivate:[ValidacionRutasGuard]
-    ,data: { 
-        expectedRole: '2'
-      }},
-      {path:'registrarSaldo',component:RegistrarSaldoComponent, canActivate:[ValidacionRutasGuard]
-      ,data: { 
-          expectedRole: '2'
-        }},
-        {path:'configuracion',component:ConfiguracionComponent, canActivate:[ValidacionRutasGuard]
-      ,data: { 
-          expectedRole: '2'
-        }},
-      {path:'habilitarUser', component:HabilitaruserComponent},
-    {path:'bienvenida', component:HomeComponent},
-    {path:'',component: LoginComponent},
-    {path:'**',component: LoginComponent}
+
+{path:'registroConvocatoria', component: RegistrarConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'registrarPostulacion',component: RegistrarPostulacionComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '1'
+}},
+{path:'registrarPeriodo',component: CrearperiodoComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'comprarTicket',component: CrearTicketComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '1'
+}},
+{path:'crearAsignacion',component: CuposticketsComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'listarPostulacionesEst',component: ListarpostuestComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '1'
+}},
+{path:'modificarUsuario', component: ModificarusuarioComponent},
+{path:'crearUsuario', component: CrearusuarioComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'listarConvocatoria',component: ListarconvocatoriaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'crearusuariologin',component: CrearusuariologinComponent},
+{path:'listarTickets',component: ListarticketsComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'crearTBeca',component:TipobecaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'crearBeca', component:BecaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'registrarSaldo',component:RegistrarSaldoComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'configuracion',component:ConfiguracionComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'habilitarUser', component:HabilitaruserComponent},
+{path:'bienvenida', component:HomeComponent},
+{path:'',component: LoginComponent},
+{path:'**',component: LoginComponent}
 
 ]
 

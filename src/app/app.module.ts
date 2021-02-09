@@ -40,64 +40,71 @@ import { HomeComponent } from './components/home/home.component';
 import { HabilitaruserComponent } from './components/habilitaruser/habilitaruser.component';
 import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-saldo.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    LoginComponent,
-    CrearusuarioComponent,
-    ModificarusuarioComponent,
-    RegistrarConvocatoriaComponent,
-    ListarconvocatoriaComponent,
-    RegistrarPostulacionComponent,
-    ViewConvocatoriaComponent,
-    ListarpostuestComponent,
-    /*registrarlogin,*/
-    CrearusuariologinComponent,
-    TipobecaComponent,
-    BecaComponent,
-    CrearperiodoComponent,
-    TipobecaComponent,
-    CrearTicketComponent,
-    ListarticketsComponent,
-    HomeComponent,
-    HabilitaruserComponent,
-    RegistrarSaldoComponent,
-    ConfiguracionComponent
+  AppComponent,
+  NavbarComponent,
+  LoginComponent,
+  CrearusuarioComponent,
+  ModificarusuarioComponent,
+  RegistrarConvocatoriaComponent,
+  ListarconvocatoriaComponent,
+  RegistrarPostulacionComponent,
+  ViewConvocatoriaComponent,
+  ListarpostuestComponent,
+  /*registrarlogin,*/
+  CrearusuariologinComponent,
+  TipobecaComponent,
+  BecaComponent,
+  CrearperiodoComponent,
+  TipobecaComponent,
+  CrearTicketComponent,
+  ListarticketsComponent,
+  HomeComponent,
+  HabilitaruserComponent,
+  RegistrarSaldoComponent,
+  ConfiguracionComponent,
+  CuposticketsComponent
   ],
   imports: [
-    BrowserModule,
-    // Angular material
-    MatAutocompleteModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatSidenavModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatTableModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatInputModule,
-    NgxMatTimepickerModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    NgxMatDatetimePickerModule,
-    NgxMatNativeDateModule,
+  BrowserModule,
+  QRCodeModule,
+  // Angular material
+  MatAutocompleteModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatSidenavModule,
+  MatInputModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatTableModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatInputModule,
+  NgxMatTimepickerModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatButtonModule,
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
 
-    RouterModule.forRoot(ROUTES, { useHash: true }),
-    HttpClientModule,
-    BrowserAnimationsModule
+  RouterModule.forRoot(ROUTES, { useHash: true }),
+  HttpClientModule,
+  BrowserAnimationsModule
   ],
   providers: [
-    MatDatepickerModule,
-    MatNativeDateModule,
-    Globals
+  MatDatepickerModule,
+  MatNativeDateModule,
+  Globals,
+  DatePipe
   ],
   bootstrap: [AppComponent]
 })
