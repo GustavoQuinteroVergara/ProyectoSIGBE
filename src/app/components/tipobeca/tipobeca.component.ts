@@ -27,25 +27,25 @@ export class TipobecaComponent implements OnInit {
     this.serviceTipoBeca.registrarTipoBeca(this.tipoBecaRegistrar).subscribe(res =>{
       this.success = true;
       let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
+       height: '200px',
+       width: '200px',
+     });
       console.log(res);
-  
-  
-      },(err)=>{
-        this.success = false;
-        let dialogRef = this.dialog.open( templateRef,{
-           height: '200px',
-           width: '200px',
-         });
-  
-         console.log('ERROR: ' + err.error.text);
-      });
+      
+      
+    },(err)=>{
+      this.success = false;
+      let dialogRef = this.dialog.open( templateRef,{
+       height: '200px',
+       width: '200px',
+     });
+      
+      console.log('ERROR: ' + err.error.text);
+    });
     console.log(this.tipoBecaRegistrar);
-     
-     }
-  
+    
   }
   
+}
+
 

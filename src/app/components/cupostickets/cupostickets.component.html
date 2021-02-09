@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+<ng-template #mytemplate>
+	<div *ngIf="success" class="dialogSuccess">
+		<i class="icofont-ui-check text-center iconSuccessRegister"></i>
+		<h2 class="text-center textoSuccess">Registrado exitosamente</h2>
+	</div>
+	<div *ngIf="!success" class="dialogSuccess">
+		<i class="icofont-close-circled text-center iconErrRegister"></i>
+		<h2 class="text-center textoSuccess">Error al registrar</h2>
+	</div>
+</ng-template>
+<div class="row fondoCuposTickets center-align ">
+	<form class="col s6 formCuposTickets z-depth-3" [formGroup]="formularioCuposAsigna">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+		<h3 class="tituloRegistroConvocatoria"> Crear una asignación de cupos nueva</h3>
+
+		<div class="row divFormConvo">
+			<div class="input-field col s12">
+				<input #fecha type="date" min="{{fechaActual}}" id="start" name="fechaasingacion">
+			</div>
+			<div class="input-field col s12">
+				<mat-form-field class="example-full-width" appearance="none">
+					<mat-label>Cupos totales</mat-label>
+					<input #cupostotal type="number" id="descripcion" matInput placeholder="Ingrese los cupos totales" value="" formControlName="descripcionAsignacion" >
+					<mat-error class="help-block form-error text-danger small"
+					*ngIf="formularioCuposAsigna.controls['descripcionAsignacion'].hasError('required') && formularioCuposAsigna.controls['descripcionAsignacion'].touched">
+				CuposTotales es requerido </mat-error>
+			</mat-form-field>
+		</div>
+
+
+		<div class="center-align">
+			<a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!formularioCuposAsigna.valid"
+			(click)="registrarAsignacion(fecha.value,cupostotal.value,mytemplate)"  name="action">Registrar</a>
+		</div>
+	</div>
+	<div class="card-action">
+		<h1>Asignaciones creadas</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Concecutivo</th>
+					<th>Fecha</th>
+					<th>Cupos Totales</th>
+					<th>Cupos disponibles</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let asign of asignacionesBuscadas">
+					<td>{{asign.consecutivo_cupostickets}}</td>
+					<td>{{asign.fechaasignacion.date | date:'dd/MM/yyyy'}}</td>
+					<td>{{asign.cupostotal}}</td>
+					<td>{{asign.cuposdisponibles}}</td>
+					<td>
+						<a><i class="icofont-checked iconcheckAprobar"></i></a>
+						<a><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</form>
+
+</div>
