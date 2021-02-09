@@ -5,73 +5,82 @@
 			<div class="card-content">
 				No hay asignaciones para venta de tickets hoy
 			</div>
-			
-
 		</div>
 	</div>
-
-
 </div>
-<div *ngIf="asignacionBuscada != '-'" class="row rowRegistroTicket">
+
+<div *ngIf="!verificarEstadohorario" class="row rowRegistroTicket">
 	<div class="col s12 m4">
-		<ng-template #mytemplate>
-			<div *ngIf="success " class="dialogSuccess" >
-				<i class="icofont-ui-check text-center iconSuccessRegister"></i>
-				<h2 class="text-center textoSuccess">Comprado exitosamente</h2>
-			</div>
-			<div *ngIf="!confSaldo" class="dialogSuccess" >
-				<i class="icofont-close-circled text-center iconErrRegister"></i>
-				<h2 class="text-center textoSuccess">No tienes saldo suficiente</h2>
-			</div>
-			<div *ngIf="!confHorario" class="dialogSuccess" >
-				<i class="icofont-close-circled text-center iconErrRegister"></i>
-				<h2 class="text-center textoSuccess">Horario no permitido</h2>
-			</div>
-			<div *ngIf="confErr" class="dialogSuccess" >
-				<i class="icofont-close-circled text-center iconErrRegister"></i>
-				<h2 class="text-center textoSuccess">ERROR A LA COMPRA</h2>
-			</div>
-		</ng-template>
 		<div class="card">
 			<div class="card-content">
-				<h1 class="center">Reservar ticket</h1>
-				<hr>
-				<form>
-					<div class="row">
-						<div class="input-field col s6">
-							<mat-form-field class="example-full-width" appearance="none">
-								<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
-								<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
-							</mat-form-field>
-						</div>
-						<div class="input-field col s6">
-							<mat-form-field class="example-full-width" appearance="none">
-								<mat-label><i class="icofont-wallet"></i>Fecha de compra</mat-label>
-								<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="fechaActual">
-							</mat-form-field>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<mat-form-field class="example-full-width" appearance="none">
-								<mat-label><h3><i class="icofont-card"></i>Identificacion</h3></mat-label>
-								<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
-							</mat-form-field>
-						</div>
-						<div class="input-field col s6">
-							<mat-form-field class="example-full-width" appearance="none">
-								<mat-label><i class="icofont-lunch"></i>Beneficiario</mat-label>
-								<input disabled="true" #beneficiario id="tipobeca" matInput placeholder="Beneficiario" [value]="tipoBeca">
-							</mat-form-field>
-						</div>
-					</div>
-					<div class="row center">
-						<div class="input-field col s12">
-							<a (click)="comprarTicket(mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
-						</div>
-					</div>
-				</form>
+				Horario <strong>no</strong> disponible para la reserva de tickets
+				<p class="center">El horario para la reserva de tickets de almuerzo es de: <strong>{{configuracionBack['horainicioVentaAlmuerzo']}}</strong> a <strong>{{configuracionBack['horaFinVentaAlmuerzo']}}</strong></p>
+				<p class="center">Para la reserva de tickets de refrigerio es de:
+					<strong>{{configuracionBack['horainicioVentaRefrigerio']}}</strong> a <strong>{{configuracionBack['horaFinVentaRefrigerio']}}</strong></p>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+	<div *ngIf="asignacionBuscada != '-'" class="row rowRegistroTicket">
+		<div class="col s12 m4">
+			<ng-template #success>
+				<div  class="dialogSuccess" >
+					<i class="icofont-ui-check text-center iconSuccessRegister"></i>
+					<h2 class="text-center textoSuccess">Comprado exitosamente</h2>
+				</div>
+			</ng-template>
+			<ng-template #errcomprado>
+				<div  class="dialogSuccess" >
+					<i class="icofont-ui-close text-center iconErrRegister"></i>
+					<h2 class="text-center textoSuccess">Lo siento, ya reservaste el dia de hoy</h2>
+				</div>
+			</ng-template>
+			<ng-template #err>
+				<div class="dialogSuccess" >
+					<i class="icofont-ui-close text-center iconErrRegister"></i>
+					<h2 class="text-center textoSuccess">Error..</h2>
+				</div>
+			</ng-template>
+			<div *ngIf="verificarEstadohorario" class="card">
+				<div class="card-content">
+					<h1 class="center">Reservar ticket</h1>
+					<hr>
+					<form>
+						<div class="row">
+							<div class="input-field col s6">
+								<mat-form-field class="example-full-width" appearance="none">
+									<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
+									<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
+								</mat-form-field>
+							</div>
+							<div class="input-field col s6">
+								<mat-form-field class="example-full-width" appearance="none">
+									<mat-label><i class="icofont-wallet"></i>Fecha de compra</mat-label>
+									<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="fechaActual">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<mat-form-field class="example-full-width" appearance="none">
+									<mat-label><h3><i class="icofont-card"></i>Identificacion</h3></mat-label>
+									<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
+								</mat-form-field>
+							</div>
+							<div class="input-field col s6">
+								<mat-form-field class="example-full-width" appearance="none">
+									<mat-label><i class="icofont-lunch"></i>Beneficiario</mat-label>
+									<input disabled="true" #beneficiario id="tipobeca" matInput placeholder="Beneficiario" [value]="tipoBeca">
+								</mat-form-field>
+							</div>
+						</div>
+						<div class="row center">
+							<div class="input-field col s12">
+								<a (click)="comprarTicket(success,errcomprado,err)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

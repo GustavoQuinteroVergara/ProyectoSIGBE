@@ -17,7 +17,7 @@ export class TicketService {
 		}));
 	}
 
-	buscarTicketbyFechaUser(iduser:any){
-		return this.http.get(`${this.url}/app/componentes/Tickets/ticketbyfechauser.php?idUser=${iduser}`);
+	buscarTicketbyFechaUser(iduser:any,tipoticket:any){
+		return this.http.get(`${this.url}/app/componentes/Tickets/ticketbyfechauser.php?idUser=${iduser}&tipoticket=${tipoticket}`);
 	}
 }
