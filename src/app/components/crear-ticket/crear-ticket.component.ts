@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {formatDate } from '@angular/common';
-import {Globals} from './../../global';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {TicketService} from '../../services/ticket.service';
 import {UsuarioService} from '../../services/usuario.service';
+import {ConfiguracionService} from '../configuracion/configuracion.service';
 import {CuposasignacionService} from '../../services/cuposasignacion.service';
 
 @Component({
@@ -13,7 +13,6 @@ import {CuposasignacionService} from '../../services/cuposasignacion.service';
   styleUrls: ['./crear-ticket.component.css']
 })
 export class CrearTicketComponent {
-  globals: Globals;
   tipoBeca='';
   fechaActual= formatDate(new Date(), 'yyyy/MM/dd', 'en');
   fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -37,34 +36,54 @@ export class CrearTicketComponent {
   confSaldo = true;
   confErr = false;
   confHorario = true;
+  verificarEstadohorario = true;
+  configuracionBack:any;
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 
-  constructor(globals: Globals,private ticketService:TicketService,
+  constructor(private ticketService:TicketService,
+    private configuracionService:ConfiguracionService,
     private usuarioService:UsuarioService,public dialog: MatDialog, 
     private serviceCuposasign:CuposasignacionService) { 
     this.elementType = 'img';
+    this.todaysDataTime = formatDate(new Date(), 'HH:mm', 'en-US');
+    this.buscarAsignacionPorFecha();
+    this.buscarConfiguracion();
     this.level = 'M';
     this.qrdata = 'Initial QR code data string';
     this.scale = 1;
     this.width = 256;
-    this.globals = globals;
 
     // Horas manejada en 24:00HS
-    this.todaysDataTime = formatDate(this.fechaActual, 'HH:mm', 'en-US');
+    
     console.log(this.todaysDataTime);
-    if(this.todaysDataTime < '12:30'){
-      this.tipoBeca = 'Ticket Almuerzo';
-      this.valorTicket=globals.valorticketalmuerzo;
-    }else{
-      this.tipoBeca = 'Ticket Refrigerio';
-      this.valorTicket=globals.valorticketrefrigerio;
-    }
 
-    this.buscarAsignacionPorFecha();
+
+
 
   }
 
-  comprarTicket(templateRef){
+  buscarConfiguracion(){
+    this.configuracionService.listarConfiguracion().subscribe(result=>{
+      this.configuracionBack = result;
+
+      if(this.todaysDataTime < result['horaFinVentaAlmuerzo']){
+        this.tipoBeca = 'Ticket Almuerzo';
+        this.valorTicket=result['valorticketalmuerzo'];
+      }else{
+        this.tipoBeca = 'Ticket Refrigerio';
+        this.valorTicket=result['valorticketrefrigerio'];
+      }
+
+      if((this.todaysDataTime >= result['horaFinVentaAlmuerzo']) && (this.todaysDataTime < result['horainicioVentaRefrigerio'])){
+        this.verificarEstadohorario = false;
+      }
+
+    },(err)=>{
+      console.log(err);
+    });
+  }
+
+  comprarTicket(success, errcomprado,err){
     this.success=false;
     this.confSaldo = true;
     this.confErr = false;
@@ -83,28 +102,32 @@ export class CrearTicketComponent {
     console.log(this.ticketArray);
 
 
-    this.ticketService.buscarTicketbyFechaUser(this.$nombreusuario.identi).subscribe(result=>{
-      let dialogRef = this.dialog.open( templateRef,{
+    this.ticketService.buscarTicketbyFechaUser(this.$nombreusuario.identi,this.ticketArray.tipoTicket).subscribe(result=>{
+      let dialogRef = this.dialog.open( errcomprado,{
         height: '200px',
-        width: '200px',
+        width: '350px',
       });
 
     },(err)=>{
+      console.log(err.error);
       this.serviceCuposasign.actualizarCupos(this.asignacionEnviar).subscribe(result=>{
         this.ticketService.registrarTicket(this.ticketArray).subscribe(result=>{
-
-        },(errors)=>{
-          let dialogRef = this.dialog.open( templateRef,{
+          let dialogRef = this.dialog.open( success,{
             height: '200px',
-            width: '200px',
+            width: '350px',
+          });
+        },(errors)=>{
+          let dialogRef = this.dialog.open( err,{
+            height: '200px',
+            width: '350px',
           });
           console.log(errors.error);
         }); 
 
       },(exception)=>{
-        let dialogRef = this.dialog.open( templateRef,{
+        let dialogRef = this.dialog.open( err,{
           height: '200px',
-          width: '200px',
+          width: '350px',
         });
         console.log(exception.error);
       });
