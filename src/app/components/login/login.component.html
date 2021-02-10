@@ -1,4 +1,25 @@
 <div class="containerForm">
+
+
+    <ng-template #periodocaducado>
+        <div  class="dialogSuccess" >
+            <i class="icofont-ui-close text-center iconErrRegister"></i>
+            <h2 class="text-center textoSuccess">Lo siento, el periodo academico ha caducado</h2>
+        </div>
+    </ng-template>
+    <ng-template #correonoencontrado>
+        <div  class="dialogSuccess" >
+            <i class="icofont-ui-close text-center iconErrRegister"></i>
+            <h2 class="text-center textoSuccess">Lo siento, el correo ingresado no ha sido correcto</h2>
+        </div>
+    </ng-template>
+    <ng-template #errorcontrasenainvl>
+        <div  class="dialogSuccess" >
+            <i class="icofont-ui-close text-center iconErrRegister"></i>
+            <h2 class="text-center textoSuccess">La contraseña que ha ingresado es incorrecta o el usuario que ha ingresado puede no estar activo</h2>
+        </div>
+    </ng-template>
+
     <div class="row rowform">
         <form class="col s12">
             <div class="row center rowImageLogin">
@@ -28,7 +49,7 @@
             </div>
             <div class="row center">
                 <div class="input-field col s12">
-                    <a class="waves-effect waves-light btn red" (click)="login(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesion</a>
+                    <a class="waves-effect waves-light btn red" (click)="login(email.value,contrasena.value,periodocaducado,correonoencontrado,errorcontrasenainvl)"><i class="icofont-login left"></i>Iniciar sesion</a>
                 </div>
             </div>
             <div class="row center" routerLinkActive="active">
