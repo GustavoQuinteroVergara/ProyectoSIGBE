@@ -1,5 +1,61 @@
 .cartaBienvenida{
-    padding-left: 11%;
-    padding-top: 5%;
-    margin-top: 0;
+	padding-left: 11%;
+	padding-top: 5%;
+	margin-top: 0;
+}
+
+.rowRegistroPeriodo{
+	padding-left: 11%;
+	padding-top: 5%;
+}
+.inputFechas{
+	width: 100%;
+}
+.inputFechaIni{
+	position: inherit !important;
+	padding-top: 12px !important;
+}
+
+.divbotonexit{
+	margin-top: 7px;
+	margin-right: 80px
+}
+
+.iconexitperiodo{
+	font-size: 21px;
+	color: red;
+}
+
+.buttonCerrarse{
+	cursor: pointer;
+}
+
+[data-title]:hover:after {
+	opacity: 1;
+	transition: all 0.5s;
+	visibility: visible;
+}
+
+[data-title]:after {
+	content: attr(data-title);
+	background-color: #333;
+	color: #fff;
+	font-size: 14px;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	font-weight: 500;
+	position: absolute;
+	padding: 3px 20px;
+	bottom: -1.6em;
+	left: 100%;
+	white-space: nowrap;
+	box-shadow: 1px 1px 3px #222222;
+	opacity: 0;
+	border: 1px solid #111111;
+	z-index: 99999;
+	visibility: hidden;
+	border-radius: 6px;
+	
+}
+[data-title] {
+	position: relative;
 }

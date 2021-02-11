@@ -1,95 +1,161 @@
 <app-navbar></app-navbar>
-<div class="row cartaBienvenida">
-    <div class="col s4">
-        <div class="row">
-            <div class="col s12">
-                <div class="card">
-                    <div class="card-content">
-                        Bienvenido usuario : {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
-                    </div>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="card   ">
-                    <div class="card-content">
-                        Hoy se han postulado 26 estudiantes a 2 convocatorias
-                    </div>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="card   ">
-                    <div class="card-content">
-                        Hay 1200 estudiantes registrados en la app
-                    </div>
-                </div>
-            </div>
+<ng-template #templatePeriodo>
+  <ng-template #errorRegistrarPeriodo>
+    <div  class="dialogSuccess" >
+      <i class="icofont-ui-close text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Error al registrar el periodo</h2>
+    </div>
+  </ng-template>
+
+  <ng-template #periodoexitoso>
+    <div  class="dialogSuccess" >
+      <i class="icofont-ui-close text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Periodo creado exitosamente</h2>
+    </div>
+  </ng-template>
+
+
+  <div  class="dialogSuccess" >
+
+    <div class="card">
+      <div class="card-content">
+        <div class="right divbotonexit">
+          <a class="buttonCerrarse" data-title="Cerrar sesión" (click)="cerrarSesion()"><i class="icofont-exit iconexitperiodo"></i></a>
         </div>
-        
+        <h1>Registrar un periodo</h1>
+
+        <hr>
+
+        <form [formGroup]="formularioRegistrarPeriodo">
+          <div class="row">
+            <div class="input-field col s12">
+
+              <input #descripcion formControlName="descripcionperiodo" id="icon_prefix" type="text" class="validate">
+              <label for="icon_prefix"> Descripcion</label>
+              <mat-error class="help-block form-error text-danger small"
+              *ngIf="formularioRegistrarPeriodo.controls['descripcionperiodo'].hasError('required') && formularioRegistrarPeriodo.controls['descripcionperiodo'].touched">
+            La descripcion es requerida </mat-error>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <mat-form-field appearance="none" class="inputFechas">
+              <mat-label>Selecciona las fechas del periodo</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate #fechaini  class="inputFechaIni" placeholder="Fecha incial">
+                <input matEndDate #fechafin formControlName="fechasperiodo" placeholder="Fecha final">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              <mat-error class="help-block form-error text-danger small"
+              *ngIf="formularioRegistrarPeriodo.controls['fechasperiodo'].hasError('required') && formularioRegistrarPeriodo.controls['fechasperiodo'].touched">
+            Las fechas es requerida </mat-error>
+          </mat-form-field>
+        </div>
+
+
+      </div>
+      <div class="row center">
+        <div class="input-field col s12">
+          <a (click)="registrarPeriodo(descripcion.value,fechaini.value,fechafin.value,errorRegistrarPeriodo,periodoexitoso)" [class.disabled]="!formularioRegistrarPeriodo.valid" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>Registrar Postulacion</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</ng-template>
+<div class="row cartaBienvenida">
+  <div class="col s4">
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            Bienvenido usuario : {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="card   ">
+          <div class="card-content">
+            Hoy se han postulado 26 estudiantes a 2 convocatorias
+          </div>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="card   ">
+          <div class="card-content">
+            Hay 1200 estudiantes registrados en la app
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="col s8"*ngIf="this.$nombreusuario.rol =='1'">
-       <div class="card">
-           <div class="card-content">
-            <h1>Postulaciones Realizadas</h1>
-            <table>
-                   <thead>
-                     <tr>
-                         <th>PostuId</th>
-                         <th>Beca</th>
-                         <th>Estado</th>
-                     </tr>
-                   </thead>
-           
-                   <tbody>
-                     <tr>
-                       <td>1</td>
-                       <td>Almuerzo</td>
-                       <td>Rechazado</td>
-                     </tr>
-                     <tr>
-                       <td>2</td>
-                       <td>Almuerzo</td>
-                       <td>En espera</td>
-                     </tr>
-                   </tbody>
-                 </table>
-           </div>
-       </div>
-    </div>
-    <div class="col s8"*ngIf="this.$nombreusuario.rol =='2'">
-        <div class="card">
-            <div class="card-content">
-             <h1>Últimas Convocatorias Realizadas</h1>
-             <table>
-                    <thead>
-                      <tr>
-                          <th>Nombre</th>
-                          <th>Cupos</th>
-                          <th>Periodo</th>
-                          <th>Tiempo Restante</th>
-                          <th> Ver Información</th>    
-                      </tr>
-                    </thead>
-            
-                    <tbody>
-                      <tr>
-                        <td>Almuerzo</td>
-                        <td>100</td>
-                        <td>2020-1</td>
-                        <td>20 Dia(s)</td>
-                        <td> <a [routerLink]="['/viewConvocatoria', 1]" > <i class="icofont-search-2"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Refrigerio</td>
-                        <td>34</td>
-                        <td>2020-1</td>
-                        <td>20 Dia(s)</td>
-                        <td> <a [routerLink]="['/viewConvocatoria', 2]" > <i class="icofont-search-2"></i></a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-        </div>
-     </div>
+  </div>
+
+  <div class="col s8"*ngIf="this.$nombreusuario.rol =='1'">
+   <div class="card">
+     <div class="card-content">
+      <h1>Postulaciones Realizadas</h1>
+      <table>
+       <thead>
+         <tr>
+           <th>PostuId</th>
+           <th>Beca</th>
+           <th>Estado</th>
+         </tr>
+       </thead>
+
+       <tbody>
+         <tr>
+           <td>1</td>
+           <td>Almuerzo</td>
+           <td>Rechazado</td>
+         </tr>
+         <tr>
+           <td>2</td>
+           <td>Almuerzo</td>
+           <td>En espera</td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+ </div>
+</div>
+<div class="col s8"*ngIf="this.$nombreusuario.rol =='2'">
+  <div class="card">
+    <div class="card-content">
+     <h1>Últimas Convocatorias Realizadas</h1>
+     <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cupos</th>
+          <th>Periodo</th>
+          <th>Tiempo Restante</th>
+          <th> Ver Información</th>    
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Almuerzo</td>
+          <td>100</td>
+          <td>2020-1</td>
+          <td>20 Dia(s)</td>
+          <td> <a [routerLink]="['/viewConvocatoria', 1]" > <i class="icofont-search-2"></i></a></td>
+        </tr>
+        <tr>
+          <td>Refrigerio</td>
+          <td>34</td>
+          <td>2020-1</td>
+          <td>20 Dia(s)</td>
+          <td> <a [routerLink]="['/viewConvocatoria', 2]" > <i class="icofont-search-2"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
 
 </div>
