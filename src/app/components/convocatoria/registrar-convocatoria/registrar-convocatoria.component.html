@@ -12,22 +12,22 @@
 <div class="row fondoConvocatoria center-align ">
   <form class="col s6 formConvocatoria z-depth-3" [formGroup]="formularioConvocatoria" novalidate>
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png "
-      width="50px" alt="LogoUV">
+    width="50px" alt="LogoUV">
     <h3 class="tituloRegistroConvocatoria"> Crea una Convocatoria</h3>
-      <div class="col s6">
-        <mat-form-field appearance="none" class="inputsEspacio">
-          <mat-label>Seleccione una Beca</mat-label>
-          <mat-select #beca required formControlName="beca">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let beca of convocatoriaBeca" [value]="beca.consecutivo_beca">
-              {{beca.descripcion}}
-            </mat-option>
-          </mat-select>
-          <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['beca'].hasError('required') &&
-          formularioConvocatoria.controls['beca'].touched">Seleccionar una beca</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col s6">
+    <div class="col s6">
+      <mat-form-field appearance="none" class="inputsEspacio">
+        <mat-label>Seleccione una Beca</mat-label>
+        <mat-select #beca required formControlName="beca">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let beca of convocatoriaBeca" [value]="beca.consecutivo_beca">
+            {{beca.descripcion}}
+          </mat-option>
+        </mat-select>
+        <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['beca'].hasError('required') &&
+        formularioConvocatoria.controls['beca'].touched">Seleccionar una beca</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col s6">
       <mat-form-field class="estadoConvo" appearance="none" class="inputsEspacio">
         <mat-label>Seleccione el estado</mat-label>
         <mat-select #estadoconvocatoria required formControlName="estadoConvocatoria">
@@ -36,57 +36,83 @@
           <mat-option value="Inactivo">Inactivo</mat-option>
         </mat-select>
         <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['estadoConvocatoria'].hasError('required') &&
-          formularioConvocatoria.controls['estadoConvocatoria'].touched">Selecciona un estado</mat-error>
-      </mat-form-field>
-    </div>
-      <div class="col s6">
-      <mat-form-field class="example-full-width" appearance="none" class="inputsEspacio">
-        <mat-label>Cantidad de Cupos</mat-label>
-        <input #cupos id="cupos" matInput placeholder="cupos" value="" pattern="^[0-9]+" formControlName="cupos">
-        <mat-error class="help-block form-error text-danger small"
-          *ngIf="formularioConvocatoria.controls['cupos'].hasError('required') && formularioConvocatoria.controls['cupos'].touched">
-          Los cupos son requeridos </mat-error>
-        <mat-error class="help-block form-error text-danger small"
-          *ngIf="formularioConvocatoria.controls['cupos'].hasError('pattern') && formularioConvocatoria.controls['cupos'].touched">
-          Solo números positivos</mat-error>
+        formularioConvocatoria.controls['estadoConvocatoria'].touched">Selecciona un estado</mat-error>
       </mat-form-field>
     </div>
     <div class="col s6">
       <mat-form-field class="example-full-width" appearance="none" class="inputsEspacio">
-        <mat-label>Periodo Actual</mat-label>
-        <input disabled matInput placeholder="consecutivo" [value]="convocatoriaPeriodo[0].descripcion">
+        <mat-label>Cantidad de Cupos</mat-label>
+        <input #cupos id="cupos" matInput placeholder="cupos" value="" pattern="^[0-9]+" formControlName="cupos">
+        <mat-error class="help-block form-error text-danger small"
+        *ngIf="formularioConvocatoria.controls['cupos'].hasError('required') && formularioConvocatoria.controls['cupos'].touched">
+      Los cupos son requeridos </mat-error>
+      <mat-error class="help-block form-error text-danger small"
+      *ngIf="formularioConvocatoria.controls['cupos'].hasError('pattern') && formularioConvocatoria.controls['cupos'].touched">
+    Solo números positivos</mat-error>
+  </mat-form-field>
+</div>
+<div class="col s6">
+  <mat-form-field class="example-full-width" appearance="none" class="inputsEspacio">
+    <mat-label>Periodo Actual</mat-label>
+    <input disabled matInput placeholder="consecutivo" [value]="convocatoriaPeriodo[0].descripcion">
+  </mat-form-field>
+</div>
+
+<div class="col s6">
+  <mat-form-field appearance="none" class="inputsEspacio">
+    <input #fechainicial matInput [ngxMatDatetimePicker]="picker" [min]="minDate"
+    placeholder="Fecha Inicial" [formControl]="dateControl" [disabled]="disabled">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+    <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+    [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+    [color]="color" [enableMeridian]="enableMeridian">
+  </ngx-mat-datetime-picker>
+</mat-form-field>
+</div>
+
+<div class="col s6">
+  <mat-form-field appearance="none" class="inputsEspacio">
+    <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" [min]="minDate"
+    placeholder="Fecha final" [formControl]="dateControl" [disabled]="disabled">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+
+    <ngx-mat-datetime-picker #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+    [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+    [color]="color" [enableMeridian]="enableMeridian">
+  </ngx-mat-datetime-picker>
+</mat-form-field>
+</div>
+
+<!-- Correo enviar -->
+<div class="col s6">
+  <mat-checkbox (change)="setAll($event.checked)" [(ngModel)]="opcion">¿Desea enviar correo electronico?</mat-checkbox>
+</div>
+
+
+
+
+<div class="col s12" [hidden]="!opcion">
+  <div class="col s12">
+    <mat-form-field class="example-full-width" appearance="none" class="inputsEspacio">
+      <mat-label>Asunto del correo</mat-label>
+      <input #asuntocorreo matInput placeholder="Asunto">
+    </mat-form-field>
+  </div>
+  <div class="col s12">
+    <mat-form-field class="example-full-width" appearance="none" class="inputsEspacio" >
+      <mat-form-field class="example-full-width" style="width: 100%;">
+        <mat-label>Contenido del correo</mat-label>
+        <textarea #contenidocorreo matInput placeholder="Contenido" ></textarea>
       </mat-form-field>
-    </div>
-    
-      <div class="col s6">
-        <mat-form-field appearance="none" class="inputsEspacio">
-          <input #fechainicial matInput [ngxMatDatetimePicker]="picker" [min]="minDate"
-            placeholder="Fecha Inicial" [formControl]="dateControl" [disabled]="disabled">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    </mat-form-field>
+  </div>
+</div>
 
-          <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
-            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
-            [color]="color" [enableMeridian]="enableMeridian">
-          </ngx-mat-datetime-picker>
-        </mat-form-field>
-      </div>
-
-      <div class="col s6">
-        <mat-form-field appearance="none" class="inputsEspacio">
-          <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" [min]="minDate"
-            placeholder="Fecha final" [formControl]="dateControl" [disabled]="disabled">
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-
-          <ngx-mat-datetime-picker #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
-            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
-            [color]="color" [enableMeridian]="enableMeridian">
-          </ngx-mat-datetime-picker>
-        </mat-form-field>
-      </div>
-    <div class="center-align">
-      <a class="btn waves-effect waves-light red darken-4 " (click)="registrarConvocatoria
-        (fechainicial.value,fechafinal.value,beca.value,cupos.value,estadoconvocatoria.value,mytemplate)"
-        name="action">Registrar</a>
-    </div>
-  </form>
+<div class="center-align">
+  <a class="btn waves-effect waves-light red darken-4 " (click)="registrarConvocatoria
+  (fechainicial.value,fechafinal.value,beca.value,cupos.value,estadoconvocatoria.value,asuntocorreo.value,contenidocorreo.value,mytemplate)"
+  name="action">Registrar</a>
+</div>
+</form>
 </div>
