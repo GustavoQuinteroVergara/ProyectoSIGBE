@@ -7,6 +7,20 @@
 	cursor: pointer;
 }
 
+.infocuposdiv{
+	width: 69%;
+	text-align: center;
+	display: inline-block;
+}
+
+.infocupos{
+	padding: 1em;
+	background: #ffffff;
+	color: black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 5px #927979 inset;
+}
+
 .barraLateral{
 	margin-top: 64px !important;
 }
@@ -50,22 +64,22 @@
 	font-weight: bold;
 	font-size: 15px;
 	border-left: 3px solid #f04c3e;
-    padding-left: 3px;
+	padding-left: 3px;
 }
 
 .BotonALiBar:hover{
 	border-left: 3px solid white;
-    padding-left: 3px;
+	padding-left: 3px;
 }
 
 .BotonALiBar:hover > .ulInternoMenu > li{
 	border-left: 3px solid #f04c3e;
-    padding-left: 3px;
+	padding-left: 3px;
 }
 
 .BotonALiBar:hover > .ulInternoMenu > li:hover{
 	border-left: 3px solid white;
-    padding-left: 3px;
+	padding-left: 3px;
 }
 
 .iconUp{
@@ -93,10 +107,10 @@
 
 @keyframes entradaMenu {
 	to{
-opacity: 1;
+		opacity: 1;
 	}
 	from{
-opacity: 0;
+		opacity: 0;
 	}
 }
 
@@ -143,10 +157,10 @@ opacity: 0;
 	}
 }
 @media only screen and (max-width: 1264px){
-		.liNombreext{
-			margin-left: -39%;
-		}
+	.liNombreext{
+		margin-left: -39%;
 	}
+}
 @media only screen and (max-width: 600px){
 	.barraLateral {
 		margin-top: 56px !important;

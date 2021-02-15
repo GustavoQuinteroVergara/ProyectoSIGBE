@@ -98,10 +98,21 @@ export class CrearTicketComponent {
       tipoTicket:this.tipoBeca,
       idAsign:this.asignacionBuscada.concecutivo
     }
-    this.asignacionEnviar = {
-      conceasign : this.asignacionBuscada.concecutivo,
-      cuposnuevos: this.asignacionBuscada.cuposdisponibles - 1
+
+    if(this.tipoBeca == 'Ticket Almuerzo'){
+      this.asignacionEnviar = {
+        conceasign : this.asignacionBuscada.concecutivo,
+        cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo - 1,
+        cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio
+      }
+    }else{
+      this.asignacionEnviar = {
+        conceasign : this.asignacionBuscada.concecutivo,
+        cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo,
+        cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio - 1
+      }
     }
+    
 
     console.log(this.ticketArray);
 
@@ -111,9 +122,7 @@ export class CrearTicketComponent {
         height: '200px',
         width: '350px',
       });
-
     },(err)=>{
-      console.log(err.error);
       this.serviceCuposasign.actualizarCupos(this.asignacionEnviar).subscribe(result=>{
         this.ticketService.registrarTicket(this.ticketArray).subscribe(result=>{
           let dialogRef = this.dialog.open( success,{
@@ -129,16 +138,14 @@ export class CrearTicketComponent {
         }); 
 
       },(exception)=>{
+        console.log(exception.error);
         let dialogRef = this.dialog.open( err,{
           height: '200px',
           width: '350px',
         });
-        console.log(exception.error);
+        
       });
     });
-
-
-
 
   }
 

@@ -20,46 +20,55 @@
 			</div>
 			<div class="input-field col s12">
 				<mat-form-field class="example-full-width" appearance="none">
-					<mat-label>Cupos totales</mat-label>
-					<input #cupostotal type="number" id="descripcion" matInput placeholder="Ingrese los cupos totales" value="" formControlName="descripcionAsignacion" >
+					<mat-label>Cupos Almuerzo</mat-label>
+					<input #cuposalmuerzo type="number" id="cuposalmuerzo" matInput placeholder="Ingrese los cupos de almuerzo" value="" formControlName="cuposAlmuerzo" >
 					<mat-error class="help-block form-error text-danger small"
-					*ngIf="formularioCuposAsigna.controls['descripcionAsignacion'].hasError('required') && formularioCuposAsigna.controls['descripcionAsignacion'].touched">
-				CuposTotales es requerido </mat-error>
+					*ngIf="formularioCuposAsigna.controls['cuposAlmuerzo'].hasError('required') && formularioCuposAsigna.controls['cuposAlmuerzo'].touched">
+				Cupos de almuerzo es requerido </mat-error>
 			</mat-form-field>
 		</div>
+		<div class="input-field col s12">
+			<mat-form-field class="example-full-width" appearance="none">
+				<mat-label>Cupos Refrigerio</mat-label>
+				<input #cuposrefrigerio type="number" id="cuposrefrigerio" matInput placeholder="Ingrese los cupos de refrigerio" value="" formControlName="cuposRefrigerio" >
+				<mat-error class="help-block form-error text-danger small"
+				*ngIf="formularioCuposAsigna.controls['cuposRefrigerio'].hasError('required') && formularioCuposAsigna.controls['cuposRefrigerio'].touched">
+			Cupos de refrigerio es requerido </mat-error>
+		</mat-form-field>
+	</div>
 
 
-		<div class="center-align">
-			<a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!formularioCuposAsigna.valid"
-			(click)="registrarAsignacion(fecha.value,cupostotal.value,mytemplate)"  name="action">Registrar</a>
-		</div>
+	<div class="center-align">
+		<a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!formularioCuposAsigna.valid"
+		(click)="registrarAsignacion(fecha.value,cuposalmuerzo.value,cuposrefrigerio.value,mytemplate)"  name="action">Registrar</a>
 	</div>
-	<div class="card-action">
-		<h1>Asignaciones creadas</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>Concecutivo</th>
-					<th>Fecha</th>
-					<th>Cupos Totales</th>
-					<th>Cupos disponibles</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let asign of asignacionesBuscadas">
-					<td>{{asign.consecutivo_cupostickets}}</td>
-					<td>{{asign.fechaasignacion.date | date:'dd/MM/yyyy'}}</td>
-					<td>{{asign.cupostotal}}</td>
-					<td>{{asign.cuposdisponibles}}</td>
-					<td>
-						<a><i class="icofont-checked iconcheckAprobar"></i></a>
-						<a><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+</div>
+<div class="card-action">
+	<h1>Asignaciones creadas</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Concecutivo</th>
+				<th>Fecha</th>
+				<th>Cupos Almuerzos</th>
+				<th>Cupos Refrigerio</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let asign of asignacionesBuscadas">
+				<td>{{asign.consecutivo_cupostickets}}</td>
+				<td>{{asign.fechaasignacion.date | date:'dd/MM/yyyy'}}</td>
+				<td>{{asign.cuposdisponiblesalmuerzo}}</td>
+				<td>{{asign.cuposdisponiblesrefrigerio}}</td>
+				<td>
+					<a><i class="icofont-checked iconcheckAprobar"></i></a>
+					<a><i class="icofont-ui-edit iconcloseAprobar"></i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 </form>
 
