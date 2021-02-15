@@ -76,6 +76,10 @@ export class CrearTicketComponent {
 
       if((this.todaysDataTime >= result['horaFinVentaAlmuerzo']) && (this.todaysDataTime < result['horainicioVentaRefrigerio'])){
         this.verificarEstadohorario = false;
+      }else if ((this.todaysDataTime < result['horainicioVentaAlmuerzo'])){
+        this.verificarEstadohorario = false;
+      }else if ((this.todaysDataTime > result['horaFinVentaRefrigerio'])){
+        this.verificarEstadohorario = false;
       }
 
     },(err)=>{
