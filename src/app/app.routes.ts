@@ -19,6 +19,7 @@ import {HabilitaruserComponent} from './components/habilitaruser/habilitaruser.c
 import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-saldo.component';
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
+import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 
 export const ROUTES: Routes = [
 
@@ -79,6 +80,10 @@ export const ROUTES: Routes = [
 {path:'configuracion',component:ConfiguracionComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '2'
+}},
+{path:'visitadomiciliaria',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '4'
 }},
 {path:'habilitarUser', component:HabilitaruserComponent},
 {path:'bienvenida', component:HomeComponent},

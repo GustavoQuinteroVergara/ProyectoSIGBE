@@ -43,6 +43,7 @@ import { ConfiguracionComponent } from './components/configuracion/configuracion
 import { QRCodeModule } from 'angularx-qrcode';
 import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
 import { DatePipe } from '@angular/common';
+import { VisitadomiciliariaComponent } from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { DatePipe } from '@angular/common';
   HabilitaruserComponent,
   RegistrarSaldoComponent,
   ConfiguracionComponent,
-  CuposticketsComponent
+  CuposticketsComponent,
+  VisitadomiciliariaComponent
   ],
   imports: [
   BrowserModule,
