@@ -1,0 +1,245 @@
+<app-navbar></app-navbar>
+
+<div class="fondo"> 
+    <div class="caja z-depth-3">
+        <div class="logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+        </div>
+        <form  novalidate class="col s12">
+          <h1>Visita Domiciliaria</h1>
+          <div class="row divInputssrow">
+            <div class="input-field col s6">
+              <input #nombre formControlName="nombre"id="first_name" type="text" class="validate">
+               <label for="first_name">Nombre</label>
+              
+            </div>
+            <div class="input-field col s6">
+              <input  #apellido formControlName="apellido"  id="last_name" type="text" class="validate">
+              <label for="last_name">Apellido</label>    
+            </div>
+          </div>
+          <div class="row divInputssrow"> 
+            <div class="input-field col s12">
+                 <label for="">Estamento</label> 
+                 <section class="example-section checkboxEstamento">
+                  <mat-checkbox class="example-margin estamentoCheck">Est.</mat-checkbox>
+                  <mat-checkbox class="example-margin estamentoCheck">Doc.</mat-checkbox>
+                  <mat-checkbox class="example-margin estamentoCheck">Empl.</mat-checkbox>
+                  <mat-checkbox class="example-margin estamentoCheck">Trab.</mat-checkbox>
+                  <mat-checkbox class="example-margin estamentoCheck">Jub.</mat-checkbox>
+                  <mat-checkbox class="example-margin estamentoCheck">Pen.</mat-checkbox>
+                </section>
+              </div> 
+              <div class="input-field col s6" style="width: 20%;">
+                <input #codigo formControlName="codigo" id="codigo" type="text" class="validate" >
+                <label for="codigo">Código</label>
+              </div>
+              <div class="input-field col s6" style="width: 20%;">
+                  <input #contrasena formControlName="plan" id="plan" type="text" class="validate">
+                    <label for="plan">Plan</label>
+                  </div>
+                  <div class="input-field col s6" style="width: 20%;">
+                  <input #codigo formControlName="cc" id="cc" type="text" class="validate">
+                    <label for="cc">C.C</label>
+                  </div>
+                  <div class="input-field col s6" style="width: 20%;">
+                  <input #contrasena formControlName="telefono" id="telefono" type="number" class="validate">
+                    <label for="telefono">Teléfono</label>
+                  </div>
+                  <div class="input-field col s6" style="width: 20%;">
+                  <input #contrasena formControlName="celular" id="celular" type="number" class="validate">
+                    <label for="celular">Celular</label>
+                  </div>
+                  <div class="input-field col s6" style="width: 20%;">
+                  <input #contrasena formControlName="direccion" id="direccion" type="text" class="validate">
+                    <label for="direccion">Dirección</label>
+                  </div>
+                  <div class="input-field col s6" style="width: 20%;">
+                  <input #contrasena formControlName="barrio" id="barrio" type="text" class="validate">
+                    <label for="barrio">Barrio</label>
+                  </div>
+                  <div class="input-field col s6" style="width: 20%;">
+                  <input #contrasena formControlName="comuna" id="comuna" type="number" class="validate">
+                    <label for="comuna">Comuna</label>
+                  </div>
+              </div>
+              <div class="input-field col s6">
+                <h2 style="text-align: left; margin-left: 2%;" >1. Información Socio-Económica</h2>
+              </div>
+          <div class="row divInputssrow">
+            <div class="primerPunto" style="margin-left: 33%;">
+              <div class="input-field col s6" style="width: 81%;margin-left: -50%;">
+                <input #contrasena formControlName="encargado" id="encargado" type="text" class="validate">
+                  <label for="encargado">Nombre de la persona que atendió la entrevista</label>
+                </div>
+                <div class="input-field col s6" style="width: 35%;" >
+                  <input #contrasena formControlName="parentesco" id="parentesco" type="text" class="validate">
+                    <label for="parentesco">Parentesco</label>
+                  </div>
+                </div>
+          </div>
+          <div class="input-field col s6">
+            <h5 style="text-align: left; margin-left: 2%;" >1.1   Las obligaciones económicas en su casa son asumidas por:</h5>
+          </div>
+          <div class="row divInputssrow">
+            <div class="input-field col s12"> 
+              <section class="example-section checkboxObligaciones">
+                <mat-checkbox classs="example-margin obligacionesCheck" style="margin-right: 1%;">Solicitante</mat-checkbox>
+                <mat-checkbox class="example-margin obligacionesCheck">Padre</mat-checkbox>
+                <mat-checkbox class="example-margin obligacionesCheck">Madre</mat-checkbox>
+                <mat-checkbox class="example-margin obligacionesCheck">Conyúge</mat-checkbox>
+               <mat-checkbox class="example-margin obligacionesCheck">Otro</mat-checkbox>
+               
+             </section>
+             <div class="input-field col s6" style="width: 17%;float: left;margin-top: -6.5%;margin-left: 58%;" >
+              <input #contrasena formControlName="otros1" id="otros1" type="text" class="validate">
+                <label for="otros1">¿Cuál?</label>
+              </div>
+           </div> 
+             
+          </div>
+          <div class="tercerCheck">
+          <div class="input-field col s6">
+            <h5 style="text-align: left; margin-left: 2%;" >1.2 Estrato según DANE</h5>
+          </div>
+          <div class="row divInputssrow">
+            <div class="input-field col s12"> 
+              <section class="example-section checkboxEstrato">
+                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">1. Bajo-Bajo</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">2. Bajo</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">3. Mediano-bajo</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">4. Medio</mat-checkbox>
+               <mat-checkbox class="example-margin estratoCheck">5. Medio-alto</mat-checkbox>
+               <mat-checkbox class="example-margin estratoCheck">5. Alto</mat-checkbox>
+             </section>
+           </div>             
+          </div>
+        </div>
+        <div class="cuartoCheck">
+          <div class="input-field col s6">
+            <h5 style="text-align: left; margin-left: 2%;" >1.3 ¿Paga Arriendo? </h5>
+            <h5 style="text-align: left; margin-left: 50%;
+            margin-top: -4%;" >¿Qué cubre el arriendo? </h5>
+          </div>
+          <div class="row divInputssrow">
+            <div class="input-field col s12"> 
+              <section class="example-section checkboxEstrato">
+                <div class="pagaArriendo">
+                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Si</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">No</mat-checkbox>
+              </div>
+              <div class="informacionArriendo">
+                <mat-checkbox class="example-margin estratoCheck" style="margin-right: 4%;">Cuarto</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">Alimentación</mat-checkbox>
+              </div>
+             </section>
+             <div class="input-field col s6 valorArriendo"  >
+              <input #contrasena formControlName="arriendo" id="arriendo" type="text" class="validate" >
+                <label for="arriendo">¿Valor arriendo?</label>
+              </div>
+              <div class="input-field col s6 informacionGastos" >
+                <input #contrasena formControlName="otros2" id="otros2" type="text" class="validate">
+                  <label for="otros2 ">Otros</label>
+                </div>
+           </div>             
+          </div>
+        </div>
+        <div class="quintoCheck">
+          <div class="input-field col s6">
+            <h5 style="text-align: left; margin-left: 2%;" >1.4 Fuentes de ingreso del solicitante</h5>
+          </div>
+          <div class="row divInputssrow quintoDivCheck">
+            <div class="input-field col s12"> 
+              <section class="example-section checkboxEstrato">
+                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Trabajo</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">Familia</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">Otros</mat-checkbox>
+             </section>
+             <div class="input-field col s6" style="width: 41%;float: left;margin-top: -5%;margin-left: 58%;">
+              <input #contrasena formControlName="otros3" id="otros3" type="text" class="validate">
+                <label for="otros3">¿Cuáles?</label>
+              </div>
+           </div>             
+          </div>
+        </div>
+        <div class="input-field col s6">
+          <h2 style="text-align: left; margin-left: 2%;" >2. Características de la vivienda</h2>
+        </div>
+        <div class="input-field col s6">
+          <h5 style="text-align: left; margin-left: 2%;" >2.1</h5>
+        </div>
+        <div class="row divInputssrow quintoDivCheck">
+          <div class="input-field col s12"> 
+            <section class="example-section checkboxEstrato">
+              <div class="primeraDivision">
+              <strong>Tipo:</strong>
+              <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Casa</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Apartemento</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Cuarto</mat-checkbox>
+            </div>
+            <div class="segundaDivision">
+              <strong>Aspecto físico:</strong>
+              <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Terminado</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Obra negra</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">En construcción</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Remodelación</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Otro</mat-checkbox>
+            </div>
+            <div class="terceraDivision">
+              <strong>Servicios públicos:</strong>
+              <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Agua</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Energía</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Alcantarillado</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Teléfono</mat-checkbox>
+              <mat-checkbox class="example-margin estratoCheck">Gas Domiciliario</mat-checkbox>
+            </div>
+           </section>
+           <div class="input-field col s6" style="width: 14%;float: left;margin-top: -9%;margin-left: 88%;">
+            <input #contrasena formControlName="otros3" id="otros3" type="text" class="validate">
+              <label for="otros3">¿Cuáles?</label>
+            </div>
+         </div>             
+        </div>
+        <div class="sextoCheck">
+          <div class="input-field col s6">
+            <h5 style="text-align: left; margin-left: 2%;" >2.2 Cuarto del solicitante</h5>
+          </div>
+          <div class="row divInputssrow quintoDivCheck">
+            <div class="input-field col s12"> 
+              <section class="example-section checkboxCuarto">
+                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Solo</mat-checkbox>
+                <mat-checkbox class="example-margin estratoCheck">Compartido</mat-checkbox>
+             </section>
+             <div class="input-field col s6" style="width: 41%;float: left;margin-top: -5%;margin-left: 58%;">
+              <input #contrasena formControlName="otros4" id="otros4" type="number" class="validate">
+                <label for="otros4">¿Con cuantas personas?</label>
+              </div>
+           </div>             
+          </div>
+        </div>
+        <div class="input-field col s6">
+          <h2 style="text-align: left; margin-left: 2%;" >Observaciones</h2>
+        </div>
+        <div class="input-field col s6">
+          <h5 style="text-align: left; margin-left: 2%;" >(Concepto del Trabajador Social - Breve Descripción de la Situación del Estudiante)</h5>
+        </div>
+        <mat-form-field class="example-full-width areaDescripcion">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput placeholder="Este es un ejemplo.."></textarea>
+        </mat-form-field>
+          <div>
+            <div class="row center" style="text-align: center;float: unset;" >
+              <div class="input-field col s12">
+                  <a class="btn waves-effect waves-light red darken-4 "  >Registrar</a>
+              </div>
+              
+          </div>
+              
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+
+    
