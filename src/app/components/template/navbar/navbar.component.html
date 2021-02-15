@@ -9,7 +9,10 @@
         </button>
       </mat-drawer-content>
     </mat-drawer-container>
-    <span>Cupos disponibles almuerzo hoy: {{asignacionBuscada.cuposdisponibles}}</span>
+    <div class="infocuposdiv">
+      <span class="infocupos">Cupos disponibles almuerzo hoy: {{asignacionBuscada.cuposalmuerzo}}</span>
+      <span class="infocupos">Cupos disponibles refrigerio hoy: {{asignacionBuscada.cuposrefrigerio}}</span>
+    </div>
     <div class="right">
 
       <li class="liMenuBarLateral liExterno liNombreext" routerLinkActive="active">

@@ -23,7 +23,8 @@ export class CuposticketsComponent implements OnInit {
 	ngOnInit(): void {
 		this.buscarAsignaciones();
 		this.formularioCuposAsigna = new FormGroup({
-			descripcionAsignacion: new FormControl('',Validators.required),
+			cuposAlmuerzo: new FormControl('',Validators.required),
+			cuposRefrigerio: new FormControl('',Validators.required),
 		});
 		
 	}
@@ -31,8 +32,8 @@ export class CuposticketsComponent implements OnInit {
 		return this.formularioCuposAsigna.controls[controlName].hasError(errorName);
 	}
 
-	registrarAsignacion(fecha:any,cupostotal:any,templateRef){
-		this.cuposAsignacionarray= {fecha:fecha,cupostotal:cupostotal};
+	registrarAsignacion(fecha:any,cuposalmuerzo:any,cuposrefrigerio:any,templateRef){
+		this.cuposAsignacionarray= {fecha:fecha,cuposalmuerzo:cuposalmuerzo,cuposrefrigerio:cuposrefrigerio};
 		this.serviceCuposasign.registrarAsignacionCupos(this.cuposAsignacionarray).subscribe(res =>{
 			this.success = true;
 			let dialogRef = this.dialog.open( templateRef,{
