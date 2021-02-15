@@ -23,8 +23,8 @@
 
     <tbody>
       <tr *ngFor="let convoca of convocatorias">
-        <td>{{convoca.fecha_inicio.date}} </td>  
-        <td>{{convoca.fecha_fin.date}}</td>
+        <td>{{convoca.fecha_inicio}} </td>  
+        <td>{{convoca.fecha_fin}}</td>
         <td>{{convoca.estado_convocatoria}}</td>
         <td>{{convoca.beca}}</td>
         <td>{{convoca.periodosacademicos}}</td>
@@ -39,6 +39,10 @@
   </table>
 
 </div>
-
+<h3>Exportar a Excel</h3>
+<div class ="container" style="padding-bottom:20px">
+    <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
+    <!--<button mat-raised-button color="accent">Accent</button>-->
+</div>
 </div>
 </div>
