@@ -21,7 +21,9 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   public showSeconds = false;
   public touchUi = false;
   public enableMeridian = false;
-  
+  opcion=false;
+  asuntocorreo:any;
+  contenidocorreo:any;
   
   public stepHour = 1;
   public stepMinute = 1;
@@ -38,8 +40,8 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   minDate = new Date();
   
   public options = [
-    { value: true, label: 'True' },
-    { value: false, label: 'False' }
+  { value: true, label: 'True' },
+  { value: false, label: 'False' }
   ];
 
   public listColors = ['primary', 'accent', 'warn'];
@@ -48,10 +50,10 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   public stepMinutes = [1, 5, 10, 15, 20, 25];
   public stepSeconds = [1, 5, 10, 15, 20, 25];
 
-constructor(private serviceConvocatoria:RegistrarConvoServiceService,public dialog: MatDialog) { 
-  this.buscarBeca();
-  this.buscarPeriodo();
-}
+  constructor(private serviceConvocatoria:RegistrarConvoServiceService,public dialog: MatDialog) { 
+    this.buscarBeca();
+    this.buscarPeriodo();
+  }
   ngOnInit(): void {
     this.formularioConvocatoria = new FormGroup({
       beca: new FormControl('',Validators.required),
@@ -63,42 +65,72 @@ constructor(private serviceConvocatoria:RegistrarConvoServiceService,public dial
   public hasError = (controlName: string, errorName: string) =>{
     return this.formularioConvocatoria.controls[controlName].hasError(errorName);
   }
-buscarBeca(){
-  this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
-    console.log(convocatoriaBeca);
-    this.convocatoriaBeca = convocatoriaBeca;
-  });
-}
-buscarPeriodo(){
-  this.serviceConvocatoria.buscarListadoPeriodos().subscribe(convocatoriaPeriodo=>{
-    console.log(convocatoriaPeriodo);
-    this.convocatoriaPeriodo = convocatoriaPeriodo;
-  });
-}
+  buscarBeca(){
+    this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
+      console.log(convocatoriaBeca);
+      this.convocatoriaBeca = convocatoriaBeca;
+    });
+  }
+  buscarPeriodo(){
+    this.serviceConvocatoria.buscarListadoPeriodos().subscribe(convocatoriaPeriodo=>{
+      console.log(convocatoriaPeriodo);
+      this.convocatoriaPeriodo = convocatoriaPeriodo;
+    });
+  }
 
-registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estadoconvocatoria:any,templateRef){
-  this.convocatoriaRegistrar= {fechainicio:fechainicial,
-    fechafin:fechafinal,
-    becas:becas,
-    cupo:cupos,
-    periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
-    estadoconvocatoria:estadoconvocatoria};
-  this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
-    this.success = true;
+  registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estadoconvocatoria:any,asuntocorreo:any,contenidocorreo:any,templateRef){
+
+
+    if(this.opcion){
+      this.convocatoriaRegistrar= {fechainicio:fechainicial,
+        fechafin:fechafinal,
+        becas:becas,
+        cupo:cupos,
+        periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
+        estadoconvocatoria:estadoconvocatoria,
+        enviarCorreo:true,
+        asuntocorreo:asuntocorreo,
+        contenidocorreo:contenidocorreo
+      };
+    }else{
+      this.convocatoriaRegistrar= {fechainicio:fechainicial,
+        fechafin:fechafinal,
+        becas:becas,
+        cupo:cupos,
+        periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
+        estadoconvocatoria:estadoconvocatoria,
+        enviarCorreo:false,
+        asuntocorreo:'',
+        contenidocorreo:''
+      };
+    }
+    this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
+      this.success = true;
       let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
-    console.log(res);
+       height: '200px',
+       width: '200px',
+     });
+      console.log(res);
     },(err)=>{
       this.success = false;
       let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
+       height: '200px',
+       width: '200px',
+     });
+      console.log(err);
     });
-  console.log(this.convocatoriaRegistrar);
-   
-   }
+
+    console.log(this.convocatoriaRegistrar);
+
+  }
+
+  setAll(completed: boolean){
+    if(this.opcion){
+      this.opcion = false;
+    }else{
+      this.opcion = true;
+    }
+
+  }
 
 }
