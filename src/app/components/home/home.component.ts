@@ -3,10 +3,11 @@ import {PeriodoServiceService} from '../../services/periodo-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-
+import {InicioService} from './inicio.service'
 import {Router } from '@angular/router';
 
 import {formatDate } from '@angular/common';
+import { TicketService } from 'src/app/services/ticket.service';
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
@@ -18,15 +19,24 @@ export class HomeComponent implements OnInit {
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 	fechaultperiodo:any;
 	periodocaducado:any;
-
+    postulaciones:any;
 	public formularioRegistrarPeriodo: FormGroup;
 
 	periodoArray:any;
 
 	@ViewChild('templatePeriodo') customTemplate: TemplateRef<any>;
-	constructor(private periodoService:PeriodoServiceService, public dialog: MatDialog, private router:Router) { 
+	constructor(private periodoService:PeriodoServiceService, public dialog: MatDialog, private router:Router, private listarpostu: InicioService) { 
 		this.buscarUltimoperiodo();
+		this.buscarPostuEnespera();
 
+	}
+
+	buscarPostuEnespera(){
+		this.listarpostu.buscarPostuEnespera().subscribe(res=>{
+             this.postulaciones=res;
+		})
+
+		
 	}
 
 	ngOnInit(): void {
@@ -86,5 +96,11 @@ export class HomeComponent implements OnInit {
 
 
 	}
+	buscarEstPostuByIden(templateRef){
+		let dialogRef = this.dialog.open( templateRef,{
+			 height: '500px',
+			 width: '500px',
+		   });
+	  }
 
 }
