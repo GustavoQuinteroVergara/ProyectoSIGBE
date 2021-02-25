@@ -74,6 +74,20 @@
 								</mat-form-field>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col s12" *ngIf="confirmacionBeneficiario">
+								<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
+								<div class="input-field col s12 center">
+									<span>Valor a pagar: <h1>1500</h1></span>
+								</div>
+							</div>
+							<div class="row" *ngIf="!confirmacionBeneficiario">
+								<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
+								<div class="input-field col s6">
+									<span>Valor a pagar: <h1>2000</h1></span>
+								</div>
+							</div>
+						</div>
 						<div class="row center">
 							<div class="input-field col s12">
 								<a (click)="comprarTicket(success,errcomprado,err)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
