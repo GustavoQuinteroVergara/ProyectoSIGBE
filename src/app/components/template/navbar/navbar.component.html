@@ -164,6 +164,9 @@
           <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
             <a class="BotonALiBar" disabled="true" routerLink="/listarTickets">Listar tickets</a>
           </li>
+          <li class="liMenuBarLateral" routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='1'">
+            <a class="BotonALiBar" disabled="true" routerLink="/listarTicketEst">Listar tickets</a>
+          </li>
         </ul>
       </li>
       <!-- Fin botones tickets -->

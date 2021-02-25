@@ -20,4 +20,8 @@ export class TicketService {
 	buscarTicketbyFechaUser(iduser:any,tipoticket:any){
 		return this.http.get(`${this.url}/app/componentes/Tickets/ticketbyfechauser.php?idUser=${iduser}&tipoticket=${tipoticket}`);
 	}
+
+	listTicketByest(iduser:any){
+		return this.http.get(`${this.url}/app/componentes/Tickets/ticketbyest.php?identificacion=${iduser}`);
+	}
 }

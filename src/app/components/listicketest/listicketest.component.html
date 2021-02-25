@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+<ng-template #verqr>
+	<div class="dialogSuccess" >
+		<div class="center" >
+			<h1>Ver codigo QR</h1>
+		</div>
+		<hr>
+		<div id="imgqr">
+			<qrcode [qrdata]="concecutivosel" [width]="300" [level]="'M'" usesvg="true"></qrcode>
+		</div>
+		<div class="center">
+			<button *ngIf="imgcreada === false;" class="btn btn-info mt-3" (click)="crearImagen()">Configurar IMAGEN QR</button>
+			<ng-container *ngIf="imgcreada === true;">
+				<div align="center">
+					<!-- Botón para descargar la imagen creada -->
+					<a type="button" class="btn btn-success mt-3" href="{{imagenCreada}}" download>	
+						Descargar
+					</a>
+
+				</div>
+			</ng-container>
+		</div>
+	</div>       
+</ng-template>
+<div class="row rowViewPostest">
+	<div class="col s12 m7" *ngIf="listatickets == null">
+		<div class="card">
+			<h1>No hay tickets comprados</h1>
+		</div>
+	</div>
+	<div class="col s12 m7" *ngIf="listatickets != null">
+		<div class="card">
+			<div class="card-content">
+				<h1>Mis ultimos tickets</h1>
+				<hr>
+				<table>
+					<thead>
+						<tr>
+							<th>Numero ticket</th>
+							<th>Fecha ticket</th>
+							<th>Tipo Ticket</th>
+							<th>Estado ticket</th>
+							<th>Ver QR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let ticket of listatickets">
+							<td>{{ticket.consecutivoticket}}</td>
+							<td>{{ticket.fecha_compra.date}}</td>
+							<td>{{ticket.tipoticket}}</td>
+							<td>{{ticket.estadoticket}}</td>
+							<td>
+								<a (click)="verQr(verqr,ticket.consecutivoticket)" data-title="Ver y descargar QR"><i class="icofont-qr-code icoqr"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
