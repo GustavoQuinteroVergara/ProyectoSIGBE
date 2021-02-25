@@ -44,6 +44,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
 import { DatePipe } from '@angular/common';
 import { VisitadomiciliariaComponent } from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
+import { ListicketestComponent } from './components/listicketest/listicketest.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { VisitadomiciliariaComponent } from './components/psicologia/visitadomic
   RegistrarSaldoComponent,
   ConfiguracionComponent,
   CuposticketsComponent,
-  VisitadomiciliariaComponent
+  VisitadomiciliariaComponent,
+  ListicketestComponent
   ],
   imports: [
   BrowserModule,
