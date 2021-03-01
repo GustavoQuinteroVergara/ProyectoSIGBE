@@ -154,8 +154,97 @@
         </tr>
       </tbody>
     </table>
+       
+
   </div>
+  <ng-template #mytemplate>
+    <div >
+    <form >
+        <h1>Info Estudiante</h1>
+        <mat-form-field class="example-full-width" disabled appearance="none">
+        <mat-label>Nombre estudiante</mat-label>
+        <input id="cupos" matInput placeholder="cupos" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" disabled appearance="none">
+        <mat-label>Codigo estudiante</mat-label>
+        <input #beca id="cupos" matInput placeholder="cupos" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" disabled appearance="none">
+        <mat-label>Saldo</mat-label>
+        <input #fechainicio id="cupos" matInput placeholder="cupos" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" disabled appearance="none">
+        <mat-label>Postulaciones realizadas</mat-label>
+        <input #fechafin id="cupos" matInput placeholder="cupos" value="">
+        </mat-form-field>
+        
+    </form>
+    <h1>Postulaciones Realizadas</h1>
+     <table>
+            <thead>
+              <tr>
+                  <th>PostuId</th>
+                  <th>Beca</th>
+                  <th>Estado</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Almuerzo</td>
+                <td>Rechazado</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Almuerzo</td>
+                <td>En espera</td>
+              </tr>
+            </tbody>
+          </table>
+    
+    </div>
+    </ng-template>
+
+
+  
+  </div>
+<br>
+
+    
+<div class="col s12">
+  <div class="card   ">
+    <div class="card-content">
+<div class="table-wrapper-scroll-y my-custom-scrollbar "  *ngIf="this.$nombreusuario.rol =='2'">
+      
+      
+  
+  <h1>Postulaciones en espera</h1>
+
+  <table class="table table-bordered table-striped mb-0">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Estrato</th>
+        <th scope="col">Tipo beca</th>
+        <th scope="col">Revision</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let postus of  postulaciones">
+        <th scope="row">{{postus.nombre}}</th>
+        <td>{{postus.estrato}}</td>
+        <td>{{postus.convocatoria}}</td>
+        <td>{{postus.estado}}</td>
+        <td><a (click)="buscarEstPostuByIden(mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
+      </tr>
+     
+    </tbody>
+  </table>
 </div>
+</div>
+</div>
+
 </div>
 
 </div>
