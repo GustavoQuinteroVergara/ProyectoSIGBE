@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {ServicesViewConvocatoriaService} from './services-view-convocatoria.service';
 import {ServiciolistarconvoService} from './../../listarconvocatoria/serviciolistarconvo.service';
+import {PostulacionService} from '../../../services/postulacion.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {RegistrarConvoServiceService} from '../registrar-convocatoria/registrar-convo-service.service';
 import {Router } from '@angular/router';
@@ -27,10 +28,12 @@ export class ViewConvocatoriaComponent {
   activeButton=false;
   estado=true;
   disabledActualizar=true;
+  postulacionesest:any;
   public formularioConvocatoria: FormGroup;
   constructor(private rutaActiva: ActivatedRoute,
    private serviceviewconvocatoria:ServicesViewConvocatoriaService,public dialog: MatDialog, 
    private serviceConvocatoria:RegistrarConvoServiceService,
+   private servicePostulacion:PostulacionService,
    private router:Router ) { 
     this.$idConvo = this.rutaActiva.snapshot.params.idConvo;
     this.buscarConvoByIdConvo(this.$idConvo);
@@ -62,27 +65,34 @@ export class ViewConvocatoriaComponent {
     
   }
 
-  buscarEstPostuByIden(templateRef){
-    let dialogRef = this.dialog.open( templateRef,{
-         height: '500px',
-         width: '500px',
-       });
+  buscarEstPostuByIden(idsel:any,templateRef){
+    this.servicePostulacion.buscarPostuByIdenti(idsel).subscribe(result=>{
+      this.postulacionesest = result;
+      console.log(result[0]);
+      let dialogRef = this.dialog.open( templateRef,{
+       height: '500px',
+       width: '500px',
+     });
+    },(err)=>{
+      console.log(err);
+    });
+
   }
 
   buscarConvoByIdConvo(idConvo:any){
-      this.serviceviewconvocatoria.buscarConvoById(idConvo).subscribe(result =>{ 
+    this.serviceviewconvocatoria.buscarConvoById(idConvo).subscribe(result =>{ 
       console.log(result); 
       this.$convoBuscada = result; 
       this.loading=true;
-  });
+    });
   }
 
   buscarPostulacionesByIdConvo(idConvo:any){
-      this.serviceviewconvocatoria.buscarPostulacionesByIdConvo(idConvo).subscribe(result =>{ 
+    this.serviceviewconvocatoria.buscarPostulacionesByIdConvo(idConvo).subscribe(result =>{ 
       console.log(result); 
       this.$postuByIdArray = result; 
 
-  });
+    });
   }
   actualizarConvocatoria(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
     fecha_inicio:any,fecha_fin:any,estado_convocatoria:any){
@@ -95,15 +105,15 @@ export class ViewConvocatoriaComponent {
       fecha_fin:fecha_fin,
       estado_convocatoria:estado_convocatoria,
     };
-  this.serviceviewconvocatoria.actualizarListConvocatorias(this.convoActualizado).subscribe
+    this.serviceviewconvocatoria.actualizarListConvocatorias(this.convoActualizado).subscribe
     (res=>{
-      
+
     },(err)=>{
       //console.log('ERROR: ' + err.error.text);
       
     });
     console.log(this.convoActualizado);
-  
+
   }
   buscarBeca(){
     this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
@@ -123,108 +133,108 @@ export class ViewConvocatoriaComponent {
     if(estadopostulacionactual == 'En espera'){
       if(estadoseleccionado == true){
         // Actualizar el estado postulacion
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu:'Aprobado'
-          };
-          this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
-          this.convoActualizado={
-            idconvo:this.$convoBuscada.consecutivo_convocatoria,
-            cupos:this.$convoBuscada.cupo
-          };
+        this.updatePostu = {
+          idpostu:idPostu,
+          estadopostu:'Aprobado'
+        };
+        this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
+        this.convoActualizado={
+          idconvo:this.$convoBuscada.consecutivo_convocatoria,
+          cupos:this.$convoBuscada.cupo
+        };
 
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{ 
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
+        this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+        (res=>{ 
+          for (var i = 0; i < this.$postuByIdArray.length; i++) {
+            if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+              this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
             }
-             console.log(this.updatePostu.estadopostu);
-           },(err)=>{console.log('ERROR: ' + err.error.text);
-          });
+          }
+          console.log(this.updatePostu.estadopostu);
+        },(err)=>{console.log('ERROR: ' + err.error.text);
+      });
         //Actualizar Convocatoria
 
-          this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
-          (res=>{console.log(res);},(err)=>{
-            console.log('ERROR: ' + err.error.text);
-            });
+        this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
+        (res=>{console.log(res);},(err)=>{
+          console.log('ERROR: ' + err.error.text);
+        });
       }else{
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu:'Denegado'
-          };
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{  
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
+        this.updatePostu = {
+          idpostu:idPostu,
+          estadopostu:'Denegado'
+        };
+        this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+        (res=>{  
+          for (var i = 0; i < this.$postuByIdArray.length; i++) {
+            if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+              this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
             }
-          },(err)=>{console.log('ERROR: ' + err.error.text);
-          });
+          }
+        },(err)=>{console.log('ERROR: ' + err.error.text);
+      });
       }
       // Aprobado
     }else if(estadopostulacionactual == 'Aprobado'){
       if(estadoseleccionado == true){
         console.log('Ya esta aprobado');
       }else{
-          // Actualizar el estado postulacion
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu:'Denegado'
-          };
-          this.$convoBuscada.cupo = this.$convoBuscada.cupo +1;
-          this.convoActualizado={
-            idconvo:this.$convoBuscada.consecutivo_convocatoria,
-            cupos:this.$convoBuscada.cupo
-          };
+        // Actualizar el estado postulacion
+        this.updatePostu = {
+          idpostu:idPostu,
+          estadopostu:'Denegado'
+        };
+        this.$convoBuscada.cupo = this.$convoBuscada.cupo +1;
+        this.convoActualizado={
+          idconvo:this.$convoBuscada.consecutivo_convocatoria,
+          cupos:this.$convoBuscada.cupo
+        };
 
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{ 
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
+        this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+        (res=>{ 
+          for (var i = 0; i < this.$postuByIdArray.length; i++) {
+            if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+              this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
             }
-           },(err)=>{console.log('ERROR: ' + err.error.text);
-          });
+          }
+        },(err)=>{console.log('ERROR: ' + err.error.text);
+      });
         //Actualizar Convocatoria
 
-          this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
-          (res=>{},(err)=>{
-            console.log('ERROR: ' + err.error.text);
-            });
+        this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
+        (res=>{},(err)=>{
+          console.log('ERROR: ' + err.error.text);
+        });
       }
       // Denegado
     }else{
       if(estadoseleccionado == true){
         // Actualizar el estado postulacion
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu:'Aprobado'
-          };
-          this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
-          this.convoActualizado={
-            idconvo:this.$convoBuscada.consecutivo_convocatoria,
-            cupos:this.$convoBuscada.cupo
-          };
+        this.updatePostu = {
+          idpostu:idPostu,
+          estadopostu:'Aprobado'
+        };
+        this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
+        this.convoActualizado={
+          idconvo:this.$convoBuscada.consecutivo_convocatoria,
+          cupos:this.$convoBuscada.cupo
+        };
 
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{ 
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
+        this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+        (res=>{ 
+          for (var i = 0; i < this.$postuByIdArray.length; i++) {
+            if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+              this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
             }
-           },(err)=>{console.log('ERROR: ' + err.error.text);
-          });
+          }
+        },(err)=>{console.log('ERROR: ' + err.error.text);
+      });
         //Actualizar Convocatoria
 
-          this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
-          (res=>{},(err)=>{
-            console.log('ERROR: ' + err.error.text);
-            });
+        this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
+        (res=>{},(err)=>{
+          console.log('ERROR: ' + err.error.text);
+        });
       }else{
         console.log('Ya esta denegado, estado: ' + estadopostulacionactual);
       }

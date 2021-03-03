@@ -3,6 +3,10 @@
     font-size: 18px;
 }
 
+.divbuttoninfo{
+    display: inline-block;
+}
+
 .iconcloseAprobar{
 	color: red;
     font-size: 18px;
