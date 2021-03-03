@@ -15,6 +15,10 @@ export class PostulacionService {
 		return this.http.get(`${this.url}/app/componentes/postulacion/postulacionbeneficario.php?iduser=${idUser}&tipoticket=${tipoticket}`);
 	}
 
+	buscarPostuByIdenti(identiEst:any){
+		return this.http.get(`${this.url}/app/componentes/postulacion/listpostubyest.php?idest=${identiEst}`);
+	}
+
 	actualizarPostulacion(postuArray:any){
 		return this.http.put(`${this.url}/app/componentes/postulacion/actualizarPostulacion.php`,{data: postuArray})
 		.pipe(map((res)=>{
