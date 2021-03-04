@@ -9,7 +9,7 @@
 			<qrcode [qrdata]="concecutivosel" [width]="300" [level]="'M'" usesvg="true"></qrcode>
 		</div>
 		<div class="center">
-			<button *ngIf="imgcreada === false;" class="btn btn-info mt-3" (click)="crearImagen()">Configurar IMAGEN QR</button>
+			<button *ngIf="imgcreada === false;" mat-raised-button color="primary" (click)="crearImagen()">Configurar IMAGEN QR</button>
 			<ng-container *ngIf="imgcreada === true;">
 				<div align="center">
 					<!-- Botón para descargar la imagen creada -->
@@ -22,18 +22,19 @@
 		</div>
 	</div>       
 </ng-template>
-<div class="row rowViewPostest">
-	<div class="col s12 m7" *ngIf="listatickets == null">
-		<div class="card">
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+	<div class="formtiq " *ngIf="listatickets == null">
+		<div>
 			<h1>No hay tickets comprados</h1>
 		</div>
 	</div>
-	<div class="col s12 m7" *ngIf="listatickets != null">
-		<div class="card">
-			<div class="card-content">
-				<h1>Mis ultimos tickets</h1>
+	<div class="formtiq" *ngIf="listatickets != null">
+		<h1>Mis ultimos tickets</h1>
+		<div>
+			<div >
+				
 				<hr>
-				<table>
+				<table class="table table-bordered table-striped mb-0">
 					<thead>
 						<tr>
 							<th>Numero ticket</th>

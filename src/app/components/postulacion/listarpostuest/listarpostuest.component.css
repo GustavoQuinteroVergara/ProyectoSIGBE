@@ -1,47 +1,20 @@
-.rowViewPostest{
-	margin-left: 11%;
-	padding-top: 5.5%;
-}
-
-.iconcheckAprobar{
-	cursor: pointer;
+.cup1{
+	height: 81vh;
 	
-}
-.tituloEstados{
-	font: 500 14px/24px Roboto, "Helvetica Neue", sans-serif;
-	font-size: 17px;
-}
-
-.lapizEditPostu{
-	font-size: 22px;
-}
-
-.lapizUpdatePostu{
-	font-size: 22px;
-	color: white;
-}
-
-.botonAcepUpdate{
-    text-decoration: none;
-}
-
-.botonActivarForm{
-	text-decoration: none;
-	color: black;
 }
 
 /*colores vetana modal confirmacion*/
 .iconSuccessRegister{
-    font-size: 44px;
-    color: green;
-    border: 2px solid green;
-    border-radius: 50%;
-    padding: 10px;
+	font-size: 44px;
+	color: green;
+	border: 2px solid green;
+	border-radius: 50%;
+	padding: 10px;
 }
 
 .iconErrRegister{
 	font-size: 44px;
-    color: red;
+	color: red;
 }
 
 .textoSuccess{
@@ -50,5 +23,41 @@
 
 .dialogSuccess{
 	text-align: center;
-    padding-top: 7px;
+	padding-top: 7px;
+}
+
+.botonActivarForm{
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+
+[data-title]:hover:after {
+	opacity: 1;
+	transition: all 0.1s ease 0.5s;
+	visibility: visible;
+}
+
+[data-title]:after {
+	content: attr(data-title);
+	background-color: #333;
+	color: #fff;
+	font-size: 14px;
+	font-family: Raleway;
+	position: absolute;
+	padding: 3px 20px;
+	bottom: -1.6em;
+	left: 100%;
+	white-space: nowrap;
+	box-shadow: 1px 1px 3px #222222;
+	opacity: 0;
+	border: 1px solid #111111;
+	z-index: 99999;
+	visibility: hidden;
+	border-radius: 6px;
+
+}
+[data-title] {
+	position: relative;
 }

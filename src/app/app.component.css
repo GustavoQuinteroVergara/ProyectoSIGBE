@@ -1,9 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&family=Raleway:wght@100;200;300&display=swap');
+
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: 'Raleway', sans-serif !important;
+}
+
+
 .contenedor {
-    background: red;
+	background: red;
 }
 
 .cabeza {
-    background: red;
+	background: red;
 }
 
 .waves-effect .waves-brown .waves-ripple {
@@ -16,13 +26,13 @@
 /* label focus color */
 
 .input-field input:focus+label {
-    color: #cd1f32 !important;
+	color: #cd1f32 !important;
 }
 
 
 /* label underline focus color */
 
 .row .input-field input:focus {
-    border-bottom: 1px solid #cd1f32 !important;
-    box-shadow: 0 1px 0 0 #cd1f32 !important
+	border-bottom: 1px solid #cd1f32 !important;
+	box-shadow: 0 1px 0 0 #cd1f32 !important
 }

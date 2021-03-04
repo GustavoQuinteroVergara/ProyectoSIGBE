@@ -1,31 +1,41 @@
 <app-navbar></app-navbar>
+
+
+
 <ng-template #mytemplate>
   <div >
     <form >
-      <h1>Info Estudiante</h1>
-      <div class="right divbuttoninfo">
-        <button class="btn btn-info">Generar informe estudiante</button>
-      </div>
-      <mat-form-field class="example-full-width" disabled appearance="none">
-        <mat-label>Nombre estudiante</mat-label>
-        <input id="nombreest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.nombreestudiante">
-      </mat-form-field>
-      <mat-form-field class="example-full-width" disabled appearance="none">
-        <mat-label>Codigo estudiante</mat-label>
-        <input #beca id="codigoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.codigoestudiante">
-      </mat-form-field>
-      <mat-form-field class="example-full-width" disabled appearance="none">
-        <mat-label>Identificación</mat-label>
-        <input #beca id="identificacionest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.identificacion">
-      </mat-form-field>
-      <mat-form-field class="example-full-width" disabled appearance="none">
-        <mat-label>Correo electronico</mat-label>
-        <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest">
-      </mat-form-field>
+      <h1>Info Estudiante
+      </h1>
+      <hr>
 
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="example-full-width" disabled appearance="none">
+            <mat-label>Codigo estudiante</mat-label>
+            <input #beca id="codigoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.codigoestudiante">
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="example-full-width" disabled appearance="none">
+            <mat-label>Identificación</mat-label>
+            <input #beca id="identificacionest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.identificacion">
+          </mat-form-field>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-12">
+
+          <mat-form-field class="example-full-width" disabled appearance="none">
+            <mat-label>Correo electronico</mat-label>
+            <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest">
+          </mat-form-field>
+        </div>
+      </div>
     </form>
     <h1>Postulaciones Realizadas</h1>
-    <table>
+    <table class="table table-bordered table-striped mb-0">
       <thead>
         <tr>
           <th>Fecha postulacion</th>
@@ -46,13 +56,17 @@
         </tr>
       </tbody>
     </table>
-
+    <div class="row">
+      <div class="col-10 m-4 text-center">
+        <button mat-raised-button color="primary">Generar informe estudiante</button>
+      </div>
+    </div>
   </div>
 </ng-template>
-<div class="row rowViewConvo">
-  <div class="col s12 m7">
-    <div class="card">
-      <div class="card-content">
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+  <div class="formtiq ">
+    <div >
+      <div >
         <form [formGroup]="formularioConvocatoria" *ngIf="loading">
           <div class="card-content">
             <h1>
@@ -61,6 +75,7 @@
                 <a (click)="activeFormActualizar()" data-title="Editar convocatoria"><i class="icofont-ui-edit iconSearchUser"></i></a>
               </div>
             </h1>
+            <hr>
             <mat-form-field class="example-full-width"  appearance="none">
               <mat-label>Consecutivo Convocatoria</mat-label>
               <input #consecutivo_convocatoria [disabled]="disabledActualizar" id="consecutivo" matInput placeholder="consecutivo" [value]="$convoBuscada.consecutivo_convocatoria">
@@ -153,7 +168,7 @@
                 </div>
                 <div class="card-action">
                   <h1>Postulaciones</h1>
-                  <table>
+                  <table class="table table-bordered table-striped mb-0">
                     <thead>
                       <tr>
                         <th>Nombre estudiante</th>

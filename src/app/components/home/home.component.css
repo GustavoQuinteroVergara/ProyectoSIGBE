@@ -1,69 +1,123 @@
-.cartaBienvenida{
-	padding-left: 11%;
-	padding-top: 5%;
-	margin-top: 0;
+.rowpanelbienestar{
+    margin: 15px;
+    margin-top: 30px;
 }
 
-.rowRegistroPeriodo{
-	padding-left: 11%;
-	padding-top: 5%;
-}
-.inputFechas{
-	width: 100%;
-}
-.inputFechaIni{
-	position: inherit !important;
-	padding-top: 12px !important;
+.rowpanelbienestargrafica{
+    /*    margin-left: 15px;*/
 }
 
-.divbotonexit{
-	margin-top: 7px;
-	margin-right: 80px
+.imginfocount{
+    display: inline-block;
+    vertical-align: super;
+    margin:10px;
 }
 
-.iconexitperiodo{
-	font-size: 21px;
-	color: red;
+.infocount{
+    text-align: right;
+    float: right;
 }
 
-.buttonCerrarse{
-	cursor: pointer;
+.infocount > h1{
+    font-size: 40px;
 }
+
+.cartaBienvenida,.rowpanelbienestar{
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+.tablainfopostus{
+    margin-left: 20px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 0
+}
+
+.graficainfo{
+    margin-left: 46px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 0;
+}
+
+.titulografica{
+    padding: 15px;
+    background:#e6e2e2;
+}
+
+.titulografica > h1{
+    margin: 0;
+}
+.imggrafica{
+    padding: 15px;
+}
+
+.infoblue{
+    background: #468ad1;
+    color: white;
+    width: 23%;
+    margin-right: 20px;
+    padding: 12px;
+    margin-left: 20px;
+}
+.infogreen{
+    background: #67b94d;
+    color: white;
+    width: 23%;
+    margin-right: 20px;
+    padding: 12px;
+}
+
+.infoyellow{
+    background: #f0ad38;
+    color: white;
+    width: 23%;
+    margin-right: 20px;
+    padding: 12px;
+}
+
+.infored{
+    background: #d4554e;
+    color: white;
+    width: 23%;
+    padding: 12px;
+}
+
+.infocount{
+    display: inline-block;
+}
+
+.iconinfocount{
+    font-size: 55px;
+}
+
 
 [data-title]:hover:after {
-	opacity: 1;
-	transition: all 0.5s;
-	visibility: visible;
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
 }
 
 [data-title]:after {
-	content: attr(data-title);
-	background-color: #333;
-	color: #fff;
-	font-size: 14px;
-	font-family: Roboto, "Helvetica Neue", sans-serif;
-	font-weight: 500;
-	position: absolute;
-	padding: 3px 20px;
-	bottom: -1.6em;
-	left: 100%;
-	white-space: nowrap;
-	box-shadow: 1px 1px 3px #222222;
-	opacity: 0;
-	border: 1px solid #111111;
-	z-index: 99999;
-	visibility: hidden;
-	border-radius: 6px;
-	
+    content: attr(data-title);
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    font-family: Raleway;
+    position: absolute;
+    padding: 3px 20px;
+    bottom: -1.6em;
+    left: 100%;
+    white-space: nowrap;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    border: 1px solid #111111;
+    z-index: 99999;
+    visibility: hidden;
+    border-radius: 6px;
+    
 }
 [data-title] {
-	position: relative;
+    position: relative;
 }
-.my-custom-scrollbar {
-	position: relative;
-	height: 200px;
-	overflow: auto;
-	}
-	.table-wrapper-scroll-y {
-	display: block;
-	}

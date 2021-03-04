@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
- <ng-template #templateActualizado>
+<ng-template #templateActualizado>
     <div *ngIf="success" class="dialogSuccess" >
         <i class="icofont-ui-check text-center iconSuccessRegister"></i>
         <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
@@ -10,95 +10,107 @@
         <h2 class="text-center textoSuccess">Error al actualizar <small style="display:block;" *ngIf="!intentosPermitidos">No hay mas intentos permitidos</small></h2>
 
     </div>       
-    </ng-template>
+</ng-template>
 
 <ng-template #mytemplate >
     <div>
         <div class="row">
-            <div class="col s8">
+            <div class="col-10">
                 <h1>Convocatoria - {{postuSeleccionada.nombreConv}}</h1>
             </div>
-            <div class="col s4">
-                <a class="botonActivarForm" (click)="activarActualizar()"><i class="icofont-ui-edit right lapizEditPostu"></i></a>
+            <div class="col-sm">
+                <a class="botonActivarForm" (click)="activarActualizar()" data-title="Editar postulación"><i class="icofont-ui-edit right lapizEditPostu"></i></a>
             </div>
         </div>
-       
-            <div class="row">
-                <div class="col s6">
-                    <label for="fechapostu">Fecha postulacion</label>
-                    <input type="text" name="fechapostu" disabled="true" [value]="postuSeleccionada.fechapostulacion">
-                </div>
-                <div class="col s6">
-                    <label for="estado">Estado</label>
-                    <input type="text" name="estado" disabled="true" [value]="postuSeleccionada.estado_postulacion">
-                </div>
-            </div>
-             <form [formGroup]="myForm" novalidate>
-            <div class="row">
-                <div class="col s6">
-                    <label for="estado">Semestre</label>
-                    <mat-form-field appearance="fill">
-                      <mat-select #semestre required formControlName="semestre" [disabled]="!activarUpdate">
-                        <mat-option>-- Selecciona el semestre cursando --</mat-option>
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                        <mat-option value="3">3</mat-option>
-                        <mat-option value="4">4</mat-option>
-                        <mat-option value="5">5</mat-option>
-                        <mat-option value="6">6</mat-option>
-                        <mat-option value="7">7</mat-option>
-                        <mat-option value="8">8</mat-option>
-                        <mat-option value="9">9</mat-option>
-                        <mat-option value="10">10</mat-option>
-                        
-                      </mat-select>
-                      <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> {{postuSeleccionada.semestre}}</b> </mat-label>
-                    </mat-form-field>
-                    <div *ngIf="myForm.get('semestre').errors && myForm.get('semestre').dirty">
-                        <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                    </div>
-                </div>
 
-                <div class="col s6">
-                    <label for="estrato">Estrato</label>
-                    <mat-form-field appearance="fill">
-                      <mat-select #estrato required formControlName="estrato" [disabled]="!activarUpdate">
-                        <mat-option>-- Selecciona su estrato --</mat-option>
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                        <mat-option value="3">3</mat-option>
-                        <mat-option value="4">4</mat-option>
-                        <mat-option value="5">5</mat-option>
-                        <mat-option value="6">6</mat-option>
-                      </mat-select>
-                      <mat-label><i class="icofont-home icoselectCalendar"></i> <b> {{postuSeleccionada.estrato}}</b> </mat-label>
-                    </mat-form-field>
-                    <div *ngIf="myForm.get('estrato').errors && myForm.get('estrato').dirty">
-                        <p class="red-text" *ngIf="myForm.get('estrato').hasError('required')">Por favor, no dejar el campo estrato vacio.</p>
-                    </div>
+        <div class="row">
+            <div class="col s6">
+                <h4>Fecha postulación</h4>
+                <mat-form-field appearance="fill">
+                  <mat-label>Fecha postulacion</mat-label>
+                  <input matInput type="text" name="fechapostu" disabled="true" [value]="postuSeleccionada.fechapostulacion">
+              </mat-form-field>
+
+          </div>
+          <div class="col s6">
+
+            <h4>Estado</h4>
+            <mat-form-field appearance="fill">
+              <mat-label>Estado</mat-label>
+              <input matInput type="text" name="estado" disabled="true" [value]="postuSeleccionada.estado_postulacion">
+          </mat-form-field>
+      </div>
+  </div>
+  <form [formGroup]="myForm" novalidate>
+    <div class="row">
+        <div class="col s6">
+            <label for="estado">Semestre</label>
+            <mat-form-field appearance="fill">
+              <mat-select #semestre required formControlName="semestre" [disabled]="!activarUpdate">
+                <mat-option>-- Selecciona el semestre cursando --</mat-option>
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="4">4</mat-option>
+                <mat-option value="5">5</mat-option>
+                <mat-option value="6">6</mat-option>
+                <mat-option value="7">7</mat-option>
+                <mat-option value="8">8</mat-option>
+                <mat-option value="9">9</mat-option>
+                <mat-option value="10">10</mat-option>
+
+            </mat-select>
+            <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> {{postuSeleccionada.semestre}}</b> </mat-label>
+        </mat-form-field>
+        <div *ngIf="myForm.get('semestre').errors && myForm.get('semestre').dirty">
+            <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
+        </div>
+    </div>
+
+    <div class="col s6">
+        <label for="estrato">Estrato</label>
+        <mat-form-field appearance="fill">
+          <mat-select #estrato required formControlName="estrato" [disabled]="!activarUpdate">
+            <mat-option>-- Selecciona su estrato --</mat-option>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="6">6</mat-option>
+        </mat-select>
+        <mat-label><i class="icofont-home icoselectCalendar"></i> <b> {{postuSeleccionada.estrato}}</b> </mat-label>
+    </mat-form-field>
+    <div *ngIf="myForm.get('estrato').errors && myForm.get('estrato').dirty">
+        <p class="red-text" *ngIf="myForm.get('estrato').hasError('required')">Por favor, no dejar el campo estrato vacio.</p>
+    </div>
 
 
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col s12">
-                    <label for="promedio">Promedio</label>
-                    <input #promedio type="text" formControlName="promedio" id="promedio" >
-                    <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
-                        <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo promedio vacio.</p>
-                        <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Minimo 1 caracter</p>
-                        <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Maximo 2 caracteres</p>
-                    </div>
-                </div>
-            </div>
-            
+</div>
+</div>
+<div class="row" >
+    <div class="col s12">
 
-            <div class="row" *ngIf="activarUpdate">
-                <div class="col s12 center">
-                    <button class="waves-effect waves-light btn red" (click)="actualizarPostu(semestre.value,estrato.value,promedio?.value,templateActualizado)" [disabled]="myForm.invalid"><i class="icofont-check right lapizUpdatePostu"></i> Editar postulacion</button>
-                </div>
-            </div>
-            </form>
+        <h4>Promedio</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Promedio</mat-label>
+          <input matInput #promedio type="text" formControlName="promedio" id="promedio" >
+      </mat-form-field>
+      <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
+        <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo promedio vacio.</p>
+        <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Minimo 1 caracter</p>
+        <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Maximo 2 caracteres</p>
+    </div>
+</div>
+</div>
+
+
+<div class="row" *ngIf="activarUpdate">
+    <div class="col s12 center">
+        <button mat-raised-button color="primary"(click)="actualizarPostu(semestre.value,estrato.value,promedio?.value,templateActualizado)" [disabled]="myForm.invalid"><i class="icofont-check right lapizUpdatePostu"></i> Editar postulacion</button>
+    </div>
+</div>
+</form>
 <!--             <div class="row" *ngIf="!activarUpdate">
                 <div class="col s12">
                     <label>Promedio</label>
@@ -107,99 +119,108 @@
             </div> -->
             <div class="row">
                 <div class="col s12">
-                    <label for="estado">Estado</label>
-                    <input type="text" name="estado" disabled="true" [value]="postuSeleccionada.estado_postulacion">
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col s12">
-                    <label for="estado">Comentario psicologia</label>
-                    <input type="text" name="estado" disabled="true" [value]="postuSeleccionada.comentpsicologa">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <h3 class="tituloEstados">Estados documentos postulación</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.d10"/>
-                            <span>D10</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.factservicio"/>
-                            <span>Factura de servicio</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.cartapeticion"/>
-                            <span>Carta de petición</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.carnetestudiante"/>
-                            <span>Carnet de estudiante</span>
-                        </label>
-                    </p>
-                </div>
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.cedulapadre"/>
-                            <span>Cedula padre</span>
-                        </label>
-                    </p>  
-                </div>
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.cedulamadre"/>
-                            <span>Cedula madre</span>
-                        </label>
-                    </p>      
-                </div>
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.promedioacumulado"/>
-                            <span>Promedio acumulado</span>
-                        </label>
-                    </p>  
-                    </div>  
-                <div class="col s4">
-                    <p>
-                        <label>
-                            <input type="checkbox" disabled="true" [checked]="postuSeleccionada.documentos.tabulado"/>
-                            <span>Tabulado</span>
-                        </label>
-                    </p>              
-                </div>
-            </div>
-        
+                    <h4>Estado</h4>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Estado</mat-label>
+                      <input matInput type="text" name="estado" disabled="true" [value]="postuSeleccionada.estado_postulacion" >
+                  </mat-form-field>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+
+                <h4>Comentario psicologia</h4>
+                <mat-form-field appearance="fill">
+                  <mat-label>Comentario psicologia</mat-label>
+                  <input matInput type="text" name="estado" disabled="true" [value]="postuSeleccionada.comentpsicologa" >
+              </mat-form-field>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+            <h3 class="tituloEstados">Estados documentos postulación</h3>
+        </div>
     </div>
+    <div class="row">
+        <div class="col s6">
+            <p>
+                <label>
+                    <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.d10">D10</mat-checkbox>
+                </label>
+            </p>
+        </div>
+        <div class="col s6">
+            <p>
+                <label>
+
+                    <mat-checkbox disabled="true" [checked]="postuSeleccionada.documentos.factservicio">Factura de servicio</mat-checkbox>
+
+                </label>
+            </p>
+        </div>
+        <div class="col s6">
+            <p>
+                <label>
+                    <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.cartapeticion">Carta de petición</mat-checkbox>
+                </label>
+            </p>
+        </div>
+        <div class="col s6">
+            <p>
+                <label>
+
+                    <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.carnetestudiante">Carnet de estudiante</mat-checkbox>
+
+                </label>
+            </p>
+        </div>
+        <div class="col s6">
+            <p>
+                <label>
+
+                    <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.cedulapadre">Cedula padre</mat-checkbox>
+
+                </label>
+            </p>  
+        </div>
+        <div class="col s6">
+            <p>
+                <label>
+
+                    <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.cedulamadre">Cedula madre</mat-checkbox>
+                </label>
+            </p>      
+        </div>
+        <div class="col s6">
+            <p>
+                <label>
+
+                  <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.promedioacumulado">Promedio acumulado</mat-checkbox>
+              </label>
+          </p>  
+      </div>  
+      <div class="col s6">
+        <p>
+            <label>
+              <mat-checkbox class="example-margin" disabled="true" [checked]="postuSeleccionada.documentos.tabulado">Tabulado</mat-checkbox>
+          </label>
+      </p>              
+  </div>
+</div>
+
+</div>
 
 </ng-template>
-<div class="row rowViewPostest">
-<div class="col s12 m7">
-    <div class="card">
-        <div class="card-content">
-        	<h1>Mis postulaciones</h1>
-        	<hr>
-        	<table>
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+    <div class="col s12 m7 formtiq">
+        <h1>Mis postulaciones</h1>
+        <div>
+            <div >
+
+               <hr>
+               <table class="table table-bordered table-striped mb-0">
                 <thead>
                     <tr>
                         <th>Nombre estudiante</th>

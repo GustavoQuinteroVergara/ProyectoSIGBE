@@ -9,34 +9,39 @@
     <h2 class="text-center textoSuccess">Error al actualizar</h2>
   </div>
 </ng-template>
-<div class="row fondoConvocatoria center-align ">
-  <form class="col s6 formConvocatoria z-depth-3" [formGroup]="formularioBeca">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png "
-      width="50px" alt="LogoUV">
-    <h3 class="tituloRegistroConvocatoria"> Registra una Beca</h3>
-    <div class="row divFormConvo">
-      <mat-form-field appearance="none" class="inputsEspacio">
-        <mat-label>Seleccione un Tipo de Beca</mat-label>
-        <mat-select #tipobeca required formControlName="nombreTipoBeca">
-          <mat-option>--</mat-option>
-          <mat-option *ngFor="let TBeca of ListTBeca" [value]="TBeca.consecutivo_TipoBeca">
-            {{TBeca.descripcion}}
-          </mat-option>
-        </mat-select>
-        <mat-error class="help-block form-error text-danger small" *ngIf="formularioBeca.controls['nombreTipoBeca'].hasError('required') &&
-        formularioBeca.controls['nombreTipoBeca'].touched">Seleccionar un tipo de beca</mat-error>
-      </mat-form-field>
-      <mat-form-field class="example-full-width" appearance="none" class="inputsEspacio">
-        <mat-label>Descripción</mat-label>
-        <input #descripcion id="descripcion" matInput placeholder="Añade una descripcion.." formControlName="descripcionBeca" value="">
-        <mat-error class="help-block form-error text-danger small"
-        *ngIf="formularioBeca.controls['descripcionBeca'].hasError('required') && formularioBeca.controls['descripcionBeca'].touched">
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+
+  <form class="formtiq" [formGroup]="formularioBeca">
+    <h1 class="tituloRegistroConvocatoria"> Registra una Beca</h1>
+    <hr>
+    <div class="row">
+      <div class="col-12">      
+        <mat-form-field appearance="fill" class="inputsEspacio">
+          <mat-label>Seleccione un Tipo de Beca</mat-label>
+          <mat-select #tipobeca required formControlName="nombreTipoBeca">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let TBeca of ListTBeca" [value]="TBeca.consecutivo_TipoBeca">
+              {{TBeca.descripcion}}
+            </mat-option>
+          </mat-select>
+          <mat-error class="help-block form-error text-danger small" *ngIf="formularioBeca.controls['nombreTipoBeca'].hasError('required') &&
+          formularioBeca.controls['nombreTipoBeca'].touched">Seleccionar un tipo de beca</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio">
+          <mat-label>Descripción</mat-label>
+          <input #descripcion id="descripcion" matInput placeholder="Añade una descripcion.." formControlName="descripcionBeca" value="">
+          <mat-error class="help-block form-error text-danger small"
+          *ngIf="formularioBeca.controls['descripcionBeca'].hasError('required') && formularioBeca.controls['descripcionBeca'].touched">
         La descripción es requerida </mat-error>
       </mat-form-field>
-      <div class="center-align">
-        <a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!formularioBeca.valid"
-          (click)="registrarBeca(tipobeca.value,descripcion.value,mytemplate)" name="action">Registrar</a>
-      </div>
     </div>
-  </form>
+
+    <div class="center-align">
+      <a mat-raised-button color="primary" [class.disabled]="!formularioBeca.valid"
+      (click)="registrarBeca(tipobeca.value,descripcion.value,mytemplate)" name="action">Registrar</a>
+    </div>
+  </div>
+</form>
 </div>
