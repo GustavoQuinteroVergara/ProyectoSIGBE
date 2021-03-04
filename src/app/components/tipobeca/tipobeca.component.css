@@ -1,24 +1,11 @@
-.formConvocatoria{
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 85px;
-}
-.fondoConvocatoria{
-	margin-left: 12%;
-    
-}
-.tituloRegistroConvocatoria{
-    font-size: 24px;
-    margin-top: 0;
+.cup1{
+    height: 91vh;
+    padding: 8% 30% 8% 30%;
+    text-align: center;
 }
 
-.formConvocatoria > .divFormConvo{
-	margin: 0 auto;
-    width: 65%;
-}
-@media (max-width: 530px) {
-    .fondoConvocatoria {
-        width: 125%;
-    }
+@media (max-width: 730px){
+    .cup1{
+     padding: 8% 10% 8% 10%; 
+ }
 }

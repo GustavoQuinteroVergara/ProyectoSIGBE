@@ -1,6 +1,9 @@
-.rowRegistroTicket{
-	padding-left: 11%;
-	padding-top: 5%;
+.cup1{
+    height: 81vh;
+}
+
+.matbolderform{
+    font-weight: bolder;
 }
 
 .iconSuccessRegister{

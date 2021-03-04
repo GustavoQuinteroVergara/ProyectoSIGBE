@@ -1,36 +1,8 @@
-.caja{
-    float: center;
-    width: 80%;
-    height: 100%;
-    border: 1px solid gray;
+.cup1{
+    height: 81vh;
+}
+
+a{
+    text-decoration: none;
     color: black;
-    float: center;
-    margin-left: 11%;
-    text-align: center;
-    line-height:#444;
-    text-transform: uppercase;
-    border:none;
-    /* box-shadow: 5px 5px 5px black; */
-    
-  
-
-}
-
-.wraplistarconvo{
-    padding-top: 5.5%;
-}
-
-.logo{
-    padding-top: 10px;
-}
-
-table,td {
-    border: 1px solid darkslategray;
-    text-align: center;
-}
-
-.tabla{
-    padding-bottom: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
 }

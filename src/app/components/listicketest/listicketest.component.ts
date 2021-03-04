@@ -60,7 +60,7 @@ export class ListicketestComponent implements OnInit {
 		this.imgcreada = false;
 		this.concecutivosel = "" +  concecutivo + "";
 		let dialogRef = this.dialog.open( templateRef,{
-			height: '450px',
+			height: '480px',
 			width: '350px',
 		});
 	}
