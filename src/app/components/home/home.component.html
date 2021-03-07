@@ -17,9 +17,9 @@
 
   <div  class="dialogSuccess" >
 
-    <div class="card">
-      <div class="card-content">
-        <div class="right divbotonexit">
+    <div >
+      <div >
+        <div class="text-right divbotonexit">
           <a class="buttonCerrarse" data-title="Cerrar sesión" (click)="cerrarSesion()"><i class="icofont-exit iconexitperiodo"></i></a>
         </div>
         <h1>Registrar un periodo</h1>
@@ -28,36 +28,36 @@
 
         <form [formGroup]="formularioRegistrarPeriodo">
           <div class="row">
-            <div class="input-field col s12">
-
-              <input #descripcion formControlName="descripcionperiodo" id="icon_prefix" type="text" class="validate">
-              <label for="icon_prefix"> Descripcion</label>
+            <div class="col-12">
+              <h4>Descripción</h4>
+              <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+                <mat-label>EJ: 2021-1</mat-label>
+                <input matInput #descripcion formControlName="descripcionperiodo" id="icon_prefix" type="text" class="validate">
+              </mat-form-field>
               <mat-error class="help-block form-error text-danger small"
               *ngIf="formularioRegistrarPeriodo.controls['descripcionperiodo'].hasError('required') && formularioRegistrarPeriodo.controls['descripcionperiodo'].touched">
-            La descripcion es requerida </mat-error>
+            La descripción es requerida </mat-error>
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12">
-            <mat-form-field appearance="none" class="inputFechas">
-              <mat-label>Selecciona las fechas del periodo</mat-label>
-              <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate #fechaini  class="inputFechaIni" placeholder="Fecha incial">
-                <input matEndDate #fechafin formControlName="fechasperiodo" placeholder="Fecha final">
-              </mat-date-range-input>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-              <mat-error class="help-block form-error text-danger small"
-              *ngIf="formularioRegistrarPeriodo.controls['fechasperiodo'].hasError('required') && formularioRegistrarPeriodo.controls['fechasperiodo'].touched">
-            Las fechas es requerida </mat-error>
-          </mat-form-field>
+          <div class="col-12">
+<h4>Selecciona las fechas del periodo</h4>
+						<mat-form-field appearance="fill" class="inputFechas" style="width: 100%;">
+						<mat-label>Selecciona las fechas del periodo</mat-label>
+						<mat-date-range-input [rangePicker]="picker">
+						<input matStartDate #fechaini class="inputFechaIni" placeholder="Fecha incial">
+						<input matEndDate #fechafin placeholder="Fecha final">
+						</mat-date-range-input>
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-date-range-picker #picker></mat-date-range-picker>
+						</mat-form-field>
         </div>
 
 
       </div>
       <div class="row center">
-        <div class="input-field col s12">
-          <a (click)="registrarPeriodo(descripcion.value,fechaini.value,fechafin.value,errorRegistrarPeriodo,periodoexitoso)" [class.disabled]="!formularioRegistrarPeriodo.valid" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>Registrar Postulacion</a>
+        <div class="col-12">
+          <a mat-raised-button color="primary" (click)="registrarPeriodo(descripcion.value,fechaini.value,fechafin.value,errorRegistrarPeriodo,periodoexitoso)" [class.disabled]="!formularioRegistrarPeriodo.valid" ><i class="icofont-save left"></i>Registrar Postulacion</a>
         </div>
       </div>
     </form>
@@ -103,7 +103,7 @@
     </div>
     <div data-aos="zoom-in-down" data-aos-once="true" class="info" id="infotextid">
       <div class="titlediv">
-        <h1 class="titlesigbe">¿Que es SIGBE</h1>
+        <h1 class="titlesigbe">¿Qué es SIGBE?</h1>
       </div>
       <div>
         <div class="divimginfo">
@@ -146,7 +146,7 @@
       <div class="apoyosinfo">
         <div class="apoyoinfo apoyoinfo1">
           <div class="cardimgs">
-            <img src="assets/imgs/pajarito.png" width="50px">
+            <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
             Programa de jovenes en acción
@@ -154,7 +154,7 @@
         </div>
         <div  class="apoyoinfo apoyoinfo2">
           <div class="cardimgs">
-            <img src="assets/imgs/pajarito.png" width="50px">
+            <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
             Monitorias especiales para estudiantes en situacion de discapacidad
@@ -162,7 +162,7 @@
         </div>
         <div  class="apoyoinfo apoyoinfo3">
           <div class="cardimgs">
-            <img src="assets/imgs/pajarito.png" width="50px">
+            <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
             Beca de alimentos para estudiantes de escasos recursos
@@ -170,7 +170,7 @@
         </div>
         <div  class="apoyoinfo apoyoinfo4">
           <div class="cardimgs">
-            <img src="assets/imgs/pajarito.png" width="50px">
+            <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
             Subsidio socioeconomico para estudiantes de escasos recursos
@@ -178,7 +178,7 @@
         </div>
         <div  class="apoyoinfo apoyoinfo5">
           <div class="cardimgs">
-            <img src="assets/imgs/pajarito.png" width="50px">
+            <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
             Bono estudiantil
