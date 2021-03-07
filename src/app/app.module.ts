@@ -46,7 +46,6 @@ import { DatePipe } from '@angular/common';
 import { VisitadomiciliariaComponent } from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 
-
 @NgModule({
   declarations: [
   AppComponent,

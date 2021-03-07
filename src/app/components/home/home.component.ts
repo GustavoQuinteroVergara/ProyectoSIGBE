@@ -69,7 +69,17 @@ export class HomeComponent implements OnInit {
 			}
 
 		},(err)=>{
-
+			this.verificacionPeriodoCaducado = true;
+			console.log('llegue aqui');
+			this.formularioRegistrarPeriodo = new FormGroup({
+				fechasperiodo: new FormControl('',Validators.required),
+				descripcionperiodo: new FormControl('',Validators.required),
+			});
+			let dialogRef = this.dialog.open( this.customTemplate,{
+				height: '580px',
+				width: '450px',
+				disableClose: true, 
+			});
 		});
 	}
 

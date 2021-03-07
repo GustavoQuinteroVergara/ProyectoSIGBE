@@ -3,6 +3,19 @@
     margin-top: 30px;
 }
 
+.divbotonexit{
+    display: inline-block;
+    float: right;
+    margin-right: 90px;
+}
+.divbotonexit > a{
+    text-decoration: none;
+}
+.divbotonexit > a > i{
+    font-size: 30px;
+    color: black;
+}
+
 .rowpanelbienestargrafica{
     /*    margin-left: 15px;*/
 }
