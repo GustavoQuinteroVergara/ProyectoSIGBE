@@ -98,10 +98,39 @@
 
 
 </div>
+<!--Checkbox-->
+<section class="example-section">
+  
+  <div class="tarjetaCheck row">
+  <h1>Seleccione los documentos que desea solicitar</h1>
+  <div class="col s6">
+  <mat-checkbox #documentoidenti (change)="setAllDocumentoEstudiante($event.checked)" [(ngModel)]="documentoest" class="example-margin">Fotocopia C.C estudiante</mat-checkbox>
+  <mat-checkbox #documentoacudiente (change)="documentoAcudiente($event.checked)" [(ngModel)]="documentoacu" class="example-margin">Fotocopia C.C acudiente</mat-checkbox>
+  <mat-checkbox #recibomatricula (change)="pagoMat($event.checked)" [(ngModel)]="pagomatricula"class="example-margin"> Fotocopia recibo pago matricula</mat-checkbox>
+  <mat-checkbox #factserv  (change)="reciboPublico($event.checked)" [(ngModel)]="facturaserv" class="example-margin">Fotocopia recibo servicio público</mat-checkbox>
+  <mat-checkbox #tabulado (change)="documentoTabulado($event.checked)" [(ngModel)]="tab" class="example-margin">Fotocopia Tabulado</mat-checkbox>
+  <mat-checkbox #certificadoingresos  (change)="ingresosRetenciones($event.checked)" [(ngModel)]="certingresos" class="example-margin">Certificado ingresos y retenciones</mat-checkbox>
+  <mat-checkbox #formatosolicitud (change)="soliSubsidio($event.checked)" [(ngModel)]="formsolicitud" class="example-margin">Solicitud de subsidio y apoyoeconómico</mat-checkbox>
+  <mat-checkbox #cartapeti (change)="soliBecaAlimentacion($event.checked)" [(ngModel)]="carta" class="example-margin">Solicitud beca alimentación</mat-checkbox>
+</div>
+  <div class="col s6">
+  <mat-checkbox #certificadovencidad (change)="declaracionVecindad($event.checked)" [(ngModel)]="vecindad" class="example-margin">Declaración juramentada de vecindad</mat-checkbox>
+  <mat-checkbox #constanciaweb (change)="constaciaWeb($event.checked)" [(ngModel)]="constancia" class="example-margin">Constacia solicitud vía web</mat-checkbox>
+  <mat-checkbox #promedio (change)="promAcumulado($event.checked)" [(ngModel)]="promacumulado" class="example-margin">Promedio académico acumulado</mat-checkbox>
+  <mat-checkbox #diagnostico (change)="diagnosticoMedico($event.checked)" [(ngModel)]="diagnosticomed" class="example-margin">Fotocopia diagnostico médico</mat-checkbox>
+  <mat-checkbox #d10  (change)="documentoD10($event.checked)" [(ngModel)]="formatod10" class="example-margin">Formato D10</mat-checkbox>  
+  <mat-checkbox #cedulapadre (change)="documentoPadre($event.checked)" [(ngModel)]="documentopadre" class="example-margin">Fotocopia cédula padre</mat-checkbox>
+  <mat-checkbox #cedulamadre (change)="documentoMadre($event.checked)" [(ngModel)]="documentomadre" class="example-margin">Fotocopia cédula madre</mat-checkbox>
+  <mat-checkbox #carnetest (change)="carnetEstudiantil($event.checked)" [(ngModel)]="carnet" class="example-margin">Carnet Estudiante</mat-checkbox>
+</div>
+</div>
+<br>
+</section>
+<!--Fin checkbox-->
 <div class="row mb-10">
   <!-- Correo enviar -->
   <div class="col s12">
-    <mat-checkbox (change)="setAll($event.checked)" [(ngModel)]="opcion">¿Desea enviar correo electronico?</mat-checkbox>
+    <mat-checkbox (change)="setAll($event.checked)" [(ngModel)]="opcion">¿Desea enviar correo electrónico?</mat-checkbox>
   </div>
 </div>
 <div class="row" [hidden]="!opcion">
@@ -118,11 +147,13 @@
     </mat-form-field>
   </div>
 </div>
-
+<br>
 <div class="center-align">
-  <a mat-raised-button color="primary" (click)="registrarConvocatoria
-  (fechainicial.value,fechafinal.value,beca.value,cupos.value,estadoconvocatoria.value,asuntocorreo.value,contenidocorreo.value,mytemplate)"
-  name="action">Registrar</a>
+  <a mat-raised-button color="primary" (click)="registrarConvocatoria(fechainicial.value,fechafinal.value,
+  beca.value,cupos.value,estadoconvocatoria.value,asuntocorreo.value,contenidocorreo.value, 
+  d10.value,factserv.value,cartapeti.value, carnetest.value, cedulapadre.value,cedulamadre.value, 
+  promedio.value,tabulado.value,constanciaweb.value,certificadovencidad.value,documentoidenti.value
+  ,documentoacudiente.value,formatosolicitud.value,diagnostico.value,recibomatricula.value,certificadoingresos.value, mytemplate)"name="action">Registrar</a>
 </div>
 </form>
 </div>
