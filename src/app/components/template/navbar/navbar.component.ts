@@ -19,9 +19,9 @@ export class NavbarComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		
-		this.updateSubscription = interval(1000).subscribe(
-			(val) => { this.buscarAsignacionPorFecha(); });
+		this.buscarAsignacionPorFecha();
+		// this.updateSubscription = interval(1000).subscribe(
+		// 	(val) => {  });
 	}
 
 	cerrarSesion(){

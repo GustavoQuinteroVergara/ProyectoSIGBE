@@ -201,13 +201,13 @@
           <h1>Panel administrativo - Bienestar universitario</h1>
           <hr>
         </div>
-        <div class="row col-12">
+        <div class="row col-12" *ngFor="let infocol of infoColores">
           <div class="col-4 infoblue">
             <div class="imginfocount">
              <i class="icofont-attachment iconinfocount"></i>
            </div>
            <div class="infocount">
-            <h1>15</h1>
+            <h1>{{infocol.numeropostu}}</h1>
             <span>Postulaciones hechas</span>
           </div>
         </div>
@@ -216,7 +216,7 @@
            <i class="icofont-group-students iconinfocount"></i>
          </div>
          <div class="infocount">
-          <h1>15</h1>
+          <h1>{{infocol.numerouser}}</h1>
           <span>Estudiantes registrados</span>
         </div>
       </div>
@@ -225,7 +225,7 @@
           <i class="icofont-calendar iconinfocount"></i>
         </div>
         <div class="infocount">
-          <h1>15</h1>
+          <h1>{{infocol.numeroconvo}}</h1>
           <span>Convocatorias realizadas</span>
         </div>
       </div>
@@ -234,7 +234,7 @@
          <i class="icofont-ticket iconinfocount"></i>
        </div>
        <div class="infocount">
-        <h1>15</h1>
+        <h1>{{infocol.numerotickets}}</h1>
         <span>Tiquetes reservados</span>
       </div>
     </div>
@@ -246,10 +246,11 @@
 <div class="row col-12 rowpanelbienestargrafica" data-aos="zoom-in-down" data-aos-once="true">
   <div class="col-7 graficainfo">
     <div class="titulografica">
-      <h1>Grafica postulaciones por meses</h1>
+      <h1>Postulaciones por zonas residenciales</h1>
     </div>
     <div class="imggrafica">
-      <img src="assets/imgs/grafica.png" width="560px">
+       <canvas id="realtime">{{ chart }}</canvas>
+      <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
     </div>
   </div>
 
@@ -282,6 +283,33 @@
   </div>
 
 </div>
+<div class="row col-12 rowpanelbienestargrafica mt-4" data-aos="zoom-in-down" data-aos-once="true">
+    <div class="col-7 graficainfo">
+    <div class="titulografica">
+      <h1>Postulaciones por carrera y beca</h1>
+    </div>
+    <div>
+<!--       <div class="center">
+      <button  mat-raised-button color="primary" (click)="crearImagen()">Descargar</button>
+    </div> -->
+      <form>
+        <mat-form-field appearance="fill" class="inputsEspacio" style="width: 80%;">
+            <mat-label>Seleccione una Beca</mat-label>
+            <mat-select #beca required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let beca of listbecas" [value]="beca.consecutivo_beca">
+                {{beca.descripcion}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+            <a mat-raised-button color="primary" style="width: 20%;" (click)="consultarPostuCarrera(beca.value)">Consultar</a>
+      </form>
+    </div>
+    <div id="graficacarrerabeca" class="imggrafica">
+       <canvas id="postus">{{ chartCarreras }}</canvas>
+      <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
+    </div>
+  </div>
 
 
 </div>
