@@ -5,11 +5,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class InicioService {
 
-  url = 'http://localhost/SIGBEWEB/app/componentes/postulacion/listarpostuactivas.php';
+  url = 'http://localhost/SIGBEWEB/';
 
   constructor(private http:HttpClient) { }
 buscarPostuEnespera(){
-  return this.http.get(`${this.url}`);
+  return this.http.get(`${this.url}app/componentes/postulacion/listarpostuactivas.php`);
+}
+infoColores(){
+  return this.http.get(`${this.url}app/componentes/usuarios/consultashomebienestar.php`);
+}
+graficaInfo(){
+  return this.http.get(`${this.url}app/componentes/postulacion/postulacionesbyzona.php`);
 }
 
 }

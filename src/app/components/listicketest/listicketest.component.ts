@@ -50,11 +50,18 @@ export class ListicketestComponent implements OnInit {
 	crearImagen() {
 		html2canvas(document.querySelector("#imgqr")).then(canvas => {
 
-			this.imagenCreada = canvas.toDataURL();      
+			this.imagenCreada = canvas.toDataURL("image/png");  
+		    const a = document.createElement("a");
+		    a.setAttribute("download", `codigoqr.png`);
+		    a.setAttribute("href", this.imagenCreada);
+		    a.click();    
 
 		});
 		this.imgcreada = true;
 	}
+
+
+
 
 	verQr(templateRef,concecutivo:any){
 		this.imgcreada = false;

@@ -9,16 +9,7 @@
 			<qrcode [qrdata]="concecutivosel" [width]="300" [level]="'M'" usesvg="true"></qrcode>
 		</div>
 		<div class="center">
-			<button *ngIf="imgcreada === false;" mat-raised-button color="primary" (click)="crearImagen()">Configurar IMAGEN QR</button>
-			<ng-container *ngIf="imgcreada === true;">
-				<div align="center">
-					<!-- Botón para descargar la imagen creada -->
-					<a type="button" class="btn btn-success mt-3" href="{{imagenCreada}}" download>	
-						Descargar
-					</a>
-
-				</div>
-			</ng-container>
+			<button mat-raised-button color="primary" (click)="crearImagen()">Descargar</button>
 		</div>
 	</div>       
 </ng-template>
