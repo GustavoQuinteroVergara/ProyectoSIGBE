@@ -56,3 +56,11 @@
 [data-title] {
     position: relative;
 }
+.formtiqConvo{
+	background: white;
+	padding: 50px;
+	box-shadow: 1px 1px 10px black;
+	border-radius: 5px;
+	font-weight: 600;
+    width: 104%;
+}

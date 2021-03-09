@@ -5,14 +5,14 @@
 <ng-template #mytemplate>
   <div >
     <form >
-      <h1>Info Estudiante
+      <h1>Información Estudiante
       </h1>
       <hr>
 
       <div class="row">
         <div class="col-6">
           <mat-form-field class="example-full-width" disabled appearance="none">
-            <mat-label>Codigo estudiante</mat-label>
+            <mat-label>Código estudiante</mat-label>
             <input #beca id="codigoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.codigoestudiante">
           </mat-form-field>
         </div>
@@ -28,7 +28,7 @@
         <div class="col-12">
 
           <mat-form-field class="example-full-width" disabled appearance="none">
-            <mat-label>Correo electronico</mat-label>
+            <mat-label>Correo electrónico</mat-label>
             <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest">
           </mat-form-field>
         </div>
@@ -38,7 +38,7 @@
     <table class="table table-bordered table-striped mb-0">
       <thead>
         <tr>
-          <th>Fecha postulacion</th>
+          <th>Fecha postulación</th>
           <th>Tipo beca</th>
           <th>Estado</th>
           <th>Semestre</th>
@@ -56,21 +56,30 @@
         </tr>
       </tbody>
     </table>
-    <div class="row">
+    <!--<div class="row">
       <div class="col-10 m-4 text-center">
         <button mat-raised-button color="primary">Generar informe estudiante</button>
+      </div>
+    </div>-->
+    <div class="row">
+      <div class="col-12 m-12 text-center">
+        <h3>Exportar a Excel</h3>
+        <div class ="container" style="padding-bottom:20px">
+          <button mat-raised-button color="warning" (click)="exportAsXLSX2()">Exportar</button>
+          <!--<button mat-raised-button color="accent">Accent</button>-->
+        </div>
       </div>
     </div>
   </div>
 </ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
-  <div class="formtiq ">
+  <div class="formtiqConvo ">
     <div >
       <div >
         <form [formGroup]="formularioConvocatoria" *ngIf="loading">
           <div class="card-content">
             <h1>
-              Info Convocatoria
+              Información Convocatoria
               <div class="botonEditarForm">
                 <a (click)="activeFormActualizar()" data-title="Editar convocatoria"><i class="icofont-ui-edit iconSearchUser"></i></a>
               </div>
@@ -84,7 +93,7 @@
               <mat-label>Cantidad de Cupos</mat-label>
               <input #cupo formControlName="cupo" [disabled]="disabledActualizar" id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
               <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['cupo'].hasError('required') &&
-              formularioConvocatoria.controls['cupo'].touched">Por favor, escriba un numero de cupos</mat-error>
+              formularioConvocatoria.controls['cupo'].touched">Por favor, escriba un número de cupos</mat-error>
             </mat-form-field>
                     <!--<mat-form-field class="example-full-width" disabled appearance="none">
                     <mat-label>Beca de la convocatoria</mat-label>
@@ -172,10 +181,12 @@
                     <thead>
                       <tr>
                         <th>Nombre estudiante</th>
+                        <th>Código Estudiante</th>
                         <th>Estrato</th>
                         <th>Promedio</th>
-                        <th>Fecha postulacion</th>
+                        <th>Fecha postulación</th>
                         <th>Semestre</th>
+                        <th>Carrera</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                       </tr>
@@ -183,10 +194,12 @@
                     <tbody>
                       <tr *ngFor="let postu of $postuByIdArray">
                         <td>{{postu.estudiante.nombreestudiante + ' '}}<a (click)="buscarEstPostuByIden(postu.estudiante.identificacion,mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
+                        <td>{{postu.codigoestudiante}}</td>
                         <td>{{postu.estrato}}</td>
                         <td>{{postu.promedio}}</td>
                         <td>{{postu.fechapostulacion}}</td>
                         <td>{{postu.semestre}}</td>
+                        <td>{{postu.carrera}}</td>
                         <td>{{postu.estado_postulacion}}</td>
                         <td>
                           <a (click)="cambiarEstadoPostu(postu.consecutivo_postulacion,postu.estado_postulacion,true)"><i class="icofont-checked iconcheckAprobar"></i></a>
@@ -195,6 +208,15 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+                <div class="row">
+                  <div class="col-12 m-12 text-center">
+                    <h3>Exportar a Excel</h3>
+                    <div class ="container" style="padding-bottom:20px">
+                      <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
+                      <!--<button mat-raised-button color="accent">Accent</button>-->
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

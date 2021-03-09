@@ -7,7 +7,7 @@ import {PostulacionService} from '../../../services/postulacion.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {RegistrarConvoServiceService} from '../registrar-convocatoria/registrar-convo-service.service';
 import {Router } from '@angular/router';
-
+import {ExporterService} from '../../../services/exporter.service';
 @Component({
   selector: 'app-view-convocatoria',
   templateUrl: './view-convocatoria.component.html',
@@ -34,7 +34,8 @@ export class ViewConvocatoriaComponent {
    private serviceviewconvocatoria:ServicesViewConvocatoriaService,public dialog: MatDialog, 
    private serviceConvocatoria:RegistrarConvoServiceService,
    private servicePostulacion:PostulacionService,
-   private router:Router ) { 
+   private router:Router,
+   private excelService: ExporterService ) { 
     this.$idConvo = this.rutaActiva.snapshot.params.idConvo;
     this.buscarConvoByIdConvo(this.$idConvo);
     this.buscarPostulacionesByIdConvo(this.$idConvo);
@@ -240,6 +241,15 @@ export class ViewConvocatoriaComponent {
       }
     }
   }
-  
+  exportAsXLSX():void {
+    this.excelService.exportToExcel(this.$postuByIdArray,'ReportePostulaciones');
+  }
+  exportAsXLSX2():void {
+    this.excelService.exportToExcel(this.postulacionesest,'ReporteIndividual');
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.$postuByIdArray.filter = filterValue.trim().toLowerCase();
+  }
 }
 
