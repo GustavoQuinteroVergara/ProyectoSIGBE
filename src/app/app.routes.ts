@@ -20,6 +20,7 @@ import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
+import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 
 export const ROUTES: Routes = [
@@ -91,6 +92,7 @@ export const ROUTES: Routes = [
   expectedRole: '1'
 }},
 {path:'habilitarUser', component:HabilitaruserComponent},
+{path:'olvidarContrasena', component:OlvdarcontrasenaComponent},
 {path:'bienvenida', component:HomeComponent},
 {path:'',component: LoginComponent},
 {path:'**',component: LoginComponent}
