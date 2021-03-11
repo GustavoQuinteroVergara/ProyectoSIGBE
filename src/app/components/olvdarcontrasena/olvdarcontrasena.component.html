@@ -1,23 +1,16 @@
-
 <div class="wrap containerForm">
 
 
-  <ng-template #periodocaducado>
-    <div  class="dialogSuccess" >
-      <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">Lo siento, el periodo academico ha caducado</h2>
-    </div>
-  </ng-template>
-  <ng-template #correonoencontrado>
-    <div  class="dialogSuccess" >
-      <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">Lo siento, el correo ingresado no ha sido correcto</h2>
-    </div>
-  </ng-template>
   <ng-template #errorcontrasenainvl>
     <div  class="dialogSuccess" >
       <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">La contraseña que ha ingresado es incorrecta o el usuario que ha ingresado puede no estar activo</h2>
+      <h4 class="text-center textoSuccess">El correo ingresado no se encuentra registrado, por favor ingrese uno válido.</h4>
+    </div>
+  </ng-template>
+  <ng-template #mensajeconfirmacion>
+    <div  class="dialogSuccess" >
+      <i class="icofont-info text-center iconErrRegister" style="font-size:30px;"></i>
+      <h4 class="text-center textoSuccess">Si el correo suministrado se encuentra registrado, llegara un correo con una contraseña nueva, revisa en spam si no llega.  </h4>
     </div>
   </ng-template>
   <div class="mobiledescarga" data-aos="fade-down" data-aos-once="true">
@@ -42,6 +35,10 @@
           <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
         </div>
       </div>
+      <hr>
+      <div>
+        <h1 class="text-center">Olvide mi contraseña</h1>
+      </div>
       <div class="row">
 
         <div class="input-field col-12">
@@ -53,23 +50,10 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row ">
-        <div class="input-field col-12">
-          <h4>Contraseña</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput #contrasena id="password" type="password">
-            <i matSuffix class="icofont-key iconocontrasenas"></i>
-          </mat-form-field>
-        </div>
-      </div>
       <div class="row text-center">
         <div class="input-field col-12">
-          <a mat-raised-button color="primary" class="button" (click)="login(email.value,contrasena.value,periodocaducado,correonoencontrado,errorcontrasenainvl)"><i class="icofont-login left"></i>Iniciar sesion</a>
-          <a class="botonRegistrate" mat-stroked-button color="primary" routerLink="/olvidarContrasena" >Olvide mi contraseña</a>
-        </div>
-        <div col-12>
-          <a class="botonRegistrate" mat-raised-button class="btnregistrar" routerLink="/crearusuariologin">¿Aún sin cuenta?, ¡Registrate!</a>
+          <a mat-raised-button color="primary" style="margin-right: 20px;" class="button" (click)="olvidecontrasena(email.value,errorcontrasenainvl,mensajeconfirmacion)"><i class="icofont-login left"></i>Enviar </a>
+          <a routerLink="/**" mat-raised-button class="btn-success">Regresar</a>
         </div>
       </div>
       <div class="row center" routerLinkActive="active">

@@ -45,6 +45,7 @@ import { CuposticketsComponent } from './components/cupostickets/cupostickets.co
 import { DatePipe } from '@angular/common';
 import { VisitadomiciliariaComponent } from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
+import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ListicketestComponent } from './components/listicketest/listicketest.co
   ConfiguracionComponent,
   CuposticketsComponent,
   VisitadomiciliariaComponent,
-  ListicketestComponent
+  ListicketestComponent,
+  OlvdarcontrasenaComponent
   ],
   imports: [
   BrowserModule,

@@ -13,4 +13,8 @@ export class UsuarioService {
   actualizarSaldo(usuarioArray:any){
   	return this.http.put(`${this.url}/app/componentes/usuarios/updateSaldo.php`,usuarioArray);
   }
+
+  olvideContrasena(email:any){
+  	return this.http.put(`${this.url}/app/componentes/usuarios/olvidarcontrasena.php`,email);
+  }
 }
