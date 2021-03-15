@@ -69,7 +69,7 @@ export class CrearTicketComponent {
 	buscarBeneficiario(tipoBeca:any){
 		console.log(this.tipoBeca);
 		if(this.tipoBeca == 'Ticket Almuerzo'){
-			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,2).subscribe(result=>{
+			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,1).subscribe(result=>{
 				this.postulacionBeneficiario = result;
 				this.confirmacionBeneficiario = true;
 				console.log(result);
@@ -79,7 +79,7 @@ export class CrearTicketComponent {
 			});
 		}else{
 			console.log("Aqui estoy");
-			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,1).subscribe(result=>{
+			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,2).subscribe(result=>{
 				this.postulacionBeneficiario = result;
 				this.confirmacionBeneficiario = true;
 				console.log(result);

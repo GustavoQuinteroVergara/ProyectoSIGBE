@@ -91,6 +91,7 @@ export class LoginComponent {
 
       }
     },(error)=>{
+      console.log(error);
       let dialogRef = this.dialog.open( correonoencontrado,{
         height: '200px',
         width: '350px',

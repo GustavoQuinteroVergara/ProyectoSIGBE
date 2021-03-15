@@ -194,11 +194,12 @@
   </div>
 
 
-  <div class="col-12 mb-2" *ngIf="this.$nombreusuario.rol =='2'">
+  <div class="col-12 mb-2" *ngIf="this.$nombreusuario.rol !='1'">
     <div class="wrap ">
       <div class="row rowpanelbienestar" data-aos="zoom-in-down" data-aos-once="true">
         <div class="col-12">
-          <h1>Panel administrativo - Bienestar universitario</h1>
+          <h1 *ngIf="this.$nombreusuario.rol =='2'">Panel administrativo - Bienestar universitario</h1>
+          <h1 *ngIf="this.$nombreusuario.rol !='2'">Panel administrativo - Psicologia</h1>
           <hr>
         </div>
         <div class="row col-12" *ngFor="let infocol of infoColores">

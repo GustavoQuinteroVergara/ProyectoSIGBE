@@ -18,11 +18,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import {NgxMatDatetimePickerModule,NgxMatNativeDateModule,NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
@@ -85,6 +87,7 @@ import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarc
   MatDatepickerModule,
   MatFormFieldModule,
   MatSidenavModule,
+  MatTabsModule,
   MatInputModule,
   MatRadioModule,
   MatSelectModule,
@@ -98,6 +101,7 @@ import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarc
   FormsModule,
   ReactiveFormsModule,
   MatButtonModule,
+  MatIconModule,
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
 

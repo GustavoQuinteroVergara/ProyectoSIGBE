@@ -10,10 +10,11 @@
 
 .btnregistrar{
     margin-top: 20px;
+    font-weight: 600;
 }
 
 .btnregistrar:hover{
-    background: green;
+    background: #f04c3e;
     color: white;
     font-weight: 600;
 }
