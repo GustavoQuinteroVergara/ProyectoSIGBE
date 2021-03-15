@@ -1,6 +1,365 @@
 <app-navbar></app-navbar>
 
 
+<ng-template #templateverpostulacion>
+
+  <ng-template #successactualizacion>
+    <div  class="dialogSuccess" >
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h4 class="text-center textoSuccess">Actualizado exitosamente</h4>
+    </div>
+  </ng-template>
+  <div class="row" data-aos="fade-down" data-aos-once="true">
+    <div class="col-12 text-center">
+      <h2>Estado postulación</h2>
+    </div>
+<!-- COMIENZO COPIADA -->
+<div class="pasosestados">
+  <div class="paso mrpaso" [ngClass]="circlecolor1">
+    <div class="circulopaso">
+      <i class="icofont-clock-time iconSearchUser"></i>
+    </div>
+    <p>En espera</p>
+  </div>
+  <div class="paso pasoline2 mrpaso" [ngClass]="circlecolor2">
+    <div class="circulopaso">
+      <i class="icofont-tasks iconSearchUser"></i>
+    </div>
+    <p>Revisión</p>
+  </div>
+  <div class="paso pasoline3 mrpaso" [ngClass]="circlecolor3">
+    <div class="circulopaso">
+      <i class="icofont-address-book iconSearchUser"></i>
+    </div>
+    <p>Entrevista</p>
+  </div>
+  <div class="paso pasoline4 mrpaso4" [ngClass]="circlecolor4">
+    <div class="circulopaso">
+      <i class="icofont-home iconSearchUser"></i>
+    </div>
+    <p>Visita Domiciliaria</p>
+  </div>
+  <div class="paso pasoline5" [ngClass]="circlecolor5">
+    <div class="circulopaso">
+      <i *ngIf="estadopostusel == 1" class="icofont-check-circled iconSearchUser"></i>
+      <i *ngIf="estadopostusel == 2" class="icofont-close-circled iconSearchUser"></i>
+      <i *ngIf="estadopostusel != 1 && estadopostusel != 2 " class="icofont-spinner iconSearchUser"></i>
+    </div>
+    <p>Estado final</p>
+  </div>
+</div>
+<div class="infopostusel">
+  <div class="row">
+  <mat-tab-group mat-align-tabs="start" animationDuration="0ms">
+  <mat-tab label="Información postulación" data-aos="fade-down" data-aos-once="true">
+    <div class="tabinfopostu">
+       <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.consecutivo_postulacion}}</strong> 
+        <p>Código postulación : </p>   
+        <hr>
+        
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.fechapostulacion}}</strong>
+        <p>Fecha postulación : </p>
+        <hr>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.estudiante.nombreestudiante}}</strong>
+        <p>Nombre estudiante :</p>
+        <hr>
+         
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.estudiante.identificacion}}</strong>
+        <p>Identificacición : </p>
+        <hr>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.semestre}}</strong>
+        <p>Semestre : </p>
+        <hr>
+        
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.estrato}}</strong>
+        <p>Estrato : </p>
+        <hr>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.promedio}}</strong>
+        <p>Promedio : </p>
+        <hr>
+        
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.carrera}}</strong>
+        <p>Carrera : </p>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.codigoestudiante}}</strong>
+        <p>Codigo estudiante : </p>
+        <hr>
+      </div>
+    </div>
+  </div>
+  </mat-tab>
+  <mat-tab label="Documentos" *ngIf="estadopostusel != 3" data-aos="fade-down" data-aos-once="true">
+    <div class="tabinfopostu ">
+      <div class="row">
+        <div class="col-3" *ngIf="postuseltable.documentoestudiante != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.documentoestudiante,'documentoestudiante')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia CC Estudiante</a>
+          <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="documentoestudiante">
+              <mat-radio-button value="1" color="warn" [checked]="documentoestudiante == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="documentoestudiante == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.recibopagomatricula != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.recibopagomatricula, 'recibopagomatricula')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia recibo matricula</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="recibopagomatricula">
+              <mat-radio-button value="1" color="warn" [checked]="recibopagomatricula == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="recibopagomatricula == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.tabulado != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.tabulado,'tabulado')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia tabulado</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="tabulado">
+              <mat-radio-button value="1" color="warn" [checked]="tabulado == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="tabulado == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.formatosolicitudbeneficio != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.formatosolicitudbeneficio,'formatosolicitudbeneficio')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Formato solicitud beca</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="formatosolicitudbeneficio">
+              <mat-radio-button value="1" color="warn" [checked]="formatosolicitudbeneficio == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="formatosolicitudbeneficio == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div class="col-3" *ngIf="postuseltable.certificadovencidad != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.certificadovencidad,'certificadovencidad')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Declaración juramentada vecindad</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="certificadovencidad">
+              <mat-radio-button value="1" color="warn" [checked]="certificadovencidad == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="certificadovencidad == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.promedioacumulado != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.promedioacumulado,'promedioacumulado')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Promedio acumulado</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="promedioacumulado">
+              <mat-radio-button value="1" color="warn" [checked]="promedioacumulado == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="promedioacumulado == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.d10 != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.d10,'d10')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Formato D10</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="d10">
+              <mat-radio-button value="1" color="warn" [checked]="d10 == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="d10 == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.cedulamadre != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.cedulamadre,'cedulamadre')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia cedula madre</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="cedulamadre">
+              <mat-radio-button value="1" color="warn" [checked]="cedulamadre == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="cedulamadre == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.documentoacudiente != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.documentoacudiente,'documentoacudiente')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia C.C acudiente</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="documentoacudiente">
+              <mat-radio-button value="1" color="warn" [checked]="documentoacudiente == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="documentoacudiente == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.factservicio != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.factservicio,'factservicio')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia servicio publico</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="factservicio"> 
+              <mat-radio-button value="1" color="warn" [checked]="factservicio == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="factservicio == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.certificadoingresos != '0|-|' "> 
+          <a (click)="downloadPDF(postuseltable.certificadoingresos,'certificadoingresos')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Certificado ingresos y retenciones</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="certificadoingresos">
+              <mat-radio-button value="1" color="warn" [checked]="certificadoingresos == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="certificadoingresos == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.cartapeticion != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.cartapeticion,'cartapeticion')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Carta solicitud de beneficio</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="cartapeticion">
+              <mat-radio-button value="1" color="warn" [checked]="cartapeticion == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="cartapeticion == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.constanciaweb != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.constanciaweb,'constanciaweb')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Constacia solicitud vía web</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="constanciaweb">
+              <mat-radio-button value="1" color="warn" [checked]="constanciaweb == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="constanciaweb == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.diagnosticomedico != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.diagnosticomedico,'diagnosticomedico')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia diagnostico médico</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="diagnosticomedico">
+              <mat-radio-button value="1" color="warn" [checked]="diagnosticomedico == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="diagnosticomedico == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div  class="col-3" *ngIf="postuseltable.cedulapadre != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.cedulapadre,'cedulapadre')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Fotocopia cédula padre</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4" >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="cedulapadre">
+              <mat-radio-button value="1" color="warn" [checked]="cedulapadre == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="cedulapadre == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="postuseltable.carnetestudiante != '0|-|' ">
+          <a (click)="downloadPDF(postuseltable.carnetestudiante,'carnetestudiante')" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Carnet Estudiante</a>
+                    <hr>
+          <div class="checkboxs" *ngIf="estadopostusel == 4"  >
+            <mat-radio-group aria-label="Selecciona si un documento esta correcto" [(ngModel)]="carnetestudiante">
+              <mat-radio-button value="1" color="warn" [checked]="carnetestudiante == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button value="2" color="warn" [checked]="carnetestudiante == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+            <mat-label>Observación</mat-label>
+            <textarea [(ngModel)]="observacion" matInput placeholder="Contenido" [disabled]="estadopostusel != 4"></textarea>
+          </mat-form-field>
+        </div>
+      </div>  
+      <div class="row mb-4">
+        <div class="col-12" style="text-align: center;">
+          <a mat-raised-button (click)="actualizarEstadoPostulacion(successactualizacion)" [disabled]="estadopostusel != 4">Actualizar estado documentos</a>
+          <hr>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-tab>
+    <mat-tab label="Entrevista" *ngIf="estadopostusel != 3 && estadopostusel != 4" data-aos="fade-down" data-aos-once="true">
+      <div class="tabinfopostu mb-4">
+        <div class="row">
+          <h1>Entrevista</h1>
+          <hr>
+          <a ><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Información general del estudiante</a>
+        </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Visita" *ngIf="estadopostusel != 3 && estadopostusel != 4 && estadopostusel != 5" data-aos="fade-down" data-aos-once="true">
+    <div class="tabinfopostu mb-4">
+      <div class="row">
+        <h1>Visita</h1>
+        <hr>
+        <a mat-raised-button color="primary" class="mb-4">Iniciar visita domiciliaria</a>
+        <a mat-raised-button color="primary" >Ver visita domiciliaria</a>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+ </div>
+  <div class="row">
+
+    <div class="buttonestados col-12">
+      <div *ngIf="estadopostusel == 3"> <!-- en espera -->
+        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
+      </div>
+      <div *ngIf="estadopostusel == 4" style="text-align: center;"> <!-- Revision -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'En espera')" class="buttonanterior"><i class="icofont-rounded-left"></i>En espera</button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;"  (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonsiguiente">Entrevista<i class="icofont-rounded-right"></i></button>
+        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+      </div>
+      <div *ngIf="estadopostusel == 5"> <!-- Entrevista -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
+      </div>
+      <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
+        <button mat-stroked-button color="primary" style="font-weight: bolder;color:#357b38; margin-right: 20px;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio ">Aprobado</button>
+        <button mat-stroked-button color="warn" style="margin-right: 20px;font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+      </div>
+      <div *ngIf="estadopostusel == 1" style="text-align: center;">  <!-- Aprobado -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+      </div>
+      <div *ngIf="estadopostusel == 2" style="text-align: center;"> <!-- Rechazado -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
+        <button mat-stroked-button color="primary"  style="font-weight: bolder;color:#357b38;"(click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio">Aprobar</button>
+      </div>
+    </div><!-- fin -->
+  </div>
+
+</div>
+
+<!-- FIN COPIADA -->
+  </div>
+</ng-template>
+
+
 
 <ng-template #mytemplate>
   <div >
@@ -77,7 +436,7 @@
     <div >
       <div >
         <form [formGroup]="formularioConvocatoria" *ngIf="loading">
-          <div class="card-content">
+          <div>
             <h1>
               Información Convocatoria
               <div class="botonEditarForm">
@@ -85,50 +444,63 @@
               </div>
             </h1>
             <hr>
-            <mat-form-field class="example-full-width"  appearance="none">
-              <mat-label>Consecutivo Convocatoria</mat-label>
-              <input #consecutivo_convocatoria [disabled]="disabledActualizar" id="consecutivo" matInput placeholder="consecutivo" [value]="$convoBuscada.consecutivo_convocatoria">
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="none">
-              <mat-label>Cantidad de Cupos</mat-label>
-              <input #cupo formControlName="cupo" [disabled]="disabledActualizar" id="cupos" matInput placeholder="cupos" [value]="$convoBuscada.cupo">
-              <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['cupo'].hasError('required') &&
-              formularioConvocatoria.controls['cupo'].touched">Por favor, escriba un número de cupos</mat-error>
-            </mat-form-field>
-                    <!--<mat-form-field class="example-full-width" disabled appearance="none">
-                    <mat-label>Beca de la convocatoria</mat-label>
-                    <input #beca id="beca" matInput placeholder="beca" [value]="$convoBuscada.beca">
-                  </mat-form-field>-->
-                  <mat-form-field appearance="none">
-                    <mat-label>{{$convoBuscada.beca}}</mat-label>
-                    <mat-select #becas [disabled]="disabledActualizar" required formControlName="beca">
-                      <mat-option ></mat-option>
-                      <mat-option *ngFor="let beca of convocatoriaBeca" [value]="$convoBuscada.beca">
-                        {{$convoBuscada.beca}}
+            <div class="row" style="font-weight: bolder;">
+              <div class="col-12 row">
+                <div class="col-6">
+                  <h4 style="font-weight: bolder;">Codigo de convocatoria</h4>
+                  <mat-form-field class="example-full-width"  appearance="fill">
+                    <mat-label>Consecutivo Convocatoria</mat-label>
+                    <input #consecutivo_convocatoria disabled style="font-weight: bolder;" id="consecutivo" matInput placeholder="consecutivo" [value]="$convoBuscada.consecutivo_convocatoria">
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <h4 style="font-weight: bolder;">Cantidad de cupos asignados</h4>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Cantidad de Cupos</mat-label>
+                    <input #cupo matInput style="font-weight: bolder;" id="cupos" [disabled]="disabledActualizar"  placeholder="cupos" [value]="$convoBuscada.cupo">
+<!--                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['cupo'].hasError('required') &&
+                    formularioConvocatoria.controls['cupo'].touched">Por favor, escriba un número de cupos</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-12 row">
+                <div class="col-6">
+                  <h4 style="font-weight: bolder;">Beca seleccionada</h4>
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{$convoBuscada.descbeca}}</mat-label>
+                    <mat-select #becas style="font-weight: bolder;" formControlName="beca" [disabled]="disabledActualizar" required>
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let beca of convocatoriaBeca" [value]="beca">
+                        {{beca.descripcion}}
                       </mat-option>
                     </mat-select>
                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['beca'].hasError('required') &&
                     formularioConvocatoria.controls['beca'].touched">Por favor, seleccione una beca</mat-error>
                   </mat-form-field>
-                  <mat-form-field appearance="none">
-                    <mat-label>{{$convoBuscada.periodosacademicos}}</mat-label>
-                    <mat-select #periodosacademicos [disabled]="disabledActualizar" required formControlName="periodos">
-                      <mat-option>--</mat-option>
-                      <mat-option *ngFor="let periodos of convocatoriaPeriodo" [value]="$convoBuscada.periodosacademicos">
-                        {{$convoBuscada.periodosacademicos}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['periodos'].hasError('required') &&
-                    formularioConvocatoria.controls['periodos'].touched">Por favor, Indique un periodo</mat-error>
+                </div>
+                <div class="col-6">
+                  <h4 style="font-weight: bolder;">Periodo academico de la convocatoria</h4>
+                    <mat-form-field appearance="fill" style="font-weight: bolder;">
+                      <mat-label>{{$convoBuscada.descperiodo}}</mat-label>
+                      <mat-select #periodosacademicos [disabled]="disabledActualizar" required formControlName="periodos">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let periodos of convocatoriaPeriodo" [value]="periodos">
+                          {{periodos.descripcion}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['periodos'].hasError('required') &&
+                      formularioConvocatoria.controls['periodos'].touched">Por favor, Indique un periodo</mat-error>
                   </mat-form-field>
                 </div>
-                <div class="card-action">
-                  <h1>Horario Convocatoria</h1>
-
-                  <mat-form-field appearance="none">
-                    <input #fecha_inicio [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" 
+              </div>
+              <div class="col-12 row">
+                <div class="col-6">
+                  <h4 style="font-weight: bolder;">Fecha inicio de la convocatoria</h4>
+                  <h5 style="font-weight: bolder;">Fecha actual {{$convoBuscada.fechainicio}}</h5>
+                  <hr>
+                  <mat-form-field appearance="fill" >
+                    <input #fecha_inicio style="font-weight: bolder;" [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker" placeholder="Selecciona Fecha Inicial" 
                     [value]="$convoBuscada.fechainicio" formControlName="fechaini">
-                    Fecha inicio Convocatoria:  {{$convoBuscada.fechainicio}}
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
                     <ngx-mat-datetime-picker  #picker  >
@@ -136,11 +508,14 @@
                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['fechaini'].hasError('required') &&
                     formularioConvocatoria.controls['fechaini'].touched">Por favor, Indique una fecha inicio</mat-error>
                   </mat-form-field>
-                  <div>
-                   <mat-form-field appearance="none">
-                    <input #fecha_fin [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" 
+                </div>
+                <div class="col-6">
+                  <h4 style="font-weight: bolder;">Fecha fin de la convocatoria</h4>
+                  <h5 style="font-weight: bolder;">Fecha actual {{$convoBuscada.fechafin}}</h5>
+                  <hr>
+                  <mat-form-field appearance="fill">
+                    <input #fecha_fin style="font-weight: bolder;" [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" 
                     [value]="$convoBuscada.fechafin" formControlName="fechafin">
-                    Fecha fin Convocatoria: {{$convoBuscada.fechafin}}
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
 
                     <ngx-mat-datetime-picker  #picker2  >
@@ -148,9 +523,13 @@
                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['fechafin'].hasError('required') &&
                     formularioConvocatoria.controls['fechafin'].touched">Por favor, Indique una fecha fin</mat-error>
                   </mat-form-field>
-                  <mat-form-field style="float: right;" appearance="none">
-                    <mat-label>Seleccione el estado</mat-label>
-                    <mat-select #estado_convocatoria [disabled]="disabledActualizar" required formControlName="estado">
+                </div>
+              </div>
+              <div class="col-10 row"> 
+              <h4 style="font-weight: bolder;">Estado de la convocatoria</h4>               
+                <mat-form-field style="float: right; font-weight: bolder;" appearance="fill">
+                    <mat-label>{{$convoBuscada.estadoconvo}}</mat-label>
+                    <mat-select #estado_convocatoria [disabled]="disabledActualizar" required formControlName="estado" [value]="$convoBuscada.estadoconvo">
                       <mat-option>--</mat-option>
                       <mat-option value="Activo">Activo</mat-option>
                       <mat-option value="Inactivo">Inactivo</mat-option>
@@ -158,25 +537,28 @@
                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['estado'].hasError('required') &&
                     formularioConvocatoria.controls['estado'].touched">Por favor, seleccione una beca</mat-error>
                   </mat-form-field>
-                </div>
-                    <!--<mat-form-field class="example-full-width" disabled appearance="none">
-                        <mat-label>fecha inicio de la convocatoria</mat-label>
-                        <input #fechainicio id="fechainicio" matInput placeholder="fechainicio" [value]="$convoBuscada.fechainicio">
-                        </mat-form-field>
-                        
-                        <mat-form-field class="example-full-width" disabled appearance="none">
-                        <mat-label>fecha fin de la convocatoria</mat-label>
-                        <input #fechafin id="fechafin" matInput placeholder="fechafin" [value]="$convoBuscada.fechafin">
-                      </mat-form-field>-->
-                    </div>
+              </div>
+            </div>
                     <div *ngIf="activeButton">
-                      <a class="btn waves-effect waves-light red darken-4 " (click)="actualizarConvocatoria
+                      <a mat-raised-button color="primary" [disabled]="formularioConvocatoria.invalid" (click)="actualizarConvocatoria
                       (consecutivo_convocatoria.value, cupo.value, becas.value,periodosacademicos.value,fecha_inicio.value,fecha_fin.value,estado_convocatoria.value)" name="action">Actualizar</a>
                     </div>
+                </div>
+
+
                   </form>
                 </div>
                 <div class="card-action">
                   <h1>Postulaciones</h1>
+                                  <div class="row">
+                  <div class="col-12 m-12 text-center">
+                    <h3>Exportar a Excel</h3>
+                    <div class ="container" style="padding-bottom:20px">
+                      <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
+                      <!--<button mat-raised-button color="accent">Accent</button>-->
+                    </div>
+                  </div>
+                </div>
                   <table class="table table-bordered table-striped mb-0">
                     <thead>
                       <tr>
@@ -193,7 +575,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let postu of $postuByIdArray">
-                        <td>{{postu.estudiante.nombreestudiante + ' '}}<a (click)="buscarEstPostuByIden(postu.estudiante.identificacion,mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
+                        <td>{{postu.estudiante.nombreestudiante + ' '}}<a (click)="buscarEstPostuByIden(postu.estudiante.identificacion,mytemplate)" data-title="Ver información del estudiante"><i class="icofont-address-book iconSearchUser"></i></a></td>
                         <td>{{postu.codigoestudiante}}</td>
                         <td>{{postu.estrato}}</td>
                         <td>{{postu.promedio}}</td>
@@ -202,22 +584,13 @@
                         <td>{{postu.carrera}}</td>
                         <td>{{postu.estado_postulacion}}</td>
                         <td>
-                          <a (click)="cambiarEstadoPostu(postu.consecutivo_postulacion,postu.estado_postulacion,true)"><i class="icofont-checked iconcheckAprobar"></i></a>
-                          <a (click)="cambiarEstadoPostu(postu.consecutivo_postulacion,postu.estado_postulacion,false)"><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>
+                          <a (click)="verPostuSel(postu.consecutivo_postulacion, postu.estado_postulacion, postu ,templateverpostulacion)" data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <div class="row">
-                  <div class="col-12 m-12 text-center">
-                    <h3>Exportar a Excel</h3>
-                    <div class ="container" style="padding-bottom:20px">
-                      <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
-                      <!--<button mat-raised-button color="accent">Accent</button>-->
-                    </div>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>

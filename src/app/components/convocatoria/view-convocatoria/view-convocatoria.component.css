@@ -3,8 +3,25 @@
     font-size: 18px;
 }
 
+.buttonsdownloaddoc{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cup1{
+    padding: 3% 10% 8% 10%;
+}
+
 .divbuttoninfo{
     display: inline-block;
+}
+
+.buttonsiguiente{
+    float: right;
+}
+
+.buttonanterior{
+    float: left;
 }
 
 .iconcloseAprobar{
@@ -14,7 +31,7 @@
 
 .iconSearchUser{
 	color: black;
-	font-size: 18px;
+	font-size: 25px;
 	cursor: pointer;
 }
 
@@ -25,6 +42,7 @@
 .botonEditarForm{
 	display: inline-block;
 	float: right;
+    margin-right: 30px;
 }
 
 [data-title]:hover:after {
@@ -59,8 +77,109 @@
 .formtiqConvo{
 	background: white;
 	padding: 50px;
-	box-shadow: 1px 1px 10px black;
+	box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
 	border-radius: 5px;
 	font-weight: 600;
     width: 104%;
+}
+
+.paso{
+    display: inline-block;
+    position: relative;
+    transition: all .1s ease;
+}
+
+.mrpaso{
+    margin-right: 92px;
+}
+
+.mrpaso4{
+    margin-right: 70px;
+}
+
+.circulopaso{
+    width: 46px;
+    text-align: center;
+    background: #ccc;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.pasoactive > .circulopaso{
+   background: #4caf50;
+}
+
+.pasoactivered > .circulopaso{
+   background: #e64444;
+}
+
+.pasoactivered > .circulopaso > i{
+    color: white;
+}
+
+.pasoactive > .circulopaso > i{
+    color: white;
+}
+
+.pasoactivoline:before,.pasoactivoline:after{
+    background: linear-gradient(90deg, rgba(76,175,80,1) 0%, rgba(169,169,171,1) 67%, rgba(204,204,204,1) 100%) !important;
+}
+
+.pasoactivolinered:before,.pasoactivolinered:after{
+    background: linear-gradient(90deg, rgba(76,175,80,1) 0%, rgba(230,68,68,1) 67%, rgba(230,68,68,1) 100%) !important;
+}
+
+.tabinfopostu{
+    transform: none;
+    overflow-x: hidden;
+    margin-top: 20px;
+}
+
+.pasoactivocomplete:before,.pasoactivocomplete:after{
+    background: #4caf50 !important;
+}
+
+.pasoline2:before,.pasoline2:after {
+    line-height: 96px;
+    background: #ccc;
+    position: absolute;
+    content: ' ';
+    top: 19px;
+    right: 3em;
+    width: 134px;
+    height: 3px;
+}
+.pasoline3:before,.pasoline3:after {
+    line-height: 96px;
+    background: #ccc;
+    position: absolute;
+    content: ' ';
+    top: 19px;
+    right: 4em;
+    width: 115px;
+    height: 3px;
+}
+.pasoline4:before,.pasoline4:after {
+line-height: 96px;
+    background: #ccc;
+    position: absolute;
+    content: ' ';
+    top: 19px;
+    right: 8em;
+    width: 122px;
+    height: 3px;
+}
+.pasoline5:before,.pasoline5:after {
+    line-height: 96px;
+    background: #ccc;
+    position: absolute;
+    content: ' ';
+    top: 19px;
+    right: 5em;
+    width: 150px;
+    height: 3px;
+}
+
+.pasosestados{
+    text-align: center;
 }

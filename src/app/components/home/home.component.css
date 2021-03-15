@@ -40,13 +40,15 @@
 .cartaBienvenida,.rowpanelbienestar{
     --bs-gutter-x: 0;
     --bs-gutter-y: 0;
+    background: #ececec;
 }
 
 .tablainfopostus{
     margin-left: 20px;
     border: 1px solid gray;
+    background: white;
     border-radius: 4px;
-    padding: 0
+    padding: 0;
 }
 
 .graficainfo{
@@ -54,11 +56,14 @@
     border: 1px solid gray;
     border-radius: 4px;
     padding: 0;
+    background: white;
 }
 
 .titulografica{
     padding: 15px;
-    background:#e6e2e2;
+    background:#d63a2d;
+    color: white;
+    font-weight: 600;
 }
 
 .titulografica > h1{

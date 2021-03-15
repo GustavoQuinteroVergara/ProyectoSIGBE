@@ -60,10 +60,10 @@
         Solo números positivos</mat-error>
       </mat-form-field>
     </div>
-    <div class="col s6">
+    <div class="col s6" *ngFor="let convoperiodo of convocatoriaPeriodo">
       <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio">
         <mat-label>Periodo Actual</mat-label>
-        <input disabled matInput placeholder="consecutivo" [value]="convocatoriaPeriodo[0].descripcion">
+        <input  matInput placeholder="consecutivo" style="font-weight: 600;" disabled [value]="convoperiodo.descripcion" >
       </mat-form-field>
     </div>
   </div>
@@ -73,7 +73,7 @@
     <div class="col s6">
       <mat-form-field appearance="fill" class="inputsEspacio">
         <input #fechainicial matInput [ngxMatDatetimePicker]="picker" [min]="minDate"
-        placeholder="Fecha Inicial" [formControl]="dateControl" [disabled]="disabled">
+        placeholder="Fecha Inicial" [formControl]="dateControl" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
         <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
@@ -85,7 +85,7 @@
   <div class="col s6">
     <mat-form-field appearance="fill" class="inputsEspacio">
       <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" [min]="minDate"
-      placeholder="Fecha final" [formControl]="dateControl" [disabled]="disabled">
+      placeholder="Fecha final" [formControl]="dateControl" >
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
 
       <ngx-mat-datetime-picker #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
@@ -103,25 +103,57 @@
   
   <div class="tarjetaCheck row">
   <h1>Seleccione los documentos que desea solicitar</h1>
-  <div class="col s6">
-  <mat-checkbox #documentoidenti (change)="setAllDocumentoEstudiante($event.checked)" [(ngModel)]="documentoest" class="example-margin">Fotocopia C.C estudiante</mat-checkbox>
-  <mat-checkbox #documentoacudiente (change)="documentoAcudiente($event.checked)" [(ngModel)]="documentoacu" class="example-margin">Fotocopia C.C acudiente</mat-checkbox>
-  <mat-checkbox #recibomatricula (change)="pagoMat($event.checked)" [(ngModel)]="pagomatricula"class="example-margin"> Fotocopia recibo pago matricula</mat-checkbox>
-  <mat-checkbox #factserv  (change)="reciboPublico($event.checked)" [(ngModel)]="facturaserv" class="example-margin">Fotocopia recibo servicio público</mat-checkbox>
-  <mat-checkbox #tabulado (change)="documentoTabulado($event.checked)" [(ngModel)]="tab" class="example-margin">Fotocopia Tabulado</mat-checkbox>
-  <mat-checkbox #certificadoingresos  (change)="ingresosRetenciones($event.checked)" [(ngModel)]="certingresos" class="example-margin">Certificado ingresos y retenciones</mat-checkbox>
-  <mat-checkbox #formatosolicitud (change)="soliSubsidio($event.checked)" [(ngModel)]="formsolicitud" class="example-margin">Solicitud de subsidio y apoyoeconómico</mat-checkbox>
-  <mat-checkbox #cartapeti (change)="soliBecaAlimentacion($event.checked)" [(ngModel)]="carta" class="example-margin">Solicitud beca alimentación</mat-checkbox>
+  <div class="row">
+  <div class="col-12 row">
+     <div class="col-6">
+      <mat-checkbox [(ngModel)]="documentoest" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Fotocopia C.C estudiante</mat-checkbox>
+    </div>
+   <div class="col-6">
+     <mat-checkbox [(ngModel)]="documentoacu" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Fotocopia C.C acudiente</mat-checkbox>
+    </div>
+    <div class="col-6">
+     <mat-checkbox [(ngModel)]="pagomatricula" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn"> Fotocopia recibo pago matricula</mat-checkbox>
+    </div>
+        <div class="col-6">
+    <mat-checkbox [(ngModel)]="facturaserv" [ngModelOptions]="{standalone: true}"  class="example-margin" color="warn">Fotocopia recibo servicio público</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="tab" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Fotocopia Tabulado</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="certingresos" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Certificado ingresos y retenciones</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="formsolicitud" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Formato de solicitud de beca</mat-checkbox>
+    </div>
+        <div class="col-6">
+      <mat-checkbox [(ngModel)]="carta" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Carta de solicitud de beneficio</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="vecindad" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Declaración juramentada de vecindad</mat-checkbox>
+    </div>
+        <div class="col-6">
+      <mat-checkbox [(ngModel)]="constancia" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Constacia solicitud vía web</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="promacumulado" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Promedio académico acumulado</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="diagnosticomed" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Fotocopia diagnostico médico</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="formatod10" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Formato D10</mat-checkbox>  
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="documentopadre" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Fotocopia cédula padre</mat-checkbox>
+    </div>
+        <div class="col-6">
+     <mat-checkbox [(ngModel)]="documentomadre" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Fotocopia cédula madre</mat-checkbox>
+    </div>
+    <div class="col-6">
+     <mat-checkbox [(ngModel)]="carnet" [ngModelOptions]="{standalone: true}" class="example-margin" color="warn">Carnet Estudiante</mat-checkbox>
+    </div>
 </div>
-  <div class="col s6">
-  <mat-checkbox #certificadovencidad (change)="declaracionVecindad($event.checked)" [(ngModel)]="vecindad" class="example-margin">Declaración juramentada de vecindad</mat-checkbox>
-  <mat-checkbox #constanciaweb (change)="constaciaWeb($event.checked)" [(ngModel)]="constancia" class="example-margin">Constacia solicitud vía web</mat-checkbox>
-  <mat-checkbox #promedio (change)="promAcumulado($event.checked)" [(ngModel)]="promacumulado" class="example-margin">Promedio académico acumulado</mat-checkbox>
-  <mat-checkbox #diagnostico (change)="diagnosticoMedico($event.checked)" [(ngModel)]="diagnosticomed" class="example-margin">Fotocopia diagnostico médico</mat-checkbox>
-  <mat-checkbox #d10  (change)="documentoD10($event.checked)" [(ngModel)]="formatod10" class="example-margin">Formato D10</mat-checkbox>  
-  <mat-checkbox #cedulapadre (change)="documentoPadre($event.checked)" [(ngModel)]="documentopadre" class="example-margin">Fotocopia cédula padre</mat-checkbox>
-  <mat-checkbox #cedulamadre (change)="documentoMadre($event.checked)" [(ngModel)]="documentomadre" class="example-margin">Fotocopia cédula madre</mat-checkbox>
-  <mat-checkbox #carnetest (change)="carnetEstudiantil($event.checked)" [(ngModel)]="carnet" class="example-margin">Carnet Estudiante</mat-checkbox>
 </div>
 </div>
 <br>
@@ -130,7 +162,7 @@
 <div class="row mb-10">
   <!-- Correo enviar -->
   <div class="col s12">
-    <mat-checkbox (change)="setAll($event.checked)" [(ngModel)]="opcion">¿Desea enviar correo electrónico?</mat-checkbox>
+    <mat-checkbox [(ngModel)]="opcion" [ngModelOptions]="{standalone: true}" color="warn">¿Desea enviar correo electrónico?</mat-checkbox>
   </div>
 </div>
 <div class="row" [hidden]="!opcion">
@@ -149,11 +181,8 @@
 </div>
 <br>
 <div class="center-align">
-  <a mat-raised-button color="primary" (click)="registrarConvocatoria(fechainicial.value,fechafinal.value,
-  beca.value,cupos.value,estadoconvocatoria.value,asuntocorreo.value,contenidocorreo.value, 
-  d10.value,factserv.value,cartapeti.value, carnetest.value, cedulapadre.value,cedulamadre.value, 
-  promedio.value,tabulado.value,constanciaweb.value,certificadovencidad.value,documentoidenti.value
-  ,documentoacudiente.value,formatosolicitud.value,diagnostico.value,recibomatricula.value,certificadoingresos.value, mytemplate)"name="action">Registrar</a>
+    <a mat-raised-button color="primary" (click)="registrarConvocatoria(fechainicial.value,fechafinal.value,
+  beca.value,cupos.value,estadoconvocatoria.value,asuntocorreo.value,contenidocorreo.value, mytemplate)" name="action">Registrar</a>
 </div>
 </form>
 </div>

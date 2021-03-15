@@ -9,30 +9,72 @@
     <h2 class="text-center textoSuccess">Error al actualizar</h2>
   </div>
 </ng-template>
+
+<ng-template #agregarCarreraModal>
+  <ng-template #biencarrera>
+  <div class="dialogSuccess">
+    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+    <h2 class="text-center textoSuccess">Agregada exitosamente</h2>
+  </div>
+</ng-template>
+<ng-template #malcarrera>
+  <div *ngIf="!success" class="dialogSuccess">
+    <i class="icofont-close-circled text-center iconErrRegister"></i>
+    <h2 class="text-center textoSuccess">Error al agregar la carrera</h2>
+  </div>
+</ng-template>
+<ng-template #carrerarepetida>
+  <div *ngIf="!success" class="dialogSuccess">
+    <i class="icofont-close-circled text-center iconErrRegister"></i>
+    <h2 class="text-center textoSuccess">ERROR: Esa carrera ya ha sido agregada</h2>
+  </div>
+</ng-template>
+  <div class="row">
+    <div class="col s12 text-center">
+      <h1>Agregar una carrera</h1>
+      <hr>
+      <form>
+        <div class="col s6" >
+          <h4>Selecciona una carrera</h4>
+              <mat-form-field appearance="fill">
+                <mat-select #carreraselss required >
+                  <mat-option>-- Selecciona una carrera --</mat-option>
+                  <mat-option *ngFor="let carreras of getcarreras" [value]="carreras" >
+                  {{carreras.carreranombre}}</mat-option>
+              </mat-select>
+              <mat-label> <b> Carreras</b></mat-label>
+          </mat-form-field>
+        </div>
+        <div class="col s6">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Codigo estudiante</mat-label>
+            <input matInput #codigoestss class="matfontbolder" id="codigoest"  placeholder="Codigo estudiante" type="number">
+          </mat-form-field>
+        </div>
+        <div class="col s12">
+          <a (click)="agregarCarrera(carreraselss.value,codigoestss.value,biencarrera,malcarrera,carrerarepetida)" mat-stroked-button color="primary">Guardar carrera</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
   <div class="formtiq">
-    <div class="logo">
-      <h1 > Actualiza Usuario</h1>
-      <hr>
-    </div>
-    <form class="col s12" [formGroup]="updateForm" novalidate>
+    <mat-tab-group mat-align-tabs="start" animationDuration="0ms">
+  <mat-tab label="Actualizar datos basicos" data-aos="fade-down" data-aos-once="true">
+      <div class="formsmodificaruser">
+    <form class="col-12" [formGroup]="updateForm" novalidate>
       <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col-12">
           <mat-form-field class="example-full-width" disabled appearance="fill">
             <mat-label>Identificacion</mat-label>
             <input #identificacion class="matfontbolder" id="identificacion" disabled matInput placeholder="Identificacion" type="number"
             [value]="$nombreusuario.identi">
           </mat-form-field>
         </div>
-        <div class="input-field col s4">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Saldo Actual</mat-label>
-            <input #saldo id="saldo" class="matfontbolder" matInput placeholder="Saldo" disabled type="number" [value]="$nombreusuario.saldo">
-          </mat-form-field>
-        </div>
       </div>
       <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col-6">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nombre</mat-label>
             <input #nombre id="nombre" class="matfontbolder" matInput type="text" placeholder="Nombre" [value]="$nombreusuario.nombre"
@@ -49,7 +91,7 @@
             updateForm.controls['nombre'].touched">Solo se aceptan letras.</mat-error>
           </mat-form-field>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col-6">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Apellido</mat-label>
             <input #apellido class="matfontbolder" id="apellido" matInput placeholder="Apellido" [value]="$nombreusuario.apellido"
@@ -69,7 +111,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="input-field col s4">
+  <div class="input-field col-12">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Email</mat-label>
       <input #correo id="email" class="matfontbolder" matInput placeholder="Correo" [value]="$nombreusuario.correo"
@@ -79,31 +121,39 @@
     es requerido</mat-error>
   </mat-form-field>
 </div>
-<div class="input-field col s4">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Codigo Estudiante</mat-label>
-    <input #codigoestudiante id="codigoestudiante" class="matfontbolder" type="number" matInput placeholder="Codigo Estudiante"
-    [value]="$nombreusuario.codigoest" formControlName="codigoestudiante" pattern="^[0-9]+" minlength="7" maxlength="9" >
-    <mat-error class="help-block form-error text-danger small"
-    *ngIf="updateForm.controls['codigoestudiante'].hasError('required') && updateForm.controls['codigoestudiante'].touched">
-  Código estudiante es requerido</mat-error>
-  <mat-error class="help-block form-error text-danger small"
-  *ngIf="updateForm.controls['codigoestudiante'].hasError('pattern') && updateForm.controls['codigoestudiante'].touched">
-Solo números positivos</mat-error>
-<mat-error class="help-block form-error text-danger small"
-*ngIf="updateForm.controls['codigoestudiante'].hasError('minlength') && updateForm.controls['codigoestudiante'].touched">
-Mínimo 7 Números</mat-error>
-<mat-error class="help-block form-error text-danger small"
-*ngIf="updateForm.controls['codigoestudiante'].hasError('maxlength') && updateForm.controls['codigoestudiante'].touched">
-Máximo 7 Números</mat-error>
-</mat-form-field>
-</div>
 </div>
 <div>
   <a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!updateForm.valid" (click)="registrarSaldo
-  (identificacion.value,saldo.value,codigoestudiante.value,correo.value,
+  (identificacion.value,correo.value,
   apellido.value,nombre.value,mytemplate)" mat-raised-button color="primary" name="action">Actualizar</a>
 </div>
 </form>
+</div>
+  </mat-tab>
+    <mat-tab label="Mis carreras" data-aos="fade-down" data-aos-once="true">
+      <div class="row formsmodificaruser">
+        <div class="col-12">
+          <div>
+          <a mat-raised-button color="warn" (click)="abrirModalCarrera(agregarCarreraModal)">Agregar una carrera</a>
+        </div>
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th>Carrera</th>
+                <th>Codigo estudiante</th>
+              </tr>
+            </thead>
+
+            <tbody *ngFor="let carreras of carrerasest">
+              <tr>
+                <td>{{carreras.carrera}}</td>
+                <td>{{carreras.codigoestudiante}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    </mat-tab>
+</mat-tab-group>
 </div>
 </div>

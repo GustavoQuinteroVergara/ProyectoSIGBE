@@ -19,6 +19,13 @@ export class PostulacionService {
 		return this.http.get(`${this.url}/app/componentes/postulacion/listpostubyest.php?idest=${identiEst}`);
 	}
 
+	actualizarEstadosDocs(estadosdosc:any){
+		return this.http.put(`${this.url}/app/componentes/postulacion/actualizarestadodocpostu.php`,{data: estadosdosc})
+		.pipe(map((res)=>{
+			return estadosdosc;
+		}));
+	}
+
 	actualizarPostulacion(postuArray:any){
 		return this.http.put(`${this.url}/app/componentes/postulacion/actualizarPostulacion.php`,{data: postuArray})
 		.pipe(map((res)=>{
