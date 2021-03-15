@@ -51,7 +51,7 @@
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Identificación</mat-label>
             <input matInput formControlName="identificacion" pattern="^[0-9]+"  maxlength="10" #identificacion type="text"  id="identificacion">
-            <i matSuffix class="icofont-key iconocontrasenas"></i>
+            <i matSuffix class="icofont-id iconito"></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('identificacion').errors && formulariologin.get('identificacion').dirty">
             <mat-error *ngIf="formulariologin.get('identificacion').hasError('required')">Este campo es obligatorio</mat-error>
@@ -69,7 +69,7 @@
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="nombre" #nombre id="first_name" type="text" class="validate">
-            <i matSuffix class="icofont-key iconocontrasenas"></i>
+            <i  matSuffix class="icofont-id iconito"></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('nombre').errors && formulariologin.get('nombre').dirty">
             <mat-error *ngIf="formulariologin.get('nombre').hasError('required')">Este campo es obligatorio</mat-error>
@@ -77,27 +77,16 @@
             <mat-error *ngIf="formulariologin.get('nombre').hasError('pattern')">Solo letras</mat-error>
           </div>
         </div>
+        
       </div>
       <div class="row divInputssrow">
-        <div class="input-field col s6">
-          <h4>Email</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" #email pattern="[a-z]+.+[a-z]@correounivalle.edu.co" id="email" type="email" class="validate">
-            <i matSuffix class="icofont-key iconocontrasenas"></i>
-          </mat-form-field>
-          <div *ngIf="formulariologin.get('email').errors && formulariologin.get('email').dirty">
-            <mat-error *ngIf="formulariologin.get('email').hasError('email')"><br>Correo no valido</mat-error>
-            <mat-error *ngIf="formulariologin.get('email').hasError('pattern')"><br>debe terner correo univalle</mat-error>
-            <mat-error *ngIf="formulariologin.get('email').hasError('required')">Este campo es obligatoria</mat-error>
-          </div>
-        </div>
+       
         <div class="input-field col s6">
           <h4>Apellido</h4>
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Apellido</mat-label>
             <input matInput formControlName="apellido" #apellido id="last_name" type="text" class="validate">
-            <i matSuffix class="icofont-key iconocontrasenas"></i>
+            <i matSuffix class="icofont-id iconito"></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('apellido').errors && formulariologin.get('apellido').dirty">
             <mat-error *ngIf="formulariologin.get('apellido').hasError('required')">Este campo es obligatorio</mat-error>
@@ -107,14 +96,28 @@
 
 
         </div>
+        <div class="input-field col s6">
+          <h4>Email</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" #email pattern="[a-z]+.+[a-z]@correounivalle.edu.co" id="email" type="email" class="validate">
+            <i matSuffix class="icofont-email iconito "></i>
+          </mat-form-field>
+          <div *ngIf="formulariologin.get('email').errors && formulariologin.get('email').dirty">
+            <mat-error *ngIf="formulariologin.get('email').hasError('email')"><br>Correo no valido</mat-error>
+            <mat-error *ngIf="formulariologin.get('email').hasError('pattern')"><br>debe terner correo univalle</mat-error>
+            <mat-error *ngIf="formulariologin.get('email').hasError('required')">Este campo es obligatoria</mat-error>
+          </div>
+        </div>
+        
       </div>
       <div class="row divInputssrow">
         <div class="input-field col s6">
           <h4>Código estudiante</h4>
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Código estudiante</mat-label>
-            <input matInput #codigo formControlName="codigo" id="codigo" type="text" class="validate">
-            <i matSuffix class="icofont-key iconocontrasenas"></i>
+            <input matInput #codigo formControlName="codigo" pattern="^[0-9]+" id="codigo" type="text" class="validate">
+            <i matSuffix class="icofont-graduate iconito"></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('codigo').errors && formulariologin.get('codigo').dirty">
             <mat-error *ngIf="formulariologin.get('codigo').hasError('required')">Este campo es obligatorio</mat-error>
@@ -122,6 +125,18 @@
             <mat-error *ngIf="formulariologin.get('codigo').hasError('pattern')"> <br>solo numeros</mat-error>
           </div>
         </div>
+        <div class="col s6">
+          <h4>Seleccione su carrera</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Selecciona su carrera</mat-label>
+            <mat-select #carrera>
+              <mat-option *ngFor="let carrer of carreras" [value]="carrer.codigocarrera">{{carrer.nombre_carrera}}</mat-option>
+              
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        
         <div class="input-field col s6">
           <h4>Contraseña</h4>
           <mat-form-field appearance="fill" class="example-full-width">
@@ -132,21 +147,112 @@
           <div *ngIf="formulariologin.get('contrasena').errors && formulariologin.get('contrasena').dirty">
             <mat-error *ngIf="formulariologin.get('contrasena').hasError('required')">Este campo es obligatorio</mat-error>
             <mat-error *ngIf="formulariologin.get('contrasena').hasError('minlength')"><br>Se debe ingresar minimo 7 caracteres</mat-error>
+          
           </div>
         </div>
+        <div class="col s6">
+          <h4>Fecha de nacimiento</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput #fechanacimiento [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+     
+     
+        </div>
+        <div class="col s6">
+        <h4>Zona residencial</h4>
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Zona residencial </mat-label>
+          <mat-select #zonaresidencial>
+            <mat-option value="Rural">
+              Rural
+            </mat-option>
+            <mat-option value="Urbana">
+              Urbana
+            </mat-option>
+           
+          </mat-select>
+        </mat-form-field>
+        </div>
 
+
+   
+        <div class="col s6">
+      <h4>Departamento</h4>
+<mat-form-field appearance="fill" class="example-full-width">
+  <mat-label>Selecciona departamento</mat-label>
+  <mat-select #departamento (selectionChange)="departamentoselec($event.value)">
+    <mat-option *ngFor="let depar of departamentos" [value]="depar.iddepartamento">{{depar.nombre}}</mat-option>
+    
+  </mat-select>
+</mat-form-field>
+        </div>
+        <div class="col s6">
+          <h4>Ciudad</h4>
+<mat-form-field appearance="fill" class="example-full-width">
+  <mat-label>Selecciona la ciudad</mat-label>
+  <mat-select #ciudad>
+    <mat-option *ngFor="let ciudad of ciud" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+    
+  </mat-select>
+</mat-form-field>
+        </div>
+       
+
+        <div class="col s6">
+          <h4>Estrato</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Estrato </mat-label>
+            <mat-select #estrato>
+              <mat-option value="1">
+                1
+              </mat-option>
+              <mat-option value="2">
+                2
+              </mat-option>
+              <mat-option value="3">
+                3
+              </mat-option>
+              <mat-option value="4">
+                4
+              </mat-option>
+              <mat-option value="5">
+                5
+              </mat-option>
+              <mat-option value="6">
+                6
+              </mat-option>
+
+            </mat-select>
+          </mat-form-field>
+          </div>
+          
+<div class="col s6">
+          <section class="example-section" class="check">
+            <mat-checkbox class="example-margin">Acepto terminos y condiciones</mat-checkbox>
+          
+          </section>
+
+        </div>
 
       </div>
 
 
+     
+      
+     
 
+       
+      
 
       <div class="row center" style="text-align: center;float: unset; display: flex; margin-top: 60px;" >
         <div class="input-field col s12">
-          <a [class.disabled]="!formulariologin.valid"    (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,1,'Inactivo',mytemplate)" mat-raised-button color="primary" >Registrar</a>
+          <a [class.disabled]="!formulariologin.valid"    (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,contrasena.value,1,'Inactivo',zonaresidencial.value,ciudad.value,fechanacimiento.value,estrato.value,codigo.value,carrera.value,mytemplate)" mat-raised-button color="primary" >Registrar</a>
         </div>
         <div class="input-field col s12"routerLinkActive="active">
-          <a routerLink="/**" mat-raised-button color="warn" class="btn-success">Regresar</a>
+          <a routerLink="/**" mat-raised-button color="warn" class="btn-success">Regresar</a> 
         </div>
 
 

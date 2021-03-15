@@ -8,7 +8,9 @@ import { map } from 'rxjs/operators';
 export class ServiciocrearuserService {
 
   url='http://localhost/sigbeweb/app/componentes/usuarios/create_user.php';
-
+  url2='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscardepartamentos.php'
+  url3='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscarciudades.php';
+  url4= 'http://localhost/SIGBEWEB/app/componentes/ubicacion/carreras.php';
   constructor(private http: HttpClient) { }
 
   registrarUsuario(arreglousu:any){
@@ -17,4 +19,19 @@ export class ServiciocrearuserService {
   	return arreglousu;
   	}));
   }
+
+buscardepartamento(){
+ return this.http.get(`${this.url2}`);
+}
+
+buscarCiudad(arreglodepar:any){
+return this.http.post(`${this.url3}`,{data: arreglodepar});
+
+
+}
+
+buscarCarrera(){
+  return this.http.get(`${this.url4}`);
+}
+
 }
