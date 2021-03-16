@@ -1,245 +1,283 @@
 <app-navbar></app-navbar>
-
-<div class="fondo"> 
-    <div class="caja z-depth-3">
-        <div class="logo">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
-        </div>
-        <form  novalidate class="col s12">
-          <h1>Visita Domiciliaria</h1>
-          <div class="row divInputssrow">
-            <div class="input-field col s6">
-              <input #nombre formControlName="nombre"id="first_name" type="text" class="validate">
-               <label for="first_name">Nombre</label>
-              
-            </div>
-            <div class="input-field col s6">
-              <input  #apellido formControlName="apellido"  id="last_name" type="text" class="validate">
-              <label for="last_name">Apellido</label>    
-            </div>
-          </div>
-          <div class="row divInputssrow"> 
-            <div class="input-field col s12">
-                 <label for="">Estamento</label> 
-                 <section class="example-section checkboxEstamento">
-                  <mat-checkbox class="example-margin estamentoCheck">Est.</mat-checkbox>
-                  <mat-checkbox class="example-margin estamentoCheck">Doc.</mat-checkbox>
-                  <mat-checkbox class="example-margin estamentoCheck">Empl.</mat-checkbox>
-                  <mat-checkbox class="example-margin estamentoCheck">Trab.</mat-checkbox>
-                  <mat-checkbox class="example-margin estamentoCheck">Jub.</mat-checkbox>
-                  <mat-checkbox class="example-margin estamentoCheck">Pen.</mat-checkbox>
-                </section>
-              </div> 
-              <div class="input-field col s6" style="width: 20%;">
-                <input #codigo formControlName="codigo" id="codigo" type="text" class="validate" >
-                <label for="codigo">Código</label>
-              </div>
-              <div class="input-field col s6" style="width: 20%;">
-                  <input #contrasena formControlName="plan" id="plan" type="text" class="validate">
-                    <label for="plan">Plan</label>
-                  </div>
-                  <div class="input-field col s6" style="width: 20%;">
-                  <input #codigo formControlName="cc" id="cc" type="text" class="validate">
-                    <label for="cc">C.C</label>
-                  </div>
-                  <div class="input-field col s6" style="width: 20%;">
-                  <input #contrasena formControlName="telefono" id="telefono" type="number" class="validate">
-                    <label for="telefono">Teléfono</label>
-                  </div>
-                  <div class="input-field col s6" style="width: 20%;">
-                  <input #contrasena formControlName="celular" id="celular" type="number" class="validate">
-                    <label for="celular">Celular</label>
-                  </div>
-                  <div class="input-field col s6" style="width: 20%;">
-                  <input #contrasena formControlName="direccion" id="direccion" type="text" class="validate">
-                    <label for="direccion">Dirección</label>
-                  </div>
-                  <div class="input-field col s6" style="width: 20%;">
-                  <input #contrasena formControlName="barrio" id="barrio" type="text" class="validate">
-                    <label for="barrio">Barrio</label>
-                  </div>
-                  <div class="input-field col s6" style="width: 20%;">
-                  <input #contrasena formControlName="comuna" id="comuna" type="number" class="validate">
-                    <label for="comuna">Comuna</label>
-                  </div>
-              </div>
-              <div class="input-field col s6">
-                <h2 style="text-align: left; margin-left: 2%;" >1. Información Socio-Económica</h2>
-              </div>
-          <div class="row divInputssrow">
-            <div class="primerPunto" style="margin-left: 33%;">
-              <div class="input-field col s6" style="width: 81%;margin-left: -50%;">
-                <input #contrasena formControlName="encargado" id="encargado" type="text" class="validate">
-                  <label for="encargado">Nombre de la persona que atendió la entrevista</label>
-                </div>
-                <div class="input-field col s6" style="width: 35%;" >
-                  <input #contrasena formControlName="parentesco" id="parentesco" type="text" class="validate">
-                    <label for="parentesco">Parentesco</label>
-                  </div>
-                </div>
-          </div>
-          <div class="input-field col s6">
-            <h5 style="text-align: left; margin-left: 2%;" >1.1   Las obligaciones económicas en su casa son asumidas por:</h5>
-          </div>
-          <div class="row divInputssrow">
-            <div class="input-field col s12"> 
-              <section class="example-section checkboxObligaciones">
-                <mat-checkbox classs="example-margin obligacionesCheck" style="margin-right: 1%;">Solicitante</mat-checkbox>
-                <mat-checkbox class="example-margin obligacionesCheck">Padre</mat-checkbox>
-                <mat-checkbox class="example-margin obligacionesCheck">Madre</mat-checkbox>
-                <mat-checkbox class="example-margin obligacionesCheck">Conyúge</mat-checkbox>
-               <mat-checkbox class="example-margin obligacionesCheck">Otro</mat-checkbox>
-               
-             </section>
-             <div class="input-field col s6" style="width: 17%;float: left;margin-top: -6.5%;margin-left: 58%;" >
-              <input #contrasena formControlName="otros1" id="otros1" type="text" class="validate">
-                <label for="otros1">¿Cuál?</label>
-              </div>
-           </div> 
-             
-          </div>
-          <div class="tercerCheck">
-          <div class="input-field col s6">
-            <h5 style="text-align: left; margin-left: 2%;" >1.2 Estrato según DANE</h5>
-          </div>
-          <div class="row divInputssrow">
-            <div class="input-field col s12"> 
-              <section class="example-section checkboxEstrato">
-                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">1. Bajo-Bajo</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">2. Bajo</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">3. Mediano-bajo</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">4. Medio</mat-checkbox>
-               <mat-checkbox class="example-margin estratoCheck">5. Medio-alto</mat-checkbox>
-               <mat-checkbox class="example-margin estratoCheck">5. Alto</mat-checkbox>
-             </section>
-           </div>             
-          </div>
-        </div>
-        <div class="cuartoCheck">
-          <div class="input-field col s6">
-            <h5 style="text-align: left; margin-left: 2%;" >1.3 ¿Paga Arriendo? </h5>
-            <h5 style="text-align: left; margin-left: 50%;
-            margin-top: -4%;" >¿Qué cubre el arriendo? </h5>
-          </div>
-          <div class="row divInputssrow">
-            <div class="input-field col s12"> 
-              <section class="example-section checkboxEstrato">
-                <div class="pagaArriendo">
-                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Si</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">No</mat-checkbox>
-              </div>
-              <div class="informacionArriendo">
-                <mat-checkbox class="example-margin estratoCheck" style="margin-right: 4%;">Cuarto</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">Alimentación</mat-checkbox>
-              </div>
-             </section>
-             <div class="input-field col s6 valorArriendo"  >
-              <input #contrasena formControlName="arriendo" id="arriendo" type="text" class="validate" >
-                <label for="arriendo">¿Valor arriendo?</label>
-              </div>
-              <div class="input-field col s6 informacionGastos" >
-                <input #contrasena formControlName="otros2" id="otros2" type="text" class="validate">
-                  <label for="otros2 ">Otros</label>
-                </div>
-           </div>             
-          </div>
-        </div>
-        <div class="quintoCheck">
-          <div class="input-field col s6">
-            <h5 style="text-align: left; margin-left: 2%;" >1.4 Fuentes de ingreso del solicitante</h5>
-          </div>
-          <div class="row divInputssrow quintoDivCheck">
-            <div class="input-field col s12"> 
-              <section class="example-section checkboxEstrato">
-                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Trabajo</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">Familia</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">Otros</mat-checkbox>
-             </section>
-             <div class="input-field col s6" style="width: 41%;float: left;margin-top: -5%;margin-left: 58%;">
-              <input #contrasena formControlName="otros3" id="otros3" type="text" class="validate">
-                <label for="otros3">¿Cuáles?</label>
-              </div>
-           </div>             
-          </div>
-        </div>
-        <div class="input-field col s6">
-          <h2 style="text-align: left; margin-left: 2%;" >2. Características de la vivienda</h2>
-        </div>
-        <div class="input-field col s6">
-          <h5 style="text-align: left; margin-left: 2%;" >2.1</h5>
-        </div>
-        <div class="row divInputssrow quintoDivCheck">
-          <div class="input-field col s12"> 
-            <section class="example-section checkboxEstrato">
-              <div class="primeraDivision">
-              <strong>Tipo:</strong>
-              <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Casa</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Apartemento</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Cuarto</mat-checkbox>
-            </div>
-            <div class="segundaDivision">
-              <strong>Aspecto físico:</strong>
-              <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Terminado</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Obra negra</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">En construcción</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Remodelación</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Otro</mat-checkbox>
-            </div>
-            <div class="terceraDivision">
-              <strong>Servicios públicos:</strong>
-              <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Agua</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Energía</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Alcantarillado</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Teléfono</mat-checkbox>
-              <mat-checkbox class="example-margin estratoCheck">Gas Domiciliario</mat-checkbox>
-            </div>
-           </section>
-           <div class="input-field col s6" style="width: 14%;float: left;margin-top: -9%;margin-left: 88%;">
-            <input #contrasena formControlName="otros3" id="otros3" type="text" class="validate">
-              <label for="otros3">¿Cuáles?</label>
-            </div>
-         </div>             
-        </div>
-        <div class="sextoCheck">
-          <div class="input-field col s6">
-            <h5 style="text-align: left; margin-left: 2%;" >2.2 Cuarto del solicitante</h5>
-          </div>
-          <div class="row divInputssrow quintoDivCheck">
-            <div class="input-field col s12"> 
-              <section class="example-section checkboxCuarto">
-                <mat-checkbox classs="example-margin estratoCheck" style="margin-right: 1%;">Solo</mat-checkbox>
-                <mat-checkbox class="example-margin estratoCheck">Compartido</mat-checkbox>
-             </section>
-             <div class="input-field col s6" style="width: 41%;float: left;margin-top: -5%;margin-left: 58%;">
-              <input #contrasena formControlName="otros4" id="otros4" type="number" class="validate">
-                <label for="otros4">¿Con cuantas personas?</label>
-              </div>
-           </div>             
-          </div>
-        </div>
-        <div class="input-field col s6">
-          <h2 style="text-align: left; margin-left: 2%;" >Observaciones</h2>
-        </div>
-        <div class="input-field col s6">
-          <h5 style="text-align: left; margin-left: 2%;" >(Concepto del Trabajador Social - Breve Descripción de la Situación del Estudiante)</h5>
-        </div>
-        <mat-form-field class="example-full-width areaDescripcion">
-          <mat-label>Descripción</mat-label>
-          <textarea matInput placeholder="Este es un ejemplo.."></textarea>
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+<div class="formtiq">
+<ng-template #mytemplate>
+  <div *ngIf="success" class="dialogSuccess">
+    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+    <h2 class="text-center textoSuccess">Registro exitoso </h2>
+  </div>
+  <div *ngIf="!success" class="dialogSuccess">
+    <i class="icofont-close-circled text-center iconErrRegister"></i>
+    <h2 class="text-center textoSuccess">Error al Registrar</h2>
+  </div>
+</ng-template>
+<div>
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Información Básica</ng-template>
+      <div >
+        <h1 class="titulosVisita">Información Básica</h1>
+        <!-- Primer paso INICIO -->
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre Estudiante</mat-label>
+              <input id="postulacionid" matInput [(ngModel)]="postulacionid" placeholder="postulacionid" [value]="postulacionid"  formControlName="postulacionid" type="number">
         </mat-form-field>
-          <div>
-            <div class="row center" style="text-align: center;float: unset;" >
-              <div class="input-field col s12">
-                  <a class="btn waves-effect waves-light red darken-4 "  >Registrar</a>
-              </div>
-              
           </div>
-              
+          <div class="col-3">
+            
+     <mat-form-field class="example-full-width camposInput" appearance="fill" >
+      <mat-label>Apellido</mat-label>
+      <input   matInput placeholder="apellido" value=""  type="text">
+  </mat-form-field>
           </div>
-        </form>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="codigo">Código</mat-label>
+              <input [(ngModel)]="codigo"  id="codigo" matInput placeholder="codigo" [value]="codigo"  formControlName="codigo" type="number">
+          </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="cedula">Número de documento de identidad</mat-label>
+              <input [(ngModel)]="cedula"   id="cedula " matInput placeholder="cedula " [value]="cedula" formControlName="cedula" type="number">
+          </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <h4>Estamento</h4>
+            <mat-radio-group [(ngModel)]="estamento" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Est" [checked]="estamento == 'Est'">Est.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Doc" [checked]="estamento == 'Doc'">Doc.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Empl" [checked]="estamento == 'Empl'">Empl.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Trab" [checked]="estamento == 'Trab'">Trab.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Jub" [checked]="estamento == 'Jub'">Jub.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Pen" [checked]="estamento == 'Pen'">Pen.</mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="telefono">Teléfono</mat-label>
+              <input [(ngModel)]="telefono" matInput formControlName="telefono" id="telefono " [value]="telefono" type="number" class="validate">
+          </mat-form-field>
+
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="celular">Celular</mat-label>
+                  <input matInput [(ngModel)]="celular" formControlName="celular" [value]="celular" id="celular" type="number" class="validate">
+          </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="direccion">Dirección</mat-label>
+                  <input matInput [(ngModel)]="direccion" formControlName="direccion" [value]="direccion" id="direccion" type="text" class="validate">                
+          </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="barrio">Barrio</mat-label>
+                 <input  matInput [(ngModel)]="barrio" formControlName="barrio" id="barrio" [value]="barrio" type="text" class="validate">
+          </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="comuna">Comuna</mat-label>
+                  <input matInput [(ngModel)]="comuna" formControlName="comuna" id="comuna" [value]="comuna" type="number" class="validate">
+          </mat-form-field>
+          </div>
+        </div>
+          </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperNext >Siguente</button>
       </div>
-    </div>
-    
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Información SocioEconómica">
+    <ng-template matStepLabel>Información SocioEconómica</ng-template>
+    <form [formGroup]="secondFormGroup">
+      <div >
+        <h1 class="titulosVisita">Información SocioEconómica</h1>
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="nombreatencion">Nombre de la persona que atendió la entrevista</mat-label>
+                  <input [(ngModel)]="nombreatencion" matInput formControlName="nombreatencion"  id="nombreatencion" [value]="nombreatencion" type="text" class="validate">
+         </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="parentesco">Parentesco</mat-label >
+                  <input [(ngModel)]="parentesco"  matInput formControlName="parentesco" id="parentesco" [value]="parentesco" type="text" class="validate">
+          </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h3 style="text-align: left; margin-left: 2%;" >1.1   Las obligaciones económicas en su casa son asumidas por:</h3>
+            <mat-radio-group [(ngModel)]="obligacion" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Solicitante" [checked]="obligacion == 'Solicitante'">Solicitante.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Padre" [checked]="obligacion == 'Padre'">Padre.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Madre" [checked]="obligacion == 'Madre'">Madre.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn"  value="Conyúge" [checked]="obligacion == 'Conyúge'">Conyúge.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Otro" [checked]="obligacion == 'Otro'">Otro.</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label for="cualobligacion">¿Cuál?</mat-label>
+                <input [(ngModel)]="cualobligacion"  matInput formControlName="cualobligacion" id="cualobligacion"  [value]="cualobligacion" type="text" class="validate">
+          </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h3 style="text-align: left; margin-left: 2%;" >1.2 Estrato según DANE</h3>
+            <mat-radio-group [(ngModel)]="estratodane" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Bajo-Bajo" [checked]="estratodane == 'Bajo-Bajo'">1. Bajo-Bajo</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Bajo" [checked]="estratodane == 'Bajo'">2. Bajo.</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Mediano-Bajo" [checked]="estratodane == 'Mediano-Bajo'">3. Mediano-bajo</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Medio" [checked]="estratodane == 'Medio'">4. Medio</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Medio-Alto" [checked]="estratodane == 'Medio-Alto'">5. Medio-alto</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Alto" [checked]="estratodane == 'Alto'">6. Alto</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <h3  >1.3 ¿Paga Arriendo? </h3>
+            <mat-radio-group [(ngModel)]="pagoarriendo" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Si" [checked]="pagoarriendo == 'Si'">Si</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="No" [checked]="pagoarriendo == 'No'">No</mat-radio-button>
+              <mat-form-field class="example-full-width camposInput" appearance="fill">
+                  <mat-label  for="valorarriendo">¿Valor arriendo?</mat-label >
+                      <input [(ngModel)]="valorarriendo"  matInput formControlName="valorarriendo" id="valorarriendo" [value]="valorarriendo"  type="text" class="validate">
+              </mat-form-field>
+            </mat-radio-group>
+          </div>
+          <div class="col-6">
+            <h3 >¿Qué cubre el arriendo? </h3>
+            <mat-radio-group [(ngModel)]="cubrearriendo" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Cuarto" [checked]="cubrearriendo == 'Cuarto'">Cuarto</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Alimentación" [checked]="cubrearriendo == 'Alimentación'">Alimentación</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label  for="otroarriendo">Otros</mat-label >
+                  <input [(ngModel)]="otroarriendo"  matInput formControlName="otroarriendo" id="otroarriendo"  [value]="otroarriendo" type="text" class="validate">
+          </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h3 style="text-align: left; margin-left: 2%;" >1.4 Fuentes de ingreso del solicitante</h3>
+            <mat-radio-group [(ngModel)]="fuenteingreso" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Trabajo" [checked]="fuenteingreso == 'Trabajo'">Trabajo</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Familia"[checked]="fuenteingreso == 'Familia'" >Familia</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Otros" [checked]="fuenteingreso == 'Otros'">Otros</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label  for="cualfuente">¿Cuáles?</mat-label >
+                  <input [(ngModel)]="cualfuente"  matInput formControlName="cualfuente" id="cualfuente" [value]="cualfuente" type="text" class="validate">
+          </mat-form-field>  
+          </div>
+        </div>
 
 
-    
+                  
+                      </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperPrevious>Atras</button>
+        <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" label="Vivienda">
+    <ng-template matStepLabel>Vivienda</ng-template>
+    <form [formGroup]="thirdFormGroup">
+      <div >
+        <h2  class="titulosVisita" >2. Características de la vivienda</h2>
+        <div class="row">
+          <h3 >2.1</h3>
+          <div class="col-12">
+            <strong>Tipo: </strong>
+            <mat-radio-group [(ngModel)]="tipocasa" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Casa"  [checked]="tipocasa == 'Casa'">Casa</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Apartamento" [checked]="tipocasa == 'Apartemento'">Apartemento</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Cuarto" [checked]="tipocasa == 'Cuarto'">Cuarto</mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <strong>Aspecto físico: </strong>
+            <mat-radio-group [(ngModel)]="aspectocasa"  aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Terminado" [checked]="aspectocasa == 'Terminado'">Terminado</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Obra Negra" [checked]="aspectocasa == 'Obra negra'">Obra negra</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="En Construcción" [checked]="aspectocasa == 'En construcción'">En construcción</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Remodelación" [checked]="aspectocasa == 'Remodelación'">Remodelación</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="otrosAspecto" [checked]="aspectocasa == 'Otro'">Otro</mat-radio-button>
+              </mat-radio-group>
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+                <mat-label for="cualaspecto">¿Cuáles?</mat-label>
+                <input  [(ngModel)]="cualaspecto"  matInput formControlName="cualaspecto" id="cualaspecto" [value]="cualaspecto" type="text" class="validate">
+           </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <strong>Servicios públicos: </strong>
+            <mat-radio-group [(ngModel)]="serviciopublico"   aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Agua" [checked]="serviciopublico == 'Agua'">Agua</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Energía" [checked]="serviciopublico == 'Energía'">Energía</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Alcantarillado" [checked]="serviciopublico == 'Alcantarillado'">Alcantarillado</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Teléfono" [checked]="serviciopublico == 'Teléfono'">Teléfono</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="Gas Domiciliario" [checked]="serviciopublico == 'Gas Domiciliario'">Gas Domiciliario</mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12">
+            <h3 >2.2 Cuarto del solicitante</h3>
+            <mat-radio-group [(ngModel)]="cuartosolicitante"  aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-margin estratoCheck" value="Solo" [checked]="cuartosolicitante == 'Solo'">Solo</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" value="Compartido" [checked]="cuartosolicitante == 'Compartido'">Compartido</mat-radio-button>
+            </mat-radio-group>
+              <mat-form-field class="example-full-width camposInput" appearance="fill">
+                  <mat-label for="cantidadpersonas">¿Con cuántas personas?</mat-label>
+                  <input [(ngModel)]="cantidadpersonas"  matInput formControlName="cantidadpersonas" id="cantidadpersonas" [value]="cantidadpersonas" type="number" class="validate">
+             </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="example-full-width areaDescripcion" style="width:100%;">
+              <mat-label for="descripcionfinal" > Descripción</mat-label>
+              <textarea [(ngModel)]="descripcionfinal"  matInput formControlName="descripcionfinal" id="descripcionfinal" [value]="descripcionfinal" type="text" class="validate" placeholder="Este es un ejemplo.."></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        </div>
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious>Regresar</button>
+          <button mat-raised-button color="primary" (click)="stepper.reset()">Resetear</button>
+          <button mat-raised-button color="primary" (click)="registroVisita(mytemplate)">Registrar</button>
+        </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+  </div>
+</div>
+</div>

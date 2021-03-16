@@ -48,7 +48,7 @@ import { DatePipe } from '@angular/common';
 import { VisitadomiciliariaComponent } from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
-
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   declarations: [
   AppComponent,
@@ -104,7 +104,7 @@ import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarc
   MatIconModule,
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
-
+  MatStepperModule,
   RouterModule.forRoot(ROUTES, { useHash: true }),
   HttpClientModule,
   BrowserAnimationsModule
