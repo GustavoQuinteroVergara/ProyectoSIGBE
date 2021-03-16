@@ -71,7 +71,7 @@ export class LoginComponent {
               localStorage.setItem('currentUser',JSON.stringify(this.usuario));
               this.router.navigate(['/bienvenida']);
             }else{
-              console.log(this.usuario);
+              console.log(resultuser);
               let dialogRef = this.dialog.open( errorcontrasenainvl,{
                 height: '200px',
                 width: '350px',

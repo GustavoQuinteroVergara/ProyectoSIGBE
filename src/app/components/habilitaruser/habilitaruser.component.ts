@@ -20,11 +20,11 @@ buscarEstudiante(codigoestudiante:any){
   console.log(this.estudiante);
 }
 
-updateuser(codigoestudiante:any,estadoseleccionado:any){
+updateuser(identificacion:any,estadoseleccionado:any){
 
   if(estadoseleccionado == true){
       this.updateestudiante={
-        codigoestudiante:codigoestudiante,
+        identificacion:identificacion,
         estadouser:'Inactivo'
 
       };
@@ -37,7 +37,7 @@ updateuser(codigoestudiante:any,estadoseleccionado:any){
   }
   if(estadoseleccionado == false){
     this.updateestudiante={
-      codigoestudiante:codigoestudiante,
+      identificacion:identificacion,
       estadouser:'Activo'
 
     };

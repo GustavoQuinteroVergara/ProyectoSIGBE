@@ -8,14 +8,11 @@
     <div class="buscar" >
 
       <div class="input-group">
-        <input #codigo style="width: 300px;" type="text" class="form-control" placeholder="Ingresar Codigo estudiante">
+        <input #codigo style="width: 300px;" type="text" class="form-control" placeholder="Ingresar identificacion estudiante">
         <span class="input-group-btn">
           <button mat-raised-button class="waves-effect waves-light btn-small" type="button"(click)="buscarEstudiante(codigo.value)" >Buscar</button>
         </span>
       </div>
-
-
-
     </div>
 
     <div >
@@ -34,9 +31,9 @@
 
 
             <td>
-              <a *ngIf="est.estadoestudiante=='Inactivo'" (click)="updateuser(codigo.value,false)"><i class="icofont-checked iconcheckAprobar"></i></a>
+              <a *ngIf="est.estadoestudiante=='Inactivo'" class="" (click)="updateuser(est.identificacion,false)"><i class="icofont-checked iconcheckAprobar botoninvactivo"></i></a>
               {{est.estadoestudiante}}
-              <a *ngIf="est.estadoestudiante =='Activo'" (click)="updateuser(codigo.value,true)"><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>     
+              <a *ngIf="est.estadoestudiante =='Activo'" class="botoninvactivo" (click)="updateuser(est.identificacion,true)"><i class="icofont-close-squared-alt iconcloseAprobar botoninvactivo"></i></a>     
             </td>
           </tr>
         </tbody>

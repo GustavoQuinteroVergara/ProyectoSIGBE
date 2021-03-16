@@ -10,8 +10,31 @@
   </div>
 </ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
-  <div class="formtiq">
-    <div >
+  <div class="formtiq row">
+    <div class="col-6">
+      <h1>Configuración Actual</h1>
+      <hr>
+      <ul>
+        <li><h4>Tarifas de los tickets</h4></li>
+        <li> 
+          <ul>
+            <li>Tarifa ticket almuerzo sin beneficio : <strong>{{configuracionlist.valorticketalmuerzo}}</strong></li> 
+            <li>Tarifa ticket refrigerio sin beneficio : <strong>{{configuracionlist.valorticketrefrigerio}}</strong></li> 
+            <li>Tarifa ticket almuerzo con beneficio : <strong>{{configuracionlist.valorticketalmuerzobeneficiario}}</strong></li> 
+            <li>Tarifa ticket refrigerio con beneficio : <strong>{{configuracionlist.valorticketrefrigeriobeneficiario}}</strong></li> 
+          </ul>
+        </li>
+        <hr>
+        <li>
+          <h4>Horarios de venta de tickets</h4>
+          <ul>
+            <li>Horario venta de ticket de almuerzo: <strong>{{configuracionlist.horainicioVentaAlmuerzo}} - {{configuracionlist.horaFinVentaAlmuerzo}}</strong></li>
+            <li>Horario venta de ticket de refrigerio : <strong>{{configuracionlist.horainicioVentaRefrigerio}} - {{configuracionlist.horaFinVentaRefrigerio}}</strong></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
       <form >
         <h1 class="tituloConfiguracion"> Modificar Configuración</h1>
         <hr>

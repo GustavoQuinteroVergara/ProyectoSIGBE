@@ -76,17 +76,31 @@
 									</mat-form-field>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" *ngIf="tipoBeca == 'Ticket Almuerzo'">
 								<div class="col s12" *ngIf="confirmacionBeneficiario">
 									<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
 									<div class="input-field col s12 center">
-										<span>Tarifa: <h1>1500</h1></span>
+										<span>Tarifa: <h1>{{configuracionBack.valorticketalmuerzobeneficiario}}</h1></span>
 									</div>
 								</div>
 								<div class="row" *ngIf="!confirmacionBeneficiario">
 									<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
 									<div class="input-field col s6">
-										<span>Tarifa: <h1>2000</h1></span>
+										<span>Tarifa: <h1>{{configuracionBack.valorticketalmuerzo}}</h1></span>
+									</div>
+								</div>
+							</div>
+							<div class="row" *ngIf="tipoBeca == 'Ticket Refrigerio'">
+								<div class="col s12" *ngIf="confirmacionBeneficiario">
+									<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
+									<div class="input-field col s12 center">
+										<span>Tarifa: <h1>{{configuracionBack.valorticketrefrigeriobeneficiario}}</h1></span>
+									</div>
+								</div>
+								<div class="row" *ngIf="!confirmacionBeneficiario">
+									<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
+									<div class="input-field col s6">
+										<span>Tarifa: <h1>{{configuracionBack.valorticketrefrigerio}}</h1></span>
 									</div>
 								</div>
 							</div>
