@@ -11,7 +11,7 @@
     </div>       
 </ng-template>
  <ng-template #errorpostuexistente>
-    <div *ngIf="!success" class="dialogSuccess" >
+    <div class="dialogSuccess" >
         <i class="icofont-close-circled text-center iconErrRegister"></i>
         <h2 class="text-center textoSuccess">Error al registrarse,ya has registrado una postulación de esta convocatoria</h2>
     </div>       
@@ -124,6 +124,20 @@
       <input matInput #identificacion id="icon_prefix" style="font-weight: 600;" value="{{this.$nombreusuario.identi}}" disabled="true" readonly type="text" class="validate inputidenuser">
   </mat-form-field>
 </div>
+        <div class="input-field col s12">
+            <h4>Selecciona tu carrera para postularte</h4>
+            <mat-form-field appearance="fill">
+              <mat-select #carrera required formControlName="carrera">
+                <mat-option>-- Selecciona una carrera --</mat-option>
+                <mat-option *ngFor="let carrera of carrerasest" [value]="carrera.idusuariocarrera" >
+                {{carrera.carrera}}</mat-option>
+            </mat-select>
+            <mat-label> <b> Carreras</b></mat-label>
+        </mat-form-field>
+        <div *ngIf="myForm.get('convo').errors && myForm.get('convo').dirty">
+            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo carrera vacio.</p>
+        </div>
+    </div>
 </div>
 <!-- SUBIR DOCUMENTOS -->
     <div class="row">
@@ -204,7 +218,7 @@
 
 <div class="row center mt-4">
     <div class="input-field col s12 text-center">
-        <button (click)="registrarPostulacion(promedio.value,semestre.value,identificacion.value,convo.value,mytemplate,errorpostuexistente)" mat-raised-button color="primary" ><i class="icofont-save left"></i> <span class="buttontext">Registrar Postulacion</span></button>
+        <button (click)="registrarPostulacion(promedio.value,semestre.value,carrera.value,identificacion.value,convo.value,mytemplate,errorpostuexistente)" mat-raised-button color="primary" ><i class="icofont-save left"></i> <span class="buttontext">Registrar Postulacion</span></button>
     </div>
 </div>
 </form>

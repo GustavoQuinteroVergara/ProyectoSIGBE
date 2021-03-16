@@ -68,16 +68,16 @@
 }
 
 .imagelogin{
-    width: 50%;
+    width: 30%;
     height: 100%;
-    background-image: url(../../../assets/imgs/uvpalmira.jpg);
+    background-image: url(../../../assets/imgs/bck2.jpg);
     background-size: cover;
     display: inline-block;
 }
 
 .rowloginn{
     display: inline-block;
-    width: 49%;
+    width: 69%;
     height: 100%;
     vertical-align: top;
     --bs-gutter-x: 0 !important;

@@ -11,17 +11,23 @@ export class ConfiguracionComponent implements OnInit {
   modificarConfig:any[]=[];
   archivoModificado:any;
   options:any[]=[];
+  configuracionlist:any;
   selection:Number;
   showvalor:boolean=false;
   showfecha:boolean=false;
   date:any;
   success:any;
   public formPrecios: FormGroup;
-  constructor(private servicioConfiguracion:ConfiguracionService, public dialog: MatDialog) {}
+  constructor(private servicioConfiguracion:ConfiguracionService, public dialog: MatDialog) {
+    this.getConfiguracion();
+
+  }
   ngOnInit(): void {
     this.options=[
       {id:0,name:"Precio Almuerzo"},
       {id:1,name:"Precio Refrigerio"},
+      {id:6,name:"Precio Almuerzo Beneficiario"},
+      {id:7,name:"Precio Refrigerio Beneficiario"},
       {id:2,name:"Hora inicio almuerzo "},
       {id:3,name:"Hora fin almuerzo "},
       {id:4,name:"Hora inicio refrigerio "},
@@ -35,8 +41,14 @@ export class ConfiguracionComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) =>{
     return this.formPrecios.controls[controlName].hasError(errorName);
   }
+
+  getConfiguracion(){
+    this.servicioConfiguracion.listarConfiguracion().subscribe(result=>{
+      this.configuracionlist = result;
+    });
+  }
   opcionSeleccionada(val:any){
-    if (val==0 || val==1) {
+    if (val==0 || val==1 || val==6 || val == 7) {
       this.showvalor= true;
       this.showfecha = false;
     }else{

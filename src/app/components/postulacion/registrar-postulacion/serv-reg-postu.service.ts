@@ -19,8 +19,8 @@ export class ServRegPostuService {
   	}));
   }
 
-  buscarPostuByIdConvo(idconvo:any){
-  	return this.http.get(`${this.url}app/componentes/postulacion/createpostulacion.php?idconvo=${idconvo}`);
+  buscarPostuByIdConvo(idconvo:any,identi:any){
+  	return this.http.get(`${this.url}app/componentes/postulacion/postulacionbyidconvo.php?idconvo=${idconvo}&iduser=${identi}`);
   
   }
 }

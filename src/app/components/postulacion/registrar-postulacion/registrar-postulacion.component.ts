@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';  
 import {ListconvoactivasService} from './listconvoactivas.service';
 import {ServRegPostuService} from './serv-reg-postu.service';
+import {UsuariocarreraService} from '../../../services/usuariocarrera.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
@@ -14,6 +15,7 @@ export class RegistrarPostulacionComponent  {
   convoActivas: any;
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
   postulacionRegistrar:any;
+  carrerasest:any;
   success:any;
   myForm: FormGroup;
   varsel:any;
@@ -57,13 +59,16 @@ export class RegistrarPostulacionComponent  {
   constructor(private listconvoactivas:ListconvoactivasService,
     public fb: FormBuilder,
     private registrarpostu:ServRegPostuService,
-    public dialog: MatDialog) { 
+    public dialog: MatDialog,
+    public usuariocarreraService:UsuariocarreraService) { 
   	this.buscarConvoActivas();
+    this.getCarrerasEst();
     this.myForm = this.fb.group({
       convo: ['', [Validators.required]],
       promedio: ['', [Validators.required]],
       semestre: ['', [Validators.required]],
       d10 :['', [Validators.required]],
+      carrera :['', [Validators.required]],
       factservicio :['', [Validators.required]],
       cartapeticion :['', [Validators.required]],
       carnetestudiante :['', [Validators.required]],
@@ -87,7 +92,12 @@ export class RegistrarPostulacionComponent  {
     this.convosel = convosel;
 
     console.log(this.convosel);
+  }
 
+  getCarrerasEst(){
+    this.usuariocarreraService.carrerasEst(this.$nombreusuario.identi).subscribe(result=>{
+      this.carrerasest = result;
+    });
   }
 
   buscarConvoActivas(){
@@ -114,9 +124,10 @@ export class RegistrarPostulacionComponent  {
 
 
 
-  registrarPostulacion(promedio:any,semestre:any,usuario:any,convocatoria:any,templateRef,errorpostuexistente){
+  registrarPostulacion(promedio:any,semestre:any,carrera:any,usuario:any,convocatoria:any,templateRef,errorpostuexistente){
     this.postulacionRegistrar= {promedio:promedio,
                                 semestre:semestre,
+                                carrera:carrera,
                                 estado_postulacion:1,
                                 usuario:usuario,
                                 convocatoria:convocatoria,
@@ -137,9 +148,13 @@ export class RegistrarPostulacionComponent  {
                                 recibopagomatricula :"0|-|" +this.listDocsupload['recibopagomatricula'],
                                 certificadoingresos :"0|-|" +this.listDocsupload['certificadoingresos']
     };
-    this.registrarpostu.buscarPostuByIdConvo(convocatoria.consecutivoconvo).subscribe(result=>{
+    this.registrarpostu.buscarPostuByIdConvo(convocatoria.consecutivoconvo,this.$nombreusuario.identi).subscribe(result=>{
 
-
+        let dialogRef = this.dialog.open( errorpostuexistente,{
+          height: '263px',
+          width: '350px',
+        });
+    },(err)=>{
         this.registrarpostu.registrarPostulacion(this.postulacionRegistrar).subscribe(res =>{
          this.success = true;
          let dialogRef = this.dialog.open( templateRef,{
@@ -154,13 +169,6 @@ export class RegistrarPostulacionComponent  {
               width: '350px',
             });
           });
-
-    },(err)=>{
-        let dialogRef = this.dialog.open( errorpostuexistente,{
-          height: '263px',
-          width: '350px',
-        });
-        // console.log('ERROR: ' + err.error.text);
       });
     
 
