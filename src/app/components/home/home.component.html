@@ -13,6 +13,16 @@
       <h2 class="text-center textoSuccess">Periodo creado exitosamente</h2>
     </div>
   </ng-template>
+  <ng-template #mytemplate>
+    <div *ngIf="success" class="dialogSuccess">
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
+    </div>
+    <div *ngIf="!success" class="dialogSuccess">
+      <i class="icofont-close-circled text-center iconErrRegister"></i>
+      <h2 class="text-center textoSuccess">Error al actualizar</h2>
+    </div>
+  </ng-template>
 
 
   <div  class="dialogSuccess" >
@@ -22,7 +32,7 @@
         <div class="text-right divbotonexit">
           <a class="buttonCerrarse" data-title="Cerrar sesión" (click)="cerrarSesion()"><i class="icofont-exit iconexitperiodo"></i></a>
         </div>
-        <h1>Registrar un periodo</h1>
+        <h1>REGISTRAR UN PERIODO</h1>
 
         <hr>
 
@@ -41,7 +51,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-<h4>Selecciona las fechas del periodo</h4>
+          <h4>Selecciona las fechas del periodo</h4>
 						<mat-form-field appearance="fill" class="inputFechas" style="width: 100%;">
 						<mat-label>Selecciona las fechas del periodo</mat-label>
 						<mat-date-range-input [rangePicker]="picker">
@@ -90,20 +100,12 @@
               </div>
             </div>
           </div>
-
         </section>            
       </div>
-<!--       <div class="divulbuttonslider">
-        <ul class="ulbuttonslider">
-          <li class="lislider"><a href="#element1"><div class="ilink"></div></a></li>
-          <li class="lislider"><a href="#element2"><div class="ilink"></div></a></li>
-          <li class="lislider"><a href="#element3"><div class="ilink"></div></a></li>
-        </ul>
-      </div> -->
     </div>
     <div data-aos="zoom-in-down" data-aos-once="true" class="info" id="infotextid">
       <div class="titlediv">
-        <h1 class="titlesigbe">¿Qué es SIGBE?</h1>
+        <h1 class="titlesigbe">¿QUÉ ES SIGBE?</h1>
       </div>
       <div>
         <div class="divimginfo">
@@ -141,7 +143,7 @@
     </div>
     <div data-aos="zoom-in-down" data-aos-once="true" class="info" id="infoprogramass">
       <div class="titlediv">
-        <h1 class="titlesigbe">Apoyos de bienestar universitario</h1>
+        <h1 class="titlesigbe">APOYOS DE BIENESTAR UNIVERSITARIO</h1>
       </div>
       <div class="apoyosinfo">
         <div class="apoyoinfo apoyoinfo1">
@@ -149,7 +151,7 @@
             <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
-            Programa de jovenes en acción
+            Programa de jóvenes en acción
           </div>
         </div>
         <div  class="apoyoinfo apoyoinfo2">
@@ -157,7 +159,7 @@
             <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
-            Monitorias especiales para estudiantes en situacion de discapacidad
+            Monitorias especiales para estudiantes en situación de discapacidad
           </div>
         </div>
         <div  class="apoyoinfo apoyoinfo3">
@@ -173,7 +175,7 @@
             <img src="assets/imgs/uv.png" width="40px">
           </div>
           <div class="cardtexts">
-            Subsidio socioeconomico para estudiantes de escasos recursos
+            Subsidio socioeconómico para estudiantes de escasos recursos
           </div>
         </div>
         <div  class="apoyoinfo apoyoinfo5">
@@ -186,7 +188,7 @@
         </div>
       </div>
       <div class="divbuttonconocemas">
-        <a class="buttonconocemas" href="https://sites.google.com/correounivalle.edu.co/bienestar-universitario/secci%C3%B3n-de-desarrollo-humano-y-promoci%C3%B3n-socioeconomica?authuser=0" target="_blank">Conoce mas</a>
+        <a class="buttonconocemas" href="https://sites.google.com/correounivalle.edu.co/bienestar-universitario/secci%C3%B3n-de-desarrollo-humano-y-promoci%C3%B3n-socioeconomica?authuser=0" target="_blank">Conoce más</a>
       </div>
       
     </div>
@@ -198,8 +200,8 @@
     <div class="wrap ">
       <div class="row rowpanelbienestar" data-aos="zoom-in-down" data-aos-once="true">
         <div class="col-12">
-          <h1 *ngIf="this.$nombreusuario.rol =='2'">Panel administrativo - Bienestar universitario</h1>
-          <h1 *ngIf="this.$nombreusuario.rol !='2'">Panel administrativo - Psicologia</h1>
+          <h1 *ngIf="this.$nombreusuario.rol =='2'">PANEL ADMINISTRATIVO - Bienestar Universitario</h1>
+          <h1 *ngIf="this.$nombreusuario.rol !='2'">PANEL ADMINISTRATIVO - Psicología</h1>
           <hr>
         </div>
         <div class="row col-12" *ngFor="let infocol of infoColores">
@@ -209,7 +211,7 @@
            </div>
            <div class="infocount">
             <h1>{{infocol.numeropostu}}</h1>
-            <span>Postulaciones hechas</span>
+            <span>POSTULACIONES HECHAS</span>
           </div>
         </div>
         <div class="col-4 infogreen">
@@ -218,7 +220,7 @@
          </div>
          <div class="infocount">
           <h1>{{infocol.numerouser}}</h1>
-          <span>Estudiantes registrados</span>
+          <span>ESTUDIANTES REGISTRADOS</span>
         </div>
       </div>
       <div class="col-4 infoyellow">
@@ -227,7 +229,7 @@
         </div>
         <div class="infocount">
           <h1>{{infocol.numeroconvo}}</h1>
-          <span>Convocatorias realizadas</span>
+          <span>CONVOCATORIAS REALIZADAS </span>
         </div>
       </div>
       <div class="col-4 infored">
@@ -236,7 +238,7 @@
        </div>
        <div class="infocount">
         <h1>{{infocol.numerotickets}}</h1>
-        <span>Tiquetes reservados</span>
+        <span>TIQUETES RESERVADOS</span>
       </div>
     </div>
 
@@ -247,7 +249,7 @@
 <div class="row col-12 rowpanelbienestargrafica" data-aos="zoom-in-down" data-aos-once="true">
   <div class="col-7 graficainfo">
     <div class="titulografica">
-      <h1>Postulaciones por zonas residenciales</h1>
+      <h1>POSTULACIONES POR ZONAS RESIDENCIALES</h1>
     </div>
     <div class="imggrafica">
        <canvas id="realtime">{{ chart }}</canvas>
@@ -257,17 +259,16 @@
 
   <div class="col-4 tablainfopostus">
     <div class="titulografica">
-      <h1>Postulaciones en espera</h1>
+      <h1>POSTULACIONES EN ESPERA</h1>
     </div>
     
-
     <table class="table table-bordered table-striped mb-0">
       <thead>
         <tr>
           <th scope="col">Nombre</th>
           <th scope="col">Estrato</th>
           <th scope="col">Tipo beca</th>
-          <th scope="col">Revision</th>
+          <th scope="col">Revisión</th>
         </tr>
       </thead>
       <tbody>
@@ -278,16 +279,15 @@
           <td>{{postus.estado}}</td>
           <td><a (click)="buscarEstPostuByIden(mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
         </tr>
-
       </tbody>
     </table>
   </div>
-
 </div>
+
 <div class="row col-12 rowpanelbienestargrafica mt-4" data-aos="zoom-in-down" data-aos-once="true">
     <div class="col-7 graficainfo">
     <div class="titulografica">
-      <h1>Postulaciones por carrera y beca</h1>
+      <h1>POSTULACIONES POR CARRERA Y BECA</h1>
     </div>
     <div>
 <!--       <div class="center">
@@ -311,8 +311,6 @@
       <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
     </div>
   </div>
-
-
-</div>
-</div>
+    </div>
+  </div>
 </div>

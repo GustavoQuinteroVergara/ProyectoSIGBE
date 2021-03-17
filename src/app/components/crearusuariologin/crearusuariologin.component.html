@@ -3,7 +3,7 @@
   <ng-template #mytemplate>
     <div *ngIf="success" class="dialogSuccess">
       <i class="icofont-ui-check text-center iconSuccessRegister"></i>
-      <h2 class="text-center textoSuccess">Registro exitoso (espere activacion de bienestar)</h2>
+      <h2 class="text-center textoSuccess">Registro exitoso (espere activación de bienestar)</h2>
     </div>
     <div *ngIf="!success" class="dialogSuccess">
       <i class="icofont-close-circled text-center iconErrRegister"></i>
@@ -46,7 +46,7 @@
       </div>
       <hr>
       <div>
-        <h1 class="text-center">Registro estudiantil</h1>
+        <h1 class="text-center">REGISTRO ESTUDIANTIL </h1>
       </div>
       <div class="row"> 
         <div class="input-field col-3">
@@ -59,8 +59,8 @@
           </mat-form-field>
           <div *ngIf="formulariologin.get('identificacion').errors && formulariologin.get('identificacion').dirty">
             <mat-error *ngIf="formulariologin.get('identificacion').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('identificacion').hasError('minlength')"><br>Se debe ingresar minimo 6 caracteres</mat-error>
-            <mat-error *ngIf="formulariologin.get('identificacion').hasError('pattern')"><br>solo numeros</mat-error>
+            <mat-error *ngIf="formulariologin.get('identificacion').hasError('minlength')"><br>Se debe ingresar mÍnimo 6 caracteres</mat-error>
+            <mat-error *ngIf="formulariologin.get('identificacion').hasError('pattern')"><br>Solo números</mat-error>
           </div>
         </div> 
 
@@ -74,7 +74,7 @@
           </mat-form-field>
           <div *ngIf="formulariologin.get('nombre').errors && formulariologin.get('nombre').dirty">
             <mat-error *ngIf="formulariologin.get('nombre').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('nombre').hasError('minlength')">Se debe ingresar minimo 3 caracteres</mat-error>
+            <mat-error *ngIf="formulariologin.get('nombre').hasError('minlength')">Se debe ingresar mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="formulariologin.get('nombre').hasError('pattern')">Solo letras</mat-error>
           </div>
         </div>
@@ -87,7 +87,7 @@
           </mat-form-field>
           <div *ngIf="formulariologin.get('apellido').errors && formulariologin.get('apellido').dirty">
             <mat-error *ngIf="formulariologin.get('apellido').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('apellido').hasError('minlength')"><br>Se debe ingresar minimo 3 caracteres</mat-error>
+            <mat-error *ngIf="formulariologin.get('apellido').hasError('minlength')"><br>Se debe ingresar mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="formulariologin.get('apellido').hasError('pattern')"><br>Solo letras</mat-error>
           </div>
         </div>
@@ -100,7 +100,7 @@
           </mat-form-field>
           <div *ngIf="formulariologin.get('direccion').errors && formulariologin.get('direccion').dirty">
             <mat-error *ngIf="formulariologin.get('direccion').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('direccion').hasError('minlength')"><br>Se debe ingresar minimo 3 caracteres</mat-error>
+            <mat-error *ngIf="formulariologin.get('direccion').hasError('minlength')"><br>Se debe ingresar mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="formulariologin.get('direccion').hasError('pattern')"><br>Solo letras</mat-error>
           </div>
         </div>
@@ -194,8 +194,8 @@
             <i matSuffix class="icofont-email iconito "></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('email').errors && formulariologin.get('email').dirty">
-            <mat-error *ngIf="formulariologin.get('email').hasError('email')"><br>Correo no valido</mat-error>
-            <mat-error *ngIf="formulariologin.get('email').hasError('pattern')"><br>debe terner correo univalle</mat-error>
+            <mat-error *ngIf="formulariologin.get('email').hasError('email')"><br>El correo no es válido</mat-error>
+            <mat-error *ngIf="formulariologin.get('email').hasError('pattern')"><br>Debe tener correo univalle</mat-error>
             <mat-error *ngIf="formulariologin.get('email').hasError('required')">Este campo es obligatoria</mat-error>
           </div>
         </div>
@@ -208,7 +208,7 @@
           </mat-form-field>
           <div *ngIf="formulariologin.get('contrasena').errors && formulariologin.get('contrasena').dirty">
             <mat-error *ngIf="formulariologin.get('contrasena').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('contrasena').hasError('minlength')"><br>Se debe ingresar minimo 7 caracteres</mat-error>
+            <mat-error *ngIf="formulariologin.get('contrasena').hasError('minlength')"><br>Se debe ingresar mínimo 7 caracteres</mat-error>
           
           </div>
         </div>
@@ -231,8 +231,8 @@
           </mat-form-field>
           <div *ngIf="formulariologin.get('codigo').errors && formulariologin.get('codigo').dirty">
             <mat-error *ngIf="formulariologin.get('codigo').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('codigo').hasError('minlength')">Se debe ingresar minimo 5 caracteres </mat-error>
-            <mat-error *ngIf="formulariologin.get('codigo').hasError('pattern')"> <br>solo numeros</mat-error>
+            <mat-error *ngIf="formulariologin.get('codigo').hasError('minlength')">Se debe ingresar mínimo 5 caracteres </mat-error>
+            <mat-error *ngIf="formulariologin.get('codigo').hasError('pattern')"> <br>Solo números</mat-error>
           </div>
         </div>
       </div>  
