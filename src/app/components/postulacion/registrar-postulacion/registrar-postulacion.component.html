@@ -139,78 +139,15 @@
         </div>
     </div>
 </div>
-<!-- SUBIR DOCUMENTOS -->
-    <div class="row">
-        <hr>
-        <h1>Documentos solicitados</h1>
-        <hr>
-     <div class="col s6" *ngIf="convosel.documentoestudiante">
-        <h4>Fotocopia C.C estudiante</h4>
-          <input #documentoestudiante formControlName="documentoestudiante" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'documentoestudiante')">
-        </div>
-       <div class="col s6" *ngIf="convosel.documentoacudiente">
-        <h4>Fotocopia C.C acudiente</h4>
-          <input #documentoacudiente formControlName="documentoacudiente" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'documentoacudiente')">
-        </div>
-        <div class="col s6" *ngIf="convosel.recibopagomatricula">
-            <h4>Fotocopia recibo pago matricula</h4>
-          <input #recibopagomatricula formControlName="recibopagomatricula" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'recibopagomatricula')">
-        </div>
-    <div class="col s6" *ngIf="convosel.factservicio">
-                <h4>Fotocopia recibo servicio público</h4>
-          <input #factservicio formControlName="factservicio" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'factservicio')">
-        </div>
-        <div class="col s6" *ngIf="convosel.tabulado">
-        <h4>Fotocopia Tabulado</h4>            
-          <input #tabulado formControlName="tabulado" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'tabulado')">
-        </div>
-        
-         <div class="col s6" *ngIf="convosel.certificadoingresos">
-            <h4>Certificado ingresos y retenciones</h4>
-          <input #certificadoingresos formControlName="certificadoingresos" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'certificadoingresos')">
-        </div>
-            <div class="col s6" *ngIf="convosel.formatosolicitudbeneficio">
-            <h4>Formato de solicitud de beca</h4>
-          <input #formatosolicitudbeneficio formControlName="formatosolicitudbeneficio" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'formatosolicitudbeneficio')">
-        </div>
-            <div class="col s6" *ngIf="convosel.cartapeticion">
-                <h4>Carta de solicitud de beneficio</h4>
-          <input #cartapeticion formControlName="cartapeticion" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'cartapeticion')">
-        </div>
-            <div class="col s6" *ngIf="convosel.certificadovencidad">
-                <h4>Declaración juramentada de vecindad</h4>
-          <input #certificadovencidad formControlName="certificadovencidad" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'certificadovencidad')">
-        </div>
-            <div class="col s6" *ngIf="convosel.constanciaweb">
-                <h4>Constacia solicitud vía web</h4>
-          <input #constanciaweb formControlName="constanciaweb" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'constanciaweb')">
-        </div>
-            <div class="col s6" *ngIf="convosel.promedioacumulado">
-                <h4>Promedio académico acumulado</h4>
-          <input #promedioacumulado formControlName="promedioacumulado" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'promedioacumulado')">
-        </div>
-            <div class="col-6" *ngIf="convosel.diagnosticomedico">
-                <h4>Fotocopia diagnostico médico</h4>
-          <input #diagnosticomedico formControlName="pdiagnosticomedicodf" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'diagnosticomedico')">
-        </div>
-            <div class="col s6" *ngIf="convosel.d10">
-                <h4>Formato D10</h4>
-          <input #d10 formControlName="d10" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'d10')">
-        </div>
-            <div class="col s6" *ngIf="convosel.cedulapadre">
-                <h4>Fotocopia cédula padre</h4>
-          <input #cedulapadre formControlName="cedulapadre" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'cedulapadre')">
-        </div>
-            <div class="col s6" *ngIf="convosel.cedulamadre">
-                <h4>Fotocopia cédula madre</h4>
-          <input #cedulamadre formControlName="cedulamadre" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'cedulamadre')">
-        </div>
-        <div class="col s6" *ngIf="convosel.carnetestudiante">
-            <h4>Carnet Estudiante</h4>
-          <input #carnetestudiante formControlName="carnetestudiante" type="file" accept="application/pdf" (change)="seleccionarArchivo($event,'carnetestudiante')">
-        </div> 
 
-    <!-- FIN SUBIR DOCUMENTOS -->
+<div>
+<div class="row" *ngFor="let docsarchivos of docsconvosel">
+        <div class="col-6">
+            <h4>{{docsarchivos.nombredoc}}</h4>
+            <input type="file" accept="application/pdf" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">   
+        </div>
+</div>
+
     </div>
 </div>
 

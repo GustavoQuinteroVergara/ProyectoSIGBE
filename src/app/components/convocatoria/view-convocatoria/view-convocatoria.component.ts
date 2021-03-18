@@ -3,7 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {ServicesViewConvocatoriaService} from './services-view-convocatoria.service';
 import {ServiciolistarconvoService} from './../../listarconvocatoria/serviciolistarconvo.service';
+import {DocumentoService} from '../../../services/documento.service';
 import {PostulacionService} from '../../../services/postulacion.service';
+import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {RegistrarConvoServiceService} from '../registrar-convocatoria/registrar-convo-service.service';
 import {Router } from '@angular/router';
@@ -21,6 +23,8 @@ export class ViewConvocatoriaComponent {
   loading=false;
   nuevoarreglo:any;
   convoActualizado:any;
+  documentosFoundpostu:any;
+  listActualizar:any;
   listadoDocsActualizar:any;
   observacion='';
   //Colores barra progreso
@@ -54,39 +58,13 @@ export class ViewConvocatoriaComponent {
   //fin Colores barra progreso
 
   updatePostu:any;
+  loadingcc = false;
   Docsestados={};
-  listDocs= [
-    "d10", 
-    "factservicio", 
-    "cartapeticion", 
-    "carnetestudiante", 
-    "cedulapadre", 
-    "cedulamadre" ,
-    "promedioacumulado" ,
-    "tabulado" ,"constanciaweb" ,"certificadovencidad" ,"documentoestudiante" 
-    ,"documentoacudiente" ,"formatosolicitudbeneficio" ,"diagnosticomedico",
-    "recibopagomatricula" ,"certificadoingresos"];
+  listDocs= [];
   postuseltable:any;
   estadopostusel=0;
-
-
-//DOCUMENTOS VARIABLES INICIO
-  d10 = '';
-  factservicio = '';
-  cartapeticion = '';
-  carnetestudiante = '';
-  cedulapadre = '';
-  cedulamadre = '';
-  promedioacumulado = '';
-  tabulado = '';
-  constanciaweb = '';
-  certificadovencidad = '';
-  documentoestudiante = '';
-  documentoacudiente = '';
-  formatosolicitudbeneficio = '';
-  diagnosticomedico  = '';
-  recibopagomatricula = '';
-  certificadoingresos = '';
+  visitaPostuFound:any;
+  visitavalidate=false;
 
   //FIN VARIABLES DOCUMENTOS
 
@@ -103,6 +81,8 @@ export class ViewConvocatoriaComponent {
    private serviceviewconvocatoria:ServicesViewConvocatoriaService,public dialog: MatDialog, 
    private serviceConvocatoria:RegistrarConvoServiceService,
    private servicePostulacion:PostulacionService,
+   private documentosService:DocumentoService,
+   private visitadomiciliariaService:VisitadomiciliariaService,
    private router:Router,
    private excelService: ExporterService ) { 
     this.$idConvo = this.rutaActiva.snapshot.params.idConvo;
@@ -125,23 +105,8 @@ export class ViewConvocatoriaComponent {
 
     this.listadoDocsActualizar = {
         idpost:this.postuseltable.consecutivo_postulacion,
-        d10:this.d10 + "|-|" +this.postuseltable.d10.split("|-|")[1],
-        factservicio:this.factservicio + "|-|" +this.postuseltable.factservicio.split("|-|")[1],
-        cartapeticion:this.cartapeticion + "|-|" +this.postuseltable.cartapeticion.split("|-|")[1],
-        carnetestudiante:this.carnetestudiante + "|-|" +this.postuseltable.carnetestudiante.split("|-|")[1],
-        cedulapadre:this.cedulapadre + "|-|" +this.postuseltable.cedulapadre.split("|-|")[1],
-        cedulamadre:this.cedulamadre + "|-|" +this.postuseltable.cedulamadre.split("|-|")[1],
-        promedioacumulado:this.promedioacumulado + "|-|" +this.postuseltable.promedioacumulado.split("|-|")[1],
-        tabulado:this.tabulado + "|-|" +this.postuseltable.tabulado.split("|-|")[1],
-        constanciaweb:this.constanciaweb+ "|-|" +this.postuseltable.constanciaweb.split("|-|")[1],
-        certificadovencidad:this.certificadovencidad+ "|-|" +this.postuseltable.certificadovencidad.split("|-|")[1],
-        documentoestudiante:this.documentoestudiante + "|-|" + this.postuseltable.documentoestudiante.split("|-|")[1],
-        documentoacudiente:this.documentoacudiente+ "|-|" +this.postuseltable.documentoacudiente.split("|-|")[1],
-        formatosolicitudbeneficio:this.formatosolicitudbeneficio+ "|-|" +this.postuseltable.formatosolicitudbeneficio.split("|-|")[1],
-        diagnosticomedico:this.diagnosticomedico+ "|-|" +this.postuseltable.diagnosticomedico.split("|-|")[1],
-        recibopagomatricula:this.recibopagomatricula+ "|-|" +this.postuseltable.recibopagomatricula.split("|-|")[1],
-        certificadoingresos:this.certificadoingresos + "|-|" +this.postuseltable.certificadoingresos.split("|-|")[1],
-        observacion:this.observacion
+        observacion:this.observacion,
+        listEstadosDocs:this.listDocs
     };
 
       this.servicePostulacion.actualizarEstadosDocs(this.listadoDocsActualizar).subscribe(result =>{
@@ -153,6 +118,47 @@ export class ViewConvocatoriaComponent {
         console.log(err);
       });
 
+  }
+
+  getDocumntosPostu(idPostu:any){
+    this.documentosService.getDocumentsPostu(idPostu).subscribe(result=>{
+        this.documentosFoundpostu = result;
+    });
+  }
+
+  getVisitaPostu(idPostu:any){
+    this.visitavalidate=false;
+    this.visitadomiciliariaService.listVisitaPostu(idPostu).subscribe(result=>{
+      this.visitaPostuFound = result;
+      this.visitavalidate =true;
+    },(err)=>{
+      this.visitavalidate=false;
+    });
+  }
+
+  checkboxEstados(concecutivodoc:any,estadovalor:any){
+
+    this.listActualizar = {
+      concecutivodoc:concecutivodoc,
+      estadonuevo:estadovalor
+    };
+    var encontrado = false;
+    for (var i = 0; i < this.listDocs.length; i++) {
+      if(this.listDocs[i].concecutivodoc == concecutivodoc){
+        encontrado = true;
+        this.listDocs[i].estadonuevo = estadovalor;
+      }
+    }
+    if (!encontrado) {
+      this.listDocs.push(this.listActualizar);
+    }
+  }
+
+  verVisitaModal(visitaModal){
+    let dialogRef = this.dialog.open( visitaModal,{
+       height: '500px',
+       width: '700px',
+    });
   }
 
   //Metodo actualizar formconvo
@@ -192,7 +198,7 @@ export class ViewConvocatoriaComponent {
 
     });}
   actualizarConvocatoria(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
-    fecha_inicio:any,fecha_fin:any,estado_convocatoria:any){
+    fecha_inicio:any,fecha_fin:any,estado_convocatoria:any,successactualizacion){
     this.convoActualizado= {
       consecutivo_convocatoria:consecutivo_convocatoria,
       cupo:cupo,
@@ -204,7 +210,10 @@ export class ViewConvocatoriaComponent {
     };
     this.serviceviewconvocatoria.actualizarListConvocatorias(this.convoActualizado).subscribe
     (res=>{
-
+          let dialogRef = this.dialog.open( successactualizacion,{
+           height: '150px',
+           width: '165px',
+         });
     },(err)=>{
       //console.log('ERROR: ' + err.error.text);
       
@@ -212,22 +221,8 @@ export class ViewConvocatoriaComponent {
   verPostuSel(idpostu:any, estado_postu:any, postu:any ,templatePostu){
     this.postuseltable = postu;
     this.observacion = this.postuseltable.coments;
-    this.d10=this.postuseltable.d10.split("|-|")[0];
-    this.factservicio=this.postuseltable.factservicio.split("|-|")[0];
-    this.cartapeticion=this.postuseltable.cartapeticion.split("|-|")[0];
-    this.carnetestudiante=this.postuseltable.carnetestudiante.split("|-|")[0];
-    this.cedulapadre=this.postuseltable.cedulapadre.split("|-|")[0];
-    this.cedulamadre=this.postuseltable.cedulamadre.split("|-|")[0];
-    this.promedioacumulado=this.postuseltable.promedioacumulado.split("|-|")[0];
-    this.tabulado=this.postuseltable.tabulado.split("|-|")[0];
-    this.constanciaweb=this.postuseltable.constanciaweb.split("|-|")[0];
-    this.certificadovencidad=this.postuseltable.certificadovencidad.split("|-|")[0];
-    this.documentoestudiante=this.postuseltable.documentoestudiante.split("|-|")[0];
-    this.documentoacudiente=this.postuseltable.documentoacudiente.split("|-|")[0];
-    this.formatosolicitudbeneficio=this.postuseltable.formatosolicitudbeneficio.split("|-|")[0];
-    this.diagnosticomedico=this.postuseltable.diagnosticomedico.split("|-|")[0];
-    this.recibopagomatricula=this.postuseltable.recibopagomatricula.split("|-|")[0];
-    this.certificadoingresos=this.postuseltable.certificadoingresos.split("|-|")[0];
+    this.getDocumntosPostu(idpostu);
+    this.getVisitaPostu(idpostu)
     switch (estado_postu) {
       case "En espera":
         this.estadopostusel=3;
@@ -304,7 +299,7 @@ export class ViewConvocatoriaComponent {
       this.convocatoriaPeriodo = convocatoriaPeriodo;
     });}
   cambiarEstadoPostu(idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
-
+    this.loadingcc = true;
     if(estadopostulacionactual == 'En espera'){
         if(estadoseleccionado == 'Revision'){
           this.updatePostu = {
@@ -313,6 +308,7 @@ export class ViewConvocatoriaComponent {
           };
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{  
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -324,7 +320,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor2['pasoactive'] = true;
             this.circlecolor2['pasoactivocomplete'] = true;
             this.circlecolor3['pasoactivoline'] = true;
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }
       }else if(estadopostulacionactual == 'Revision'){
@@ -335,6 +331,7 @@ export class ViewConvocatoriaComponent {
           };
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{  
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -348,7 +345,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor3['pasoactivoline'] = false;
             this.circlecolor1['pasoactive'] = true;
             this.circlecolor2['pasoactivoline'] = true;
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Entrevista'){
           this.updatePostu = {
@@ -357,6 +354,7 @@ export class ViewConvocatoriaComponent {
           };
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{  
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -379,7 +377,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor3['pasoactive'] = true;
             this.circlecolor3['pasoactivocomplete'] = true;
             this.circlecolor4['pasoactivoline'] = true;
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Aprobado'){
           this.updatePostu = {
@@ -394,6 +392,7 @@ export class ViewConvocatoriaComponent {
 
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{ 
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -420,7 +419,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor5['pasoactivocomplete'] = true;
 
             }
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
           //Actualizar Convocatoria
 
@@ -434,6 +433,7 @@ export class ViewConvocatoriaComponent {
             };
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res=>{  
+              this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                   this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -463,7 +463,7 @@ export class ViewConvocatoriaComponent {
                 this.circlecolor5['pasoactivered'] = true;
                 this.circlecolor5['pasoactivolinered'] = true;
               }
-            },(err)=>{console.log('ERROR: ' + err.error.text);
+            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
           });
         }
       }else if(estadopostulacionactual == 'Entrevista'){
@@ -474,6 +474,7 @@ export class ViewConvocatoriaComponent {
           };
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{  
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -497,7 +498,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor2['pasoactive'] = true;
             this.circlecolor2['pasoactivocomplete'] = true;
             this.circlecolor3['pasoactivoline'] = true;
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Visita'){
             this.updatePostu = {
@@ -506,6 +507,7 @@ export class ViewConvocatoriaComponent {
             };
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res=>{  
+              this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                   this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -531,7 +533,7 @@ export class ViewConvocatoriaComponent {
               this.circlecolor4['pasoactive'] = true;
               this.circlecolor4['pasoactivocomplete'] = true;
               this.circlecolor5['pasoactivoline'] = true;
-            },(err)=>{console.log('ERROR: ' + err.error.text);
+            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
           });
         }
       }else if(estadopostulacionactual == 'Visita'){
@@ -542,6 +544,7 @@ export class ViewConvocatoriaComponent {
           };
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{  
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -568,7 +571,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor3['pasoactive'] = true;
             this.circlecolor3['pasoactivocomplete'] = true;
             this.circlecolor4['pasoactivoline'] = true;
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Aprobado'){
           this.updatePostu = {
@@ -583,6 +586,7 @@ export class ViewConvocatoriaComponent {
 
           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
           (res=>{ 
+            this.loadingcc = false;
             for (var i = 0; i < this.$postuByIdArray.length; i++) {
               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                 this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -612,7 +616,7 @@ export class ViewConvocatoriaComponent {
             this.circlecolor5['pasoactivocomplete'] = true;
 
             }
-          },(err)=>{console.log('ERROR: ' + err.error.text);
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
           //Actualizar Convocatoria
 
@@ -626,6 +630,7 @@ export class ViewConvocatoriaComponent {
             };
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res=>{  
+              this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                   this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -654,7 +659,7 @@ export class ViewConvocatoriaComponent {
                 this.circlecolor5['pasoactivered'] = true;
                 this.circlecolor5['pasoactivolinered'] = true;
               }
-            },(err)=>{console.log('ERROR: ' + err.error.text);
+            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
           });
         }
       }else if(estadopostulacionactual == 'Aprobado'){
@@ -671,6 +676,7 @@ export class ViewConvocatoriaComponent {
 
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res=>{ 
+              this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                   this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -699,7 +705,7 @@ export class ViewConvocatoriaComponent {
               this.circlecolor4['pasoactive'] = true;
               this.circlecolor4['pasoactivocomplete'] = true;
               this.circlecolor5['pasoactivoline'] = true;
-            },(err)=>{console.log('ERROR: ' + err.error.text);
+            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
           });
             //Actualizar Convocatoria
 
@@ -720,6 +726,7 @@ export class ViewConvocatoriaComponent {
 
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res =>{ 
+              this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                   this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -751,7 +758,7 @@ export class ViewConvocatoriaComponent {
               this.circlecolor5['pasoactivolinered'] = true;
 
             },(err) => {
-              console.log('ERROR: ' + err.error.text); 
+              console.log('ERROR: ' + err.error.text); this.loadingcc = false;
             });
           }
        }else if(estadopostulacionactual == 'Rechazado'){
@@ -769,6 +776,7 @@ export class ViewConvocatoriaComponent {
 
               this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
               (res=>{ 
+                this.loadingcc = false;
                 for (var i = 0; i < this.$postuByIdArray.length; i++) {
                   if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                     this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -798,7 +806,7 @@ export class ViewConvocatoriaComponent {
                 this.circlecolor5['pasoactivolinered'] = false;
                 this.circlecolor5['pasoactive'] = true;
                 this.circlecolor5['pasoactivocomplete'] = true;
-              },(err)=>{console.log('ERROR: ' + err.error.text);
+              },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
             });
               //Actualizar Convocatoria
 
@@ -812,6 +820,7 @@ export class ViewConvocatoriaComponent {
             };
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res=>{  
+              this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
                   this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
@@ -844,7 +853,7 @@ export class ViewConvocatoriaComponent {
               this.circlecolor5['pasoactive'] = false;
               this.circlecolor5['pasoactivocomplete'] = false;
               this.circlecolor5['pasoactivoline'] = true;
-            },(err)=>{console.log('ERROR: ' + err.error.text);
+            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
           });
           }
         }
@@ -855,10 +864,9 @@ export class ViewConvocatoriaComponent {
     this.excelService.exportToExcel(this.$postuByIdArray,'ReportePostulaciones'); }
 
   downloadPDF(docsel:any,nombrefile:any){
-    this.nuevoarreglo = docsel.split("|-|");
     var obj = document.createElement('a'); 
     obj.type = 'application/pdf';
-    obj.href = 'data:application/pdf;base64,' + this.nuevoarreglo[1];
+    obj.href = 'data:application/pdf;base64,' + docsel;
     obj.download = nombrefile+ ".pdf";
     obj.click();
   }
