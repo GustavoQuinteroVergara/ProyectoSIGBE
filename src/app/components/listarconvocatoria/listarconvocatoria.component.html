@@ -2,7 +2,7 @@
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
   <div class="formtiq ">
     <div>
-      <h1>Lista de convocatorias</h1>
+      <h1>LISTA DE CONVOCATORIAS</h1>
       <hr>
     </div>
     <div >
@@ -18,7 +18,6 @@
             <th>Postulaciones</th>
           </tr>
         </thead>
-
         <tbody>
           <tr *ngFor="let convoca of convocatorias">
             <td>{{convoca.fecha_inicio}} </td>  
@@ -28,24 +27,17 @@
             <td>{{convoca.periodosacademicos}}</td>
             <td>{{convoca.cupo}}</td>
             <td> <a [routerLink]="['/viewConvocatoria', convoca.consecutivo_convocatoria]" > <i class="icofont-search-2"></i></a></td>
-
-
           </tr>
-
-
         </tbody>
       </table>
-
     </div>
     <div class="row">
       <div class="col-12 m-12 text-center">
         <h3>Exportar a Excel</h3>
         <div class ="container" style="padding-bottom:20px">
           <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
-          <!--<button mat-raised-button color="accent">Accent</button>-->
         </div>
       </div>
     </div>
-
   </div>
 </div>
