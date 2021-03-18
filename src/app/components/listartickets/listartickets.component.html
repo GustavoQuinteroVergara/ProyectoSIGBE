@@ -2,36 +2,30 @@
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
   <div class="formtiq ">
     <div class="titulo">
-      <h1>Lista de Tickets por identificación</h1>
+      <h1>LISTA DE TICKETS POR IDENTIFICACIÓN </h1>
     </div>
     <hr>
     <div class="row">
 
       <div class="col-12 m-4">
-        <input #identificacion type="text" class="form-control" placeholder="Ingresar identificacion"  aria-describedby="basic-addon2">
+        <input #identificacion type="text" class="form-control" placeholder="Ingresar identificación"  aria-describedby="basic-addon2">
         <div class="input-group-append">
           <span class="input-group-text" id="basic-addon2"><button  mat-raised-button class="buttonbuscar" type="button"(click)="buscartickets(identificacion.value)" >Buscar</button></span>
         </div>
       </div>
-
-
-
     </div>
-
 
     <div class="tabla">
       <table class="table table-bordered table-striped mb-0">
         <thead>
           <tr >
             <th>Fecha <br>Compra ticket</th>
-            <th>Identificacion</th>
-            <th>Codigo de <br> estudiante</th>
+            <th>Identificación</th>
+            <th>Código de <br> estudiante</th>
             <th>Nombre</th>
             <th>Apellido</th>
-
           </tr>
         </thead>
-
         <tbody>
           <tr *ngIf="ticketes == null">
             <td>No hay tiquetes encontrados</td>
@@ -42,16 +36,9 @@
             <td>{{ticket.codigo_estudiante}}</td>
             <td>{{ticket.nombre_estudiate}}</td>
             <td>{{ticket.apellido_estudiate}}</td>
-
-
-
           </tr>
-
-
         </tbody>
       </table>
-
     </div>
-
   </div>
 </div>

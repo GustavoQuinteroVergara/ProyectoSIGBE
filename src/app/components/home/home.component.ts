@@ -17,6 +17,8 @@ import { Chart } from 'chart.js';
 	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+	success:any;
+
 	$nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 	verificacionPeriodoCaducado = false;
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');

@@ -20,7 +20,7 @@
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
     <form [formGroup]="myForm" class="col s12 formtiq" novalidate>
         <div class="row text-center rowImageLogin">
-         <h1>Postularse a una convocatoria</h1>
+         <h1>POSTULARSE A UNA CONVOCATORIA</h1>
      </div>
 
      <div class="row">
@@ -36,13 +36,13 @@
             <mat-label> <b> Convocatoria</b></mat-label>
         </mat-form-field>
         <div *ngIf="myForm.get('convo').errors && myForm.get('convo').dirty">
-            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
+            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
         </div>
     </div>
 <!-- fin estrato -->
 
 <div class="input-field col s6">
-    <h4>Selecciona tú semestre</h4>
+    <h4>Selecciona tu semestre</h4>
     <mat-form-field appearance="fill">
       <mat-select #semestre required formControlName="semestre">
         <mat-option>-- Selecciona el semestre cursando --</mat-option>
@@ -61,7 +61,7 @@
     <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Semestre</b> </mat-label>
 </mat-form-field>
 <div *ngIf="myForm.get('semestre').errors && myForm.get('semestre').dirty">
-    <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
+    <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
 </div>
 </div>
 </div>
@@ -111,14 +111,14 @@
     <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Promedio acumulado</b> </mat-label>
 </mat-form-field>
   <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
-    <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-    <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Minimo 1 caracter</p>
-    <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Maximo 3 caracteres</p>
+    <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
+    <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Mínimo 1 carácter</p>
+    <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Máximo 3 caracteres</p>
 </div>
 </div>
 <!-- FIN PROMEDIO -->
 <div class="input-field col s6">
-    <h4>Verifica tu numero de identificación</h4>
+    <h4>Verifica tu número de identificación</h4>
     <mat-form-field appearance="fill">
       <mat-label>Identificacion</mat-label>
       <input matInput #identificacion id="icon_prefix" style="font-weight: 600;" value="{{this.$nombreusuario.identi}}" disabled="true" readonly type="text" class="validate inputidenuser">
@@ -135,14 +135,14 @@
             <mat-label> <b> Carreras</b></mat-label>
         </mat-form-field>
         <div *ngIf="myForm.get('convo').errors && myForm.get('convo').dirty">
-            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo carrera vacio.</p>
+            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo carrera vacío.</p>
         </div>
     </div>
 </div>
 <!-- SUBIR DOCUMENTOS -->
     <div class="row">
         <hr>
-        <h1>Documentos solicitados</h1>
+        <h1>DOCUMENTOS SOLICITADOS</h1>
         <hr>
      <div class="col s6" *ngIf="convosel.documentoestudiante">
         <h4>Fotocopia C.C estudiante</h4>
