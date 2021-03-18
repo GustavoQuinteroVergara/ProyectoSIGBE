@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';  
 import {ListconvoactivasService} from './listconvoactivas.service';
+import {DocumentoService} from '../../../services/documento.service';
 import {ServRegPostuService} from './serv-reg-postu.service';
 import {UsuariocarreraService} from '../../../services/usuariocarrera.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -16,53 +17,23 @@ export class RegistrarPostulacionComponent  {
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
   postulacionRegistrar:any;
   carrerasest:any;
+  documentosarchivos:any;
   success:any;
   myForm: FormGroup;
   varsel:any;
-  convosel={
-    d10 :false,
-    factservicio :false,
-    cartapeticion :false,
-    carnetestudiante :false,
-    cedulapadre :false,
-    cedulamadre :false,
-    promedioacumulado :false,
-    tabulado :false,
-    constanciaweb :false,
-    certificadovencidad :false,
-    documentoestudiante :false,
-    documentoacudiente :false,
-    formatosolicitudbeneficio :false,
-    diagnosticomedico  :false,
-    recibopagomatricula :false,
-    certificadoingresos :false
-  };
-  listDocsupload={
-    d10 :'',
-    factservicio :'',
-    cartapeticion :'',
-    carnetestudiante :'',
-    cedulapadre :'',
-    cedulamadre :'',
-    promedioacumulado :'',
-    tabulado :'',
-    constanciaweb :'',
-    certificadovencidad :'',
-    documentoestudiante :'',
-    documentoacudiente :'',
-    formatosolicitudbeneficio :'',
-    diagnosticomedico  :'',
-    recibopagomatricula :'',
-    certificadoingresos :''
-  };
+  convosel:any;
+  docsconvosel:any;
+  listDocsupload=[];
 
   constructor(private listconvoactivas:ListconvoactivasService,
     public fb: FormBuilder,
     private registrarpostu:ServRegPostuService,
     public dialog: MatDialog,
-    public usuariocarreraService:UsuariocarreraService) { 
+    public usuariocarreraService:UsuariocarreraService,
+    public documentoService:DocumentoService) { 
   	this.buscarConvoActivas();
     this.getCarrerasEst();
+    this.buscarDocumentos();
     this.myForm = this.fb.group({
       convo: ['', [Validators.required]],
       promedio: ['', [Validators.required]],
@@ -90,6 +61,13 @@ export class RegistrarPostulacionComponent  {
 
   cambiarConvo(convosel:any){
     this.convosel = convosel;
+    this.docsconvosel = null;
+    this.listDocsupload = [];
+
+    this.documentoService.getDocumentsConvo(this.convosel.consecutivoconvo).subscribe(result=>{
+      this.docsconvosel = result;
+      console.log(result);
+    });
 
     console.log(this.convosel);
   }
@@ -99,11 +77,18 @@ export class RegistrarPostulacionComponent  {
       this.carrerasest = result;
     });
   }
+  buscarDocumentos(){
+    this.documentoService.listDocumentosSelect().subscribe(result=>{
+      this.documentosarchivos = result;
+    });
+  }
 
   buscarConvoActivas(){
     this.listconvoactivas.buscarConvoActivas().subscribe(convoActivas =>{ 
      this.convoActivas = convoActivas;
-     console.log(convoActivas)});
+   },(err)=>{
+     console.log(err);
+   });
   }
 
   seleccionarArchivo(event,variable:any) {
@@ -119,35 +104,25 @@ export class RegistrarPostulacionComponent  {
 
   _handleReaderLoaded(readerEvent) {
     var binaryString = readerEvent.target.result;
-    this.listDocsupload[this.varsel] = btoa(binaryString);
+    // this.listDocsupload[this.varsel] = btoa(binaryString);
+    this.varsel =  this.varsel + '|-|' + btoa(binaryString) ;
+    this.listDocsupload.push(this.varsel);
   }
 
 
 
   registrarPostulacion(promedio:any,semestre:any,carrera:any,usuario:any,convocatoria:any,templateRef,errorpostuexistente){
-    this.postulacionRegistrar= {promedio:promedio,
-                                semestre:semestre,
-                                carrera:carrera,
-                                estado_postulacion:1,
-                                usuario:usuario,
-                                convocatoria:convocatoria,
-                                d10 :"0|-|" +this.listDocsupload['d10'],
-                                factservicio :"0|-|" +this.listDocsupload['factservicio'],
-                                cartapeticion :"0|-|" +this.listDocsupload['cartapeticion'],
-                                carnetestudiante :"0|-|" +this.listDocsupload['carnetestudiante'],
-                                cedulapadre :"0|-|" +this.listDocsupload['cedulapadre'],
-                                cedulamadre :"0|-|" +this.listDocsupload['cedulamadre'],
-                                promedioacumulado :"0|-|" +this.listDocsupload['promedioacumulado'],
-                                tabulado :"0|-|" +this.listDocsupload['tabulado'],
-                                constanciaweb :"0|-|" +this.listDocsupload['constanciaweb'],
-                                certificadovencidad :"0|-|" +this.listDocsupload['certificadovencidad'],
-                                documentoestudiante :"0|-|" +this.listDocsupload['documentoestudiante'],
-                                documentoacudiente :"0|-|" +this.listDocsupload['documentoacudiente'],
-                                formatosolicitudbeneficio :"0|-|" +this.listDocsupload['formatosolicitudbeneficio'],
-                                diagnosticomedico  :"0|-|" +this.listDocsupload['diagnosticomedico'],
-                                recibopagomatricula :"0|-|" +this.listDocsupload['recibopagomatricula'],
-                                certificadoingresos :"0|-|" +this.listDocsupload['certificadoingresos']
-    };
+            this.postulacionRegistrar= {promedio:promedio,
+                                  semestre:semestre,
+                                  carrera:carrera,
+                                  estado_postulacion:1,
+                                  usuario:usuario,
+                                  convocatoria:convocatoria,
+                                  listDocumentos:this.listDocsupload
+            };
+
+
+
     this.registrarpostu.buscarPostuByIdConvo(convocatoria.consecutivoconvo,this.$nombreusuario.identi).subscribe(result=>{
 
         let dialogRef = this.dialog.open( errorpostuexistente,{

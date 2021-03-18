@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RegistrarConvoServiceService} from './registrar-convo-service.service';
+import {DocumentoService} from '../../../services/documento.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +13,11 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   convocatoriaBeca: any;
   registroConvo:any[]=[];
   convocatoriaPeriodo: any;
-  convocatoriaRegistrar:any;
+  convocatoriaRegistrar={};
+  formNewDoc=false;
+  documentoscheckbox:any;
+  docssel=[];
+  nomvacio=false;
   success:any;
   isChecked=false;
   //Documentos beca alimenticia
@@ -73,9 +78,12 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   public stepMinutes = [1, 5, 10, 15, 20, 25];
   public stepSeconds = [1, 5, 10, 15, 20, 25];
 
-  constructor(private serviceConvocatoria:RegistrarConvoServiceService,public dialog: MatDialog) { 
+  constructor(private serviceConvocatoria:RegistrarConvoServiceService,
+    public dialog: MatDialog,
+    public documentoService:DocumentoService) { 
     this.buscarBeca();
     this.buscarPeriodo();
+    this.buscarDocumentos();
     this.formularioConvocatoria = new FormGroup({
       beca: new FormControl('',Validators.required),
       estadoConvocatoria: new FormControl('',Validators.required),
@@ -86,12 +94,59 @@ export class RegistrarConvocatoriaComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  activateDocNew(){
+    if(this.formNewDoc){
+      this.formNewDoc = false;
+      return;
+    }
+    this.formNewDoc = true;
+  }
+
+  NewDoc(nomdoc:any,successdoc){
+    this.nomvacio = false;
+    if(nomdoc == ''){
+      this.nomvacio = true;
+      return;
+    }
+    this.documentoService.nuevoDocumento(nomdoc).subscribe(result=>{
+      let dialogRef = this.dialog.open( successdoc,{
+         height: '200px',
+         width: '200px',
+       });
+      this.buscarDocumentos();
+    },(errr)=>{
+      console.log(errr);
+    });
+  }
   public hasError = (controlName: string, errorName: string) =>{
     return this.formularioConvocatoria.controls[controlName].hasError(errorName);
+  }
+  agregarDoc(event){
+    console.log("LE DI AL CHECKBOX");
+    var encontrado = false;
+    var posencontrado = 0;
+    for (var i = 0; i < this.docssel.length; i++) {
+      if(this.docssel[i] == event){
+        encontrado = true;
+        posencontrado = i;
+      }
+    }
+    if(!encontrado){
+      this.docssel.push(event);
+    }else{
+      this.docssel.splice(posencontrado,1);
+    }
+    
+    console.log(this.docssel);
   }
   buscarBeca(){
     this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
       this.convocatoriaBeca = convocatoriaBeca;
+    });
+  }
+  buscarDocumentos(){
+    this.documentoService.listDocumentosSelect().subscribe(result=>{
+      this.documentoscheckbox = result;
     });
   }
   buscarPeriodo(){
@@ -104,60 +159,59 @@ export class RegistrarConvocatoriaComponent implements OnInit {
     asuntocorreo:any,contenidocorreo:any,templateRef){
 
     if(this.opcion){
-      this.convocatoriaRegistrar= {fechainicio:fechainicial,
-        fechafin:fechafinal,
-        becas:becas,
-        cupo:cupos,
-        periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
-        estadoconvocatoria:estadoconvocatoria,
-        enviarCorreo:true,
-        asuntocorreo:asuntocorreo,
-        contenidocorreo:contenidocorreo,
-        d10:this.formatod10,
-        factserv:this.facturaserv,
-        cartapeti:this.carta,
-        carnetest:this.carnet,
-        cedulapadre:this.documentopadre,
-        cedulamadre:this.documentomadre,
-        promedio:this.promacumulado,
-        tabulado:this.tab,
-        constanciaweb:this.constancia,
-        certificadovencidad:this.vecindad,
-        documentoidenti:this.documentoest,
-        documentoacudiente:this.documentoacu,
-        formatosolicitud:this.formsolicitud,
-        diagnostico:this.diagnosticomed,
-        recibomatricula:this.pagomatricula,
-        certificadoingresos:this.certingresos        
-      };
+      if(this.docssel.length == 0){
+        this.convocatoriaRegistrar= {fechainicio:fechainicial,
+          fechafin:fechafinal,
+          becas:becas,
+          cupo:cupos,
+          periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
+          estadoconvocatoria:estadoconvocatoria,
+          enviarCorreo:true,
+          asuntocorreo:asuntocorreo,
+          contenidocorreo:contenidocorreo      
+        };
+      }else{
+        this.convocatoriaRegistrar= {fechainicio:fechainicial,
+          fechafin:fechafinal,
+          becas:becas,
+          cupo:cupos,
+          periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
+          estadoconvocatoria:estadoconvocatoria,
+          enviarCorreo:true,
+          asuntocorreo:asuntocorreo,
+          contenidocorreo:contenidocorreo, 
+          documentossel : this.docssel
+        };
+      }
     }else{
-      this.convocatoriaRegistrar= {fechainicio:fechainicial,
-        fechafin:fechafinal,
-        becas:becas,
-        cupo:cupos,
-        periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
-        estadoconvocatoria:estadoconvocatoria,
-        enviarCorreo:false,
-        asuntocorreo:'',
-        contenidocorreo:'',
-        d10:this.formatod10,
-        factserv:this.facturaserv,
-        cartapeti:this.carta,
-        carnetest:this.carnet,
-        cedulapadre:this.documentopadre,
-        cedulamadre:this.documentomadre,
-        promedio:this.promacumulado,
-        tabulado:this.tab,
-        constanciaweb:this.constancia,
-        certificadovencidad:this.vecindad,
-        documentoidenti:this.documentoest,
-        documentoacudiente:this.documentoacu,
-        formatosolicitud:this.formsolicitud,
-        diagnostico:this.diagnosticomed,
-        recibomatricula:this.pagomatricula,
-        certificadoingresos:this.certingresos        
-      };
+      if(this.docssel.length == 0){
+        this.convocatoriaRegistrar= {fechainicio:fechainicial,
+          fechafin:fechafinal,
+          becas:becas,
+          cupo:cupos,
+          periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
+          estadoconvocatoria:estadoconvocatoria,
+          enviarCorreo:false,
+          asuntocorreo:'',
+          contenidocorreo:''      
+        };
+
+      }else{
+        this.convocatoriaRegistrar= {fechainicio:fechainicial,
+          fechafin:fechafinal,
+          becas:becas,
+          cupo:cupos,
+          periodo:this.convocatoriaPeriodo[0].consecutivo_periodo,
+          estadoconvocatoria:estadoconvocatoria,
+          enviarCorreo:false,
+          asuntocorreo:'',
+          contenidocorreo:'',
+          documentossel : this.docssel
+        };
+      }
+
     }
+    console.log(this.convocatoriaRegistrar);
     this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
       this.success = true;
       let dialogRef = this.dialog.open( templateRef,{

@@ -83,9 +83,13 @@ export const ROUTES: Routes = [
 ,data: { 
   expectedRole: '2'
 }},
-{path:'visitadomiciliaria',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
+{path:'visitadomiciliaria/:idPostu',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '4'
+}},
+{path:'visitadomiciliariaconvo/:idPostu',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
 }},
 {path:'listarTicketEst',component:ListicketestComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
