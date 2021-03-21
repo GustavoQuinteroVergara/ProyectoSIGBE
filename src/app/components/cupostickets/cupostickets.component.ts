@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {CuposasignacionService} from '../../services/cuposasignacion.service';
 import { MatDialog } from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {formatDate } from '@angular/common';
 
 @Component({
@@ -14,10 +17,15 @@ export class CuposticketsComponent implements OnInit {
 	cuposAsignacionarray:any;
 	success:any;
 	asignacionesBuscadas:any;
+	dataSource: MatTableDataSource<any>;
 	fechaActual= formatDate(new Date(), 'yyyy-MM-dd', 'en');
+	displayedColumns: string[] = ['consecutivo_cupostickets', 
+    'fechaasignacion', 'cuposdisponiblesalmuerzo', 
+    'cuposdisponiblesrefrigerio','Acciones'];
 	public formularioCuposAsigna: FormGroup;
 
-	
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort,{static: false}) sort: MatSort;
 	constructor(private serviceCuposasign:CuposasignacionService,public dialog: MatDialog) { }
 
 	ngOnInit(): void {
@@ -60,7 +68,12 @@ export class CuposticketsComponent implements OnInit {
 	buscarAsignaciones(){
 		this.serviceCuposasign.buscarAsignaciones().subscribe(res=>{
 			this.asignacionesBuscadas=res;
-		})
+			this.dataSource = new MatTableDataSource(this.asignacionesBuscadas);
+		    this.dataSource.paginator = this.paginator;
+		    this.dataSource.sort = this.sort;
+		    this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
+		    console.log(this.dataSource);
+		});
 	}
 
 }

@@ -12,6 +12,56 @@
 	padding: 10px;
 }
 
+.textoinfo{
+	padding: 5px
+}
+
+.estadodivpostu{
+	display: inline-block;
+    padding: 15px;
+    background: #ccc;
+    box-shadow: 1px 1px 5px #ccc;
+    transition: all ease .1s;
+    border-radius: 5px;
+}
+
+.estadodivpostu:hover{
+	background: #b1b1b1 !important;
+}
+
+.icono{
+	display: inline-block;
+    padding: 15px;
+    background: #ff4c3e;
+    margin-right: 10px;
+    color: white;
+    vertical-align: top;
+}
+
+.texto{
+	display: inline-block;
+    box-shadow: 1px 1px 4px #ccc;
+}
+
+.texto > h4{
+	display: inline-block;
+}
+
+
+.tituloConvocatoria{
+	position: absolute;
+    left: 0;
+    right: 0;
+    top: 5vw;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.tituloConvoVerp{
+	font-size: 3vw;
+    color: white;
+}
+
 .iconErrRegister{
 	font-size: 44px;
 	color: red;
@@ -48,7 +98,7 @@
 	position: absolute;
 	padding: 3px 20px;
 	bottom: -1.6em;
-	left: 100%;
+	right: 100%;
 	white-space: nowrap;
 	box-shadow: 1px 1px 3px #222222;
 	opacity: 0;
