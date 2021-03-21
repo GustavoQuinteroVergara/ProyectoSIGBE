@@ -20,10 +20,14 @@
         <h1 class="titulosVisita">Información Básica</h1>
         <!-- Primer paso INICIO -->
         <div class="row">
+          <mat-form-field [hidden]="true" class="example-full-width camposInput" appearance="fill" >
+            <mat-label>postulacionid</mat-label>
+            <input id="postulacionid" matInput [(ngModel)]="postulacionid" placeholder="postulacionid" [value]="postulacionid"  formControlName="postulacionid" type="number">
+      </mat-form-field>
           <div class="col-3">
             <mat-form-field class="example-full-width camposInput" appearance="fill" >
               <mat-label>Nombre Estudiante</mat-label>
-              <input id="postulacionid" matInput [(ngModel)]="postulacionid" placeholder="postulacionid" [value]="postulacionid"  formControlName="postulacionid" type="number">
+              <input id="nombreEstudiante" matInput  placeholder="Nombre del estudiante" value="">
         </mat-form-field>
           </div>
           <div class="col-3">
@@ -51,12 +55,12 @@
           <div class="col-12">
             <h4>Estamento</h4>
             <mat-radio-group [(ngModel)]="estamento" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
-                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Est" [checked]="estamento == 'Est'">Est.</mat-radio-button>
-                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Doc" [checked]="estamento == 'Doc'">Doc.</mat-radio-button>
-                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Empl" [checked]="estamento == 'Empl'">Empl.</mat-radio-button>
-                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Trab" [checked]="estamento == 'Trab'">Trab.</mat-radio-button>
-                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Jub" [checked]="estamento == 'Jub'">Jub.</mat-radio-button>
-                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Pen" [checked]="estamento == 'Pen'">Pen.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Est" [checked]="estamento == 'Estudiante'">Estudiante.</mat-radio-button>
+               <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Doc" [checked]="estamento == 'Docente'">Docente.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Empl" [checked]="estamento == 'Empleado'">Empleado.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Trab" [checked]="estamento == 'Trabajador'">Trabajador.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Jub" [checked]="estamento == 'Jubilado'">Jubilado.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Pen" [checked]="estamento == 'Pensionado'">Pensionado.</mat-radio-button>
               </mat-radio-group>
           </div>
         </div>
@@ -101,6 +105,8 @@
       </div>
     </form>
   </mat-step>
+    <!-- Fin paso INICIO -->
+    <!-- Segundo paso INICIO -->
   <mat-step [stepControl]="secondFormGroup" label="Información SocioEconómica">
     <ng-template matStepLabel>Información SocioEconómica</ng-template>
     <form [formGroup]="secondFormGroup">
@@ -123,16 +129,17 @@
         <div class="row">
           <div class="col-12">
             <h3 style="text-align: left; margin-left: 2%;" >1.1   Las obligaciones económicas en su casa son asumidas por:</h3>
-            <mat-radio-group [(ngModel)]="obligacion" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+            <mat-radio-group [(ngModel)]="obligacion" aria-label="Select an option" [ngModelOptions]="{standalone: true}" >
                 <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Solicitante" [checked]="obligacion == 'Solicitante'">Solicitante.</mat-radio-button>
                 <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Padre" [checked]="obligacion == 'Padre'">Padre.</mat-radio-button>
                 <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Madre" [checked]="obligacion == 'Madre'">Madre.</mat-radio-button>
                 <mat-radio-button class="example-margin estamentoCheck" color="warn"  value="Conyúge" [checked]="obligacion == 'Conyúge'">Conyúge.</mat-radio-button>
                 <mat-radio-button class="example-margin estamentoCheck" color="warn" value="Otro" [checked]="obligacion == 'Otro'">Otro.</mat-radio-button>
             </mat-radio-group>
-            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              
+            <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="obligacion == 'Otro'" >
               <mat-label for="cualobligacion">¿Cuál?</mat-label>
-                <input [(ngModel)]="cualobligacion"  matInput formControlName="cualobligacion" id="cualobligacion"  [value]="cualobligacion" type="text" class="validate">
+                <input [(ngModel)]="cualobligacion"  matInput  id="cualobligacion"  [value]="cualobligacion" type="text" class="validate" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
           </div>
         </div>
@@ -153,11 +160,12 @@
           <div class="col-6">
             <h3  >1.3 ¿Paga Arriendo? </h3>
             <mat-radio-group [(ngModel)]="pagoarriendo" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Si" [checked]="pagoarriendo == 'Si'">Si</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Si" [checked]="pagoarriendo == 'Si'" >Si</mat-radio-button>
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="No" [checked]="pagoarriendo == 'No'">No</mat-radio-button>
-              <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="pagoarriendo == 'Si'">
                   <mat-label  for="valorarriendo">¿Valor arriendo?</mat-label >
-                      <input [(ngModel)]="valorarriendo"  matInput formControlName="valorarriendo" id="valorarriendo" [value]="valorarriendo"  type="text" class="validate">
+                      <!--<input [(ngModel)]="valorarriendo"  matInput formControlName="valorarriendo" id="valorarriendo" [value]="valorarriendo"  type="text" class="validate">-->
+                      <input [(ngModel)]="valorarriendo"  matInput  id="valorarriendo" [value]="valorarriendo" value=""  type="text" class="validate" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
             </mat-radio-group>
           </div>
@@ -169,34 +177,35 @@
             </mat-radio-group>
             <mat-form-field class="example-full-width camposInput" appearance="fill">
               <mat-label  for="otroarriendo">Otros</mat-label >
-                  <input [(ngModel)]="otroarriendo"  matInput formControlName="otroarriendo" id="otroarriendo"  [value]="otroarriendo" type="text" class="validate">
+                  <!--<input [(ngModel)]="otroarriendo"  matInput formControlName="otroarriendo" id="otroarriendo"  [value]="otroarriendo" type="text" class="validate">-->
+                  <input [(ngModel)]="otroarriendo"  matInput  id="otroarriendo"  [value]="otroarriendo" type="text" class="validate" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
           </div>
         </div>
         <div class="row">
-          <div class="col-12">
+          <div class="col-12" style="margin-bottom: 2%;">
             <h3 style="text-align: left; margin-left: 2%;" >1.4 Fuentes de ingreso del solicitante</h3>
             <mat-radio-group [(ngModel)]="fuenteingreso" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="Trabajo" [checked]="fuenteingreso == 'Trabajo'">Trabajo</mat-radio-button>
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="Familia"[checked]="fuenteingreso == 'Familia'" >Familia</mat-radio-button>
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="Otros" [checked]="fuenteingreso == 'Otros'">Otros</mat-radio-button>
             </mat-radio-group>
-            <mat-form-field class="example-full-width camposInput" appearance="fill">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="fuenteingreso == 'Otros'" >
               <mat-label  for="cualfuente">¿Cuáles?</mat-label >
-                  <input [(ngModel)]="cualfuente"  matInput formControlName="cualfuente" id="cualfuente" [value]="cualfuente" type="text" class="validate">
+                  <!--<input [(ngModel)]="cualfuente"  matInput formControlName="cualfuente" id="cualfuente" [value]="cualfuente" type="text" class="validate">-->
+                  <input [(ngModel)]="cualfuente"  matInput  id="cualfuente" [value]="cualfuente" type="text" class="validate" [ngModelOptions]="{standalone: true}">
           </mat-form-field>  
           </div>
         </div>
-
-
-                  
-                      </div>
+      </div>
       <div>
-        <button mat-raised-button color="primary" matStepperPrevious>Atras</button>
+        <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
         <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
       </div>
     </form>
   </mat-step>
+  <!-- Segundo paso FIN -->
+  <!-- Tercer paso INICIO -->
   <mat-step [stepControl]="thirdFormGroup" label="Vivienda">
     <ng-template matStepLabel>Vivienda</ng-template>
     <form [formGroup]="thirdFormGroup">
@@ -226,11 +235,12 @@
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Obra Negra" [checked]="aspectocasa == 'Obra negra'">Obra negra</mat-radio-button>
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="En Construcción" [checked]="aspectocasa == 'En construcción'">En construcción</mat-radio-button>
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Remodelación" [checked]="aspectocasa == 'Remodelación'">Remodelación</mat-radio-button>
-                <mat-radio-button class="example-margin estratoCheck" color="warn" value="otrosAspecto" [checked]="aspectocasa == 'Otro'">Otro</mat-radio-button>
+                <mat-radio-button class="example-margin estratoCheck" color="warn" value="otrosAspecto" [checked]="aspectocasa == 'Otro'" >Otro</mat-radio-button>
               </mat-radio-group>
-            <mat-form-field class="example-full-width camposInput" appearance="fill">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="fuenteingreso == 'Otro'" >
                 <mat-label for="cualaspecto">¿Cuáles?</mat-label>
-                <input  [(ngModel)]="cualaspecto"  matInput formControlName="cualaspecto" id="cualaspecto" [value]="cualaspecto" type="text" class="validate">
+                <!--<input  [(ngModel)]="cualaspecto"  matInput formControlName="cualaspecto" id="cualaspecto" [value]="cualaspecto" type="text" class="validate">-->
+                <input  [(ngModel)]="cualaspecto"  matInput  id="cualaspecto" [value]="cualaspecto" type="text" class="validate" [ngModelOptions]="{standalone: true}">
            </mat-form-field>
           </div>
         </div>
@@ -253,30 +263,30 @@
               <mat-radio-button class="example-margin estratoCheck" value="Solo" [checked]="cuartosolicitante == 'Solo'">Solo</mat-radio-button>
               <mat-radio-button class="example-margin estratoCheck" value="Compartido" [checked]="cuartosolicitante == 'Compartido'">Compartido</mat-radio-button>
             </mat-radio-group>
-              <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="fuenteingreso == 'Compartido'">
                   <mat-label for="cantidadpersonas">¿Con cuántas personas?</mat-label>
-                  <input [(ngModel)]="cantidadpersonas"  matInput formControlName="cantidadpersonas" id="cantidadpersonas" [value]="cantidadpersonas" type="number" class="validate">
+                  <!--<input [(ngModel)]="cantidadpersonas"  matInput formControlName="cantidadpersonas" id="cantidadpersonas" [value]="cantidadpersonas" type="number" class="validate">-->
+                  <input [(ngModel)]="cantidadpersonas"  matInput  id="cantidadpersonas" [value]="cantidadpersonas" type="number" class="validate" [ngModelOptions]="{standalone: true}">
              </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <mat-form-field class="example-full-width areaDescripcion" style="width:100%;">
+            <mat-form-field class="example-full-width areaDescripcion" style="width:100%;" >
               <mat-label for="descripcionfinal" > Descripción</mat-label>
               <textarea [(ngModel)]="descripcionfinal"  matInput formControlName="descripcionfinal" id="descripcionfinal" [value]="descripcionfinal" type="text" class="validate" placeholder="Este es un ejemplo.."></textarea>
             </mat-form-field>
           </div>
         </div>
-
-
         </div>
         <div>
-          <button mat-raised-button color="primary" matStepperPrevious>Regresar</button>
-          <button mat-raised-button color="primary" (click)="stepper.reset()">Resetear</button>
-          <button mat-raised-button color="primary" (click)="registroVisita(mytemplate)">Registrar</button>
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Regresar</button>
+          <button mat-raised-button color="primary" (click)="stepper.reset()" style="margin-right: 5%;">Resetear</button>
+          <button mat-raised-button color="warn" (click)="registroVisita(mytemplate)">Registrar</button>
         </div>
     </form>
   </mat-step>
+  <!-- Tercer paso FIN -->
 </mat-horizontal-stepper>
   </div>
 </div>
