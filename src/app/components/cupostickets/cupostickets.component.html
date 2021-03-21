@@ -63,29 +63,52 @@
 
 		<h1>ASIGNACIONES CREADAS</h1>
 		<hr>
-		<table class="table table-bordered table-striped mb-0">
-			<thead>
-				<tr>
-					<th>Consecutivo</th>
-					<th>Fecha</th>
-					<th>Cupos Almuerzos</th>
-					<th>Cupos Refrigerio</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let asign of asignacionesBuscadas">
-					<td>{{asign.consecutivo_cupostickets}}</td>
-					<td>{{asign.fechaasignacion.date | date:'dd/MM/yyyy'}}</td>
-					<td>{{asign.cuposdisponiblesalmuerzo}}</td>
-					<td>{{asign.cuposdisponiblesrefrigerio}}</td>
-					<td>
-						<a><i class="icofont-checked iconcheckAprobar"></i></a>
-						<a><i class="icofont-ui-edit iconcloseAprobar"></i></a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+                  <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="consecutivo_cupostickets">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo asignación</th>
+                      <td mat-cell *matCellDef="let row"> {{row.consecutivo_cupostickets}}</td>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="fechaasignacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de asignación</th>
+                      <td mat-cell *matCellDef="let row"> {{row.fechaasignacion.date | date:'dd/MM/yyyy'}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="cuposdisponiblesalmuerzo">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cupos de almuerzo</th>
+                      <td mat-cell *matCellDef="let row"> {{row.cuposdisponiblesalmuerzo}} </td>
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="cuposdisponiblesrefrigerio">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cupos de refrigerio</th>
+                      <td mat-cell *matCellDef="let row" > {{row.cuposdisponiblesrefrigerio}} </td>
+                    </ng-container>
+                      <!-- Color Column -->
+                    <ng-container matColumnDef="Acciones">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                      <td mat-cell *matCellDef="let row" > <a data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+                  </div>
+
+
+
+
 	</div>
 </div>
 </form>

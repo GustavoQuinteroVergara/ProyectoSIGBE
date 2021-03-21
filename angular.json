@@ -14,7 +14,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/SIGBE-FrontEnd",
-            "allowedCommonJsDependencies": ["chart.js","file-saver","xlsx", "qrcode"],
+            "allowedCommonJsDependencies": ["chart.js","file-saver","xlsx", "qrcode",
+                                            "@babel/runtime-corejs3/core-js/object/define-property"],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

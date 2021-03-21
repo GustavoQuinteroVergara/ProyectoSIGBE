@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {ServicesViewConvocatoriaService} from './services-view-convocatoria.service';
@@ -7,9 +7,14 @@ import {DocumentoService} from '../../../services/documento.service';
 import {PostulacionService} from '../../../services/postulacion.service';
 import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {RegistrarConvoServiceService} from '../registrar-convocatoria/registrar-convo-service.service';
 import {Router } from '@angular/router';
 import {ExporterService} from '../../../services/exporter.service';
+import jsPDF from 'jspdf';
+import html2canvas from "html2canvas";
 @Component({
   selector: 'app-view-convocatoria',
   templateUrl: './view-convocatoria.component.html',
@@ -21,7 +26,9 @@ export class ViewConvocatoriaComponent {
   $postuByIdArray:any;
   $convoBuscada:any;
   loading=false;
+  visitarListar:any;
   nuevoarreglo:any;
+  dataSource: MatTableDataSource<any>;
   convoActualizado:any;
   documentosFoundpostu:any;
   listActualizar:any;
@@ -67,7 +74,10 @@ export class ViewConvocatoriaComponent {
   visitavalidate=false;
 
   //FIN VARIABLES DOCUMENTOS
-
+    displayedColumns: string[] = ['estudiante.nombreestudiante', 
+    'codigoestudiante', 'estrato', 
+    'promedio','fechapostulacion',
+    'semestre','carrera','estado_postulacion','Acciones'];
     success:any;
     convocatoriaBeca: any;
     activeForm=false;
@@ -77,6 +87,9 @@ export class ViewConvocatoriaComponent {
     disabledActualizar=true;
     postulacionesest:any;
     public formularioConvocatoria: FormGroup;
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort,{static: false}) sort: MatSort;
   constructor(private rutaActiva: ActivatedRoute,
    private serviceviewconvocatoria:ServicesViewConvocatoriaService,public dialog: MatDialog, 
    private serviceConvocatoria:RegistrarConvoServiceService,
@@ -117,6 +130,18 @@ export class ViewConvocatoriaComponent {
       },(err)=>{
         console.log(err);
       });
+
+  }
+
+  descargarPDF(visitaAListar:any){
+    const doc = new jsPDF();
+    let data = document.getElementById('visitaListar');
+    html2canvas(data).then(canvas =>{
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('p','cm','A4');
+      pdf.addImage(contentDataURL,'PNG',0,0,20.7,10.0);
+      pdf.save('VisitaDomiciliaria.pdf');
+    });
 
   }
 
@@ -195,8 +220,15 @@ export class ViewConvocatoriaComponent {
   buscarPostulacionesByIdConvo(idConvo:any){
     this.serviceviewconvocatoria.buscarPostulacionesByIdConvo(idConvo).subscribe(result =>{ 
       this.$postuByIdArray = result; 
+      this.dataSource = new MatTableDataSource(this.$postuByIdArray);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
+      // this.dataSource.paginator._intl.itemsPerPageLabel="Contenido por paginas";
 
-    });}
+
+    });
+  }
   actualizarConvocatoria(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
     fecha_inicio:any,fecha_fin:any,estado_convocatoria:any,successactualizacion){
     this.convoActualizado= {
@@ -222,15 +254,50 @@ export class ViewConvocatoriaComponent {
     this.postuseltable = postu;
     this.observacion = this.postuseltable.coments;
     this.getDocumntosPostu(idpostu);
-    this.getVisitaPostu(idpostu)
+    this.getVisitaPostu(idpostu);
     switch (estado_postu) {
       case "En espera":
         this.estadopostusel=3;
+        this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
         this.circlecolor1['pasoactive'] = true;
         this.circlecolor2['pasoactivoline'] = true;
         break;
       case "Revision":
         this.estadopostusel=4;
+        this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
         this.circlecolor1['pasoactive'] = true;
         this.circlecolor2['pasoactive'] = true;
         this.circlecolor2['pasoactivocomplete'] = true;
@@ -238,6 +305,24 @@ export class ViewConvocatoriaComponent {
         break;
       case "Entrevista":
         this.estadopostusel=5;
+            this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
         this.circlecolor1['pasoactive'] = true;
         this.circlecolor2['pasoactive'] = true;
         this.circlecolor2['pasoactivoline'] = true;
@@ -248,6 +333,23 @@ export class ViewConvocatoriaComponent {
         break;
       case "Visita":
         this.estadopostusel=6;
+            this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
         this.circlecolor1['pasoactive'] = true;
         this.circlecolor2['pasoactive'] = true;
         this.circlecolor2['pasoactivocomplete'] = true;
@@ -259,6 +361,24 @@ export class ViewConvocatoriaComponent {
         break;
       case "Aprobado":
         this.estadopostusel=1;
+    this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
         this.circlecolor1['pasoactive'] = true;
         this.circlecolor2['pasoactive'] = true;
         this.circlecolor2['pasoactivocomplete'] = true;
@@ -271,6 +391,24 @@ export class ViewConvocatoriaComponent {
         break;
       case "Rechazado":
         this.estadopostusel=2;
+
+    this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
         this.circlecolor1['pasoactive'] = true;
         this.circlecolor2['pasoactive'] = true;
         this.circlecolor2['pasoactivocomplete'] = true;
