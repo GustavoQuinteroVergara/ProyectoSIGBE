@@ -10,6 +10,7 @@ import {RegistrarvisitaService} from './registrarvisita.service';
 })
 export class VisitadomiciliariaComponent implements OnInit {
   isLinear = false;
+  hidden: string = 'false';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -27,20 +28,20 @@ export class VisitadomiciliariaComponent implements OnInit {
   nombreatencion:any;
   parentesco:any;
   obligacion:any;
-  cualobligacion:any;
+  cualobligacion='';
   estratodane:any;
-  pagoarriendo:any;
-  valorarriendo:any;
+  pagoarriendo='';
+  valorarriendo='';
   cubrearriendo:any;
-  otroarriendo:any;
+  otroarriendo='';
   fuenteingreso:any;
-  cualfuente:any;
+  cualfuente='';
   tipocasa:any;
   aspectocasa:any;
-  cualaspecto:any;
+  cualaspecto='';
   serviciopublico:any;
   cuartosolicitante:any;
-  cantidadpersonas:any;
+  cantidadpersonas='';
   idPostuSel:any;
   descripcionfinal:any;
   constructor(private _formBuilder: FormBuilder,
@@ -66,20 +67,21 @@ export class VisitadomiciliariaComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       nombreatencion: new FormControl('', [Validators.required]),
         parentesco: new FormControl('', [Validators.required]),
-        cualobligacion: new FormControl('', [Validators.required]),
-        valorarriendo: new FormControl('', [Validators.required]),
-        otroarriendo: new FormControl('', [Validators.required]),
-        cualfuente: new FormControl('', [Validators.required]),
+        //cualobligacion: new FormControl(''),
+        //valorarriendo: new FormControl('', [Validators.required]),
+        //otroarriendo: new FormControl('', [Validators.required]),
+        //cualfuente: new FormControl('', [Validators.required]),
     });
     this.thirdFormGroup = this._formBuilder.group({
-      cualaspecto: new FormControl('', [Validators.required]),
-      cantidadpersonas: new FormControl('', [Validators.required]),
+      //cualaspecto: new FormControl('', [Validators.required]),
+      //cantidadpersonas: new FormControl('', [Validators.required]),
       descripcionfinal: new FormControl('', [Validators.required])
     });
   }
 
 
   registroVisita(templateRef){
+    
     this.visitaDomiciliaria={
       postulacionid:this.postulacionid,
       estamento:this.estamento,
@@ -127,6 +129,19 @@ export class VisitadomiciliariaComponent implements OnInit {
     console.log(this.visitaDomiciliaria);
   
   }
-
+  /*
+  radioChange(event) {
+    this.hidden = event;
+    if (event === "Otro") {
+      this.secondFormGroup.setValidators([Validators.required]);
+      this.secondFormGroup.updateValueAndValidity();
+      this.cualobligacion=this.cualobligacion;
+    } else {
+      this.secondFormGroup.clearValidators();
+      this.secondFormGroup.updateValueAndValidity();
+      this.cualobligacion="";
+    }
+    console.log("Requerido", this.secondFormGroup.errors);
+  }*/
 }
 
