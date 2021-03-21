@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import {RegistrarvisitaService} from './registrarvisita.service';
 @Component({
@@ -41,12 +42,19 @@ export class VisitadomiciliariaComponent implements OnInit {
   serviciopublico:any;
   cuartosolicitante:any;
   cantidadpersonas='';
+  idPostuSel:any;
   descripcionfinal:any;
-  constructor(private _formBuilder: FormBuilder,private serviceVisita:RegistrarvisitaService,public dialog: MatDialog) {}
+  constructor(private _formBuilder: FormBuilder,
+    private rutaActiva: ActivatedRoute,
+    private serviceVisita:RegistrarvisitaService,
+    public dialog: MatDialog) {
+    this.idPostuSel = this.rutaActiva.snapshot.params.idConvo;
+
+  }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-        postulacionid: new FormControl('', Validators.required),
+        postulacionid: new FormControl(this.idPostuSel, Validators.required),
         apellido: new FormControl('', Validators.required),
         codigo: new FormControl('', Validators.required),
         cedula: new FormControl('', Validators.required),
