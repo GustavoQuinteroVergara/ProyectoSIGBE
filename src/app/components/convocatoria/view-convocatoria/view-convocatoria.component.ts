@@ -134,15 +134,222 @@ export class ViewConvocatoriaComponent {
   }
 
   descargarPDF(visitaAListar:any){
-    const doc = new jsPDF();
-    let data = document.getElementById('visitaListar');
-    html2canvas(data).then(canvas =>{
-      const contentDataURL = canvas.toDataURL('image/png');
-      let pdf = new jsPDF('p','cm','A4');
-      pdf.addImage(contentDataURL,'PNG',0,0,20.7,10.0);
-      pdf.save('VisitaDomiciliaria.pdf');
-    });
+    const doc = new jsPDF("p", "mm", "a4");
+    var width = doc.internal.pageSize.getWidth();
+    var height = doc.internal.pageSize.getHeight();
+    // PAGINA 1
+    var img = new Image();
+    var img2 = new Image();
+    var align = Object("right");
+    img.src="assets/imgs/0001.jpg";
+    img2.src="assets/imgs/0002.jpg";
+    doc.addImage(img,'jpg',0,0,width,height);
 
+    //Fecha
+    doc.setFontSize(10);
+    doc.text("26     03      2021",158,50,align);
+    doc.setFontSize(10);
+    doc.setFont("helvetica","bold");
+    doc.text("X",47,66);
+
+    doc.setFontSize(10);
+    doc.setFont("helvetica","normal");
+    doc.text(""+visitaAListar.codigoestpostu,25,75);
+    doc.text(""+visitaAListar.plancarrera,73,75);
+    doc.text(""+visitaAListar.ccvisita,105,75);
+    doc.text('-------' ,145,75);
+    doc.text('-------' ,175,75);
+    doc.setFontSize(10);
+    doc.text( visitaAListar.direccion,40,85);
+    doc.text( visitaAListar.barrio,117,85);
+    doc.text(""+visitaAListar.comuna,185,85);
+    doc.setFontSize(10);
+    doc.text(visitaAListar.nombreatencion,100,100);
+    doc.setFontSize(10);
+    doc.text(visitaAListar.parentesco,35,105);
+    doc.setFontSize(10);
+    doc.setFont("helvetica","bold");
+    switch (visitaAListar.obligacion) {
+      case "Solicitante":
+        doc.text("X",34,122);
+        break;
+      case "Conyúge":
+        doc.text("X",34,127);
+        break;
+      case "Padre":
+        doc.text("X",93,122);
+        break;
+      case "Madre":
+        doc.text("X",160,122);
+        break;
+      case "Otro":
+        doc.text("X",93,127);
+        doc.setFontSize(10);
+        doc.setFont("helvetica","normal");
+        doc.text(visitaAListar.cualobligacion,157,126);
+        break;                             
+      default:
+        // code...
+        break;
+    }
+    doc.setFontSize(10);
+    doc.setFont("helvetica","bold");
+    switch (visitaAListar.estratodane) {
+      case "Bajo-Bajo":
+       doc.text("X",41,142);
+        break;
+      case "Bajo":
+        doc.text("X",40,147);
+        break;
+      case "Mediano-Bajo":
+        doc.text("X",105,142);
+        break;
+      case "Medio":
+        doc.text("X",105,147);
+        break;
+      case "Medio-Alto":
+        doc.text("X",150,142);
+        break;   
+      case "Alto":
+        doc.text("X",150,147);
+        break;                                    
+      default:
+        // code...
+        break;
+    }
+    switch (visitaAListar.pagoarriendo) {
+      case "Si":
+        doc.text("X",59,157);
+        break;
+      case "No":
+        doc.text("X",59,162);
+        break;
+      default:
+        // code...
+        break;
+    }
+
+    doc.text(""+visitaAListar.valorarriendo,130,157);
+    switch (visitaAListar.cubrearriendo) {
+      case "Cuarto":
+        doc.text("X",75,170);
+        break;
+      case "Alimentación":
+        doc.text("X",123,170);
+        break;
+      
+      default:
+        // code...
+        break;
+    }
+    doc.text(""+visitaAListar.otroarriendo,170,170);
+
+    switch (visitaAListar.fuenteingreso) {
+      case "Trabajo":
+        doc.text("X",27,184);
+        break;
+      case "Familia":
+        doc.text("X",62,184);
+        break;
+      case "Otros":
+        doc.text("X",99,184);
+        doc.text(""+visitaAListar.cualfuente,130,184);
+        break;
+      
+      default:
+        // code...
+        break;
+    }
+    //VIVIENDA TIPO
+    switch (visitaAListar.tipocasa) {
+      case "Casa":
+        doc.text("X",75,205);
+        break;
+      case "Apartamento":
+        doc.text("X",123,205);
+        break;
+      case "Cuarto":
+        doc.text("X",168,205);
+        break;
+      
+      default:
+        // code...
+        break;
+    }
+    //ASPECTO FISICO
+    switch (visitaAListar.aspectocasa) {
+      case "Terminado":
+        doc.text("X",75,215);
+        break;
+      case "Obra Negra":
+        doc.text("X",123,215);
+        break;
+      case "otrosAspecto":
+        doc.text("X",168,215);
+        doc.text(""+visitaAListar.cualaspecto,168,220);
+        break;
+      case "En Construcción":
+        doc.text("X",75,220);
+        break;
+      case "Remodelación":
+        doc.text("X",123,220);
+        break;
+      
+      default:
+        // code...
+        break;
+    }
+    //SERVICIOS PUBLICOS
+    switch (visitaAListar.serviciopublico) {
+         case "Agua":
+           doc.text("X",75,228);
+           break;
+         case "Energía":
+           doc.text("X",123,228);
+           break;
+         case "Alcantarillado":
+           doc.text("X",75,233);
+           break;
+         case "Teléfono":
+           doc.text("X",171,228);
+           break;
+         case "Gas Domiciliario":
+           doc.text("X",171,233);
+           break;
+         
+         default:
+           // code...
+           break;
+       }      
+
+    //CUARTO DEL SOLICITANTE
+       switch (visitaAListar.cuartosolicitante) {
+         case "Solo":
+           doc.text("X",20,248);
+           break;
+         case "Compartido":
+           doc.text("X",75,248);
+           doc.text(visitaAListar.cantidadpersonas,140,248);
+           break;
+         
+         default:
+           // code...
+           break;
+       }
+    
+    //FIN PAGINA 1
+    //PAGINA 2
+    doc.addPage();
+    doc.addImage(img2,'jpg',0,0,width,height);
+    doc.setFontSize(10);
+    doc.setFont("helvetica","normal");
+    var splitText = doc.splitTextToSize(visitaAListar.descripcionfinal,180);
+    doc.text(splitText,8,52);
+
+
+    //FIN PAGINA 2
+
+    doc.save("VisitaDomiciliaria.pdf");
   }
 
   getDocumntosPostu(idPostu:any){
