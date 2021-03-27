@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioshabilitarService } from './servicioshabilitar.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-habilitaruser',
   templateUrl: './habilitaruser.component.html',
@@ -32,7 +33,17 @@ updateuser(identificacion:any,estadoseleccionado:any){
       .subscribe(res=>{
         console.log(res);
         this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser;
-
+          Swal.fire({
+                title: 'Exitoso',
+                text: 'Actualizado exitosamente.',
+                icon: 'success'
+          });        
+      },(err)=>{
+          Swal.fire({
+                title: 'ERROR',
+                text: 'Error al actualizar.' + err.error.text,
+                icon: 'error'
+          });  
       });
   }
   if(estadoseleccionado == false){
@@ -45,9 +56,19 @@ updateuser(identificacion:any,estadoseleccionado:any){
     .subscribe(res=>{
       console.log(res);
        this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser;
-       
+          Swal.fire({
+                title: 'Exitoso',
+                text: 'Actualizado exitosamente.',
+                icon: 'success'
+          }); 
       
-    });
+    },(err)=>{
+          Swal.fire({
+                title: 'ERROR',
+                text: 'Error al actualizar.' + err.error.text,
+                icon: 'error'
+          });  
+      });
 
 
   }

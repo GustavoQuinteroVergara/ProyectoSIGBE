@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {TipobecaService} from './tipobeca.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-tipobeca',
   templateUrl: './tipobeca.component.html',
@@ -25,24 +26,19 @@ export class TipobecaComponent implements OnInit {
   registrarTBeca(descripcion:any,templateRef){
     this.tipoBecaRegistrar= {descripcion:descripcion};
     this.serviceTipoBeca.registrarTipoBeca(this.tipoBecaRegistrar).subscribe(res =>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRef,{
-       height: '200px',
-       width: '200px',
-     });
-      console.log(res);
-      
-      
+
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Registrado exitosamente.',
+        icon: 'success'
+      }); 
     },(err)=>{
-      this.success = false;
-      let dialogRef = this.dialog.open( templateRef,{
-       height: '200px',
-       width: '200px',
-     });
-      
-      console.log('ERROR: ' + err.error.text);
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al registrar, ERROR: ' + err.error.text,
+        icon: 'error'
+      }); 
     });
-    console.log(this.tipoBecaRegistrar);
     
   }
   

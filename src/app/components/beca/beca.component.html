@@ -1,14 +1,4 @@
 <app-navbar></app-navbar>
-<ng-template #mytemplate>
-  <div *ngIf="success" class="dialogSuccess">
-    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
-    <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
-  </div>
-  <div *ngIf="!success" class="dialogSuccess">
-    <i class="icofont-close-circled text-center iconErrRegister"></i>
-    <h2 class="text-center textoSuccess">Error al actualizar</h2>
-  </div>
-</ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
 
   <form class="formtiq" [formGroup]="formularioBeca">
@@ -40,7 +30,7 @@
 
     <div class="center-align">
       <a mat-raised-button color="primary" [class.disabled]="!formularioBeca.valid"
-      (click)="registrarBeca(tipobeca.value,descripcion.value,mytemplate)" name="action">Registrar</a>
+      (click)="registrarBeca(tipobeca.value,descripcion.value)" name="action">Registrar</a>
     </div>
   </div>
 </form>

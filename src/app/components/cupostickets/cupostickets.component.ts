@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-cupostickets',
@@ -40,28 +41,25 @@ export class CuposticketsComponent implements OnInit {
 		return this.formularioCuposAsigna.controls[controlName].hasError(errorName);
 	}
 
-	registrarAsignacion(fecha:any,cuposalmuerzo:any,cuposrefrigerio:any,templateRef){
+	registrarAsignacion(fecha:any,cuposalmuerzo:any,cuposrefrigerio:any){
 		this.cuposAsignacionarray= {fecha:fecha,cuposalmuerzo:cuposalmuerzo,cuposrefrigerio:cuposrefrigerio};
 		this.serviceCuposasign.registrarAsignacionCupos(this.cuposAsignacionarray).subscribe(res =>{
-			this.success = true;
-			let dialogRef = this.dialog.open( templateRef,{
-				height: '200px',
-				width: '200px',
-			});
+			
+			Swal.fire({
+	          title: 'Exitoso',
+	          text: 'Registrado exitosamente.',
+	          icon: 'success'
+	        });
 			this.buscarAsignaciones();
-			console.log(res);
 
 
 		},(err)=>{
-			this.success = false;
-			let dialogRef = this.dialog.open( templateRef,{
-				height: '200px',
-				width: '200px',
-			});
-
-			console.log('ERROR: ' + err.error.text);
+			Swal.fire({
+	          title: 'ERROR',
+	          text: 'Error al registrar.' + err.error.text,
+	          icon: 'error'
+	        });
 		});
-		console.log(this.cuposAsignacionarray);
 
 	}
 

@@ -5,6 +5,7 @@ import{ActualizarSaldoService} from './actualizar-saldo.service';
 import{UsuariocarreraService} from '../../services/usuariocarrera.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-modificarusuario',
   templateUrl: './modificarusuario.component.html',
@@ -47,7 +48,7 @@ export class ModificarusuarioComponent implements OnInit {
 
   getCarrerasEst(){
     this.usuariocarreraService.carrerasEst(this.$nombreusuario.identi).subscribe(result=>{
-      this.carrerasest = result;
+      this.carrerasest = [result];
     });
   }
 
@@ -65,7 +66,7 @@ export class ModificarusuarioComponent implements OnInit {
 
   }
 
-  agregarCarrera(carrerasel:any,codigoest:any,biencarrera,malcarrera,carrerarepetida){
+  agregarCarrera(carrerasel:any,codigoest:any){
 
     this.newCarrera= {
       idCarr:carrerasel.idcarrera,
@@ -74,30 +75,40 @@ export class ModificarusuarioComponent implements OnInit {
     };
 
     this.usuariocarreraService.foundCarreraByIdenCarr(this.$nombreusuario.identi,carrerasel.idcarrera).subscribe(result=>{
-        let dialogRef = this.dialog.open( carrerarepetida,{
-           height: '180px',
-           width: '350px',
-         });
+          Swal.fire({
+                title: 'ERROR',
+                text: 'Error, ya tienes guardado esa carrera',
+                icon: 'error'
+          });  
     },(err)=>{
-      console.log(err);
-      this.usuariocarreraService.agregarCarreraEst(this.newCarrera).subscribe(result=>{
-        let dialogRef = this.dialog.open( biencarrera,{
-           height: '180px',
-           width: '350px',
-         });
-        this.getCarrerasEst();
-      },(err)=>{
-        console.log(err);
-        let dialogRef = this.dialog.open( malcarrera,{
-           height: '180px',
-           width: '350px',
-         });
-      });
+      if(this.carrerasest[0].length >= 3){
+          Swal.fire({
+              title: 'ERROR',
+              text: 'Error, ya tienes el limite de carreras actuales.',
+              icon: 'error'
+          });  
+      }else{
+        this.usuariocarreraService.agregarCarreraEst(this.newCarrera).subscribe(result=>{
+          Swal.fire({
+            title: 'Exitoso',
+            text: 'Carrera registrada exitosamente.',
+            icon: 'success'
+          });  
+          this.getCarrerasEst();
+        },(err)=>{
+          Swal.fire({
+            title: 'Exitoso',
+            text: 'Error al agregar la carrera.',
+            icon: 'success'
+          }); 
+        });
+      }
+
     });
 
   }
   registrarSaldo(identificacion:any,correo:any,apellido:any,  
-    nombre:any,templateRef){
+    nombre:any){
     this.saldoRegistrado= {
       identificacion:identificacion,
       correo:correo,
@@ -106,24 +117,22 @@ export class ModificarusuarioComponent implements OnInit {
     };
     this.serviceSaldo.registrarSaldos(this.saldoRegistrado).subscribe
     (res=>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Actualizado exitosamente.',
+        icon: 'success'
+      });  
        this.$nombreusuario.correo=correo;
        this.$nombreusuario.apellido=apellido;
        this.$nombreusuario.nombre=nombre;
        localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
     },(err)=>{
-      //console.log('ERROR: ' + err.error.text);
-      this.success = false;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Error al actualizar.' + err.error.text,
+        icon: 'success'
+      }); 
     });
-    console.log(this.saldoRegistrado);
   }
 
 

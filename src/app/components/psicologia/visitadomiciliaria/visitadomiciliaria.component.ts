@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import {RegistrarvisitaService} from './registrarvisita.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-visitadomiciliaria',
   templateUrl: './visitadomiciliaria.component.html',
@@ -81,7 +82,6 @@ export class VisitadomiciliariaComponent implements OnInit {
 
 
   registroVisita(templateRef){
-    
     this.visitaDomiciliaria={
       postulacionid:this.postulacionid,
       estamento:this.estamento,
@@ -113,20 +113,18 @@ export class VisitadomiciliariaComponent implements OnInit {
     };
     this.serviceVisita.registrarVisitaDomiciliaria(this.visitaDomiciliaria)
     .subscribe(res=>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       })
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Registrado exitosamente.',
+        icon: 'success'
+      }); 
     },(err)=>{
-      console.log('ERROR: ' + err.error.text);
-      this.success = false;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al Registrar, ERROR: ' + err.error.text,
+        icon: 'error'
+      }); 
     });
-    console.log(this.visitaDomiciliaria);
   
   }
   /*

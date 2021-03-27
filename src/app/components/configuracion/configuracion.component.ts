@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {ConfiguracionService} from '../configuracion/configuracion.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.component.html',
@@ -56,29 +57,26 @@ export class ConfiguracionComponent implements OnInit {
       this.showfecha = true;
     }
   }
-  actualizarConfiguracion(variable:any,valorNuevo:any,templateRef){
+  actualizarConfiguracion(variable:any,valorNuevo:any){
     this.archivoModificado= {
       variable:variable,
       valorNuevo:valorNuevo
     };
     this.servicioConfiguracion.modificarConfiguración(this.archivoModificado).subscribe
     (res=>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
-      console.log(res);
+      this.getConfiguracion();
+        Swal.fire({
+          title: 'Exitoso',
+          text: 'Actualizado exitosamente.',
+          icon: 'success'
+        });
      },(err)=>{
-      this.success = false;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
-      console.log(err.error);
-      
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error al actualizar.',
+          icon: 'error'
+        });
     });
-    console.log(this.archivoModificado);
   
   }
   onChange(event) {

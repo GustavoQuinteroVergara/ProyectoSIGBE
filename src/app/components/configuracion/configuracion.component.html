@@ -1,35 +1,25 @@
 <app-navbar></app-navbar>
-<ng-template #mytemplate>
-  <div *ngIf="success" class="dialogSuccess">
-    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
-    <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
-  </div>
-  <div *ngIf="!success" class="dialogSuccess">
-    <i class="icofont-close-circled text-center iconErrRegister"></i>
-    <h2 class="text-center textoSuccess">Error al actualizar</h2>
-  </div>
-</ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
   <div class="formtiq row">
     <div class="col-6">
-      <h1>CONFIGRUACIÓN ACTUAL</h1>
+      <h1>CONFIGURACIÓN ACTUAL</h1>
       <hr>
       <ul>
-        <li><h4>Tarifas de los tickets</h4></li>
         <li> 
+          <h4>Tarifas de los tickets</h4>
           <ul>
-            <li>Tarifa ticket almuerzo sin beneficio : <strong>{{configuracionlist.valorticketalmuerzo}}</strong></li> 
-            <li>Tarifa ticket refrigerio sin beneficio : <strong>{{configuracionlist.valorticketrefrigerio}}</strong></li> 
-            <li>Tarifa ticket almuerzo con beneficio : <strong>{{configuracionlist.valorticketalmuerzobeneficiario}}</strong></li> 
-            <li>Tarifa ticket refrigerio con beneficio : <strong>{{configuracionlist.valorticketrefrigeriobeneficiario}}</strong></li> 
+            <li class="text-align">Tarifa ticket almuerzo sin beneficio : <strong>{{configuracionlist.valorticketalmuerzo}}</strong></li> 
+            <li class="text-align">Tarifa ticket refrigerio sin beneficio : <strong>{{configuracionlist.valorticketrefrigerio}}</strong></li> 
+            <li class="text-align">Tarifa ticket almuerzo con beneficio : <strong>{{configuracionlist.valorticketalmuerzobeneficiario}}</strong></li> 
+            <li class="text-align">Tarifa ticket refrigerio con beneficio : <strong>{{configuracionlist.valorticketrefrigeriobeneficiario}}</strong></li> 
           </ul>
         </li>
         <hr>
         <li>
           <h4>Horarios de venta de tickets</h4>
           <ul>
-            <li>Horario venta de ticket de almuerzo: <strong>{{configuracionlist.horainicioVentaAlmuerzo}} - {{configuracionlist.horaFinVentaAlmuerzo}}</strong></li>
-            <li>Horario venta de ticket de refrigerio : <strong>{{configuracionlist.horainicioVentaRefrigerio}} - {{configuracionlist.horaFinVentaRefrigerio}}</strong></li>
+            <li class="text-align">Horario venta de ticket de almuerzo: <strong>{{configuracionlist.horainicioVentaAlmuerzo}} - {{configuracionlist.horaFinVentaAlmuerzo}}</strong></li>
+            <li class="text-align">Horario venta de ticket de refrigerio : <strong>{{configuracionlist.horainicioVentaRefrigerio}} - {{configuracionlist.horaFinVentaRefrigerio}}</strong></li>
           </ul>
         </li>
       </ul>
@@ -70,7 +60,7 @@
     </div>
     <div>
       <a mat-raised-button color="primary" (click)="actualizarConfiguracion
-      (variable.value,valorNuevo.value,mytemplate)" name="action">Actualizar</a>
+      (variable.value,valorNuevo.value)" name="action">Actualizar</a>
     </div>
   </form>
 

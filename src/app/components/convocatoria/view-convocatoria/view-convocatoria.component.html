@@ -1,9 +1,15 @@
 <app-navbar></app-navbar>
 
+<ng-template #entrevistaPostu>
+
+      <a (click)="descargarPDFEntrevista()" mat-stroked-button><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
+</ng-template>
+
+
 <ng-template #visitaPostu>
   <div>
     <h1>Visita domiciliaria</h1>
-    <a (click)="descargarPDF(visitaPostuFound)" style="cursor: pointer;"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
+    <a (click)="descargarPDFVisita(visitaPostuFound)" style="cursor: pointer;"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
   </div>
   <hr>
   <div id="visitaListar" #visitarListar>
@@ -259,7 +265,9 @@
         <div class="row">
           <h1>Entrevista</h1>
           <hr>
-          <a ><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Información general del estudiante</a>
+          <a mat-stroked-button><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Información general del estudiante</a>
+          <a mat-stroked-button color="primary">Iniciar entrevista</a>
+          <a mat-stroked-button color="primary" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista</a>
         </div>
     </div>
   </mat-tab>

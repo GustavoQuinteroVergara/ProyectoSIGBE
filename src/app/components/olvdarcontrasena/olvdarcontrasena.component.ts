@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {UsuarioService} from '../../services/usuario.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-olvdarcontrasena',
   templateUrl: './olvdarcontrasena.component.html',
@@ -16,22 +17,23 @@ export class OlvdarcontrasenaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  olvidecontrasena(email:any,errormensaje,mensajeconfirmacion){
+  olvidecontrasena(email:any){
 
   	this.email = {
   		email : email
   	}
 
   	this.usuarioService.olvideContrasena(this.email).subscribe(result=>{
-        let dialogRef = this.dialog.open( mensajeconfirmacion,{
-                height: '200px',
-                width: '350px',
+        Swal.fire({
+          title: 'Información',
+          text: 'Si el correo suministrado se encuentra registrado, llegara un correo con una contraseña nueva, revisa en spam si no llega.',
+          icon: 'info'
         });
   	},(err)=>{
-      console.log(err);
-         let dialogRef = this.dialog.open(errormensaje ,{
-                height: '200px',
-                width: '350px',
+        Swal.fire({
+          title: 'ERROR',
+          text: 'El correo ingresado no se encuentra registrado, por favor ingrese uno válido.',
+          icon: 'error'
         });
   	});
 

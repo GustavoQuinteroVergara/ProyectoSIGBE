@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import  {ServiciocrearuserService } from './serviciocrearuser.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crearusuario',
   templateUrl: './crearusuario.component.html',
@@ -32,7 +33,8 @@ success:any;
 console.log(this.formulariologin.value);
    }
 
-  registrouser(identificacion:any,nombre:any,apellido:any,email:any,codigo:any,contrasena:any,roles:any,estadouser:any,templateRef){
+  registrouser(identificacion:any,nombre:any,apellido:any,email:any,codigo:any,
+    contrasena:any,roles:any,estadouser:any){
     this.usuario={
    identificacion:identificacion,
    nombre:nombre,
@@ -45,20 +47,18 @@ console.log(this.formulariologin.value);
     };
     this.registraruser.registrarUsuario(this.usuario)
     .subscribe(res=>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       })
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Registro exitoso.',
+        icon: 'success'
+      });
     },(err)=>{
-      //console.log('ERROR: ' + err.error.text);
-      this.success = false;
-      let dialogRef = this.dialog.open( templateRef,{
-         height: '200px',
-         width: '200px',
-       });
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Error al Registrar. ERR: ' + err.error,
+        icon: 'success'
+      });
     });
-    console.log(this.usuario);
   
   }
 }

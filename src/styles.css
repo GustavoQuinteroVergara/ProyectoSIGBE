@@ -68,6 +68,10 @@ body { margin: 0;font-family: 'Raleway', sans-serif !important;}
 	display: block;
 }
 
+::ng-deep .redNoMatch{
+	background: white !important;
+}
+
 .infodivtiquetes{
 	display: inline-block;
 	margin-left: 20px;
@@ -167,6 +171,14 @@ body { margin: 0;font-family: 'Raleway', sans-serif !important;}
 
 .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary{
 	background-color: #0056cc;
+}
+
+.mat-snack-bar-container{
+	background-color: #0056cc !important;
+	color: white !important;
+}
+.mat-simple-snackbar-action{
+	color:white !important;
 }
 
 .cup1{

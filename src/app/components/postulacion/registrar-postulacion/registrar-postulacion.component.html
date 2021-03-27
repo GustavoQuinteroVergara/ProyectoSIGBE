@@ -73,38 +73,38 @@
     
 
     <mat-form-field appearance="fill">
-      <mat-select #promedio required formControlName="promedio">
+      <mat-select #promedio required formControlName="promedio" (selectionChange)="promedioMessage($event.value)">
         <mat-option>-- Selecciona tu promedio acumulado --</mat-option>
         <mat-option value="2">2</mat-option>
-        <mat-option value="2,1">2,1</mat-option>
-        <mat-option value="2,2">2,2</mat-option>
-        <mat-option value="2,3">2,3</mat-option>
-        <mat-option value="2,4">2,4</mat-option>
-        <mat-option value="2,5">2,5</mat-option>
-        <mat-option value="2,6">2,6</mat-option>
-        <mat-option value="2,7">2,7</mat-option>
-        <mat-option value="2,8">2,8</mat-option>
-        <mat-option value="2,9">2,9</mat-option>
+        <mat-option value="2.1">2,1</mat-option>
+        <mat-option value="2.2">2,2</mat-option>
+        <mat-option value="2.3">2,3</mat-option>
+        <mat-option value="2.4">2,4</mat-option>
+        <mat-option value="2.5">2,5</mat-option>
+        <mat-option value="2.6">2,6</mat-option>
+        <mat-option value="2.7">2,7</mat-option>
+        <mat-option value="2.8">2,8</mat-option>
+        <mat-option value="2.9">2,9</mat-option>
         <mat-option value="3">3</mat-option>
-        <mat-option value="3,1">3,1</mat-option>
-        <mat-option value="3,2">3,2</mat-option>
-        <mat-option value="3,3">3,3</mat-option>
-        <mat-option value="3,4">3,4</mat-option>
-        <mat-option value="3,5">3,5</mat-option>
-        <mat-option value="3,6">3,6</mat-option>
-        <mat-option value="3,7">3,7</mat-option>
-        <mat-option value="3,8">3,8</mat-option>
-        <mat-option value="3,9">3,9</mat-option>
+        <mat-option value="3.1">3,1</mat-option>
+        <mat-option value="3.2">3,2</mat-option>
+        <mat-option value="3.3">3,3</mat-option>
+        <mat-option value="3.4">3,4</mat-option>
+        <mat-option value="3.5">3,5</mat-option>
+        <mat-option value="3.6">3,6</mat-option>
+        <mat-option value="3.7">3,7</mat-option>
+        <mat-option value="3.8">3,8</mat-option>
+        <mat-option value="3.9">3,9</mat-option>
         <mat-option value="4">4</mat-option>
-        <mat-option value="4,1">4,1</mat-option>
-        <mat-option value="4,2">4,2</mat-option>
-        <mat-option value="4,3">4,3</mat-option>
-        <mat-option value="4,4">4,4</mat-option>
-        <mat-option value="4,5">4,5</mat-option>
-        <mat-option value="4,6">4,6</mat-option>
-        <mat-option value="4,7">4,7</mat-option>
-        <mat-option value="4,8">4,8</mat-option>
-        <mat-option value="4,9">4,9</mat-option>
+        <mat-option value="4.1">4,1</mat-option>
+        <mat-option value="4.2">4,2</mat-option>
+        <mat-option value="4.3">4,3</mat-option>
+        <mat-option value="4.4">4,4</mat-option>
+        <mat-option value="4.5">4,5</mat-option>
+        <mat-option value="4.6">4,6</mat-option>
+        <mat-option value="4.7">4,7</mat-option>
+        <mat-option value="4.8">4,8</mat-option>
+        <mat-option value="4.9">4,9</mat-option>
         <mat-option value="5">5</mat-option>
 
     </mat-select>

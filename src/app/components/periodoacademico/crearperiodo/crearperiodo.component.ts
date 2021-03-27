@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-
 import {PeriodoServiceService} from '../../../services/periodo-service.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crearperiodo',
   templateUrl: './crearperiodo.component.html',
@@ -23,9 +23,17 @@ export class CrearperiodoComponent{
     };
 
     this.periodoService.crearPeriodo(this.periodoArray).subscribe(result=>{
-      console.log(result);
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Registrado exitosamente.',
+        icon: 'success'
+      }); 
     },(err)=>{
-      console.log(err.error);
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al registrar el periodo.' + err.error.text,
+        icon: 'error'
+      }); 
     });
 
     
