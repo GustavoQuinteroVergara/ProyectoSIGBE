@@ -1,122 +1,29 @@
-.formConvocatoria{
+.example-full-width{
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 85px;
-}
-.fondoConvocatoria{
-	margin-left: 12%;
-    
-}
-.tituloRegistroConvocatoria{
-    font-size: 24px;
-    margin-top: 0;
 }
 
-.formConvocatoria > .divFormConvo{
-	margin: 0 auto;
-    width: 65%;
+.tarjetaCheck{
+    width: 94%;
 }
-.estadoConvo{
-    float: right;
+
+.file-upload {
+	margin: 0 10px 0 25px;
 }
-.contendorFechas{
-    display: inline-flex;
-    width: 125%;
-    margin-left: -10%;
-}
-@media (max-width: 1317px) {
-    .fondoConvocatoria{
-        width: 90%;
-    }
-}
-@media (max-width: 1290px) {
-    .fondoConvocatoria{
-        width: 98%;
-    }
-}
-@media (max-width: 1160px) {
-    .fondoConvocatoria{
-        width: 108%;
-    }
-}
-@media (max-width: 1062px) {
-    .fondoConvocatoria{
-        width: 118%;
-    }
-}
-@media (max-width: 1052px){
-    .contendorFlex{
-        display: inline-flex;
-    }
-}
-@media (max-width: 972px) {
-    .fondoConvocatoria{
-        width: 128%;
-    }
-}
-@media (max-width: 896px){
-    .estadoConvo{
-        float: none;
-    }
-    .contendorFechas{
-        flex: auto;
-        flex-flow: column;
-        margin-left: -65%;
-    }
-}
-@media (max-width: 800px){
-    .estadoConvo{
-        float: none;
-    }
-    .contendorFechas{
-        flex: auto;
-        flex-flow: column;
-        margin-left: -71%;
-    }
-}
-@media (max-width: 715px){
-    .estadoConvo{
-        float: none;
-    }
-    .contendorFechas{
-        flex: auto;
-        flex-flow: column;
-        margin-left: -77%;
-    }
-}
-@media (max-width: 615px){
-    .estadoConvo{
-        float: none;
-    }
-    .contendorFechas{
-        flex: auto;
-        flex-flow: column;
-        margin-left: -94%;
-    }
-}
-@media (max-width: 520px){
-    .estadoConvo{
-        float: none;
-    }
-    .contendorFechas{
-        flex: auto;
-        flex-flow: column;
-        margin-left: -108%;
-    }
-}
-@media (max-width: 406px){
-    .estadoConvo{
-        float: none;
-    }
-    .contendorFechas{
-        flex: auto;
-        flex-flow: column;
-        margin-left: -127%;
-    }
-}
-@media (max-width: 460px) {
-    .fondoConvocatoria{
-        width: 135%;
-    }
-}
+.file-upload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+  z-index: 10;
+	font-size: 20px;
+	cursor: pointer;
+	height: 36px;
+	opacity: 0;
+	filter: alpha(opacity=0); }
+
+#fileuploadurl{
+  border: none;
+  font-size: 12px;
+  padding-left: 0;
+  width: 250px; }

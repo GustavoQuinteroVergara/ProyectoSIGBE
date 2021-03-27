@@ -9,106 +9,156 @@
         <i class="icofont-close-circled text-center iconErrRegister"></i>
         <h2 class="text-center textoSuccess">Error al registrarse</h2>
     </div>       
-    </ng-template>
+</ng-template>
+ <ng-template #errorpostuexistente>
+    <div class="dialogSuccess" >
+        <i class="icofont-close-circled text-center iconErrRegister"></i>
+        <h2 class="text-center textoSuccess">Error al registrarse,ya has registrado una postulación de esta convocatoria</h2>
+    </div>       
+</ng-template>
 
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+    <form [formGroup]="myForm" class="col s12 formtiq" novalidate>
+        <div class="row text-center rowImageLogin">
+         <h1>POSTULARSE A UNA CONVOCATORIA</h1>
+     </div>
 
-        <form [formGroup]="myForm" class="col s12 formPostuRegister" novalidate>
-            <div class="row center rowImageLogin">
-                <div class="input-field col s12 divImageInto">
-                    <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
-                </div>
-            </div>
-
-            <div class="row center">
-                <div class="input-field col s12">
-                    <h4>Convocatorias activas</h4>
-                 <mat-form-field appearance="fill">
-                  <mat-select #convo required formControlName="convo">
-                    <mat-option>-- Selecciona una Convocatoria --</mat-option>
-                    <mat-option *ngFor="let convos of convoActivas" [value]="convos.consecutivoconvo">{{convos.beca}}</mat-option>
-                  </mat-select>
-                  <mat-label> <b> Convocatoria</b></mat-label>
-                </mat-form-field>
-                <div *ngIf="myForm.get('convo').errors && myForm.get('convo').dirty">
-                    <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                </div>
-            </div>
-            </div>
-            <div class="row">
-
-
-<!-- estratp -->
-
-               <div class="input-field col s6">
-
-                  <mat-form-field appearance="fill">
-                  <mat-select #estrato required formControlName="estrato">
-                    <mat-option>-- Selecciona su estrato --</mat-option>
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="2">2</mat-option>
-                    <mat-option value="3">3</mat-option>
-                    <mat-option value="4">4</mat-option>
-                    <mat-option value="5">5</mat-option>
-                    <mat-option value="6">6</mat-option>
-                  </mat-select>
-                  <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Semestre</b> </mat-label>
-                </mat-form-field>
-                <div *ngIf="myForm.get('estrato').errors && myForm.get('estrato').dirty">
-                    <p class="red-text" *ngIf="myForm.get('estrato').hasError('required')">Por favor, no dejar el campo estrato vacio.</p>
-                </div>
-                </div>
+     <div class="row">
+        <div class="row">
+        <div class="input-field col s12">
+            <h4>Selecciona una convocatoria</h4>
+            <mat-form-field appearance="fill">
+              <mat-select #convo required formControlName="convo" (selectionChange)="cambiarConvo($event.value)">
+                <mat-option>-- Selecciona una Convocatoria --</mat-option>
+                <mat-option *ngFor="let convos of convoActivas" [value]="convos" >
+                {{convos.beca}}</mat-option>
+            </mat-select>
+            <mat-label> <b> Convocatoria</b></mat-label>
+        </mat-form-field>
+        <div *ngIf="myForm.get('convo').errors && myForm.get('convo').dirty">
+            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
+        </div>
+    </div>
 <!-- fin estrato -->
 
-                <div class="input-field col s6">
-                     <mat-form-field appearance="fill">
-                  <mat-select #semestre required formControlName="semestre">
-                    <mat-option>-- Selecciona el semestre cursando --</mat-option>
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="2">2</mat-option>
-                    <mat-option value="3">3</mat-option>
-                    <mat-option value="4">4</mat-option>
-                    <mat-option value="5">5</mat-option>
-                    <mat-option value="6">6</mat-option>
-                    <mat-option value="7">7</mat-option>
-                    <mat-option value="8">8</mat-option>
-                    <mat-option value="9">9</mat-option>
-                    <mat-option value="10">10</mat-option>
-                    
-                  </mat-select>
-                  <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Semestre</b> </mat-label>
-                </mat-form-field>
-                <div *ngIf="myForm.get('semestre').errors && myForm.get('semestre').dirty">
-                    <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                </div>
-                </div>
-            </div>
-            <div class="row">
+<div class="input-field col s6">
+    <h4>Selecciona tu semestre</h4>
+    <mat-form-field appearance="fill">
+      <mat-select #semestre required formControlName="semestre">
+        <mat-option>-- Selecciona el semestre cursando --</mat-option>
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="6">6</mat-option>
+        <mat-option value="7">7</mat-option>
+        <mat-option value="8">8</mat-option>
+        <mat-option value="9">9</mat-option>
+        <mat-option value="10">10</mat-option>
+
+    </mat-select>
+    <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Semestre</b> </mat-label>
+</mat-form-field>
+<div *ngIf="myForm.get('semestre').errors && myForm.get('semestre').dirty">
+    <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
+</div>
+</div>
+</div>
+<div class="row">
 
 <!-- PROMEDIO -->
-                <div class="input-field col s6">
-                    <i class="icofont-data material-icons prefix"></i>
-                    <input #promedio formControlName="promedio" id="icon_prefix" type="text" class="validate" required>
-                    <label for="icon_prefix">Promedio</label>
-                <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
-                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo convocatoria vacio.</p>
-                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Minimo 1 caracter</p>
-                    <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Maximo 3 caracteres</p>
-                </div>
-                </div>
+<div class="input-field col s6">
+    <h4>Selecciona tu promedio acumulado</h4>
+    
+
+    <mat-form-field appearance="fill">
+      <mat-select #promedio required formControlName="promedio" (selectionChange)="promedioMessage($event.value)">
+        <mat-option>-- Selecciona tu promedio acumulado --</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="2.1">2,1</mat-option>
+        <mat-option value="2.2">2,2</mat-option>
+        <mat-option value="2.3">2,3</mat-option>
+        <mat-option value="2.4">2,4</mat-option>
+        <mat-option value="2.5">2,5</mat-option>
+        <mat-option value="2.6">2,6</mat-option>
+        <mat-option value="2.7">2,7</mat-option>
+        <mat-option value="2.8">2,8</mat-option>
+        <mat-option value="2.9">2,9</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="3.1">3,1</mat-option>
+        <mat-option value="3.2">3,2</mat-option>
+        <mat-option value="3.3">3,3</mat-option>
+        <mat-option value="3.4">3,4</mat-option>
+        <mat-option value="3.5">3,5</mat-option>
+        <mat-option value="3.6">3,6</mat-option>
+        <mat-option value="3.7">3,7</mat-option>
+        <mat-option value="3.8">3,8</mat-option>
+        <mat-option value="3.9">3,9</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="4.1">4,1</mat-option>
+        <mat-option value="4.2">4,2</mat-option>
+        <mat-option value="4.3">4,3</mat-option>
+        <mat-option value="4.4">4,4</mat-option>
+        <mat-option value="4.5">4,5</mat-option>
+        <mat-option value="4.6">4,6</mat-option>
+        <mat-option value="4.7">4,7</mat-option>
+        <mat-option value="4.8">4,8</mat-option>
+        <mat-option value="4.9">4,9</mat-option>
+        <mat-option value="5">5</mat-option>
+
+    </mat-select>
+    <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Promedio acumulado</b> </mat-label>
+</mat-form-field>
+  <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
+    <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
+    <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Mínimo 1 carácter</p>
+    <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Máximo 3 caracteres</p>
+</div>
+</div>
 <!-- FIN PROMEDIO -->
-                <div class="input-field col s6">
-                    <i class="icofont-id material-icons prefix"></i>
-                    <input #identificacion id="icon_prefix" value="{{this.$nombreusuario.identi}}" disabled="true" type="text" class="validate">
-                    <label for="icon_prefix">Identificacion</label>
-                </div>
-            </div>
-            
-
-
-            <div class="row center">
-                <div class="input-field col s12">
-                    <button (click)="registrarPostulacion(promedio.value,semestre.value,estrato.value,identificacion.value,convo.value,mytemplate)" class="waves-effect waves-light btn red" [disabled]="myForm.invalid" ><i class="icofont-save left"></i>Registrar Postulacion</button>
-                </div>
-            </div>
-        </form>
+<div class="input-field col s6">
+    <h4>Verifica tu número de identificación</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Identificacion</mat-label>
+      <input matInput #identificacion id="icon_prefix" style="font-weight: 600;" value="{{this.$nombreusuario.identi}}" disabled="true" readonly type="text" class="validate inputidenuser">
+  </mat-form-field>
+</div>
+        <div class="input-field col s12">
+            <h4>Selecciona tu carrera para postularte</h4>
+            <mat-form-field appearance="fill">
+              <mat-select #carrera required formControlName="carrera">
+                <mat-option>-- Selecciona una carrera --</mat-option>
+                <mat-option *ngFor="let carrera of carrerasest" [value]="carrera.idusuariocarrera" >
+                {{carrera.carrera}}</mat-option>
+            </mat-select>
+            <mat-label> <b> Carreras</b></mat-label>
+        </mat-form-field>
+        <div *ngIf="myForm.get('convo').errors && myForm.get('convo').dirty">
+            <p class="red-text" *ngIf="myForm.get('convo').hasError('required')">Por favor, no dejar el campo carrera vacío.</p>
+        </div>
     </div>
+</div>
+
+
+<div>
+<div class="row" *ngFor="let docsarchivos of docsconvosel">
+        <div class="col-6">
+            <h4>{{docsarchivos.nombredoc}}</h4>
+            <input type="file" accept="application/pdf" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">   
+        </div>
+</div>
+
+    </div>
+</div>
+
+
+
+<div class="row center mt-4">
+    <div class="input-field col s12 text-center">
+        <button (click)="registrarPostulacion(promedio.value,semestre.value,carrera.value,identificacion.value,convo.value,mytemplate,errorpostuexistente)" mat-raised-button color="primary" ><i class="icofont-save left"></i> <span class="buttontext">Registrar Postulacion</span></button>
+    </div>
+</div>
+</form>
+</div>
+</div>

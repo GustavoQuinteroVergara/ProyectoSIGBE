@@ -1,50 +1,43 @@
 <app-navbar></app-navbar>
-<div class="wraplistarconvo">
-<div class="caja z-depth-3">
-    <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+  <div class="formtiq">
+    <div class="titulo">
+      <h1>BUSCAR ESTUDIANTE</h1>
+      <hr>
+    </div>
+    <div class="buscar" >
+
+      <div class="input-group">
+        <input #codigo style="width: 300px;" type="text" class="form-control" placeholder="Ingresar identificacion estudiante">
+        <span class="input-group-btn">
+          <button mat-raised-button class="waves-effect waves-light btn-small" type="button"(click)="buscarEstudiante(codigo.value)" >Buscar</button>
+        </span>
       </div>
-      <div class="titulo">
-          <h5>Buscar Estudiante</h5>
-      </div>
-      <div class="buscar" style="float: left;  width: 100%;text-align: left;padding-left: 10px;">
-        
-            <div class="input-group">
-              <input #codigo style="width: 300px;" type="text" class="form-control" placeholder="Ingresar Codigo estudiante">
-              <span class="input-group-btn">
-                <button style="width: 75px; height: 35px;" class="waves-effect waves-light btn-small" type="button"(click)="buscarEstudiante(codigo.value)" >Buscar</button>
-              </span>
-            </div>
-        
-        
-        
-      </div>
-      
-      <div class="card-action" style="padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
-        <h1>Estudiante</h1>
-        <table> 
-            <thead>
-                <tr>
-                    <th>nombre</th>
-                    <th>Correo</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let est of estudiante"> 
-                    <td>{{est.nombre}}</td>
-                    <td>{{est.correo}}</td>
-                    
-                    
-                    <td>
-                        <a *ngIf="est.estadoestudiante=='Inactivo'" (click)="updateuser(codigo.value,false)"><i class="icofont-checked iconcheckAprobar"></i></a>
-                        {{est.estadoestudiante}}
-                        <a *ngIf="est.estadoestudiante =='Activo'" (click)="updateuser(codigo.value,true)"><i class="icofont-close-squared-alt iconcloseAprobar"></i></a>     
-                    </td>
-                </tr>
-            </tbody>
-        </table> 
     </div>
 
-</div>
+    <div >
+      <table class="table table-bordered table-striped mb-0"> 
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let est of estudiante"> 
+            <td>{{est.nombre}}</td>
+            <td>{{est.correo}}</td>
+
+
+            <td>
+              <a *ngIf="est.estadoestudiante=='Inactivo'" class="" (click)="updateuser(est.identificacion,false)"><i class="icofont-checked iconcheckAprobar botoninvactivo"></i></a>
+              {{est.estadoestudiante}}
+              <a *ngIf="est.estadoestudiante =='Activo'" class="botoninvactivo" (click)="updateuser(est.identificacion,true)"><i class="icofont-close-squared-alt iconcloseAprobar botoninvactivo"></i></a>     
+            </td>
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+  </div>
 </div>

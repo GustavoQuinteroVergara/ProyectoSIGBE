@@ -1,27 +1,237 @@
 <app-navbar></app-navbar>
-<ng-template #mytemplate >
-    <div>
-        <small>Postu</small>
-        <small>Postu</small>
-        <small>Postu</small>
-        <small>Postu</small>
-        <small>Postu</small>
+
+<ng-template #templateActualizado>
+    <div *ngIf="success" class="dialogSuccess" >
+        <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+        <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
+    </div>   
+    <div *ngIf="!success" class="dialogSuccess" >
+        <i class="icofont-close-circled text-center iconErrRegister"></i>
+        <h2 class="text-center textoSuccess">Error al actualizar <small style="display:block;" *ngIf="!intentosPermitidos">No hay más intentos permitidos</small></h2>
+
+    </div>       
+</ng-template>
+
+<!-- INICIO MODAL VER POSTULACIÓN -->
+
+<ng-template #mytemplate>
+    <div style="overflow-x: hidden;position: relative;" data-aos="fade-down" data-aos-once="true">
+        <div class="col-12 col-sm-12">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 70%; width: 100%;">
+                <path d="M0.00,92.27 C216.83,192.92 304.30,8.39 500.00,109.03 L500.00,0.00 L0.00,0.00 Z" style="stroke: none;fill: rgb(256,76,62);"></path>
+            </svg>
+            <div class="row tituloConvocatoria">
+                <div class="col-8 col-sm-8">
+                    <h1 class="tituloConvoVerp">CONVOCATORIA - {{postuSeleccionada.nombreConv}}</h1>
+                </div>
+                <div class="col">
+                    <a class="botonActivarForm" (click)="activarActualizar()" data-title="Editar postulación"><i class="icofont-ui-edit right lapizEditPostu" style="font-size: 2vw;color: white;"></i></a>
+                </div>
+            </div>
+
+        </div>
+    <div class="col-12 col-sm-12 text-center">
+        <h1>Estado postulación</h1>
+        <div class="col-12 col-sm-12">
+            <div class="estadodivpostu" *ngIf="postuSeleccionada.estado_postulacion != 'Aprobado' && postuSeleccionada.estado_postulacion != 'Rechazado'">
+              <strong>{{postuSeleccionada.estado_postulacion}}</strong>  
+            </div>
+            <div class="estadodivpostu" *ngIf="postuSeleccionada.estado_postulacion == 'Aprobado'" style="background: #3dda49 !important;color: white !important;">
+              <strong>{{postuSeleccionada.estado_postulacion}}</strong>  
+            </div>
+            <div class="estadodivpostu" *ngIf="postuSeleccionada.estado_postulacion == 'Rechazado'" style="background: #d82121 !important;color: white !important;">
+              <strong>{{postuSeleccionada.estado_postulacion}}</strong>  
+            </div>
+            
+        </div>
+    </div>
+    <div *ngIf="!this.activarUpdate">
+        <hr>
+        <div class="col-12 col-sm-12 row"  style="margin:0;">
+                <div class="textoinfo col-lg">
+                    <div class="texto" style="width: 100%;">
+                        <div class="icono">
+                            <i class="icofont-ui-calendar right lapizEditPostu" style="font-size: 20px;"></i>
+                        </div>
+                        <div style="display: inline-block;">
+                            <h4 style="margin:0;">
+                            Fecha postulación: <strong>{{postuSeleccionada.fechapostulacion}}</strong> 
+                            </h4>
+                        </div>  
+                    </div>
+                </div>
+                <div class="textoinfo col-lg" >
+                    <div class="texto" style="width: 100%;">
+                        <div class="icono">
+                            <i class="icofont-home right lapizEditPostu" style="font-size: 20px;"></i>
+                        </div>
+                        <h4 style="margin:0;">
+                        Estrato: <strong>{{postuSeleccionada.estrato}}</strong> 
+                        </h4>  
+                    </div>
+                </div>
+        </div>
+        <div class="col-12 col-sm-12 row" style="margin:0;">
+            <div class="textoinfo col-lg" >
+                <div class="texto" style="width: 100%;">
+                    <div class="icono">
+                        <i class="icofont-university right lapizEditPostu" style="font-size: 20px;"></i>
+                    </div>
+                    <h4 style="margin:0;">
+                    Semestre: <strong>{{postuSeleccionada.semestre}}</strong> 
+                    </h4>  
+                </div>
+            </div>
+            <div class="textoinfo col-lg" >
+                <div class="texto" style="width: 100%;">
+                    <div class="icono">
+                        <i class="icofont-listing-number right lapizEditPostu" style="font-size: 20px;"></i>
+                    </div>
+                    <h4 style="margin:0;">
+                    Promedio: <strong>{{postuSeleccionada.promedio}}</strong> 
+                    </h4>  
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 row" style="margin:0;">
+            <div class="textoinfo col-lg" >
+                <div class="texto" style="width: 100%;">
+                    <div class="icono">
+                        <i class="icofont-comment right lapizEditPostu" style="font-size: 20px;"></i>
+                    </div>
+                    <div style="display: inline-block;">
+                        <h4 style="margin:0;">Observaciones: </h4>  
+                        <strong>{{postuSeleccionada.comentpsicologa}}</strong>  
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="col-lg row" *ngIf="!this.activarUpdate" style="margin:0;">
+            <h1>Documentos enviados</h1>
+            <hr>
+            <div class="col" *ngFor="let docspostu of documentosFoundpostu">
+              <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}} ---</a>
+                <div class="good" *ngIf="docspostu.estado == 1">
+                    Bien diligenciado - <i class="icofont-checked" style="font-size: 15px;"></i>
+                </div>
+                <div class="bad" *ngIf="docspostu.estado == 2">
+                    Mal diligenciado     - <i class="icofont-close-squared" style="font-size: 15px;"></i>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="col-12 col-sm-12" *ngIf="this.activarUpdate" >
+        <hr>
+          <form [formGroup]="myForm" novalidate style="margin-left: 20px;margin-right: 20px;">
+            <div class="row">
+                <div class="col-lg">
+                    <h4 for="estado">Semestre</h4>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                      <mat-select #semestre required formControlName="semestre" [disabled]="!activarUpdate">
+                        <mat-option>-- Selecciona el semestre cursando --</mat-option>
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                        <mat-option value="4">4</mat-option>
+                        <mat-option value="5">5</mat-option>
+                        <mat-option value="6">6</mat-option>
+                        <mat-option value="7">7</mat-option>
+                        <mat-option value="8">8</mat-option>
+                        <mat-option value="9">9</mat-option>
+                        <mat-option value="10">10</mat-option>
+
+                    </mat-select>
+                    <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> {{postuSeleccionada.semestre}}</b> </mat-label>
+                </mat-form-field>
+                <div *ngIf="myForm.get('semestre').errors && myForm.get('semestre').dirty">
+                    <p class="red-text" *ngIf="myForm.get('semestre').hasError('required')">Por favor, no dejar el campo convocatoria vacío.</p>
+                </div>
+            </div>
+            <div class="col-lg">
+
+    <h4>Selecciona tu promedio acumulado</h4>
+    
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-select #promedio required formControlName="promedio" id="promedio" (selectionChange)="promedioMessage($event.value)">
+        <mat-option>-- Selecciona tu promedio acumulado --</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="2.1">2,1</mat-option>
+        <mat-option value="2.2">2,2</mat-option>
+        <mat-option value="2.3">2,3</mat-option>
+        <mat-option value="2.4">2,4</mat-option>
+        <mat-option value="2.5">2,5</mat-option>
+        <mat-option value="2.6">2,6</mat-option>
+        <mat-option value="2.7">2,7</mat-option>
+        <mat-option value="2.8">2,8</mat-option>
+        <mat-option value="2.9">2,9</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="3.1">3,1</mat-option>
+        <mat-option value="3.2">3,2</mat-option>
+        <mat-option value="3.3">3,3</mat-option>
+        <mat-option value="3.4">3,4</mat-option>
+        <mat-option value="3.5">3,5</mat-option>
+        <mat-option value="3.6">3,6</mat-option>
+        <mat-option value="3.7">3,7</mat-option>
+        <mat-option value="3.8">3,8</mat-option>
+        <mat-option value="3.9">3,9</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="4.1">4,1</mat-option>
+        <mat-option value="4.2">4,2</mat-option>
+        <mat-option value="4.3">4,3</mat-option>
+        <mat-option value="4.4">4,4</mat-option>
+        <mat-option value="4.5">4,5</mat-option>
+        <mat-option value="4.6">4,6</mat-option>
+        <mat-option value="4.7">4,7</mat-option>
+        <mat-option value="4.8">4,8</mat-option>
+        <mat-option value="4.9">4,9</mat-option>
+        <mat-option value="5">5</mat-option>
+
+    </mat-select>
+    <mat-label><i class="icofont-calendar icoselectCalendar"></i> <b> Promedio acumulado</b> </mat-label>
+</mat-form-field>
+              <div *ngIf="myForm.get('promedio').errors && myForm.get('promedio').dirty">
+                <p class="red-text" *ngIf="myForm.get('promedio').hasError('required')">Por favor, no dejar el campo promedio vacío.</p>
+                <p class="red-text" *ngIf="myForm.get('promedio').hasError('minlength')">Mínimo 1 caracter</p>
+                <p class="red-text" *ngIf="myForm.get('promedio').hasError('maxlength')">Máximo 2 caracteres</p>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="row" *ngIf="activarUpdate">
+            <div class="col s12 center">
+                <button mat-raised-button color="primary"(click)="actualizarPostu(semestre.value,promedio?.value)" [disabled]="myForm.invalid"><i class="icofont-check right lapizUpdatePostu"></i> Editar postulacion</button>
+            </div>
+        </div>
+        </form>
+        <hr>
     </div>
 
+
+</div>
+
 </ng-template>
-<div class="row rowViewPostest">
-<div class="col s12 m7">
-    <div class="card">
-        <div class="card-content">
-        	<h1>Mis postulaciones</h1>
-        	<hr>
-        	<table>
+
+<!-- FIN MODAL VER POSTULACIÓN -->
+
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+    <div class="col s12 m7 formtiq">
+        <h1>Mis postulaciones</h1>
+        <div>
+            <div >
+
+               <hr>
+               <table class="table table-bordered table-striped mb-0">
                 <thead>
                     <tr>
                         <th>Nombre estudiante</th>
                         <th>Estrato</th>
                         <th>Promedio</th>
-                        <th>Fecha postulacion</th>
+                        <th>Fecha postulación</th>
                         <th>Semestre</th>
                         <th>Estado</th>
                         <th>Acciones</th>
@@ -36,7 +246,7 @@
                         <td>{{postu.semestre}}</td>
                         <td>{{postu.estado_postulacion}}</td>
                         <td>
-                            <a (click)="abrirPostu(mytemplate)"><i class="icofont-search-document iconcheckAprobar"></i></a>
+                            <a (click)="abrirPostu(mytemplate,postu)"><i class="icofont-search-document iconcheckAprobar"></i></a>
                         </td>
                     </tr>
                 </tbody>

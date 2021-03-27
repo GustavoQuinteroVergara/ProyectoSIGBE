@@ -8,14 +8,19 @@ import { map } from 'rxjs/operators';
 })
 export class ServRegPostuService {
 
-  url='http://localhost/sigbeweb/app/componentes/postulacion/createpostulacion.php'; // disponer url de su servidor que tiene las páginas PHP
+  url='http://localhost/sigbeweb/'; // disponer url de su servidor que tiene las páginas PHP
 
   constructor(private http: HttpClient) { }
 
   registrarPostulacion(arregloPostu:any){
-  	return this.http.post(`${this.url}`,{data: arregloPostu})
+  	return this.http.post(`${this.url}app/componentes/postulacion/createpostulacion.php`,{data: arregloPostu})
   	.pipe(map((res)=>{
   	return arregloPostu;
   	}));
+  }
+
+  buscarPostuByIdConvo(idconvo:any,identi:any){
+  	return this.http.get(`${this.url}app/componentes/postulacion/postulacionbyidconvo.php?idconvo=${idconvo}&iduser=${identi}`);
+  
   }
 }

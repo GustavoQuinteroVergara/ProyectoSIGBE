@@ -11,8 +11,8 @@ export class RegistrarConvoServiceService {
   urlCreate ='http://localhost/SIGBEWEB/app/componentes/convocatorias/create_convocatoria.php';
   constructor(private http: HttpClient) { }
  
-  registrarConvocatoria(registroConvo:Array<any>){
-    return this.http.post(`${this.urlCreate}`,{data: registroConvo}).
+  registrarConvocatoria(registroConvo:any){
+    return this.http.post(`${this.urlCreate}`,registroConvo).
     pipe(map((res)=>{
       return  registroConvo
     }));

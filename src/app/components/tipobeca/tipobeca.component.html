@@ -1,17 +1,33 @@
 <app-navbar></app-navbar>
-<div class="row fondoConvocatoria center-align ">
-    <form class="col s6 formConvocatoria z-depth-3">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
-      <h3 class="tituloRegistroConvocatoria"> Registre un Tipo de Beca</h3>
-      <div class="row divFormConvo">
-       <mat-form-field class="example-full-width" appearance="none">
-        <mat-label>Descripción</mat-label>
-        <input #descripcion id="descripcion" matInput placeholder="Añade una descripcion.." value="" >
-        <div class="center-align">
-         <a class="btn waves-effect waves-light red darken-4 " (click)="registrarTBeca(descripcion.value)"  name="action">Registrar</a>
-        </div>
-       </mat-form-field>
-      </div>
-    </form>
+<ng-template #mytemplate>
+  <div *ngIf="success" class="dialogSuccess">
+    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+    <h2 class="text-center textoSuccess">Registrado exitosamente</h2>
   </div>
-        
+  <div *ngIf="!success" class="dialogSuccess">
+    <i class="icofont-close-circled text-center iconErrRegister"></i>
+    <h2 class="text-center textoSuccess">Error al registrar</h2>
+  </div>
+</ng-template>
+<div class="cuerpopage cup1">
+  <form class="formtiq" [formGroup]="formularioTipoBeca">
+    <h1> REGISTRE UN TIPO DE BECA</h1>
+    <hr>
+    <div class="row ">
+      <div class="col-12">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Descripción</mat-label>
+          <input #descripcion id="descripcion" matInput placeholder="Añade una descripcion.." value="" formControlName="descripcionTipoBeca" >
+          <mat-error class="help-block form-error text-danger small"
+          *ngIf="formularioTipoBeca.controls['descripcionTipoBeca'].hasError('required') && formularioTipoBeca.controls['descripcionTipoBeca'].touched">
+        La descripción es requerida </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="center-align">
+      <a mat-raised-button color="primary" [class.disabled]="!formularioTipoBeca.valid"
+      (click)="registrarTBeca(descripcion.value,mytemplate)"  name="action">Registrar</a>
+    </div>
+  </div>
+</form>
+</div>

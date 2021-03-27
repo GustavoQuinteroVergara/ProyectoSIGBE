@@ -1,9 +1,113 @@
-.rowViewPostest{
-	margin-left: 11%;
-	padding-top: 5.5%;
+.cup1{
+	height: 81vh;
+	
 }
 
-.iconcheckAprobar{
+/*colores vetana modal confirmacion*/
+.iconSuccessRegister{
+	font-size: 44px;
+	color: green;
+	border: 2px solid green;
+	border-radius: 50%;
+	padding: 10px;
+}
+
+.textoinfo{
+	padding: 5px
+}
+
+.estadodivpostu{
+	display: inline-block;
+    padding: 15px;
+    background: #ccc;
+    box-shadow: 1px 1px 5px #ccc;
+    transition: all ease .1s;
+    border-radius: 5px;
+}
+
+.estadodivpostu:hover{
+	background: #b1b1b1 !important;
+}
+
+.icono{
+	display: inline-block;
+    padding: 15px;
+    background: #ff4c3e;
+    margin-right: 10px;
+    color: white;
+    vertical-align: top;
+}
+
+.texto{
+	display: inline-block;
+    box-shadow: 1px 1px 4px #ccc;
+}
+
+.texto > h4{
+	display: inline-block;
+}
+
+
+.tituloConvocatoria{
+	position: absolute;
+    left: 0;
+    right: 0;
+    top: 5vw;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.tituloConvoVerp{
+	font-size: 3vw;
+    color: white;
+}
+
+.iconErrRegister{
+	font-size: 44px;
+	color: red;
+}
+
+.textoSuccess{
+	margin-top: 20px;
+}
+
+.dialogSuccess{
+	text-align: center;
+	padding-top: 7px;
+}
+
+.botonActivarForm{
+	text-decoration: none;
+	color: black;
 	cursor: pointer;
-	
+}
+
+
+[data-title]:hover:after {
+	opacity: 1;
+	transition: all 0.1s ease 0.5s;
+	visibility: visible;
+}
+
+[data-title]:after {
+	content: attr(data-title);
+	background-color: #333;
+	color: #fff;
+	font-size: 14px;
+	font-family: Raleway;
+	position: absolute;
+	padding: 3px 20px;
+	bottom: -1.6em;
+	right: 100%;
+	white-space: nowrap;
+	box-shadow: 1px 1px 3px #222222;
+	opacity: 0;
+	border: 1px solid #111111;
+	z-index: 99999;
+	visibility: hidden;
+	border-radius: 6px;
+
+}
+[data-title] {
+	position: relative;
 }

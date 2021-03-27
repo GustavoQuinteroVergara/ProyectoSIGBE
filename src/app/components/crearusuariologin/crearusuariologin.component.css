@@ -1,93 +1,101 @@
-
-
-.fondo{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #cd1f32;
-    height: 140%;
-    
+.rowImageLogin,
+.divImageInto {
+    margin-top: 0;
+    margin-bottom: 0;
 }
-@keyframes entradalogi {
+
+.imglogobienestar{
+    margin-right: 20px;
+}
+
+.rowImageLogin{
+    text-align: center;
+}
+
+.mobiledescarga{
+    display: inline-block;
+    position: absolute;
+    top: 80%;
+    left: 30px;
+    background: white;
+    text-align: center;
+    box-shadow: 1px 1px 10px black;
+}
+
+.titledescargar{
+    display: inline-block;
+    padding-left: 5px;
+    font-weight: bolder;
+    padding-right: 5px;
+}
+
+.imagedescargarapk{
+    display: inline-block;
+    display: inline-block;
+    background: #ffffff;
+    padding: 15px;
+    border-right: 0.5px solid #afadad;
+}
+
+.titledescargar > h3{
+    margin: 0;
+}
+
+/*@keyframes entradalogin {
     0% {
         opacity: 0;
         top: 0%;
     }
     100% {
         opacity: 1;
-        top: 10%;
+        top: 20%;
     }
-}
+    }*/
 
+    .botonRegistrate{
+        color: black;
+        font-weight: bold;
+        transition: all 0.5s ;
+        margin-left: 5px;
+    }
 
-.caja  {
-    background: white;
-    float: center;
-    position: absolute;
-    width: 30%;
-    left: 35%;
-    top: 10%;
-    background: white;
+    .example-full-width {
+      width: 100%;
+  }
+
+  .rowform {
     padding: 20px;
-    box-shadow: 1px 1px 24px #00000059;
-    border: 1px solid gray;
-    color: black;
-     float: left;
-    /* margin: 20px; */
-    /* margin-left: 11%; */
-    margin-bottom: 0%;
-    /* margin-top: 5.5%; */
-    text-align: center;
-    line-height:#444;
-    animation-name: entradalogi;
-    animation-duration: 2s;
-    
 }
- /* .rowform {
-    text-align: center;
-    position: absolute;
+
+.imagelogin{
     width: 30%;
-    left: 35%;
-    top: 5%;
-    bottom: 10px;
-    background: white;
-    
-    box-shadow: 1px 1px 24px #00000059;
-   
-    
-}  */
-
-.divInputssrow{
-    margin-bottom: 0px !important;
+    height: 100%;
+    background-image: url(../../../assets/imgs/bck2.jpg);
+    background-size: cover;
+    display: inline-block;
 }
 
-img{
-    
-    text-align: center;
+.rowloginn{
+    display: inline-block;
+    width: 69%;
+    height: 100%;
+    vertical-align: top;
+    --bs-gutter-x: 0 !important;
+    --bs-gutter-y: 0  !important;
 }
 
 
 
-
-.row{
-    padding-left: 20px;
-    padding-right: 20px;
+.containerForm {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+.iconito{
+    font-size:140%; 
 }
 
-
-.btn{
-    
-    background: red;
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
-
-h5{
-    color: slategrey;
-}
-
-.logo{
-    margin-top: 10px;
+.check{
+    margin-top: 70px;
 }

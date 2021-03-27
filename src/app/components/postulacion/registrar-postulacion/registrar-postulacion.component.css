@@ -24,13 +24,14 @@
     padding-top: 7px;
 }
 
-.containerRegisterPostu{
-    width: 50%;
-    margin-left: 12%;
-    padding-top: 6%;
+.inputidenuser{
+    font-weight: 600;
 }
 
-.formPostuRegister{
-    box-shadow: 0px 1px 11px #ccc;
-    padding: 20px;
+.buttontext{
+    margin-left: 5px;
+}
+
+.cup1{
+    padding:3% 10% 8% 10%;
 }

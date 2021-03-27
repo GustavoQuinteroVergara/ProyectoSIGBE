@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioshabilitarService } from './servicioshabilitar.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-habilitaruser',
   templateUrl: './habilitaruser.component.html',
@@ -20,11 +21,11 @@ buscarEstudiante(codigoestudiante:any){
   console.log(this.estudiante);
 }
 
-updateuser(codigoestudiante:any,estadoseleccionado:any){
+updateuser(identificacion:any,estadoseleccionado:any){
 
   if(estadoseleccionado == true){
       this.updateestudiante={
-        codigoestudiante:codigoestudiante,
+        identificacion:identificacion,
         estadouser:'Inactivo'
 
       };
@@ -32,12 +33,22 @@ updateuser(codigoestudiante:any,estadoseleccionado:any){
       .subscribe(res=>{
         console.log(res);
         this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser;
-
+          Swal.fire({
+                title: 'Exitoso',
+                text: 'Actualizado exitosamente.',
+                icon: 'success'
+          });        
+      },(err)=>{
+          Swal.fire({
+                title: 'ERROR',
+                text: 'Error al actualizar.' + err.error.text,
+                icon: 'error'
+          });  
       });
   }
   if(estadoseleccionado == false){
     this.updateestudiante={
-      codigoestudiante:codigoestudiante,
+      identificacion:identificacion,
       estadouser:'Activo'
 
     };
@@ -45,9 +56,19 @@ updateuser(codigoestudiante:any,estadoseleccionado:any){
     .subscribe(res=>{
       console.log(res);
        this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser;
-       
+          Swal.fire({
+                title: 'Exitoso',
+                text: 'Actualizado exitosamente.',
+                icon: 'success'
+          }); 
       
-    });
+    },(err)=>{
+          Swal.fire({
+                title: 'ERROR',
+                text: 'Error al actualizar.' + err.error.text,
+                icon: 'error'
+          });  
+      });
 
 
   }

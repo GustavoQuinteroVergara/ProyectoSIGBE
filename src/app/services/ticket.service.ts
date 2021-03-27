@@ -2,18 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TicketService {
 
 	url="http://localhost/sigbeweb";
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  registrarTicket(ticketArray:any){
-  	return this.http.post(`${this.url}/app/componentes/tickets/crearTicket.php`,{data: ticketArray})
-  	.pipe(map((res)=>{
-  	return ticketArray;
-  	}));
-  }
+	registrarTicket(ticketArray:any){
+		return this.http.post(`${this.url}/app/componentes/Tickets/crearTicket.php`,{data: ticketArray})
+		.pipe(map((res)=>{
+			return ticketArray;
+		}));
+	}
+
+	buscarTicketbyFechaUser(iduser:any,tipoticket:any){
+		return this.http.get(`${this.url}/app/componentes/Tickets/ticketbyfechauser.php?idUser=${iduser}&tipoticket=${tipoticket}`);
+	}
+
+	listTicketByest(iduser:any){
+		return this.http.get(`${this.url}/app/componentes/Tickets/ticketbyest.php?identificacion=${iduser}`);
+	}
 }

@@ -1,163 +1,187 @@
 import { Component, OnInit } from '@angular/core';
 import {formatDate } from '@angular/common';
-import {Globals} from './../../global';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {TicketService} from '../../services/ticket.service';
 import {UsuarioService} from '../../services/usuario.service';
-
+import {ConfiguracionService} from '../configuracion/configuracion.service';
+import {CuposasignacionService} from '../../services/cuposasignacion.service';
+import {PostulacionService} from '../../services/postulacion.service';
+import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-crear-ticket',
-  templateUrl: './crear-ticket.component.html',
-  styleUrls: ['./crear-ticket.component.css']
+	selector: 'app-crear-ticket',
+	templateUrl: './crear-ticket.component.html',
+	styleUrls: ['./crear-ticket.component.css']
 })
 export class CrearTicketComponent {
-  globals: Globals;
-  tipoBeca='';
-  fechaActual= new Date();
-  todaysDataTime = '';
-  ticketArray:any;
+	tipoBeca='';
+	fechaActual= formatDate(new Date(), 'yyyy/MM/dd', 'en');
+	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
+	todaysDataTime = '';
+	ticketArray:any;
+	postulacionBeneficiario:any;  
+	confirmacionBeneficiario = false;
+	asignacionBuscada:any= '-';
 
-  userArraySaldo:any;
-  valorTicket:number;
-  success=false;
-  confSaldo = true;
-  confErr = false;
-  confHorario = true;
-  $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 
-  constructor(globals: Globals,private ticketService:TicketService,
-    private usuarioService:UsuarioService,public dialog: MatDialog) { 
-  	this.globals = globals;
 
-  	// Horas manejada en 24:00HS
-  	this.todaysDataTime = formatDate(this.fechaActual, 'HH:mm', 'en-US');
-  	console.log(this.todaysDataTime);
-	if(this.todaysDataTime < '12:30'){
-		this.tipoBeca = 'Ticket Almuerzo';
-		this.valorTicket=globals.valorticketalmuerzo;
-	}else{
-		this.tipoBeca = 'Ticket Refrigerio';
-		this.valorTicket=globals.valorticketrefrigerio;
+	public qrdata: string = null;
+	public elementType: 'img' | 'url' | 'canvas' | 'svg' = null;
+	public level: 'L' | 'M' | 'Q' | 'H';
+	public scale: number;
+	public width: number;
+
+	userArraySaldo:any;
+	asignacionEnviar:any;
+	valorTicket:number;
+	success=false;
+	confSaldo = true;
+	confErr = false;
+	confHorario = true;
+	verificarEstadohorario = true;
+	configuracionBack:any;
+	$nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
+
+	constructor(private ticketService:TicketService,
+		private configuracionService:ConfiguracionService,
+		private postulacionService:PostulacionService,
+		private usuarioService:UsuarioService,public dialog: MatDialog, 
+		private serviceCuposasign:CuposasignacionService) { 
+		this.elementType = 'img';
+		this.todaysDataTime = formatDate(new Date(), 'HH:mm', 'en-US');
+		this.buscarAsignacionPorFecha();
+		this.buscarConfiguracion();
+		
+		this.level = 'M';
+		this.qrdata = 'Initial QR code data string';
+		this.scale = 1;
+		this.width = 256;
+
+		// Horas manejada en 24:00HS
+		
+		console.log(this.todaysDataTime);
+
+
+
+
 	}
-	
-  }
 
-  comprarTicket(templateRef){
-      this.success=false;
-      this.confSaldo = true;
-      this.confErr = false;
-      this.confHorario = true;
-  	this.ticketArray= {
-  		idUser: this.$nombreusuario.identi,
-  		valorticket:this.valorTicket,
-  		tipoTicket:this.tipoBeca
-  	}
-    this.userArraySaldo = {
-      idUser : this.$nombreusuario.identi,
-      saldo : this.$nombreusuario.saldo - this.valorTicket
-    }
+	buscarBeneficiario(tipoBeca:any){
+		console.log(this.tipoBeca);
+		if(this.tipoBeca == 'Ticket Almuerzo'){
+			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,1).subscribe(result=>{
+				this.postulacionBeneficiario = result;
+				this.confirmacionBeneficiario = true;
+				console.log(result);
+			},(err)=>{
+				this.confirmacionBeneficiario = false;
+				console.log(err);
+			});
+		}else{
+			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,2).subscribe(result=>{
+				this.postulacionBeneficiario = result;
+				this.confirmacionBeneficiario = true;
+			},(err)=>{
+				this.confirmacionBeneficiario = false;
+			});
+		}
 
-  	if((this.todaysDataTime > this.globals.horainicioVentaAlmuerzo) &&  (this.todaysDataTime < this.globals.horaFinVentaAlmuerzo)){
-      //inicio primer if
+	}
 
-      if(this.userArraySaldo.saldo >= 0){
+	buscarConfiguracion(){
+		this.configuracionService.listarConfiguracion().subscribe(result=>{
+			this.configuracionBack = result;
 
-        	this.ticketService.registrarTicket(this.ticketArray).subscribe(result=>{
-        		
-            
-            this.usuarioService.actualizarSaldo(this.userArraySaldo).subscribe(result=>{
-              this.$nombreusuario.saldo = this.$nombreusuario.saldo - this.valorTicket;
-              this.success=true;
-              localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
-              let dialogRef = this.dialog.open( templateRef,{
-                height: '200px',
-                width: '200px',
-              });
-              console.log("Actualizado, msg " ,result);
-
-            },(err)=>{
-              this.confErr = true;
-              let dialogRef = this.dialog.open( templateRef,{
-                height: '200px',
-                width: '200px',
-              });
-              console.log(err.error);
-            });
-        	},(err)=>{
-            this.confErr = true;
-              let dialogRef = this.dialog.open( templateRef,{
-                height: '200px',
-                width: '200px',
-              });
-              console.log(err.error);
-        	});
-
-      }else{
-        this.confSaldo = false;
-      let dialogRef = this.dialog.open( templateRef,{
-        height: '200px',
-        width: '200px',
-      });
-
-      }
+			if(this.todaysDataTime < result['horaFinVentaAlmuerzo']){
+				this.tipoBeca = 'Ticket Almuerzo';
+				this.valorTicket=result['valorticketalmuerzo'];
+				this.buscarBeneficiario('Ticket Almuerzo');
+			}else{
+				this.tipoBeca = 'Ticket Refrigerio';
+				this.valorTicket=result['valorticketrefrigerio'];
+				this.buscarBeneficiario('Ticket Refrigerio');
+			}
 
 
-    //fin primer if
-  	}else if((this.todaysDataTime > this.globals.horainicioVentaRefrigerio) &&  
-  		(this.todaysDataTime < this.globals.horaFinVentaRefrigerio)){
-      // Inicio segundo if
-        if(this.userArraySaldo.saldo >= 0){
 
-          this.ticketService.registrarTicket(this.ticketArray).subscribe(result=>{
-            
-            
-            this.usuarioService.actualizarSaldo(this.userArraySaldo).subscribe(resultus=>{
-              this.$nombreusuario.saldo = this.$nombreusuario.saldo - this.valorTicket;
-              this.success=true;
-              localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
-              let dialogRef = this.dialog.open( templateRef,{
-                height: '200px',
-                width: '200px',
-              });
-              
-              console.log("Actualizado, msg " ,resultus);
+			if((this.todaysDataTime >= result['horaFinVentaAlmuerzo']) && (this.todaysDataTime < result['horainicioVentaRefrigerio'])){
+				this.verificarEstadohorario = false;
+			}else if ((this.todaysDataTime < result['horainicioVentaAlmuerzo'])){
+				this.verificarEstadohorario = false;
+			}else if ((this.todaysDataTime > result['horaFinVentaRefrigerio'])){
+				this.verificarEstadohorario = false;
+			}
 
-            },(errs)=>{
-              this.confErr = true;
-              let dialogRef = this.dialog.open( templateRef,{
-                height: '200px',
-                width: '200px',
-              });
-              console.log(errs.error);
-            });
-          },(err)=>{
-              this.confErr = true;
-              let dialogRef = this.dialog.open( templateRef,{
-                height: '200px',
-                width: '200px',
-              });
-          });
+		},(err)=>{
+			console.log(err);
+		});
+	}
 
-      }else{
-        this.confSaldo = false;
-      let dialogRef = this.dialog.open( templateRef,{
-        height: '200px',
-        width: '200px',
-      });
+	comprarTicket(){
+		this.success=false;
+		this.confSaldo = true;
+		this.confErr = false;
+		this.confHorario = true;
+		this.ticketArray= {
+			idUser: this.$nombreusuario.identi,
+			valorticket:this.valorTicket,
+			tipoTicket:this.tipoBeca,
+			idAsign:this.asignacionBuscada.concecutivo
+		}
 
-      }
+		if(this.tipoBeca == 'Ticket Almuerzo'){
+			this.asignacionEnviar = {
+				conceasign : this.asignacionBuscada.concecutivo,
+				cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo - 1,
+				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio
+			}
+		}else{
+			this.asignacionEnviar = {
+				conceasign : this.asignacionBuscada.concecutivo,
+				cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo,
+				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio - 1
+			}
+		}
+		this.ticketService.buscarTicketbyFechaUser(this.$nombreusuario.identi,this.ticketArray.tipoTicket).subscribe(result=>{
+			Swal.fire({
+	          title: 'ERROR',
+	          text: 'Lo siento, ya reservaste el día de hoy.',
+	          icon: 'error'
+	        });
+		},(err)=>{
+			this.serviceCuposasign.actualizarCupos(this.asignacionEnviar).subscribe(result=>{
+				this.ticketService.registrarTicket(this.ticketArray).subscribe(result=>{
 
-    // Fin segundo if
-  	}else{
-      this.confHorario = false;
-  		let dialogRef = this.dialog.open( templateRef,{
-        height: '200px',
-        width: '200px',
-      });
-  	}  	
+					Swal.fire({
+			          title: 'Exitoso',
+			          text: 'Comprado exitosamente.',
+			          icon: 'success'
+			        });
 
+				},(errors)=>{
+					Swal.fire({
+			          title: 'ERROR',
+			          text: 'Error... : ' + errors.error,
+			          icon: 'error'
+			        });
+				}); 
 
-  }
+			},(exception)=>{
+				Swal.fire({
+		          title: 'ERROR',
+		          text: 'Error... : ' + exception.error,
+		          icon: 'error'
+		        });
+				
+			});
+		});
+
+	}
+
+	buscarAsignacionPorFecha(){
+		this.serviceCuposasign.buscarAsignacionByFecha(this.fechaActual2).subscribe(res=>{
+			this.asignacionBuscada=res;
+		})
+	}
 
 }

@@ -1,66 +1,99 @@
 <app-navbar></app-navbar>
-<div class="row rowRegistroTicket">
-<div class="col s12 m4">
-	<ng-template #mytemplate>
-	<div *ngIf="success " class="dialogSuccess" >
-		<i class="icofont-ui-check text-center iconSuccessRegister"></i>
-		<h2 class="text-center textoSuccess">Comprado exitosamente</h2>
-	</div>
-	<div *ngIf="!confSaldo" class="dialogSuccess" >
-		<i class="icofont-close-circled text-center iconErrRegister"></i>
-		<h2 class="text-center textoSuccess">No tienes saldo suficiente</h2>
-	</div>
-	<div *ngIf="!confHorario" class="dialogSuccess" >
-		<i class="icofont-close-circled text-center iconErrRegister"></i>
-		<h2 class="text-center textoSuccess">Horario no permitido</h2>
-	</div>
-	<div *ngIf="confErr" class="dialogSuccess" >
-		<i class="icofont-close-circled text-center iconErrRegister"></i>
-		<h2 class="text-center textoSuccess">ERROR A LA COMPRA</h2>
-	</div>
-	</ng-template>
-	<div class="card">
-		<div class="card-content">
-			<h1>Comprar ticket</h1>
-			<hr>
-			<form>
-				<div class="row">
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
-						<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
-						</mat-form-field>
-					</div>
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><i class="icofont-wallet"></i>Saldo actual</mat-label>
-						<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="$nombreusuario.saldo">
-						</mat-form-field>
-					</div>
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+	<div *ngIf="asignacionBuscada == '-'" class="formtiq">
+		<div class="col s12 m4">
+			<div>
+				<div>
+					No hay asignaciones para venta de tickets hoy
 				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><h3><i class="icofont-card"></i>Identificacion</h3></mat-label>
-						<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
-						</mat-form-field>
-					</div>
-					<div class="input-field col s6">
-						<mat-form-field class="example-full-width" appearance="none">
-						<mat-label><i class="icofont-lunch"></i>Tipo ticket</mat-label>
-						<input disabled="true" #descripcion id="tipobeca" matInput placeholder="Tipo beca" [value]="tipoBeca">
-						</mat-form-field>
-
-
-					</div>
-				</div>
-				<div class="row center">
-					<div class="input-field col s12">
-						<a (click)="comprarTicket(mytemplate)" class="waves-effect waves-light btn red" ><i class="icofont-save left"></i>COMPRAR</a>
-					</div>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
-</div>
-</div>
+
+	<div *ngIf="!verificarEstadohorario" >
+		<div class="col s12 m4 formtiq">
+			<div >
+				<div >
+					Horario <strong>no</strong> disponible para la reserva de tickets
+					<p class="center">El horario para la reserva de tickets de almuerzo es de: <strong>{{configuracionBack['horainicioVentaAlmuerzo']}}</strong> a <strong>{{configuracionBack['horaFinVentaAlmuerzo']}}</strong></p>
+					<p class="center">Para la reserva de tickets de refrigerio es de:
+						<strong>{{configuracionBack['horainicioVentaRefrigerio']}}</strong> a <strong>{{configuracionBack['horaFinVentaRefrigerio']}}</strong></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="asignacionBuscada != '-'">
+			<div class="col s12 m4">
+				<div *ngIf="verificarEstadohorario" class="card">
+					<div >
+						
+						<form class="formtiq">
+							<h1 class="center">Reservar ticket</h1>
+							<hr>
+							<div class="row">
+								<div class="input-field col s6">
+									<mat-form-field class="matbolderform" appearance="none">
+										<mat-label><i class="icofont-user"></i>Nombre estudiante</mat-label>
+										<input disabled="true" #nombreest id="nombrest" matInput placeholder="Nombre estudiante" [value]="$nombreusuario.nombre + ' ' + $nombreusuario.apellido">
+									</mat-form-field>
+								</div>
+								<div class="input-field col s6">
+									<mat-form-field class="matbolderform" appearance="none">
+										<mat-label><i class="icofont-wallet"></i>Fecha de compra</mat-label>
+										<input disabled="true" #saldo id="cupos" matInput placeholder="Saldo" [value]="fechaActual">
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s6">
+									<mat-form-field class="matbolderform" appearance="none">
+										<mat-label><h3><i class="icofont-card"></i>Identificación</h3></mat-label>
+										<input disabled="true" #identifi id="identi" matInput placeholder="Identificacion" [value]="$nombreusuario.identi">
+									</mat-form-field>
+								</div>
+								<div class="input-field col s6">
+									<mat-form-field class="matbolderform" appearance="none">
+										<mat-label><i class="icofont-lunch"></i>Beneficiario</mat-label>
+										<input disabled="true" #beneficiario id="tipobeca" matInput placeholder="Beneficiario" [value]="tipoBeca">
+									</mat-form-field>
+								</div>
+							</div>
+							<div class="row" *ngIf="tipoBeca == 'Ticket Almuerzo'">
+								<div class="col s12" *ngIf="confirmacionBeneficiario">
+									<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
+									<div class="input-field col s12 center">
+										<span>Tarifa: <h1>{{configuracionBack.valorticketalmuerzobeneficiario}}</h1></span>
+									</div>
+								</div>
+								<div class="row" *ngIf="!confirmacionBeneficiario">
+									<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
+									<div class="input-field col s6">
+										<span>Tarifa: <h1>{{configuracionBack.valorticketalmuerzo}}</h1></span>
+									</div>
+								</div>
+							</div>
+							<div class="row" *ngIf="tipoBeca == 'Ticket Refrigerio'">
+								<div class="col s12" *ngIf="confirmacionBeneficiario">
+									<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
+									<div class="input-field col s12 center">
+										<span>Tarifa: <h1>{{configuracionBack.valorticketrefrigeriobeneficiario}}</h1></span>
+									</div>
+								</div>
+								<div class="row" *ngIf="!confirmacionBeneficiario">
+									<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
+									<div class="input-field col s6">
+										<span>Tarifa: <h1>{{configuracionBack.valorticketrefrigerio}}</h1></span>
+									</div>
+								</div>
+							</div>
+							<div class="row center">
+								<div class="input-field col s12">
+									<a (click)="comprarTicket()" class="waves-effect waves-light btn red" mat-raised-button color="primary" ><i class="icofont-save left"></i>COMPRAR</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

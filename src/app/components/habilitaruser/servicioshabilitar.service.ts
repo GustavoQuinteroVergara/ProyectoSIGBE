@@ -13,7 +13,7 @@ export class ServicioshabilitarService {
   constructor(private http: HttpClient) { }
 
 buscarUser(codigoestudiante:any){
-  return this.http.get(`${this.url}codigoestudiante=${codigoestudiante}`);
+  return this.http.get(`${this.url}identificacion=${codigoestudiante}`);
 }
 
 updateuser(Actualizaruser:Array<any> ){

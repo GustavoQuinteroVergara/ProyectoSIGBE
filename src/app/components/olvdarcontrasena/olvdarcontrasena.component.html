@@ -1,0 +1,50 @@
+<div class="wrap containerForm">
+  <div class="mobiledescarga" data-aos="fade-down" data-aos-once="true">
+    <a href="assets/apk/app-debug.apk" download="app-debug.apk" >
+      <div class="imagedescargarapk">
+        <img src="assets/imgs/apkt.png" width="40px">
+      </div>
+      <div class="titledescargar">
+        <h3>Descarga SIGBE Mobile</h3>
+      </div>
+    </a>
+
+  </div>
+  <div class="imagelogin" data-aos="fade-right" data-aos-once="true">
+
+  </div>
+  <div class="row rowloginn" data-aos="fade-down" data-aos-once="true">
+    <form class="col-12 rowform align-self-center">
+      <div class="row center rowImageLogin">
+        <div class="input-field col s12 divImageInto">
+          <img src="assets/imgs/logo1.png" alt="...." width="100px" class="imglogobienestar">
+          <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
+        </div>
+      </div>
+      <hr>
+      <div>
+        <h1 class="text-center">OLVIDE MI CONTRASEÑA</h1>
+      </div>
+      <div class="row">
+        <div class="input-field col-12">
+          <h4>Email</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput #email id="email" type="email" class="validate" require>
+            <i matSuffix class="icofont-key iconocontrasenas"></i>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="input-field col-12">
+          <a mat-raised-button color="primary" style="margin-right: 20px;" class="button" (click)="olvidecontrasena(email.value)"><i class="icofont-login left"></i>Enviar </a>
+          <a routerLink="/**" mat-raised-button class="btn-success">Regresar</a>
+        </div>
+      </div>
+      <div class="row center" routerLinkActive="active">
+        <div class="input-field col s12">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

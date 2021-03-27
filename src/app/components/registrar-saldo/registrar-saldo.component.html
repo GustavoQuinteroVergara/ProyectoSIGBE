@@ -67,6 +67,12 @@
 
             </mat-form-field>
           </div>
+          <form (ngSubmit)="upload()">
+            <input #pdf formControlName="pdf" type="file" accept="application/pdf" (change)="seleccionarArchivo($event)">
+            <br><br>
+            <button  class="btn waves-effect waves-light red darken-4 "> SUBIR ARCHIVO </button>
+          </form>
+          <button (click)="showPDF()"  class="btn waves-effect waves-light red darken-4 ">DescargarPDF</button>
           <div class="col s6">
             <mat-form-field class="example-full-width" appearance="none" >
               <mat-label>Nuevo Saldo</mat-label>

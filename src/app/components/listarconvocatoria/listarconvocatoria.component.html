@@ -1,44 +1,43 @@
 <app-navbar></app-navbar>
-<div class="wraplistarconvo">
-<div class="caja z-depth-3">
-    <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Univalle.svg/1200px-Univalle.svg.png " width="50px" alt="LogoUV">
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+  <div class="formtiq ">
+    <div>
+      <h1>LISTA DE CONVOCATORIAS</h1>
+      <hr>
+    </div>
+    <div >
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Fecha <br> de  inicio</th>
+            <th>Fecha fin</th>
+            <th>Estado de <br> convocatoria</th>
+            <th>Beca</th>
+            <th>Periodo</th>
+            <th>Cupos</th>
+            <th>Postulaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let convoca of convocatorias">
+            <td>{{convoca.fecha_inicio}} </td>  
+            <td>{{convoca.fecha_fin}}</td>
+            <td>{{convoca.estado_convocatoria}}</td>
+            <td>{{convoca.beca}}</td>
+            <td>{{convoca.periodosacademicos}}</td>
+            <td>{{convoca.cupo}}</td>
+            <td> <a [routerLink]="['/viewConvocatoria', convoca.consecutivo_convocatoria]" > <i class="icofont-search-2"></i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-12 m-12 text-center">
+        <h3>Exportar a Excel</h3>
+        <div class ="container" style="padding-bottom:20px">
+          <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
+        </div>
       </div>
-      <div>
-          <h5>Lista de convocatorias</h5>
-      </div>
-      <div class="tabla">
-<table class="striped">
-    <thead>
-      <tr>
-          <th>Fecha <br> de  inicio</th>
-          <th>Fecha fin</th>
-          <th>Estado de <br> convocatoria</th>
-          <th>Beca</th>
-          <th>Periodo</th>
-          <th>Cupos</th>
-          <th>Postulaciones</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let convoca of convocatorias">
-        <td>{{convoca.fecha_inicio.date}} </td>  
-        <td>{{convoca.fecha_fin.date}}</td>
-        <td>{{convoca.estado_convocatoria}}</td>
-        <td>{{convoca.beca}}</td>
-        <td>{{convoca.periodosacademicos.date}}</td>
-        <td>{{convoca.cupo}}</td>
-        <td> <a [routerLink]="['/viewConvocatoria', convoca.consecutivo_convocatoria]" > <i class="icofont-search-2"></i></a></td>
-
-
-      </tr>
-     
-      
-    </tbody>
-  </table>
-
-</div>
-
-</div>
+    </div>
+  </div>
 </div>

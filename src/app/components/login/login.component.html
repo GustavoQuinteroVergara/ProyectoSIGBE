@@ -1,39 +1,64 @@
-<div class="containerForm">
-    <div class="row rowform">
-        <form class="col s12">
-            <div class="row center rowImageLogin">
-                <div class="input-field col s12 divImageInto">
-                    <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
-                </div>
-            </div>
-            <div class="row divemail">
-                <div class="col s2 divicoemail">
-                    <i class="icofont-ui-message iconoemailLogin"></i>
-                </div>
-                <div class="input-field col s10">
-                    <input #email id="email" type="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row divcontrasena">
-                <div class="input-field col s12 inputfieldlogin">
-                    <div class="col s2 divicocontrasena">
-                        <i class="icofont-key iconocontrasenas"></i>
-                    </div>
-                    <div class="input-field col s10">
-                        <input #contrasena id="password" type="password">
-                        <label for="password">Contraseña</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row center">
-                <div class="input-field col s12">
-                    <a class="waves-effect waves-light btn red" (click)="login(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesion</a>
-                </div>
-            </div>
-            <div class="row center" routerLinkActive="active">
-                <a class="botonRegistrate" routerLink="/crearusuariologin">¿Aun sin cuenta? Registrate!</a>
-            </div>
-        </form>
-    </div>
+
+<div class="wrap containerForm">
+
+
+  <div class="mobiledescarga" data-aos="fade-down" data-aos-once="true">
+    <a href="assets/apk/app-debug.apk" download="app-debug.apk" >
+      <div class="imagedescargarapk">
+        <img src="assets/imgs/apkt.png" width="40px">
+      </div>
+      <div class="titledescargar">
+        <h3>Descarga SIGBE Mobile</h3>
+      </div>
+    </a>
+
+  </div>
+  <div class="imagelogin" data-aos="fade-right" data-aos-once="true">
+
+  </div>
+  <div class="row rowloginn" data-aos="fade-down" data-aos-once="true">
+    <form class="col-12 rowform align-self-center">
+      <div class="row center rowImageLogin">
+        <div class="input-field col s12 divImageInto">
+          <img src="assets/imgs/logo1.png" alt="...." width="100px" class="imglogobienestar">
+          <img src="../../assets/imgs/logosigbe2.png" alt="...." width="150px">
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="input-field col-12">
+          <h4>Email</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput #email id="email" type="email" class="validate" require>
+            <i matSuffix class="icofont-key iconocontrasenas"></i>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="input-field col-12">
+          <h4>Contraseña</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput #contrasena id="password" type="password">
+            <i matSuffix class="icofont-key iconocontrasenas"></i>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="input-field col-12">
+          <a mat-raised-button color="primary" class="button" (click)="login(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesión</a>
+          <a class="botonRegistrate" mat-stroked-button color="primary" routerLink="/olvidarContrasena" >Olvide mi contraseña</a>
+        </div>
+        <div col-12>
+          <a class="botonRegistrate" mat-raised-button class="btnregistrar" routerLink="/crearusuariologin">¿Aún sin cuenta?, ¡Registrate!</a>
+        </div>
+      </div>
+      <div class="row center" routerLinkActive="active">
+        <div class="input-field col s12">
+
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

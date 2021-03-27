@@ -1,0 +1,14 @@
+.cup1{
+    padding: 3% 20% 8% 20%;
+    text-align: center;
+}
+
+.text-align{
+	text-align: left;
+}
+
+@media (max-width: 730px){
+    .cup1{
+       padding: 3% 0% 8% 0%; 
+   }
+}

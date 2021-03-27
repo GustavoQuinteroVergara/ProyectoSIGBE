@@ -1,95 +1,317 @@
 <app-navbar></app-navbar>
-<div class="row cartaBienvenida">
-    <div class="col s4">
+<ng-template #templatePeriodo>
+  <ng-template #errorRegistrarPeriodo>
+    <div  class="dialogSuccess" >
+      <i class="icofont-ui-close text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Error al registrar el periodo</h2>
+    </div>
+  </ng-template>
+
+  <ng-template #periodoexitoso>
+    <div  class="dialogSuccess" >
+      <i class="icofont-ui-close text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Periodo creado exitosamente</h2>
+    </div>
+  </ng-template>
+  <ng-template #mytemplate>
+    <div *ngIf="success" class="dialogSuccess">
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
+    </div>
+    <div *ngIf="!success" class="dialogSuccess">
+      <i class="icofont-close-circled text-center iconErrRegister"></i>
+      <h2 class="text-center textoSuccess">Error al actualizar</h2>
+    </div>
+  </ng-template>
+
+
+  <div  class="dialogSuccess" >
+
+    <div >
+      <div >
+        <div class="text-right divbotonexit">
+          <a class="buttonCerrarse" data-title="Cerrar sesión" (click)="cerrarSesion()"><i class="icofont-exit iconexitperiodo"></i></a>
+        </div>
+        <h1>REGISTRAR UN PERIODO</h1>
+
+        <hr>
+
+        <form [formGroup]="formularioRegistrarPeriodo">
+          <div class="row">
+            <div class="col-12">
+              <h4>Descripción</h4>
+              <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+                <mat-label>EJ: 2021-1</mat-label>
+                <input matInput #descripcion formControlName="descripcionperiodo" id="icon_prefix" type="text" class="validate">
+              </mat-form-field>
+              <mat-error class="help-block form-error text-danger small"
+              *ngIf="formularioRegistrarPeriodo.controls['descripcionperiodo'].hasError('required') && formularioRegistrarPeriodo.controls['descripcionperiodo'].touched">
+            La descripción es requerida </mat-error>
+          </div>
+        </div>
         <div class="row">
-            <div class="col s12">
-                <div class="card">
-                    <div class="card-content">
-                        Bienvenido usuario : {{this.$nombreusuario.nombre + ' ' +  this.$nombreusuario.apellido + ' '}}
-                    </div>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="card   ">
-                    <div class="card-content">
-                        Hoy se han postulado 26 estudiantes a 2 convocatorias
-                    </div>
-                </div>
-            </div>
-            <div class="col s12">
-                <div class="card   ">
-                    <div class="card-content">
-                        Hay 1200 estudiantes registrados en la app
-                    </div>
-                </div>
-            </div>
+          <div class="col-12">
+          <h4>Selecciona las fechas del periodo</h4>
+						<mat-form-field appearance="fill" class="inputFechas" style="width: 100%;">
+						<mat-label>Selecciona las fechas del periodo</mat-label>
+						<mat-date-range-input [rangePicker]="picker">
+						<input matStartDate #fechaini class="inputFechaIni" placeholder="Fecha incial">
+						<input matEndDate #fechafin placeholder="Fecha final">
+						</mat-date-range-input>
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-date-range-picker #picker></mat-date-range-picker>
+						</mat-form-field>
         </div>
-        
-    </div>
 
-    <div class="col s8"*ngIf="this.$nombreusuario.rol =='1'">
-       <div class="card">
-           <div class="card-content">
-            <h1>Postulaciones Realizadas</h1>
-            <table>
-                   <thead>
-                     <tr>
-                         <th>PostuId</th>
-                         <th>Beca</th>
-                         <th>Estado</th>
-                     </tr>
-                   </thead>
-           
-                   <tbody>
-                     <tr>
-                       <td>1</td>
-                       <td>Almuerzo</td>
-                       <td>Rechazado</td>
-                     </tr>
-                     <tr>
-                       <td>2</td>
-                       <td>Almuerzo</td>
-                       <td>En espera</td>
-                     </tr>
-                   </tbody>
-                 </table>
+
+      </div>
+      <div class="row center">
+        <div class="col-12">
+          <a mat-raised-button color="primary" (click)="registrarPeriodo(descripcion.value,fechaini.value,fechafin.value,errorRegistrarPeriodo,periodoexitoso)" [class.disabled]="!formularioRegistrarPeriodo.valid" ><i class="icofont-save left"></i>Registrar Postulacion</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</ng-template>
+<div class="row cartaBienvenida">
+  <div class="homeestudiante" *ngIf="this.$nombreusuario.rol =='1'">
+    <div class="slider">
+      <div id="page">
+        <section>
+
+          <div id="slider-container">
+            <div id="slider-box">
+              <div class="slider-element">
+                <article id="element1" class="element-red">
+
+                </article>
+              </div>
+              <div class="slider-element">
+                <article id="element2" class="element-green">
+
+                </article>
+              </div>
+              <div class="slider-element">
+                <article id="element3" class="element-blue">
+
+                </article>                            
+              </div>
+            </div>
+          </div>
+        </section>            
+      </div>
+    </div>
+    <div data-aos="zoom-in-down" data-aos-once="true" class="info" id="infotextid">
+      <div class="titlediv">
+        <h1 class="titlesigbe">¿QUÉ ES SIGBE?</h1>
+      </div>
+      <div>
+        <div class="divimginfo">
+          <img src="assets/imgs/uv.png" style="width: 13vw;">
+        </div>
+        <div class="divinfotext">
+          <p>El sistema de información para la gestión de becas o llamado por sus siglas "SIGBE" es un proyecto desarrollado por estudiantes de la Universidad del Valle sede Palmira, el sistema 
+             lo que busca es ayudar al área de Bienestar Universitaria y
+             los estudiantes en los procesos de convocatorias, visitas y las postulaciones
+             entre otras ayudas a sus respectivos usuarios.
+             Aparte también contamos con el manejo de la reserva de tickets
+             de almuerzo y refrigerio permitiendo que desde la aplicación móvil o desde cualquier
+             computador los estudiantes puedan acceder a reservar tickets
+             sin la necesidad de hacer filas innecesarias.
+ 
+             El sistema empezó como un proyecto más, pero como grupo de trabajo
+             quisimos hacer el mejor trabajo posible en el tiempo de desarrollo que 
+             tuvimos disponibles para brindarles un excelente servicio a toda 
+             el área universitaria.
+          </p>
+             <ul>
+               <li>Desarrollado por :
+                    <ul>
+                      <li>Alejandro Ospina Escobar</li>
+                      <li>William Felipe Rueda Bejarano</li>
+                      <li>Gustavo Adolfo Quintero Vergara</li>
+                    </ul>
+
+               </li>
+             </ul>
+             
+          
+        </div>
+      </div>
+      
+    </div>
+    <div data-aos="zoom-in-down" data-aos-once="true" class="info" id="infoprogramass">
+      <div class="titlediv">
+        <h1 class="titlesigbe">APOYOS DE BIENESTAR UNIVERSITARIO</h1>
+      </div>
+      <div class="apoyosinfo">
+        <div class="apoyoinfo apoyoinfo1">
+          <div class="cardimgs">
+            <img src="assets/imgs/uv.png" width="40px">
+          </div>
+          <div class="cardtexts">
+            Programa de jóvenes en acción
+          </div>
+        </div>
+        <div  class="apoyoinfo apoyoinfo2">
+          <div class="cardimgs">
+            <img src="assets/imgs/uv.png" width="40px">
+          </div>
+          <div class="cardtexts">
+            Monitorias especiales para estudiantes en situación de discapacidad
+          </div>
+        </div>
+        <div  class="apoyoinfo apoyoinfo3">
+          <div class="cardimgs">
+            <img src="assets/imgs/uv.png" width="40px">
+          </div>
+          <div class="cardtexts">
+            Beca de alimentos para estudiantes de escasos recursos
+          </div>
+        </div>
+        <div  class="apoyoinfo apoyoinfo4">
+          <div class="cardimgs">
+            <img src="assets/imgs/uv.png" width="40px">
+          </div>
+          <div class="cardtexts">
+            Subsidio socioeconómico para estudiantes de escasos recursos
+          </div>
+        </div>
+        <div  class="apoyoinfo apoyoinfo5">
+          <div class="cardimgs">
+            <img src="assets/imgs/uv.png" width="40px">
+          </div>
+          <div class="cardtexts">
+            Bono estudiantil
+          </div>
+        </div>
+      </div>
+      <div class="divbuttonconocemas">
+        <a class="buttonconocemas" href="https://sites.google.com/correounivalle.edu.co/bienestar-universitario/secci%C3%B3n-de-desarrollo-humano-y-promoci%C3%B3n-socioeconomica?authuser=0" target="_blank">Conoce más</a>
+      </div>
+      
+    </div>
+    
+  </div>
+
+
+  <div class="col-12 mb-2" *ngIf="this.$nombreusuario.rol !='1'">
+    <div class="wrap ">
+      <div class="row rowpanelbienestar" data-aos="zoom-in-down" data-aos-once="true">
+        <div class="col-12">
+          <h1 *ngIf="this.$nombreusuario.rol =='2'">PANEL ADMINISTRATIVO - Bienestar Universitario</h1>
+          <h1 *ngIf="this.$nombreusuario.rol !='2'">PANEL ADMINISTRATIVO - Psicología</h1>
+          <hr>
+        </div>
+        <div class="row col-12" *ngFor="let infocol of infoColores">
+          <div class="col-4 infoblue">
+            <div class="imginfocount">
+             <i class="icofont-attachment iconinfocount"></i>
            </div>
-       </div>
-    </div>
-    <div class="col s8"*ngIf="this.$nombreusuario.rol =='2'">
-        <div class="card">
-            <div class="card-content">
-             <h1>Últimas Convocatorias Realizadas</h1>
-             <table>
-                    <thead>
-                      <tr>
-                          <th>Nombre</th>
-                          <th>Cupos</th>
-                          <th>Periodo</th>
-                          <th>Tiempo Restante</th>
-                          <th> Ver Información</th>    
-                      </tr>
-                    </thead>
-            
-                    <tbody>
-                      <tr>
-                        <td>Almuerzo</td>
-                        <td>100</td>
-                        <td>2020-1</td>
-                        <td>20 Dia(s)</td>
-                        <td> <a [routerLink]="['/viewConvocatoria', 1]" > <i class="icofont-search-2"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Refrigerio</td>
-                        <td>34</td>
-                        <td>2020-1</td>
-                        <td>20 Dia(s)</td>
-                        <td> <a [routerLink]="['/viewConvocatoria', 2]" > <i class="icofont-search-2"></i></a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
+           <div class="infocount">
+            <h1>{{infocol.numeropostu}}</h1>
+            <span>POSTULACIONES HECHAS</span>
+          </div>
         </div>
-     </div>
+        <div class="col-4 infogreen">
+          <div class="imginfocount">
+           <i class="icofont-group-students iconinfocount"></i>
+         </div>
+         <div class="infocount">
+          <h1>{{infocol.numerouser}}</h1>
+          <span>ESTUDIANTES REGISTRADOS</span>
+        </div>
+      </div>
+      <div class="col-4 infoyellow">
+        <div class="imginfocount">
+          <i class="icofont-calendar iconinfocount"></i>
+        </div>
+        <div class="infocount">
+          <h1>{{infocol.numeroconvo}}</h1>
+          <span>CONVOCATORIAS REALIZADAS </span>
+        </div>
+      </div>
+      <div class="col-4 infored">
+        <div class="imginfocount">
+         <i class="icofont-ticket iconinfocount"></i>
+       </div>
+       <div class="infocount">
+        <h1>{{infocol.numerotickets}}</h1>
+        <span>TIQUETES RESERVADOS</span>
+      </div>
+    </div>
 
+  </div>
+</div>
+
+<br>
+<div class="row col-12 rowpanelbienestargrafica" data-aos="zoom-in-down" data-aos-once="true">
+  <div class="col-7 graficainfo">
+    <div class="titulografica">
+      <h1>POSTULACIONES POR ZONAS RESIDENCIALES</h1>
+    </div>
+    <div class="imggrafica">
+       <canvas id="realtime">{{ chart }}</canvas>
+      <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
+    </div>
+  </div>
+
+  <div class="col-4 tablainfopostus">
+    <div class="titulografica">
+      <h1>POSTULACIONES EN ESPERA</h1>
+    </div>
+    
+    <table class="table table-bordered table-striped mb-0">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Estrato</th>
+          <th scope="col">Tipo beca</th>
+          <th scope="col">Revisión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let postus of  postulaciones">
+          <th scope="row">{{postus.nombre}}</th>
+          <td>{{postus.estrato}}</td>
+          <td>{{postus.convocatoria}}</td>
+          <td>{{postus.estado}}</td>
+          <td><a (click)="buscarEstPostuByIden(mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row col-12 rowpanelbienestargrafica mt-4" data-aos="zoom-in-down" data-aos-once="true">
+    <div class="col-7 graficainfo">
+    <div class="titulografica">
+      <h1>POSTULACIONES POR CARRERA Y BECA</h1>
+    </div>
+    <div>
+<!--       <div class="center">
+      <button  mat-raised-button color="primary" (click)="crearImagen()">Descargar</button>
+    </div> -->
+      <form>
+        <mat-form-field appearance="fill" class="inputsEspacio" style="width: 80%;">
+            <mat-label>Seleccione una Beca</mat-label>
+            <mat-select #beca required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let beca of listbecas" [value]="beca.consecutivo_beca">
+                {{beca.descripcion}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+            <a mat-raised-button color="primary" style="width: 20%;" (click)="consultarPostuCarrera(beca.value)">Consultar</a>
+      </form>
+    </div>
+    <div id="graficacarrerabeca" class="imggrafica">
+       <canvas id="postus">{{ chartCarreras }}</canvas>
+      <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
+    </div>
+  </div>
+    </div>
+  </div>
 </div>

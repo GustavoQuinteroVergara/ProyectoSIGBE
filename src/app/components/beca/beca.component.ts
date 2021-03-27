@@ -1,18 +1,30 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { BecaService } from './beca.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-beca',
   templateUrl: './beca.component.html',
   styleUrls: ['./beca.component.css']
 })
-export class BecaComponent  {
+export class BecaComponent implements OnInit  {
   becaRegistrar:any;
   ListTBeca: any;
-  constructor(private serviceBeca:BecaService) { 
+  success:any;
+  public formularioBeca: FormGroup;
+  constructor(private serviceBeca:BecaService,public dialog: MatDialog) { 
     this.buscarTipoBeca();
   }
- 
+  ngOnInit(): void {
+    this.formularioBeca = new FormGroup({
+      nombreTipoBeca: new FormControl('',Validators.required),
+      descripcionBeca: new FormControl('',Validators.required),
+    });
+  }
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.formularioBeca.controls[controlName].hasError(errorName);
+  }
   buscarTipoBeca(){
     this.serviceBeca.buscarListadoTBecas().subscribe(ListTBeca=>{
       console.log(ListTBeca);
@@ -24,15 +36,20 @@ export class BecaComponent  {
       descripcion:descripcion
     };
     this.serviceBeca.registrarBecas(this.becaRegistrar).subscribe(res =>{
-      console.log(res);
-  
+          Swal.fire({
+            title: 'Exitoso',
+            text: 'Registrado exitosamente.',
+            icon: 'success'
+          });  
   
       },(err)=>{
-      
-  
-         console.log('ERROR: ' + err.error.text);
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error al registrar, ERROR: ' + err.error.text,
+            icon: 'success'
+          });  
+
       });
-    console.log(this.becaRegistrar);
      
      }
   
