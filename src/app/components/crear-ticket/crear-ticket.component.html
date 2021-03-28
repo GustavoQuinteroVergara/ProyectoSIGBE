@@ -8,7 +8,158 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg text-end" *ngIf="!encontroEncuesta">
+			<button mat-raised-button color="primary" (click)="realizarEncuesta(templateEncuesta)">
+				Realizar encuesta
+			</button>
+		</div>
 	</div>
+
+	<ng-template #templateEncuesta>
+		<div style="overflow-x: hidden;position: relative;" data-aos="fade-down" data-aos-once="true">
+	        <div class="col-12 col-sm-12">
+	        	<div style="width: 100%;height: 200px;background:url(assets/imgs/cafeteria.jpg);background-size: cover;background-position: center;"></div>
+	            <div class="col mt-4">
+	                <div class="col-lg col-12 text-center">
+	                    <h1 class="tituloConvoVerp">ENCUESTA DE SATISFACCIÓN</h1>
+	                    <hr>
+	                </div>
+	                <div class="col-lg col-12">
+	                	<p>Con el fin de evaluar el programa de Becas Alimenticias ofrecido por la Universidad del Valle Sede Palmira en convenio con la Alcaldía Municipal de Palmira, se busca a través de esta encuesta conocer su valiosa opinión como Beneficiario y/o usuario del programa, con miras al mejoramiento del mismo teniendo en cuenta sus necesidades como estudiante.</p>
+	                	<hr>
+	                </div>
+	                <div class="col-lg col-12" style="padding: 15px;">
+	                	<form>
+	                		<div class="col-lg">
+								<div class="row" *ngIf="tipoBeca == 'Ticket Almuerzo'">
+									<div class="col s12" *ngIf="confirmacionBeneficiario">
+										<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
+									</div>
+									<div class="row" *ngIf="!confirmacionBeneficiario">
+										<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
+									</div>
+								</div>
+								<div class="row" *ngIf="tipoBeca == 'Ticket Refrigerio'">
+									<div class="col s12" *ngIf="confirmacionBeneficiario">
+										<h1>Usted es beneficiario de la beca {{tipoBeca}}</h1>
+									</div>
+									<div class="row" *ngIf="!confirmacionBeneficiario">
+										<h1>Usted <strong>No</strong> se encuentra registrado como beneficiario</h1>
+									</div>
+								</div>
+								<hr>
+							</div>
+							<hr>
+							<div class="col-lg">
+								<h4>¿Con que frecuencia usó el beneficio de la Beca de Alimentación?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.frecuencia" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="0">Todos los dias</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="1" >1-3 veces a la semana</mat-radio-button>
+                					<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="2" >3-4 veces a la semana</mat-radio-button>
+              					</mat-radio-group>
+              					<hr>
+							</div>
+							<div class="col-lg">
+								<h4>¿Califique la calidad de los alimentos servidos?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.calidad" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="0">Excelente</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="1" >Bueno</mat-radio-button>
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="2" >Regular</mat-radio-button>
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="3" >Malo</mat-radio-button>
+              					</mat-radio-group>
+              					<div class="col-lg mt-4" *ngIf="encuesta.calidad == 2 || encuesta.calidad == 3">
+              						<h4>¿Por que?</h4>
+              						<mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+      									<mat-label>¿Por que?</mat-label>
+     									 <textarea [(ngModel)]="encuesta.calidadcomentario" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" value="" ></textarea>
+    								</mat-form-field>
+              					</div>	
+              					<hr>
+							</div>
+							<div class="col-lg">
+								<h4>¿Considera que la cantidad de comida es adecuada?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.cantidad" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="0">Si</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="1" >No</mat-radio-button>
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="2" >A veces</mat-radio-button>
+              					</mat-radio-group>
+              					<hr>
+							</div>
+							<div class="col-lg">
+								<h4>¿Considera que existe variedad en el menu?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.variedad" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="0">Si</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="1" >No</mat-radio-button>
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="2" >A veces</mat-radio-button>
+              					</mat-radio-group>
+              					<hr>
+							</div>
+							<div class="col-lg">
+								<h4>¿Considera que el horario actual en él que se sirve el almuerzo es el mas adecuado?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.horario" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck  col-12" color="warn" value="0">Si</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="1" >No</mat-radio-button>
+              					</mat-radio-group>
+              					<div class="col-lg mt-4" *ngIf="encuesta.horario == 1">
+              						<h4>Si su respuesta es no conteste, ¿según usted cual sería el horario más adecuado para ofrecer el servicio?</h4>
+              						<mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+      									<mat-label>Si su respuesta es no conteste, ¿según usted cual sería el horario más adecuado para ofrecer el servicio?</mat-label>
+     									 <textarea [(ngModel)]="encuesta.horariocomentario" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" value=""></textarea>
+    								</mat-form-field>
+              					</div>    
+              					<hr>          					
+							</div>
+							<div class="col-lg">
+								<h4>¿Considera que el espacio donde se realiza la entrega de los almuerzos es el adecuado?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.espacio" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="0">Si</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="1" >No</mat-radio-button>
+              					</mat-radio-group>
+              					<div class="col-lg mt-4" *ngIf="encuesta.espacio == 1">
+              						<h4>¿Por que?</h4>
+              						<mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+      									<mat-label>¿Por que?</mat-label>
+     									 <textarea [(ngModel)]="encuesta.espaciocomentario" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" value="" ></textarea>
+    								</mat-form-field>
+              					</div>  
+              					<hr>
+							</div>
+							<div class="col-lg">
+								<h4>¿En términos generales, como califica usted el servicio de beneficio de alimentación ofrecido a los estudiantes?</h4>
+								<mat-radio-group [(ngModel)]="encuesta.calificacion" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                					<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="0">Excelente</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="1" >Bueno</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="2" >Regular</mat-radio-button>
+               						<mat-radio-button class="example-margin estamentoCheck col-12" color="warn" value="3" >Malo</mat-radio-button>               						
+              					</mat-radio-group>
+              					<div class="col-lg mt-4" *ngIf="encuesta.calificacion == 3 || encuesta.calificacion == 2">
+              						<h4>¿Por que?</h4>
+              						<mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+      									<mat-label>¿Por que?</mat-label>
+     									 <textarea [(ngModel)]="encuesta.calificacioncomentario" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" value=""></textarea>
+    								</mat-form-field>
+              					</div>  
+              					<hr>
+							</div>
+							 <div class="col-lg" >
+							 	<h4>Si tiene comentarios o sugerencias con respecto al beneficio y/o servicio ofrecido, favor escríbalos aquí.</h4>
+          						<mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+  									<mat-label>Si tiene comentarios o sugerencias con respecto al beneficio y/o servicio ofrecido, favor escríbalos aquí.</mat-label>
+ 									 <textarea [(ngModel)]="encuesta.comentario" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" value=""></textarea>
+								</mat-form-field>
+              				</div>  
+              				<div class="col-lg">
+              					<hr>
+              					<a mat-raised-button color="primary" (click)="guardarEncuesta()">Enviar encuesta</a>
+              				</div>
+
+	                	</form>
+	                </div>
+	            </div>
+
+	        </div>
+	    </div>
+	</ng-template>
 
 	<div *ngIf="!verificarEstadohorario" >
 		<div class="col s12 m4 formtiq">
@@ -21,7 +172,13 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg text-end" *ngIf="!encontroEncuesta">
+				<button mat-raised-button color="primary" (click)="realizarEncuesta(templateEncuesta)">
+					Realizar encuesta
+				</button>
+			</div>
 		</div>
+
 		<div *ngIf="asignacionBuscada != '-'">
 			<div class="col s12 m4">
 				<div *ngIf="verificarEstadohorario" class="card">
@@ -86,11 +243,18 @@
 									</div>
 								</div>
 							</div>
-							<div class="row center">
-								<div class="input-field col s12">
-									<a (click)="comprarTicket()" class="waves-effect waves-light btn red" mat-raised-button color="primary" ><i class="icofont-save left"></i>COMPRAR</a>
+							<div class="row center" >
+								<div class="input-field col s12" *ngIf="encontroEncuesta">
+									<a (click)="comprarTicket()" class="waves-effect waves-light btn red" mat-raised-button color="primary" ><i class="icofont-save left"></i>Reservar ticket</a>
+								</div>
+								<div class="col-lg text-start" *ngIf="!encontroEncuesta">
+									<a class="waves-effect waves-light btn red" mat-raised-button color="primary" [disabled]="true"><i class="icofont-save left"></i>Reservar ticket</a>
+									<button mat-raised-button color="primary" (click)="realizarEncuesta(templateEncuesta)">
+										Realizar encuesta
+									</button>
 								</div>
 							</div>
+
 						</form>
 					</div>
 				</div>
