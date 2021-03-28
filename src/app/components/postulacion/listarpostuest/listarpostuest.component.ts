@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ServiceListarPostuEstService} from './service-listar-postu-est.service';
 import {PostulacionService} from '../../../services/postulacion.service';
+import { MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'; 
 import {DocumentoService} from '../../../services/documento.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-listarpostuest',
   templateUrl: './listarpostuest.component.html',
@@ -21,6 +23,7 @@ export class ListarpostuestComponent {
   intentosPermitidos=false;
   constructor(private serviceListarPostuEst:ServiceListarPostuEstService,
     private postuservice:PostulacionService,
+    public snackBack: MatSnackBar,
     public fb: FormBuilder,
     public dialog: MatDialog,
     public documentoServicie:DocumentoService) { 
@@ -69,7 +72,18 @@ export class ListarpostuestComponent {
     }
   }
 
-  actualizarPostu(semestre:any,promedio:any,templateRefestados){
+    promedioMessage(promediosel:any){
+    if(promediosel < 3.0){
+      this.snackBack.open('El promedio seleccionado no es el recomendado.','Aceptar',{
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['redNoMatch']
+      });
+    }
+  }
+
+  actualizarPostu(semestre:any,promedio:any){
     if(this.postuSeleccionada.cantmodificaciones <= 2){
       this.postuSeleccionada.cantmodificaciones++;
       this.listActualizarPostu = {
@@ -80,27 +94,25 @@ export class ListarpostuestComponent {
     }
     console.log(this.listActualizarPostu);
     this.postuservice.actualizarPostulacion(this.listActualizarPostu).subscribe(result=>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRefestados,{
-         height: '240px',
-         width: '295px',
-       });
+          Swal.fire({
+            title: 'Exitoso',
+            text: 'Actualizado exitosamente.',
+            icon: 'success'
+          }); 
     },(err)=>{
-      console.log(err.error);
-      this.success = false;
-      this.intentosPermitidos = true;
-      let dialogRef = this.dialog.open( templateRefestados,{
-         height: '240px',
-         width: '295px',
-       });
+
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al actualizar, se han alcazado el limite de intentos.',
+        icon: 'error'
+      }); 
     });
     }else{
-      this.success = false;
-      this.intentosPermitidos = false;
-        let dialogRef = this.dialog.open( templateRefestados,{
-           height: '240px',
-           width: '295px',
-      });
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al actualizar.',
+        icon: 'error'
+      }); 
     }
   }
 

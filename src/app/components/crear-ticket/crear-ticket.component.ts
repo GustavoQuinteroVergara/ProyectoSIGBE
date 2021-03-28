@@ -7,7 +7,7 @@ import {UsuarioService} from '../../services/usuario.service';
 import {ConfiguracionService} from '../configuracion/configuracion.service';
 import {CuposasignacionService} from '../../services/cuposasignacion.service';
 import {PostulacionService} from '../../services/postulacion.service';
-
+import Swal from 'sweetalert2';
 @Component({
 	selector: 'app-crear-ticket',
 	templateUrl: './crear-ticket.component.html',
@@ -78,14 +78,11 @@ export class CrearTicketComponent {
 				console.log(err);
 			});
 		}else{
-			console.log("Aqui estoy");
 			this.postulacionService.postulacionBeneficiario(this.$nombreusuario.identi,2).subscribe(result=>{
 				this.postulacionBeneficiario = result;
 				this.confirmacionBeneficiario = true;
-				console.log(result);
 			},(err)=>{
 				this.confirmacionBeneficiario = false;
-				console.log(err);
 			});
 		}
 
@@ -120,7 +117,7 @@ export class CrearTicketComponent {
 		});
 	}
 
-	comprarTicket(success, errcomprado,err){
+	comprarTicket(){
 		this.success=false;
 		this.confSaldo = true;
 		this.confErr = false;
@@ -145,37 +142,36 @@ export class CrearTicketComponent {
 				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio - 1
 			}
 		}
-		
-
-		console.log(this.ticketArray);
-
-
 		this.ticketService.buscarTicketbyFechaUser(this.$nombreusuario.identi,this.ticketArray.tipoTicket).subscribe(result=>{
-			let dialogRef = this.dialog.open( errcomprado,{
-				height: '200px',
-				width: '350px',
-			});
+			Swal.fire({
+	          title: 'ERROR',
+	          text: 'Lo siento, ya reservaste el día de hoy.',
+	          icon: 'error'
+	        });
 		},(err)=>{
 			this.serviceCuposasign.actualizarCupos(this.asignacionEnviar).subscribe(result=>{
 				this.ticketService.registrarTicket(this.ticketArray).subscribe(result=>{
-					let dialogRef = this.dialog.open( success,{
-						height: '200px',
-						width: '350px',
-					});
+
+					Swal.fire({
+			          title: 'Exitoso',
+			          text: 'Comprado exitosamente.',
+			          icon: 'success'
+			        });
+
 				},(errors)=>{
-					let dialogRef = this.dialog.open( err,{
-						height: '200px',
-						width: '350px',
-					});
-					console.log(errors.error);
+					Swal.fire({
+			          title: 'ERROR',
+			          text: 'Error... : ' + errors.error,
+			          icon: 'error'
+			        });
 				}); 
 
 			},(exception)=>{
-				console.log(exception.error);
-				let dialogRef = this.dialog.open( err,{
-					height: '200px',
-					width: '350px',
-				});
+				Swal.fire({
+		          title: 'ERROR',
+		          text: 'Error... : ' + exception.error,
+		          icon: 'error'
+		        });
 				
 			});
 		});

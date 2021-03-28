@@ -4,6 +4,7 @@ import {DocumentoService} from '../../../services/documento.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registrar-convocatoria',
   templateUrl: './registrar-convocatoria.component.html',
@@ -213,19 +214,17 @@ export class RegistrarConvocatoriaComponent implements OnInit {
     }
     console.log(this.convocatoriaRegistrar);
     this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
-      this.success = true;
-      let dialogRef = this.dialog.open( templateRef,{
-       height: '200px',
-       width: '200px',
-     });
-      console.log(res);
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Actualizado exitosamente.',
+        icon: 'success'
+      });
     },(err)=>{
-      this.success = false;
-      let dialogRef = this.dialog.open( templateRef,{
-       height: '200px',
-       width: '200px',
-     });
-      console.log(err);
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al registrar la convocatoria, ERROR: ' + err.error,
+        icon: 'error'
+      });
     });
   }
 }

@@ -24,6 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
@@ -92,6 +93,7 @@ import { MatStepperModule } from '@angular/material/stepper';
   MatFormFieldModule,
   MatSidenavModule,
   MatTabsModule,
+  MatSnackBarModule,
   MatPaginatorModule,
   MatInputModule,
   MatRadioModule,

@@ -2,24 +2,6 @@
 <div class="wrap containerForm">
 
 
-  <ng-template #periodocaducado>
-    <div  class="dialogSuccess" >
-      <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">Lo siento, el periodo académico ha caducado</h2>
-    </div>
-  </ng-template>
-  <ng-template #correonoencontrado>
-    <div  class="dialogSuccess" >
-      <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">Lo siento, el correo ingresado no ha sido correcto</h2>
-    </div>
-  </ng-template>
-  <ng-template #errorcontrasenainvl>
-    <div  class="dialogSuccess" >
-      <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">La contraseña que ha ingresado es incorrecta o el usuario que ha ingresado puede no estar activo</h2>
-    </div>
-  </ng-template>
   <div class="mobiledescarga" data-aos="fade-down" data-aos-once="true">
     <a href="assets/apk/app-debug.apk" download="app-debug.apk" >
       <div class="imagedescargarapk">
@@ -65,7 +47,7 @@
       </div>
       <div class="row text-center">
         <div class="input-field col-12">
-          <a mat-raised-button color="primary" class="button" (click)="login(email.value,contrasena.value,periodocaducado,correonoencontrado,errorcontrasenainvl)"><i class="icofont-login left"></i>Iniciar sesión</a>
+          <a mat-raised-button color="primary" class="button" (click)="login(email.value,contrasena.value)"><i class="icofont-login left"></i>Iniciar sesión</a>
           <a class="botonRegistrate" mat-stroked-button color="primary" routerLink="/olvidarContrasena" >Olvide mi contraseña</a>
         </div>
         <div col-12>

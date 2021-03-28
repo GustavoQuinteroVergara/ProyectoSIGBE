@@ -1,18 +1,4 @@
 <div class="wrap containerForm">
-
-
-  <ng-template #errorcontrasenainvl>
-    <div  class="dialogSuccess" >
-      <i class="icofont-ui-close text-center iconErrRegister"></i>
-      <h4 class="text-center textoSuccess">El correo ingresado no se encuentra registrado, por favor ingrese uno válido.</h4>
-    </div>
-  </ng-template>
-  <ng-template #mensajeconfirmacion>
-    <div  class="dialogSuccess" >
-      <i class="icofont-info text-center iconErrRegister" style="font-size:30px;"></i>
-      <h4 class="text-center textoSuccess">Si el correo suministrado se encuentra registrado, llegara un correo con una contraseña nueva, revisa en spam si no llega.  </h4>
-    </div>
-  </ng-template>
   <div class="mobiledescarga" data-aos="fade-down" data-aos-once="true">
     <a href="assets/apk/app-debug.apk" download="app-debug.apk" >
       <div class="imagedescargarapk">
@@ -51,7 +37,7 @@
       </div>
       <div class="row text-center">
         <div class="input-field col-12">
-          <a mat-raised-button color="primary" style="margin-right: 20px;" class="button" (click)="olvidecontrasena(email.value,errorcontrasenainvl,mensajeconfirmacion)"><i class="icofont-login left"></i>Enviar </a>
+          <a mat-raised-button color="primary" style="margin-right: 20px;" class="button" (click)="olvidecontrasena(email.value)"><i class="icofont-login left"></i>Enviar </a>
           <a routerLink="/**" mat-raised-button class="btn-success">Regresar</a>
         </div>
       </div>

@@ -24,24 +24,6 @@
 		</div>
 		<div *ngIf="asignacionBuscada != '-'">
 			<div class="col s12 m4">
-				<ng-template #success>
-					<div  class="dialogSuccess" >
-						<i class="icofont-ui-check text-center iconSuccessRegister"></i>
-						<h2 class="text-center textoSuccess">Comprado exitosamente</h2>
-					</div>
-				</ng-template>
-				<ng-template #errcomprado>
-					<div  class="dialogSuccess" >
-						<i class="icofont-ui-close text-center iconErrRegister"></i>
-						<h2 class="text-center textoSuccess">Lo siento, ya reservaste el día de hoy</h2>
-					</div>
-				</ng-template>
-				<ng-template #err>
-					<div class="dialogSuccess" >
-						<i class="icofont-ui-close text-center iconErrRegister"></i>
-						<h2 class="text-center textoSuccess">Error..</h2>
-					</div>
-				</ng-template>
 				<div *ngIf="verificarEstadohorario" class="card">
 					<div >
 						
@@ -106,7 +88,7 @@
 							</div>
 							<div class="row center">
 								<div class="input-field col s12">
-									<a (click)="comprarTicket(success,errcomprado,err)" class="waves-effect waves-light btn red" mat-raised-button color="primary" ><i class="icofont-save left"></i>COMPRAR</a>
+									<a (click)="comprarTicket()" class="waves-effect waves-light btn red" mat-raised-button color="primary" ><i class="icofont-save left"></i>COMPRAR</a>
 								</div>
 							</div>
 						</form>

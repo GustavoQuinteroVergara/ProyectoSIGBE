@@ -5,6 +5,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {ServiceloginService} from './servicelogin.service';
 import {PeriodoServiceService} from '../../services/periodo-service.service';
 import {Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent {
 
   }
 
-  login(email:string, contrasena:string,periodocaducado,correonoencontrado,errorcontrasenainvl){
+  login(email:string, contrasena:string){
     this.logins.buscarUser(email).subscribe(resultuser =>{ 
 
       if(resultuser['roles'] == 2){
@@ -40,9 +41,10 @@ export class LoginComponent {
           localStorage.setItem('currentUser',JSON.stringify(this.usuario));
           this.router.navigate(['/bienvenida']);
         }else{
-          let dialogRef = this.dialog.open( errorcontrasenainvl,{
-            height: '200px',
-            width: '350px',
+          Swal.fire({
+            title: 'ERROR!',
+            text: 'Error contrasena invalida o usuario inactivo',
+            icon: 'error'
           });
         }
         this.usuario = resultuser; 
@@ -51,12 +53,11 @@ export class LoginComponent {
         this.periodoService.ultimoPeriodoRegistrado().subscribe(result =>{
 
           this.fechaultperiodo = formatDate(result['fechafinal']['date'], 'yyyy-MM-dd', 'en');
-          console.log(this.fechaultperiodo);
-
           if(this.fechaultperiodo < this.fechaActual2){
-            let dialogRef = this.dialog.open( periodocaducado,{
-              height: '200px',
-              width: '350px',
+            Swal.fire({
+                title: 'ERROR!',
+                text: 'Lo siento, el periodo académico ha caducado',
+                icon: 'error'
             });
           }else{
             this.usuario = {'nombre':resultuser["nombre"],
@@ -71,10 +72,10 @@ export class LoginComponent {
               localStorage.setItem('currentUser',JSON.stringify(this.usuario));
               this.router.navigate(['/bienvenida']);
             }else{
-              console.log(resultuser);
-              let dialogRef = this.dialog.open( errorcontrasenainvl,{
-                height: '200px',
-                width: '350px',
+              Swal.fire({
+                title: 'ERROR!',
+                text: 'Error contrasena invalida o usuario inactivo',
+                icon: 'error'
               });
 
             }
@@ -82,19 +83,20 @@ export class LoginComponent {
           }
 
         },(err)=>{
-          let dialogRef = this.dialog.open( periodocaducado,{
-            height: '200px',
-            width: '350px',
+          Swal.fire({
+                title: 'ERROR!',
+                text: 'Lo siento, el periodo académico ha caducado',
+                icon: 'error'
           });
         })
 
 
       }
     },(error)=>{
-      console.log(error);
-      let dialogRef = this.dialog.open( correonoencontrado,{
-        height: '200px',
-        width: '350px',
+      Swal.fire({
+                title: 'ERROR!',
+                text: 'Lo siento, el correo que ha ingresado, no existe',
+                icon: 'error'
       });
     });
 

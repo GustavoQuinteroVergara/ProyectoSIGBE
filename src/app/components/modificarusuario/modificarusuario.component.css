@@ -39,3 +39,28 @@
     font-size: 24px;
     margin-top: 0;
 }
+
+@media only screen and (max-width: 828px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 26%;
+    }
+}
+@media only screen and (max-width: 708px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 18%;
+    }
+}
+@media only screen and (max-width: 539px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 5%;
+    }
+}
+@media only screen and (max-width: 460px){
+	.fondoActualizar{
+        width: 18%;
+        margin-left: 0%;
+    }
+}

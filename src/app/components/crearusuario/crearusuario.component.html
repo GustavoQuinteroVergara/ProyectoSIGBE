@@ -1,14 +1,4 @@
 <app-navbar></app-navbar>
-<ng-template #mytemplate>
-  <div *ngIf="success" class="dialogSuccess">
-    <i class="icofont-ui-check text-center iconSuccessRegister"></i>
-    <h2 class="text-center textoSuccess">Registro exitoso </h2>
-  </div>
-  <div *ngIf="!success" class="dialogSuccess">
-    <i class="icofont-close-circled text-center iconErrRegister"></i>
-    <h2 class="text-center textoSuccess">Error al Registrar</h2>
-  </div>
-</ng-template>
 
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true"> 
   <div class="formtiq">
@@ -125,7 +115,7 @@
     <div>
       <div class="row text-center" >
         <div class="col-12">
-          <a mat-raised-button color="primary"  [class.disabled]="!formulariologin.valid" (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,roles.value,'Activo',mytemplate)" >Registrar</a>
+          <a mat-raised-button color="primary"  [class.disabled]="!formulariologin.valid" (click)="registrouser(identificacion.value,nombre.value,apellido.value,email.value,codigo.value,contrasena.value,roles.value,'Activo')" >Registrar</a>
         </div>
       </div>
     </div>

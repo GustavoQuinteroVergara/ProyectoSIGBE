@@ -3,6 +3,7 @@ import  {ServiciocrearuserService } from '../crearusuario/serviciocrearuser.serv
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {ServiceloginService} from '../login/servicelogin.service';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crearusuariologin',
   templateUrl: './crearusuariologin.component.html',
@@ -71,25 +72,25 @@ export class CrearusuariologinComponent{
      codigocarrera:codigocarrera
     };
     this.serviceLogin.buscarUser(email).subscribe(result=>{
-        let dialogRef = this.dialog.open( emailexistente,{
-           height: '200px',
-           width: '200px',
-         });
+        Swal.fire({
+          title: 'ERROR',
+          text: 'El correo ingresado, ya se encuentra registrado.',
+          icon: 'error'
+        });
     },(err)=>{
       this.registraruser.registrarUsuario(this.usuario)
       .subscribe(res=>{
-        this.success = true;
-        let dialogRef = this.dialog.open( templateRef,{
-           height: '300px',
-           width: '280px',
-         });
+        Swal.fire({
+          title: 'Exitoso',
+          text: 'Registro exitoso (espere activación de bienestar)',
+          icon: 'success'
+        });
       },(err)=>{
-        //console.log('ERROR: ' + err.error.text);
-        this.success = false;
-        let dialogRef = this.dialog.open( templateRef,{
-           height: '300px',
-           width: '280px',
-         });
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Algo ha ocurrido en el registro, por favor verifique si los datos son correctos.',
+          icon: 'error'
+        });
       });
     });
 
