@@ -22,6 +22,7 @@ import { CuposticketsComponent } from './components/cupostickets/cupostickets.co
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
+import {EntrevistaComponent} from './components/psicologia/entrevista/entrevista.component';
 
 export const ROUTES: Routes = [
 
@@ -88,6 +89,10 @@ export const ROUTES: Routes = [
   expectedRole: '4'
 }},
 {path:'visitadomiciliariaconvo/:idPostu',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'entrevista',component:EntrevistaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '2'
 }},

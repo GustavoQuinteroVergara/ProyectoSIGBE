@@ -259,7 +259,8 @@
         <div class="row">
           <h1>Entrevista</h1>
           <hr>
-          <a ><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Información general del estudiante</a>
+          <a mat-raised-button color="primary" class="mb-4" *ngIf="!visitavalidate" [routerLink]="['/entrevista']">Iniciar entrevista</a>
+          <a mat-raised-button color="primary" *ngIf="visitavalidate" (click)="verVisitaModal(visitaPostu)">Ver Entrevista</a>
         </div>
     </div>
   </mat-tab>

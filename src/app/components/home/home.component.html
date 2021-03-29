@@ -14,13 +14,73 @@
     </div>
   </ng-template>
   <ng-template #mytemplate>
-    <div *ngIf="success" class="dialogSuccess">
-      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
-      <h2 class="text-center textoSuccess">Actualizado exitosamente</h2>
-    </div>
-    <div *ngIf="!success" class="dialogSuccess">
-      <i class="icofont-close-circled text-center iconErrRegister"></i>
-      <h2 class="text-center textoSuccess">Error al actualizar</h2>
+    <div >
+      <form >
+        <h1>Información Estudiante
+        </h1>
+        <hr>
+  
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="example-full-width" disabled appearance="none">
+              <mat-label>Código estudiante</mat-label>
+              <input #beca id="codigoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.codigoestudiante">
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="example-full-width" disabled appearance="none">
+              <mat-label>Identificación</mat-label>
+              <input #beca id="identificacionest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.identificacion">
+            </mat-form-field>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-12">
+  
+            <mat-form-field class="example-full-width" disabled appearance="none">
+              <mat-label>Correo electrónico</mat-label>
+              <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest">
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <h1>Postulaciones Realizadas</h1>
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Fecha postulación</th>
+            <th>Tipo beca</th>
+            <th>Estado</th>
+            <th>Semestre</th>
+            <th>Estrato registrado</th>
+          </tr>
+        </thead>
+  
+        <tbody *ngFor="let postu of postulacionesest">
+          <tr>
+            <td>{{postu.fechapostulacion}}</td>
+            <td>{{postu.nombreConv}}</td>
+            <td>{{postu.estado_postulacion}}</td>
+            <td>{{postu.semestre}}</td>
+            <td>{{postu.estrato}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!--<div class="row">
+        <div class="col-10 m-4 text-center">
+          <button mat-raised-button color="primary">Generar informe estudiante</button>
+        </div>
+      </div>-->
+      <div class="row">
+        <div class="col-12 m-12 text-center">
+          <h3>Exportar a Excel</h3>
+          <div class ="container" style="padding-bottom:20px">
+            <button mat-raised-button color="warning" (click)="exportAsXLSX2()">Exportar</button>
+            <!--<button mat-raised-button color="accent">Accent</button>-->
+          </div>
+        </div>
+      </div>
     </div>
   </ng-template>
 
