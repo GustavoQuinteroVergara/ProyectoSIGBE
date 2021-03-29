@@ -12,11 +12,15 @@ export class ServicesViewConvocatoriaService {
   urlUpdateConvo="http://localhost/sigbeweb/app/componentes/convocatorias/actualizar_convocatoria.php";
   urlConvoCupos ="http://localhost/sigbeweb/app/componentes/convocatorias/updateCuposConvo.php";
   urlPostuEstado ="http://localhost/sigbeweb/app/componentes/postulacion/updateEstadoPostu.php";
+  urlInfoGenPostu = "http://localhost/sigbeweb/app/componentes/informaciongeneral/listarinformaciongeneral.php?";
 
   constructor(private http: HttpClient) { }
 
   buscarPostulacionesByIdConvo(idconvo:any){
     return this.http.get(`${this.url}idconvo=${idconvo}`);
+  }
+  buscarEntrevistaPostu(idpostu:any){
+    return this.http.get(`${this.urlInfoGenPostu}idpostu=${idpostu}`);
   }
 
   buscarConvoById(idconvo:any){

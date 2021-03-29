@@ -36,6 +36,7 @@ export class RegistrarPostulacionComponent  {
   	this.buscarConvoActivas();
     this.getCarrerasEst();
     this.buscarDocumentos();
+    this.actualizarConvosVencidas();
     this.myForm = this.fb.group({
       convo: ['', [Validators.required]],
       promedio: ['', [Validators.required]],
@@ -68,10 +69,20 @@ export class RegistrarPostulacionComponent  {
 
     this.documentoService.getDocumentsConvo(this.convosel.consecutivoconvo).subscribe(result=>{
       this.docsconvosel = result;
-      console.log(result);
     });
+  }
 
-    console.log(this.convosel);
+    actualizarConvosVencidas(){
+      Swal.fire({
+        title: 'Cargando...',
+        text: 'Verificando nuevos cambios.',
+        allowOutsideClick: false,
+        timer: 1500
+      });
+      Swal.showLoading();
+      this.listconvoactivas.actualizarConvosVencidas(1).subscribe(result=>{
+      },(err)=>{
+      });
   }
 
   getCarrerasEst(){
@@ -89,7 +100,6 @@ export class RegistrarPostulacionComponent  {
     this.listconvoactivas.buscarConvoActivas().subscribe(convoActivas =>{ 
      this.convoActivas = convoActivas;
    },(err)=>{
-     console.log(err);
    });
   }
 

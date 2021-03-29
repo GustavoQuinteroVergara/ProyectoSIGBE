@@ -3,13 +3,14 @@ import {PeriodoServiceService} from '../../services/periodo-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import {InicioService} from './inicio.service'
+import {InicioService} from './inicio.service';
+import {ListconvoactivasService} from './../postulacion/registrar-postulacion/listconvoactivas.service';
 import {Router } from '@angular/router';
 
 import html2canvas from "html2canvas";
 import {formatDate } from '@angular/common';
 import { BecaService } from '../../services/beca.service';
-
+import Swal from 'sweetalert2';
 import { Chart } from 'chart.js';
 @Component({
 	selector: 'app-home',
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
 	fechaultperiodo:any;
 	periodocaducado:any;
     postulaciones:any;
+    convoActivas:any;
     label=[];
     data=[];
     imgcreada = false;
@@ -81,21 +83,26 @@ export class HomeComponent implements OnInit {
 	constructor(private periodoService:PeriodoServiceService, 
 		public dialog: MatDialog, 
 		private router:Router, 
+
 		private inicioService: InicioService,
+		private listConvoActivas:ListconvoactivasService,
 		private becaService:BecaService) { 
-		this.buscarUltimoperiodo();
-		this.buscarPostuEnespera();
-		this.buscarInfoColores();
-		this.buscarGraficaInfo();
-		this.buscarBeca();
+		if(this.$nombreusuario.rol != 1){
+			this.buscarBeca();
+			this.buscarUltimoperiodo();
+			this.buscarPostuEnespera();
+			this.buscarInfoColores();
+			this.buscarGraficaInfo();
+		} else{
+			this.getConvoActivas();
+		}
+
 	}
 
 	buscarPostuEnespera(){
 		this.inicioService.buscarPostuEnespera().subscribe(res=>{
              this.postulaciones=res;
 		})
-
-		
 	}
 
 	ngOnInit(): void {
@@ -109,9 +116,19 @@ export class HomeComponent implements OnInit {
 
 	}
 
+	getConvoActivas(){
+		this.listConvoActivas.buscarConvoActivas().subscribe(result=>{
+			this.convoActivas = result;
+			Swal.close();
+		});
+	}
+
+
+
 
 	buscarUltimoperiodo(){
 		this.periodoService.ultimoPeriodoRegistrado().subscribe(result =>{
+			Swal.close();
 			this.fechaultperiodo = formatDate(result['fechafinal']['date'], 'yyyy-MM-dd', 'en');
 			if(this.fechaultperiodo < this.fechaActual2){
 				this.verificacionPeriodoCaducado = true;
@@ -155,12 +172,18 @@ export class HomeComponent implements OnInit {
 
 		this.periodoService.crearPeriodo(this.periodoArray).subscribe(result=>{
 			console.log(result);
+			Swal.fire({
+		      title: 'Exitoso.',
+		      text: 'Periodo registrado exitosamente.',
+		      icon: 'success'
+		    });
 			this.dialog.closeAll();
 		},(err)=>{
-			let dialogRef = this.dialog.open( errorperiodo,{
-				height: '550px',
-				width: '450px',
-			});
+			Swal.fire({
+		      title: 'ERROR AL REGISTRAR EL PERIODO...',
+		      text: 'Por favor, verifique si los datos son correctos.',
+		      icon: 'error'
+		    });
 		});
 
 

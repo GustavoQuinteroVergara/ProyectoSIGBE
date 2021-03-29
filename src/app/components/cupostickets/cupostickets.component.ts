@@ -70,7 +70,6 @@ export class CuposticketsComponent implements OnInit {
 		    this.dataSource.paginator = this.paginator;
 		    this.dataSource.sort = this.sort;
 		    this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
-		    console.log(this.dataSource);
 		});
 	}
 

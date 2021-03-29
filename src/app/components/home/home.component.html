@@ -103,6 +103,29 @@
         </section>            
       </div>
     </div>
+    <!-- CONVOCATORIAS ACTIVAS -->
+    <div class="col mt-4" data-aos="fade-down" data-aos-once="true">
+      <div class="col-lg px-3">
+        <h1>CONVOCATORIAS OFERTADAS ACTUALMENTE</h1>
+        <hr>
+      </div>
+      <div class="col-lg text-center" *ngIf="convoActivas != null">
+        <div class="card m-2 cardsconvos" style="width: 18rem;display: inline-block;transition: all 0.2s ease;" *ngFor="let convoact of convoActivas"> 
+          <div class="card-body">
+            <h3 class="card-title">{{convoact.beca}}</h3>
+            <hr>
+             <h4 class="card-subtitle mb-2">Periodo: <strong>{{convoact.periodonombre}}</strong></h4>
+            <h4 class="card-subtitle mb-2">Fechas: <strong>{{convoact.fechainicio}} al {{convoact.fechafin}}</strong></h4>
+            <h4 class="card-subtitle mb-2">Cantidad de cupos: <strong>{{convoact.cupos}}</strong></h4>
+            <hr>
+            <a mat-stroked-button routerLink="/registrarPostulacion">Postularse</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg" *ngIf="convoActivas == null">
+        <h4>No hay convocatorias activas actualmente</h4>
+      </div>
+    </div>
     <div data-aos="zoom-in-down" data-aos-once="true" class="info" id="infotextid">
       <div class="titlediv">
         <h1 class="titlesigbe">¿QUÉ ES SIGBE?</h1>
@@ -112,7 +135,7 @@
           <img src="assets/imgs/uv.png" style="width: 13vw;">
         </div>
         <div class="divinfotext">
-          <p>El sistema de información para la gestión de becas o llamado por sus siglas "SIGBE" es un proyecto desarrollado por estudiantes de la Universidad del Valle sede Palmira, el sistema 
+          <p>El sistema de información para la gestión de becas o llamado por sus siglas "SIGBE" es un proyecto desarrollado por los estudiantes Alejandro Ospina Escobar, William Felipe Rueda Bejarano y Gustavo Adolfo Quintero Vergara de la Universidad del Valle sede Palmira, el sistema 
              lo que busca es ayudar al área de Bienestar Universitaria y
              los estudiantes en los procesos de convocatorias, visitas y las postulaciones
              entre otras ayudas a sus respectivos usuarios.
@@ -125,18 +148,7 @@
              quisimos hacer el mejor trabajo posible en el tiempo de desarrollo que 
              tuvimos disponibles para brindarles un excelente servicio a toda 
              el área universitaria.
-          </p>
-             <ul>
-               <li>Desarrollado por :
-                    <ul>
-                      <li>Alejandro Ospina Escobar</li>
-                      <li>William Felipe Rueda Bejarano</li>
-                      <li>Gustavo Adolfo Quintero Vergara</li>
-                    </ul>
-
-               </li>
-             </ul>
-             
+          </p>            
           
         </div>
       </div>

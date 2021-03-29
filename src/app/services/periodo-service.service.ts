@@ -21,4 +21,11 @@ export class PeriodoServiceService {
 	ultimoPeriodoRegistrado(){
 		return this.http.get(`${this.url}/app/componentes/periodosacademicos/listLastPeriodo.php`);
 	}
+
+	getsPeriodos(){
+		return this.http.get(`${this.url}/app/componentes/periodosacademicos/getsPeriodos.php`);
+	}
+	ticketsByPeriodo(idperiodo:any){
+		return this.http.get(`${this.url}/app/componentes/Tickets/ticketsByPeriodo.php?idperiodo=${idperiodo}`);
+	}
 }
