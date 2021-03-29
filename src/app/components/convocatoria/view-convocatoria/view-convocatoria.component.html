@@ -256,12 +256,6 @@
   </mat-tab>
     <mat-tab label="Entrevista" *ngIf="estadopostusel != 3 && estadopostusel != 4" data-aos="fade-down" data-aos-once="true">
       <div class="tabinfopostu mb-4">
-        <div class="row">
-          <h1>Entrevista</h1>
-          <hr>
-          <a mat-raised-button color="primary" class="mb-4" *ngIf="!visitavalidate" [routerLink]="['/entrevista']">Iniciar entrevista</a>
-          <a mat-raised-button color="primary" *ngIf="visitavalidate" (click)="verVisitaModal(visitaPostu)">Ver Entrevista</a>
-        </div>
     </div>
   </mat-tab>
   <mat-tab label="Visita" *ngIf="estadopostusel != 3 && estadopostusel != 4 && estadopostusel != 5" data-aos="fade-down" data-aos-once="true">
