@@ -26,10 +26,8 @@ buscardepartamento(){
 
 buscarCiudad(arreglodepar:any){
 return this.http.post(`${this.url3}`,{data: arreglodepar});
-
-
 }
-
+  
 buscarCarrera(){
   return this.http.get(`${this.url4}`);
 }

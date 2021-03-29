@@ -36,7 +36,14 @@ export class LoginComponent {
         'codigoest':resultuser["codigoestudiante"],
         'saldo':resultuser["saldo"],
         'rol':resultuser["roles"],
-        'estadouser':resultuser["estadouser"]};
+        'estadouser':resultuser["estadouser"],
+        'contrasena':resultuser["contrasena"],
+        'estrato':resultuser["estrato"],
+        'zonaresidencial':resultuser["zonaresidencial"],      
+        'direccion':resultuser["direccion"],
+        'fechanacimiento':resultuser["fechanacimiento"],
+        
+      };
         if((resultuser["contrasena"] == contrasena) && (resultuser["estadouser"]=='Activo') ) {
           localStorage.setItem('currentUser',JSON.stringify(this.usuario));
           this.router.navigate(['/bienvenida']);
@@ -67,7 +74,14 @@ export class LoginComponent {
             'codigoest':resultuser["codigoestudiante"],
             'saldo':resultuser["saldo"],
             'rol':resultuser["roles"],
-            'estadouser':resultuser["estadouser"]};
+            'estadouser':resultuser["estadouser"],
+            'contrasena':resultuser["contrasena"],
+            'estrato':resultuser["estrato"],
+            'zonaresidencial':resultuser["zonaresidencial"],
+            'direccion':resultuser["direccion"],
+            'fechanacimiento':resultuser["fechanacimiento"],
+           
+          };
             if((resultuser["contrasena"] == contrasena) && (resultuser["estadouser"]=='Activo') ) {
               localStorage.setItem('currentUser',JSON.stringify(this.usuario));
               this.router.navigate(['/bienvenida']);
