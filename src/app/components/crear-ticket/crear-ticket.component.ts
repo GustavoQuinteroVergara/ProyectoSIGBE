@@ -7,6 +7,9 @@ import {UsuarioService} from '../../services/usuario.service';
 import {ConfiguracionService} from '../configuracion/configuracion.service';
 import {CuposasignacionService} from '../../services/cuposasignacion.service';
 import {PostulacionService} from '../../services/postulacion.service';
+import {PeriodoServiceService} from '../../services/periodo-service.service';
+import {EncuestaService} from '../../services/encuesta.service';
+import { MatSnackBar} from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 @Component({
 	selector: 'app-crear-ticket',
@@ -17,11 +20,15 @@ export class CrearTicketComponent {
 	tipoBeca='';
 	fechaActual= formatDate(new Date(), 'yyyy/MM/dd', 'en');
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
+	diaactual= formatDate(new Date(), 'dd', 'en');
 	todaysDataTime = '';
 	ticketArray:any;
 	postulacionBeneficiario:any;  
 	confirmacionBeneficiario = false;
 	asignacionBuscada:any= '-';
+	ultimoPeriodo:any;
+	encontroEncuesta = true;
+	fechaultperiodo:any;
 
 
 
@@ -42,16 +49,24 @@ export class CrearTicketComponent {
 	configuracionBack:any;
 	$nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 
+	encuesta:any;
+
+
 	constructor(private ticketService:TicketService,
 		private configuracionService:ConfiguracionService,
 		private postulacionService:PostulacionService,
+		public snackBack: MatSnackBar,
 		private usuarioService:UsuarioService,public dialog: MatDialog, 
+		private periodoService:PeriodoServiceService,
+		private encuestaService:EncuestaService,
 		private serviceCuposasign:CuposasignacionService) { 
 		this.elementType = 'img';
 		this.todaysDataTime = formatDate(new Date(), 'HH:mm', 'en-US');
 		this.buscarAsignacionPorFecha();
 		this.buscarConfiguracion();
-		
+		this.buscarUltimoPeriodo();
+
+
 		this.level = 'M';
 		this.qrdata = 'Initial QR code data string';
 		this.scale = 1;
@@ -60,9 +75,71 @@ export class CrearTicketComponent {
 		// Horas manejada en 24:00HS
 		
 		console.log(this.todaysDataTime);
+	}
 
+	realizarEncuesta(templateRef){
+	   	let dialogRef = this.dialog.open( templateRef,{
+	        panelClass: 'app-full-bleed-dialog', 
+	        height: '600px',
+	        width: '600px',
+       	});
+	}
 
+	guardarEncuesta(){
+		this.encuestaService.agregarEncuesta(this.encuesta).subscribe(result=>{
+			this.encontroEncuesta = true;
+			Swal.fire({
+	          title: 'Exitoso',
+	          text: 'Encuesta registrada, gracias por tu opinión.',
+	          icon: 'success'
+	        });
+	        this.dialog.closeAll();
+		},(err)=>{
+			Swal.fire({
+	          title: 'ERROR',
+	          text: 'ERROR al registrar la encuesta, por favor intentelo de nuevo, ERROR: ' + err.error.text,
+	          icon: 'error'
+	        });
+	        this.dialog.closeAll();
+		});
+	}
 
+	buscarUltimoPeriodo(){
+		this.periodoService.ultimoPeriodoRegistrado().subscribe(result =>{
+			this.ultimoPeriodo = result;
+			this.encuestaService.encuestaUser(this.$nombreusuario.identi,result['consecutivo_periodo']).subscribe(result=>{
+				this.encontroEncuesta = true;
+			},(err)=>{
+			if (result['menossietedias']) {
+				this.snackBack.open('Por favor realiza la encuesta antes de reservar.','Aceptar',{
+			        duration: 5000,
+			        horizontalPosition: 'right',
+			        verticalPosition: 'top',
+			        panelClass: ['redNoMatch']
+			    });
+			    this.encontroEncuesta = false;
+			    this.encuesta = {
+					iduser:this.$nombreusuario.identi,
+					idperiodo:this.ultimoPeriodo.consecutivo_periodo,
+					frecuencia:0,
+					calidad:0,
+					cantidad:0,
+					variedad:0,
+					espacio:0,
+					horario:0,
+					calificacion:0,
+					calidadcomentario:"",
+					espaciocomentario:"",
+					horariocomentario:"",
+					calificacioncomentario:"",
+					comentario:""
+				};
+			}else{
+				this.encontroEncuesta = true;
+			}
+			});
+
+		});
 
 	}
 
@@ -154,7 +231,7 @@ export class CrearTicketComponent {
 
 					Swal.fire({
 			          title: 'Exitoso',
-			          text: 'Comprado exitosamente.',
+			          text: 'Reservado exitosamente.',
 			          icon: 'success'
 			        });
 
