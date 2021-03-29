@@ -1,5 +1,4 @@
 .cup1{
-    height: 81vh;
     padding: 3% 26% 8% 26%;
 }
 
@@ -40,6 +39,20 @@
     margin-top: 0;
 }
 
+.estiloOjos{
+    background: none;
+    border: none;
+    float: right;
+    margin-top: -53.7%;
+    z-index: 1;
+}
+.ojos{
+    font-size: 150%;
+    line-height: 4.125;
+    margin-top: 119%;
+    margin-bottom: -125%;
+    z-index: 2;
+}
 @media only screen and (max-width: 828px){
 	.fondoActualizar{
         width: 18%;

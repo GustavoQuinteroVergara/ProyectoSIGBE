@@ -36,20 +36,22 @@
       <div class="formsmodificaruser">
     <form class="col-12" [formGroup]="updateForm" novalidate>
       <div class="row">
-        <div class="input-field col-12">
+        <div class="input-field col-lg">
+          <h4>Identificación</h4>
           <mat-form-field class="example-full-width" disabled appearance="fill">
             <mat-label>Identificación</mat-label>
-            <input #identificacion class="matfontbolder" id="identificacion" disabled matInput placeholder="Identificacion" type="number"
-            [value]="$nombreusuario.identi">
+            <input [(ngModel)]="$nombreusuario.identificacion" class="matfontbolder" id="identificacion" disabled matInput placeholder="Identificacion" type="number"
+            [value]="$nombreusuario.identi" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col-6">
+        <div class="input-field col-lg">
+          <h4>Nombre</h4>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Nombre</mat-label>
-            <input #nombre id="nombre" class="matfontbolder" matInput type="text" placeholder="Nombre" [value]="$nombreusuario.nombre"
-            formControlName="nombre" >
+            <input [(ngModel)]="$nombreusuario.nombre" id="nombre" class="matfontbolder" matInput type="text" placeholder="Nombre" [value]="$nombreusuario.nombre"
+            formControlName="nombre"  >
             <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('required') &&
             updateForm.controls['nombre'].touched">Nombre es requerido</mat-error>
             <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('minlength') &&
@@ -62,11 +64,12 @@
             updateForm.controls['nombre'].touched">Solo se aceptan letras.</mat-error>
           </mat-form-field>
         </div>
-        <div class="input-field col-6">
+        <div class="input-field col-lg">
+          <h4>Apellido</h4>
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Apellido</mat-label>
-            <input #apellido class="matfontbolder" id="apellido" matInput placeholder="Apellido" [value]="$nombreusuario.apellido"
-            formControlName="apellido">
+            <input [(ngModel)]="$nombreusuario.apellido" class="matfontbolder" id="apellido" matInput placeholder="Apellido" [value]="$nombreusuario.apellido"
+            formControlName="apellido" >
             <mat-error class="help-block form-error text-danger small"
             *ngIf="updateForm.controls['apellido'].hasError('required') &&updateForm.controls['apellido'].touched">
           Apellido es Requerido</mat-error>
@@ -82,22 +85,76 @@
   </div>
 </div>
 <div class="row">
-  <div class="input-field col-12">
+  <div class="input-field col-lg">
+    <h4>Email</h4>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Email</mat-label>
-      <input #correo id="email" class="matfontbolder" matInput placeholder="Correo" [value]="$nombreusuario.correo"
-      formControlName="correo">
+      <input [(ngModel)]="$nombreusuario.correo" id="email" class="matfontbolder" matInput placeholder="Correo" [value]="$nombreusuario.correo"
+      formControlName="correo" >
       <mat-error class="help-block form-error text-danger small"
       *ngIf="updateForm.controls['correo'].hasError('required') && updateForm.controls['correo'].touched">Correo
     es requerido</mat-error>
   </mat-form-field>
 </div>
+<div class="input-field col-lg">
+  <h4>Contraseña</h4>
+<mat-form-field>
+  <mat-label>Contraseña</mat-label>
+  <input matInput #contrasena placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+  <span class="input-group-text estiloOjos" ><i class="icofont-eye-blocked ojos" (click)="hide = !hide " *ngIf="hide == true" ></i></span>
+  <span class="input-group-text estiloOjos" ><i class="icofont-eye-alt ojos" (click)="hide = !hide" *ngIf="hide == false"></i></span>
+</mat-form-field>
 </div>
-<div>
-  <a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!updateForm.valid" (click)="registrarSaldo
-  (identificacion.value,correo.value,
-  apellido.value,nombre.value)" mat-raised-button color="primary" name="action">Actualizar</a>
 </div>
+<div class="row">
+  <div class="input-field col-lg">
+    <h4>Estrato</h4>
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>{{$nombreusuario.estrato}} </mat-label>
+    <mat-select [(ngModel)]="$nombreusuario.estrato" [ngModelOptions]="{standalone: true}">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      <mat-option value="4">4</mat-option>
+      <mat-option value="5">5</mat-option>
+      <mat-option value="6">6</mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+  <div class="input-field col-lg">
+    <h4>Zona Residencial</h4>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>{{$nombreusuario.zonaresidencial}}</mat-label>
+      <mat-select [(ngModel)]="$nombreusuario.zonaresidencial" [ngModelOptions]="{standalone: true}">
+        <mat-option value="Rural">Rural</mat-option>
+        <mat-option value="Urbana">Urbana</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+<div class="input-field col-lg" style="padding:0;">
+  <h4>Fecha Nacimiento</h4>
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input matInput [(ngModel)]="$nombreusuario.fechanacimiento" [matDatepicker]="picker" [ngModelOptions]="{standalone: true}">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <strong ><h5 style="margin-top: -8%;margin-bottom: 10%;">Fecha Actual: {{fechanacimiento}}</h5></strong>
+  </div>
+  <div class="input-field col-lg" style="line-height: 4.3;">
+          <h4>Dirección</h4>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>{{$nombreusuario.direccion}}</mat-label>
+            <input matInput formControlName="direccion" [(ngModel)]="$nombreusuario.direccion" id="direccion" type="text" class="validate">
+          </mat-form-field>
+        </div>
+</div>
+  <div>
+    <a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!updateForm.valid" (click)="actualizarUsuario
+    (contrasena.value)" mat-raised-button color="primary" name="action">Actualizar</a>
+  </div>
 </form>
 </div>
   </mat-tab>
