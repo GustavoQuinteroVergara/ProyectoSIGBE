@@ -77,7 +77,7 @@ export class LoginComponent {
         'zonaresidencial':resultuser["zonaresidencial"],      
         'direccion':resultuser["direccion"],
         'fechanacimiento':resultuser["fechanacimiento"],
-        
+        'estadosdatos':resultuser["estadodatos"]
       };
         if((resultuser["contrasena"] == contrasena) && (resultuser["estadouser"]=='Activo') ) {
           localStorage.setItem('currentUser',JSON.stringify(this.usuario));
@@ -115,7 +115,7 @@ export class LoginComponent {
             'zonaresidencial':resultuser["zonaresidencial"],
             'direccion':resultuser["direccion"],
             'fechanacimiento':resultuser["fechanacimiento"],
-           
+            'estadosdatos':resultuser["estadodatos"]
           };
             if((resultuser["contrasena"] == contrasena) && (resultuser["estadouser"]=='Activo') ) {
               this.actualizarConvosVencidas();

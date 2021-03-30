@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild, TemplateRef,ViewChildren,QueryList } from '@angular/core';
 import {PeriodoServiceService} from '../../services/periodo-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import {InicioService} from './inicio.service';
 import {ListconvoactivasService} from './../postulacion/registrar-postulacion/listconvoactivas.service';
+import{ActualizarSaldoService} from './../modificarusuario/actualizar-saldo.service';
 import {Router } from '@angular/router';
 
 import html2canvas from "html2canvas";
@@ -17,13 +18,16 @@ import { Chart } from 'chart.js';
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,AfterViewInit {
+	@ViewChild("myTemplate") actualizaDatos : TemplateRef<any>;
+
 	success:any;
 
 	$nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 	verificacionPeriodoCaducado = false;
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 	fechaultperiodo:any;
+	saldoRegistrado:any;
 	periodocaducado:any;
     postulaciones:any;
     convoActivas:any;
@@ -76,26 +80,20 @@ export class HomeComponent implements OnInit {
 				}
 		});
 	public formularioRegistrarPeriodo: FormGroup;
+	public updateForm: FormGroup;
 
 	periodoArray:any;
 
-	@ViewChild('templatePeriodo') customTemplate: TemplateRef<any>;
+	@ViewChild("templatePeriodo") customTemplate: TemplateRef<any>;
+	// @ViewChildren(TemplateRef) templates: QueryList<TemplateRef<any>>;
 	constructor(private periodoService:PeriodoServiceService, 
 		public dialog: MatDialog, 
 		private router:Router, 
-
+		private serviceSaldo:ActualizarSaldoService,
 		private inicioService: InicioService,
 		private listConvoActivas:ListconvoactivasService,
 		private becaService:BecaService) { 
-		if(this.$nombreusuario.rol != 1){
-			this.buscarBeca();
-			this.buscarUltimoperiodo();
-			this.buscarPostuEnespera();
-			this.buscarInfoColores();
-			this.buscarGraficaInfo();
-		} else{
-			this.getConvoActivas();
-		}
+
 
 	}
 
@@ -108,6 +106,104 @@ export class HomeComponent implements OnInit {
 	ngOnInit(): void {
 
 	}
+	ngAfterViewInit(){
+		Swal.close();
+		if(this.$nombreusuario.rol != 1){
+			this.buscarBeca();
+			this.buscarUltimoperiodo();
+			this.buscarPostuEnespera();
+			this.buscarInfoColores();
+			this.buscarGraficaInfo();
+		} else{
+			if(this.$nombreusuario.estadosdatos != 1){
+				this.abrirActualizarDatos();
+			}
+			this.getConvoActivas();
+		}
+	}
+
+
+	abrirActualizarDatos(){
+		this.updateForm = new FormGroup({
+	      nombre: new FormControl(this.$nombreusuario.nombre,[Validators.required, Validators.maxLength(30), Validators.pattern("[a-zA-Z ]*")  , Validators.minLength(3),]),
+	      apellido: new FormControl(this.$nombreusuario.apellido,[Validators.required,Validators.maxLength(40),Validators.minLength(5),Validators.pattern("[a-zA-Z ]*")]),
+	      correo: new FormControl(this.$nombreusuario.correo,[Validators.required]),
+	      password: new FormControl(this.$nombreusuario.contrasena,[Validators.required]),
+	      direccion: new FormControl(this.$nombreusuario.direccion,[Validators.required]),
+	    });
+		let dialogRef = this.dialog.open( this.actualizaDatos,{
+			height: '600px',
+			width: '900px',
+			disableClose: true, 
+		});
+	}
+
+	actualizarEstadoDate(){
+		this.saldoRegistrado= {
+	      identificacion:this.$nombreusuario.identi,
+	      estadodatos: 1
+	    };
+	    this.serviceSaldo.actualizarEstadoDatos(this.saldoRegistrado).subscribe
+	    (res=>{
+	      Swal.fire({
+	        title: 'Exitoso',
+	        text: 'Actualizado exitosamente.',
+	        icon: 'success'
+	      });
+	      this.dialog.closeAll();
+	    },(err)=>{
+	      console.log("prueba2: "+this.$nombreusuario.fechanacimiento);
+	      Swal.fire({
+	        title: 'Error',
+	        text: 'Error al actualizar.' + err.error.text,
+	        icon: 'error'
+	        
+	      }); 
+	    });
+	}
+
+	actualizarUsuario(contrasena:any,opcion:any){
+		switch (opcion) {
+			case 0:
+			    this.saldoRegistrado= {
+			      identificacion:this.$nombreusuario.identi,
+			      correo:this.$nombreusuario.correo,
+			      apellido:this.$nombreusuario.apellido,
+			      nombre:this.$nombreusuario.nombre,
+			      contrasena:contrasena,
+			      zonaresidencial:this.$nombreusuario.zonaresidencial,
+			      estrato:this.$nombreusuario.estrato,
+			      fechanacimiento:formatDate(this.$nombreusuario.fechanacimiento, 'yyyy-MM-dd', 'en'),
+			      direccion:this.$nombreusuario.direccion
+			    };
+			    this.serviceSaldo.registrarSaldos(this.saldoRegistrado).subscribe
+			    (res=>{
+			     this.actualizarEstadoDate();
+			      this.dialog.closeAll();
+			       this.$nombreusuario.fechanacimiento;
+			       this.$nombreusuario.contrasena=contrasena;
+			       localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
+			    },(err)=>{
+			      console.log("prueba2: "+this.$nombreusuario.fechanacimiento);
+			      Swal.fire({
+			        title: 'Error',
+			        text: 'Error al actualizar.' + err.error.text,
+			        icon: 'error'
+			        
+			      }); 
+			    });
+				break;
+			case 1:
+				this.actualizarEstadoDate();
+				// code...
+				break;
+			
+			default:
+				// code...
+				break;
+		}
+
+	  }
 
 	cerrarSesion(){
 		localStorage.removeItem('currentUser');
@@ -138,7 +234,7 @@ export class HomeComponent implements OnInit {
 					descripcionperiodo: new FormControl('',Validators.required),
 				});
 				let dialogRef = this.dialog.open( this.customTemplate,{
-					height: '580px',
+					height: '450px',
 					width: '450px',
 					disableClose: true, 
 				});
@@ -152,7 +248,7 @@ export class HomeComponent implements OnInit {
 				descripcionperiodo: new FormControl('',Validators.required),
 			});
 			let dialogRef = this.dialog.open( this.customTemplate,{
-				height: '580px',
+				height: '450px',
 				width: '450px',
 				disableClose: true, 
 			});
