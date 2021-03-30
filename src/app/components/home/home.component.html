@@ -1,4 +1,143 @@
 <app-navbar></app-navbar>
+    <div>
+     <ng-template #myTemplate>
+        <div class="row">
+          <div class="row">
+            <div class="col-lg col-6">
+              <h1>ACTUALIZA TUS DATOS</h1>
+            </div>
+          </div>
+          <hr>
+          <div class="col-lg col">
+              <form class="col-12" [formGroup]="updateForm" novalidate>
+                <div class="row">
+                  <div class="input-field col-lg">
+                    <h4>Identificación</h4>
+                    <mat-form-field class="example-full-width" disabled appearance="fill">
+                      <mat-label>Identificación</mat-label>
+                      <input [(ngModel)]="$nombreusuario.identi" class="matfontbolder" id="identificacion" disabled matInput placeholder="Identificacion" type="number"
+                      [value]="$nombreusuario.identi" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col-lg">
+                    <h4>Nombre</h4>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Nombre</mat-label>
+                      <input [(ngModel)]="$nombreusuario.nombre" id="nombre" class="matfontbolder" matInput type="text" placeholder="Nombre" [value]="$nombreusuario.nombre"
+                      formControlName="nombre"  >
+                      <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('required') &&
+                      updateForm.controls['nombre'].touched">Nombre es requerido</mat-error>
+                      <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('minlength') &&
+                      updateForm.controls['nombre'].touched">Mínimo 3 letras</mat-error>
+                      <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('maxlength') &&
+                      updateForm.controls['nombre'].touched">Máximo 30 letras</mat-error>
+                      <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('maxlength') &&
+                      updateForm.controls['nombre'].touched">Máximo 30 letras</mat-error>
+                      <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['nombre'].hasError('pattern') &&
+                      updateForm.controls['nombre'].touched">Solo se aceptan letras.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="input-field col-lg">
+                    <h4>Apellido</h4>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Apellido</mat-label>
+                      <input [(ngModel)]="$nombreusuario.apellido" class="matfontbolder" id="apellido" matInput placeholder="Apellido" [value]="$nombreusuario.apellido"
+                      formControlName="apellido" >
+                      <mat-error class="help-block form-error text-danger small"
+                      *ngIf="updateForm.controls['apellido'].hasError('required') &&updateForm.controls['apellido'].touched">
+                    Apellido es Requerido</mat-error>
+                    <mat-error class="help-block form-error text-danger small"
+                    *ngIf="updateForm.controls['apellido'].hasError('minlength') &&updateForm.controls['apellido'].touched">
+                  Mínimo 3 Letras</mat-error>
+                  <mat-error class="help-block form-error text-danger small"
+                  *ngIf="updateForm.controls['apellido'].hasError('maxlength') &&updateForm.controls['apellido'].touched">
+                Máximo 3 Letras</mat-error>
+                <mat-error class="help-block form-error text-danger small" *ngIf="updateForm.controls['apellido'].hasError('pattern') &&
+                updateForm.controls['apellido'].touched">Solo se aceptan letras.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col-lg">
+              <h4>Email</h4>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input [(ngModel)]="$nombreusuario.correo" id="email" class="matfontbolder" matInput placeholder="Correo" [value]="$nombreusuario.correo"
+                formControlName="correo" >
+                <mat-error class="help-block form-error text-danger small"
+                *ngIf="updateForm.controls['correo'].hasError('required') && updateForm.controls['correo'].touched">Correo
+              es requerido</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-field col-lg">
+            <h4>Contraseña</h4>
+          <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput #contrasena type="password" placeholder="Password" formControlName="password" required>
+          </mat-form-field>
+          </div>
+          </div>
+          <div class="row">
+            <div class="input-field col-lg">
+              <h4>Estrato</h4>
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>{{$nombreusuario.estrato}} </mat-label>
+              <mat-select [(ngModel)]="$nombreusuario.estrato" [ngModelOptions]="{standalone: true}">
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="4">4</mat-option>
+                <mat-option value="5">5</mat-option>
+                <mat-option value="6">6</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="input-field col-lg">
+              <h4>Zona Residencial</h4>
+              <mat-form-field appearance="fill" class="example-full-width">
+                <mat-label>{{$nombreusuario.zonaresidencial}}</mat-label>
+                <mat-select [(ngModel)]="$nombreusuario.zonaresidencial" [ngModelOptions]="{standalone: true}">
+                  <mat-option value="Rural">Rural</mat-option>
+                  <mat-option value="Urbana">Urbana</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+          <div class="input-field col-lg" style="padding:0;">
+            <h4>Fecha Nacimiento</h4>
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input matInput [(ngModel)]="$nombreusuario.fechanacimiento" [matDatepicker]="picker" [ngModelOptions]="{standalone: true}">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <strong ><h5 style="margin-top: -8%;margin-bottom: 10%;">Fecha Actual: {{fechanacimiento}}</h5></strong>
+            </div>
+            <div class="input-field col-lg" style="line-height: 4.3;">
+                    <h4>Dirección</h4>
+                    <mat-form-field appearance="fill" class="example-full-width">
+                      <mat-label>{{$nombreusuario.direccion}}</mat-label>
+                      <input matInput formControlName="direccion" [(ngModel)]="$nombreusuario.direccion" id="direccion" type="text" class="validate">
+                    </mat-form-field>
+                  </div>
+          </div>
+            <div *ngIf="!updateForm.valid">
+              <a class="btn waves-effect waves-light red darken-4 " [disabled]="true" mat-raised-button color="primary" name="action">Actualizar</a>
+            </div>
+            <div *ngIf="updateForm.valid">
+              <a class="btn waves-effect waves-light red darken-4 " [class.disabled]="!updateForm.valid" (click)="actualizarUsuario
+              (contrasena.value,0)" mat-raised-button color="primary" name="action">Actualizar</a>
+              <a mat-stroked-button color="primary" (click)="actualizarUsuario
+                  (contrasena.value,1)">Mis datos son correctos.</a>
+            </div>
+          </form>
+          </div>
+        </div>
+      </ng-template>
+    </div>
 <ng-template #templatePeriodo>
   <ng-template #errorRegistrarPeriodo>
     <div  class="dialogSuccess" >
@@ -25,7 +164,7 @@
   </ng-template>
 
 
-  <div  class="dialogSuccess" >
+  <div  class="dialogSuccess" style="overflow-x: hidden;">
 
     <div >
       <div >

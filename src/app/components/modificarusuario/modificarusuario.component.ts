@@ -49,7 +49,7 @@ export class ModificarusuarioComponent implements OnInit {
         nombre: new FormControl(this.$nombreusuario.nombre,[Validators.required, Validators.maxLength(30), Validators.pattern("[a-zA-Z ]*")  , Validators.minLength(3),]),
         apellido: new FormControl(this.$nombreusuario.apellido,[Validators.required,Validators.maxLength(40),Validators.minLength(5),Validators.pattern("[a-zA-Z ]*")]),
         correo: new FormControl(this.$nombreusuario.correo,[Validators.required]),
-        password: new FormControl(this.$nombreusuario.contrasena,[Validators.required]),
+        password: new FormControl('',[Validators.required]),
         direccion: new FormControl(this.$nombreusuario.direccion,[Validators.required]),
       });
     
