@@ -6,13 +6,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ServicesticketsService {
 
-url= 'http://localhost/sigbeweb/app/componentes/tickets/list_tickets.php?'
+	url= 'http://localhost/sigbeweb/'
 
   constructor(private http: HttpClient ) { }
 
-buscartickets(identificacion:any){
-  return this.http.get(`${this.url}identificacion=${identificacion}`);
-}
+	buscartickets(){
+		return this.http.get(`${this.url}app/componentes/tickets/list_tickets.php`);
+	}
+	ticketsByTipo(tipoTicket:any){
+		return this.http.get(`${this.url}app/componentes/tickets/ticketsByTipo.php?tipo=${tipoTicket}`);
+	}
+	ticketsByEstado(estadoticket:any){
+		return this.http.get(`${this.url}app/componentes/tickets/ticketsByEstado.php?estado=${estadoticket}`);
+	}
+	ticketsByIdenti(identi:any){
+		return this.http.get(`${this.url}app/componentes/tickets/ticketsByIdenti.php?identi=${identi}`);
+	}
 
 
 }

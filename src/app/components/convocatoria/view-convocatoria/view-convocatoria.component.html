@@ -265,9 +265,8 @@
         <div class="row">
           <h1>Entrevista</h1>
           <hr>
-          <a mat-stroked-button><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Información general del estudiante</a>
-          <a mat-stroked-button color="primary">Iniciar entrevista</a>
-          <a mat-stroked-button color="primary" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista</a>
+          <a mat-stroked-button color="primary" *ngIf="!entrevistvalidate">Iniciar entrevista</a>
+          <a mat-stroked-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista</a>
         </div>
     </div>
   </mat-tab>
