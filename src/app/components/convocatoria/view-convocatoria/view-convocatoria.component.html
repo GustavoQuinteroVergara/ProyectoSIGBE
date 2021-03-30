@@ -204,30 +204,48 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <strong>{{postuseltable.promedio}}</strong>
-        <p>Promedio : </p>
-        <hr>
-        
-      </div>
-      <div class="col-6">
-        <strong>{{postuseltable.carrera}}</strong>
-        <p>Carrera : </p>
-        <hr>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
         <strong>{{postuseltable.codigoestudiante}}</strong>
         <p>Codigo estudiante : </p>
         <hr>
       </div>
+      <div class="col-6">
+          <strong>{{postuseltable.carrera}}</strong>
+          <p>Carrera : </p>          
+        <hr>
+      </div>
     </div>
+    <div class="col-12">
+    <div class="row">
+      <div class="col-lg">
+            <strong>{{postuseltable.promedio}}</strong>
+            <p>Promedio : </p>
+      </div>
+      <div class="col-lg">
+            <form>
+              <p>¿Cumple o no cumple el promedio?</p>
+              <div class="col-lg" *ngIf="estadopostusel != 4">
+                <mat-radio-group  aria-label="Cumple o no cumple" >
+                  <mat-radio-button #text1 value="1" color="warn"  [disabled]="estadopostusel != 4"  [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
+                  <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="col-lg" *ngIf="estadopostusel == 4">
+                <mat-radio-group  aria-label="Cumple o no cumple" >
+                  <mat-radio-button #text1 value="1" color="warn" (change)="updateEstadoPromedio(text1.value)" [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
+                  <mat-radio-button #checkdos value="2" color="warn" (change)="updateEstadoPromedio(checkdos.value)" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </form>
+          </div>
+    </div>
+    </div>
+    <hr>
   </div>
   </mat-tab>
   <mat-tab label="Documentos" *ngIf="estadopostusel != 3" data-aos="fade-down" data-aos-once="true">
     <div class="tabinfopostu ">
       <div class="row">
-        <div class="col" *ngFor="let docspostu of documentosFoundpostu">
+        <div class="col-lg" *ngFor="let docspostu of documentosFoundpostu">
           <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}}</a>
           <hr>
           <div class="checkboxs">

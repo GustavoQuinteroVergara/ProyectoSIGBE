@@ -12,6 +12,7 @@ export class ServicesViewConvocatoriaService {
   urlUpdateConvo="http://localhost/sigbeweb/app/componentes/convocatorias/actualizar_convocatoria.php";
   urlConvoCupos ="http://localhost/sigbeweb/app/componentes/convocatorias/updateCuposConvo.php";
   urlPostuEstado ="http://localhost/sigbeweb/app/componentes/postulacion/updateEstadoPostu.php";
+  urlEstadoPromedio = "http://localhost/sigbeweb/app/componentes/postulacion/updateEstadoPromedio.php";
   urlInfoGenPostu = "http://localhost/sigbeweb/app/componentes/informaciongeneral/listarinformaciongeneral.php?";
 
   constructor(private http: HttpClient) { }
@@ -31,6 +32,13 @@ export class ServicesViewConvocatoriaService {
     return this.http.post(`${this.urlUpdateConvo}`,{data: actualizarConvo}).
     pipe(map((res)=>{
       return  actualizarConvo;
+    }));
+  }
+
+  actualizarEstadoPromedio(valsel:any){
+    return this.http.post(`${this.urlEstadoPromedio}`,valsel).
+    pipe(map((res)=>{
+      return  valsel;
     }));
   }
 
