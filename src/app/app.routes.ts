@@ -22,6 +22,8 @@ import { CuposticketsComponent } from './components/cupostickets/cupostickets.co
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
+import {EntrevistaComponent} from './components/psicologia/entrevista/entrevista.component';
+
 
 export const ROUTES: Routes = [
 
@@ -95,7 +97,9 @@ export const ROUTES: Routes = [
 ,data: { 
   expectedRole: '1'
 }},
+{path:'entrevista',component:EntrevistaComponent},
 {path:'habilitarUser', component:HabilitaruserComponent},
+
 {path:'olvidarContrasena', component:OlvdarcontrasenaComponent},
 {path:'bienvenida', component:HomeComponent},
 {path:'',component: LoginComponent},

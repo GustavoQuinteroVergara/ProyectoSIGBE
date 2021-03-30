@@ -1,0 +1,1073 @@
+
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+    <div class="formtiq">
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+
+      <ng-template matStepLabel>Información Básica</ng-template>
+      <h1 class="titulosVisita">Información Básica</h1>
+       <div class="row">
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Nombre compledo del Estudiante</mat-label>
+          <input id="nombreEstudiante" [(ngModel)]="nombreestudiante"  [value]="nombreestudiante" formControlName="nombreestudiante"   matInput  placeholder="Nombre completo del estudiante">
+    </mat-form-field>
+      </div>
+       <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="codigoest">Código</mat-label>
+              <input  id="codigo"  matInput placeholder="codigo" [(ngModel)]="codigoest"  [value]="codigoest"  formControlName="codigoest" type="number">
+          </mat-form-field>
+          </div>
+          <div class="col-3"> 
+            <mat-form-field appearance="fill" class="example-full-width">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput [(ngModel)] =" fechanacimiento"  [matDatepicker]="picker" [ngModelOptions]="{standalone: true}">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="planestudio">Plan de estudio</mat-label>
+              <input  id="planestudio" [(ngModel)]="planestudio"  [value]="planestudio"  matInput placeholder="planestudio"   formControlName="planestudio" type="number">
+          </mat-form-field>
+          </div> 
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                  <mat-label for="lugarnacimiento">Lugar de nacimiento</mat-label>
+                  <input id="lugarnacimiento"  matInput placeholder="lugarnacimiento" [(ngModel)]="lugarnacimiento"  formControlName="lugarnacimiento" >
+            </mat-form-field>
+              </div>
+              <div class="col-3">
+                <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                  <mat-label for="cedula">cedula</mat-label>
+                  <input  id="cedula"  [(ngModel)]="cedula"  formControlName="cedula"  [value]="cedula"  matInput placeholder="cedula"   type="number">
+              </mat-form-field>
+              </div>
+              <div class="col-3">
+                <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                  <mat-label >fecha expedicion</mat-label>
+                  <input matInput  [(ngModel)]="fechaexp" [ngModelOptions]="{standalone: true}"  [matDatepicker]="pickero">
+                  <mat-datepicker-toggle matSuffix [for]="pickero"></mat-datepicker-toggle>
+                  <mat-datepicker #pickero></mat-datepicker>
+              </mat-form-field>
+              </div>
+        </div>
+        <div class="row mb-4"> 
+            <div class="col-6"> 
+            <h4>Estado civil</h4>
+            <mat-radio-group [(ngModel)]="estadocivil" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="soltero" [checked]="estadocivil == 'soltero'">Soltero.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="casado" [checked]="estadocivil == 'casado'">Casado.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="unionlibre" [checked]="estadocivil == 'unionlibre'">Union Libre.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="viudo" [checked]="estadocivil == 'Viudo'">Viudo.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="separado" [checked]="estadocivil == 'separado'">Separado.</mat-radio-button>
+            </mat-radio-group>
+
+            </div>
+              <div class="col-4">
+            <mat-form-field class="example-full-width camposInput" appearance="fill">
+              <mat-label>Numero de hijos</mat-label>
+              <mat-select [(ngModel)]="numerohijos"  [value]="numerohijos" formControlName="numerohijos" >
+                <mat-option value="0">0</mat-option>
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="4">4</mat-option>
+                <mat-option value="5">5</mat-option>
+                <mat-option value="6">6</mat-option>
+                <mat-option value="7">7</mat-option>
+                <mat-option value="8">8</mat-option>
+                <mat-option value="9">9</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="11">11</mat-option>
+                <mat-option value="12">12</mat-option> 
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div>
+            <button mat-raised-button color="primary" matStepperNext >Siguente</button>
+          </div>
+    </form>
+ </mat-step>
+
+
+
+<mat-step [stepControl]="secondFormGroup" label="Información SocioEconómica">
+    <ng-template matStepLabel>Información SocioEconómica</ng-template>
+    <h1>Situación Economica del estudiante</h1>
+    <form [formGroup]="secondFormGroup">
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="fill" class="example-full-width  camposInput">
+              <mat-label>Selecciona departamento </mat-label>
+              <mat-select #departamento (selectionChange)="departamentoselec2($event.value)">
+                <mat-option *ngFor="let depar2 of departamentos2" [value]="depar2.iddepartamento" >{{depar2.nombre}}</mat-option>
+                
+              </mat-select>
+            </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="fill" class="example-full-width  camposInput">
+                        <mat-label>Selecciona la ciudad </mat-label>
+                        <mat-select  [(ngModel)]="c1"  [ngModelOptions]="{standalone: true}">
+                          <mat-option   *ngFor="let ciudad2 of ciud2" [value]="ciudad2.idciudad">{{ciudad2.nombre}}</mat-option>
+                          
+                        </mat-select>
+                      </mat-form-field>
+                  </div>
+                <div class="col-3">
+                    <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                      <mat-label>Direccion</mat-label>
+                      <input id="direccion" [(ngModel)]="direccionest" formControlName="direccionest"   matInput  placeholder="Direccion" value="">
+                </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                      <mat-label>Barrio</mat-label>
+                      <input id="barrio" [(ngModel)]="barrioest" formControlName="barrioest"  matInput  placeholder="barrio" value="">
+                </mat-form-field>
+                  </div>
+                  
+
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="celular">celular</mat-label>
+              <input  id="celular" [(ngModel)]="celular2" formControlName="celular2" [value]="celular2"  matInput placeholder="celular" type="number">
+          </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion Cali</mat-label>
+              <input id="direccioncali" [(ngModel)]="direccioncali" formControlName="direccioncali" [value]="direccioncali"   matInput  placeholder="Direccion Cali" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Barrio Cali</mat-label>
+              <input id="barriocali" [(ngModel)]="barriocali" formControlName="barriocali" [value]="barriocali" matInput  placeholder="Barrio Cali" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="telefono">Telefono</mat-label>
+              <input  id="telefono"  [(ngModel)]="telefonocali" formControlName="telefonocali" [value]="telefonocali"   matInput placeholder="telefono" type="number">
+          </mat-form-field>
+          </div>
+          <div class="col-3"> 
+            <h4>RESIDE</h4>
+            <mat-radio-group [(ngModel)]="reside" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="CON SU FAMILIA DE ORIGEN" [checked]="reside == 'CON SU FAMILIA DE ORIGEN'">CON SU FAMILIA DE ORIGEN.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="CON SU FAMILIA PROPIA (CÓNYUGE)" [checked]="reside == 'CON SU FAMILIA PROPIA (CÓNYUGE)'">CON SU FAMILIA PROPIA (CÓNYUGE).</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="CON SUS PARIENTES" [checked]="reside == 'CON SUS PARIENTES'">CON SUS PARIENTES.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="CON COMPAÑEROS O AMIGOS" [checked]="reside == 'CON COMPAÑEROS O AMIGOS'">CON COMPAÑEROS O AMIGOS.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="SOLO" [checked]="reside == 'SOLO'">SOLO.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="EN APARTAMENTO PROPIO" [checked]="reside == 'EN APARTAMENTO PROPIO'">EN APARTAMENTO PROPIO.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="EN APARTAMENTO ALQUILADO" [checked]="reside == 'EN APARTAMENTO ALQUILADO'"> EN APARTAMENTO ALQUILADO.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="EN PIEZA ARRENDA" [checked]="reside == 'EN PIEZA ARRENDA'">  EN PIEZA ARRENDA.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="EN PENSIÓN" [checked]="reside == 'EN PENSIÓN'">  EN PENSIÓN.</mat-radio-button>
+            </mat-radio-group>
+
+            </div>
+            
+
+    </div>
+    <div>
+        <button mat-raised-button color="primary"style="float:right;"  matStepperNext >Siguente</button>
+        <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
+      </div>
+    </form>
+</mat-step>  
+<mat-step [stepControl]="thirdFormGroup" label="Información SocioEconómica">
+    <ng-template matStepLabel>FUENTES DE INGRESO</ng-template>
+    <h1>FUENTES DE INGRESO USARÁ PARA SATISFACER CADA UNA DE LAS SIGUIENTES BÁSICAS</h1>
+    <form [formGroup]="thirdFormGroup">
+
+        <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+
+                <th>Necesidades basicas</th>
+                <th>Familia</th>
+                <th>Trab.rentas propias</th>
+                <th> Ayudas</th>
+                <th>Prestamos</th>
+                <th>otras</th>
+            
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+            
+                <td>Vivienda</td>
+            
+                <td><mat-checkbox   #familia1 value="familia" color="warn" class="example-margin"></mat-checkbox></td>
+            
+                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+            
+              </tr>
+            
+              <tr>
+        
+                <td>Alimentacion</td>
+            
+                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+            
+                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+              </tr>
+            
+              <tr>
+            
+                <td>Educacion</td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+            
+              </tr>
+              <tr>
+            
+                <td>transporte</td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+            
+                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+            
+            
+              </tr>
+              <tr>
+            
+                <td>otras</td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+            
+                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+            
+            
+              </tr>
+            </tbody>
+
+        </table>
+
+        <div class="row">
+            <div class="col-3">
+              <div style="margin-top: 10%;">
+              <h4>¿Trabajas?</h4>
+            </div>
+              <mat-radio-group [(ngModel)]="trabaja" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="si" [checked]="trabaja == 'si'">Si.</mat-radio-button>
+                <mat-radio-button class="example-margin estamentoCheck" color="warn" value="no" [checked]="trabaja == 'no'">No.</mat-radio-button>
+               
+              </mat-radio-group>
+            </div>
+            
+            <div *ngIf="trabaja=='si'" class="col-3" style="margin-top: 2%;">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Cargo que desempeña</mat-label>
+                <input [(ngModel)]="cargoempresa" formControlName="cargoempresa" [value]="cargoempresa" formcontrol id="cargo" matInput  placeholder="Cargo que desempeña" value="">
+          </mat-form-field>
+            </div>
+            <div  *ngIf="trabaja=='si'"class="col-3" style="margin-top: 2%;">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Empresa donde trabaja</mat-label>
+                <input id="empesa" [(ngModel)]="empresa" formControlName="empresa" [value]="empresa"  matInput  placeholder="Empresa donde trabaja" value="">
+          </mat-form-field>
+            </div>
+            <div *ngIf="trabaja=='si'" class="col-3" style="margin-top: 2%;">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Antiguedad</mat-label>
+                <input [(ngModel)]="antiguedad" formControlName="antiguedad" [value]="antiguedad" id="antiguedad" matInput  placeholder="Antiguedad" value="">
+          </mat-form-field>
+            </div>
+            
+  
+        </div>
+
+        <div *ngIf="trabaja=='si'" class="row">
+          <div class="col-3">
+            <mat-form-field appearance="fill" class="example-full-width  camposInput">
+              <mat-label>Selecciona departamento</mat-label>
+              <mat-select #departamento2 (selectionChange)="departamentoselec($event.value)">
+                <mat-option *ngFor="let depar of departamentos" [value]="depar.iddepartamento">{{depar.nombre}}</mat-option>
+                
+              </mat-select>
+            </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                      <mat-form-field appearance="fill" class="example-full-width  camposInput">
+                        <mat-label>Selecciona la ciudad</mat-label>
+                        <mat-select #ciudad2>
+                          <mat-option [(ngModel)]="c2" formControlName="c2" [value]="c2" *ngFor="let ciudad of ciud" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                          
+                        </mat-select>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                      <mat-label for="telefono">Telefono</mat-label>
+                      <input [(ngModel)]="telefonotrabajo" formControlName="telefonotrabajo" [value]="telefonotrabajo"  id="telefono2" matInput placeholder="telefono" type="number">
+                  </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                      <mat-label for="telefono">Valor total de ingresos</mat-label>
+                      <input  id="Valor total de ingresos" [(ngModel)]="valoringresos" formControlName="valoringresos" [value]="valoringresos" matInput placeholder="Valor total de ingresos" type="number">
+                  </mat-form-field>
+                  </div>
+        </div>
+        
+
+        <div style="margin-top: 5%;"> 
+            <button mat-raised-button (click)="mostracontedidocheck(familia1.value)" color="primary"style="float:right;"  matStepperNext >Siguente</button>
+            <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
+          </div>
+ </form>
+</mat-step>
+<mat-step [stepControl]="fourFormGroup" label="Información SocioEconómica">
+
+  <ng-template matStepLabel>Informacion de bachillerato</ng-template>
+  <h1>Informacion estudiantil basica</h1>
+  <form [formGroup]="fourFormGroup">
+     <div class="row">
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Colegio</mat-label>
+          <input id="colegio" [(ngModel)]="colegio" formControlName="colegio" [value]="colegio" matInput  placeholder="Colegio" value="">
+    </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label for="año">Año</mat-label>
+          <input  id="año" [(ngModel)]="ano" formControlName="ano" [value]="ano" matInput placeholder="Año" type="number">
+      </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="fill" class="example-full-width  camposInput">
+          <mat-label>Selecciona departamento</mat-label>
+          <mat-select #departamento3 (selectionChange)="departamentoselec3($event.value)">
+            <mat-option *ngFor="let depar of departamentos3" [value]="depar.iddepartamento">{{depar.nombre}}</mat-option>
+            
+          </mat-select>
+        </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field appearance="fill" class="example-full-width  camposInput">
+                    <mat-label>Selecciona la ciudad</mat-label>
+                    <mat-select >
+                      <mat-option [(ngModel)]="c3" formControlName="c3" [value]="c3"  *ngFor="let ciudad of ciud3" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                      
+                    </mat-select>
+                  </mat-form-field>
+              </div>
+    
+            
+
+
+     </div>
+     <div class="row">
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Pais</mat-label>
+          <input [(ngModel)]="pais" formControlName="pais" [value]="pais"  id="pais" matInput  placeholder="Pais">
+    </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Bachiller icfes</mat-label>
+          <input [(ngModel)]="bachilericfes" formControlName="bachilericfes"  id="bachilericfes" matInput  placeholder="Bachiller icfes">
+    </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label for="año2">Año</mat-label>
+          <input  [(ngModel)]="ano2" formControlName="ano2" [value]="ano2"  id="año2" matInput placeholder="Año" type="number">
+      </mat-form-field>
+      </div>
+    
+
+
+     </div>
+     <div class="row">
+     
+      <div class="col-5">
+        <h4>INDIQUE EL CARÁCTER DEL COLEGIO DONDE TERMINÓ  EL BACHILLERATO O HIZO SUS ESTUDIOS.</h4>
+        <div >
+       
+      </div>
+        <mat-radio-group [(ngModel)]="caractercolegio" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+          <mat-radio-button class="example-margin estamentoCheck" color="warn" value="privado" [checked]="caractercolegio == 'privado'">Privado.</mat-radio-button>
+          <mat-radio-button class="example-margin estamentoCheck" color="warn" value="publico" [checked]="caractercolegio == 'publico'">Publico.</mat-radio-button>
+         
+        </mat-radio-group>
+      </div>
+         <div *ngIf="caractercolegio=='privado'" class="col-3" style="margin-top: 3%;">
+          <mat-form-field  class="example-full-width camposInput" appearance="fill" >
+            <mat-label for="valormatricula">Valor matricula</mat-label>
+            <input [(ngModel)]="valormatricula" formControlName="valormatricula" [value]="valormatricula"  id="valormatricula" matInput placeholder="valormatricula" type="number">
+        </mat-form-field>
+
+         </div>
+         <div *ngIf="caractercolegio=='privado'" class="col-3" style="margin-top: 3%;">
+          <mat-form-field class="example-full-width camposInput" appearance="fill" >
+            <mat-label for="valorpernsion">Valor pension</mat-label>
+            <input  id="valorpension" [(ngModel)]="valorpension" formControlName="valorpension" [value]="valorpension" matInput placeholder="valorpension" type="number">
+        </mat-form-field>
+
+         </div>
+     </div>
+         <div class="row">
+         
+         
+       <div class="col-10">
+          <button mat-button  (click)="fuenteingreso=!fuenteingreso"><i class="icofont-ui-add"></i> Añadir padre</button>
+        <div class="row" *ngIf="fuenteingreso">
+         
+            <div class="col-3">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Nombre del padre</mat-label>
+                <input [(ngModel)]="nombrepadre"     formControlName="nombrepadre" [value]="nombrepadre" id="nombrepadre" matInput  placeholder="Nombre del padre" value="">
+          </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label for="edadpadre">Edad</mat-label>
+                <input [(ngModel)]="edadpadre"     formControlName="edadpadre" [value]="edadpadre" id="edadpadre" matInput placeholder="Edad" type="number">
+            </mat-form-field>
+             </div>
+             <div class="col-3">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Direccion</mat-label>
+                <input id="direccion" [(ngModel)]="direccionpadre"     formControlName="direccionpadre" [value]="direccionpadre" matInput  placeholder="Direccion" value="">
+          </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Ciudad</mat-label>
+                <input id="ciudad" [(ngModel)]="ciudadpadre"     formControlName="ciudadpadre" [value]="ciudadpadre" matInput  placeholder="Ciudad" value="">
+          </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label>Ocupacion</mat-label>
+                <input id="ocupacion" [(ngModel)]="ocupacionpadre"     formControlName="ocupacionpadre" [value]="ocupacionpadre" matInput  placeholder="Ocupacion" value="">
+          </mat-form-field>
+            </div>
+            <div class="col-3">
+              <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                <mat-label for="edadpadre">Ingresos</mat-label>
+                <input [(ngModel)]="ingresopadre"     formControlName="ingresopadre" [value]="ingresopadre"  id="ingresos" matInput placeholder="Ingresos" type="number">
+            </mat-form-field>
+             </div>
+
+          </div>
+        </div>
+      
+
+     
+     <div class="col-10">
+     <button mat-button (click)="madreestado=!madreestado" style="margin-top: 1%;"><i class="icofont-ui-add"></i> Añadir Madre</button>
+     <div class="row" *ngIf="madreestado">
+      
+         <div class="col-3">
+           <mat-form-field class="example-full-width camposInput" appearance="fill" >
+             <mat-label>Nombre de la madre</mat-label>
+             <input id="nombremadre"[(ngModel)]="nombremadre"     formControlName="nombremadre" [value]="nombremadre" matInput  placeholder="Nombre de la madre" value="">
+       </mat-form-field>
+         </div>
+         <div class="col-3">
+           <mat-form-field class="example-full-width camposInput" appearance="fill" >
+             <mat-label for="edadmadre">Edad</mat-label>
+             <input   id="edadmadre" [(ngModel)]="edadmadre"     formControlName="edadmadre" [value]="edadmadre"  matInput placeholder="Edad" type="number">
+         </mat-form-field>
+          </div>
+          <div class="col-3">
+           <mat-form-field class="example-full-width camposInput" appearance="fill" >
+             <mat-label>Direccion</mat-label>
+             <input  [(ngModel)]="direccionmadre" formControlName="direccionmadre" [value]="direccionmadre" id="direccion" matInput  placeholder="Direccion" value="">
+       </mat-form-field>
+         </div>
+         <div class="col-3">
+           <mat-form-field class="example-full-width camposInput" appearance="fill" >
+             <mat-label>Ciudad</mat-label>
+             <input [(ngModel)]="ciudadmadre" formControlName="ciudadmadre" [value]="ciudadmadre" id="ciudad" matInput  placeholder="Ciudad" value="">
+       </mat-form-field>
+         </div>
+         <div class="col-3">
+           <mat-form-field class="example-full-width camposInput" appearance="fill" >
+             <mat-label>Ocupacion</mat-label>
+             <input [(ngModel)]="ocupacionmadre" formControlName="ocupacionmadre" [value]="ocupacionmadre"id="ocupacion" matInput  placeholder="Ocupacion" value="">
+       </mat-form-field>
+         </div>
+         <div class="col-3">
+           <mat-form-field class="example-full-width camposInput" appearance="fill" >
+             <mat-label for="edadpadre">Ingresos</mat-label>
+             <input [(ngModel)]="ingresosmadre" formControlName="ingresosmadre" [value]="ingresosmadre"  id="ingresos" matInput placeholder="Ingresos" type="number">
+         </mat-form-field>
+          </div>
+
+       </div>
+      </div>
+      
+
+       
+      <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="conyugeestado=!conyugeestado"><i class="icofont-ui-add"></i> Añadir conyuge </button>
+      <div class="row" *ngIf="conyugeestado">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del conyuge</mat-label>
+              <input [(ngModel)]="nombreconyuge" formControlName="nombreconyuge" [value]="nombreconyuge" id="nombreconyuge" matInput  placeholder="Nombre del conyuge" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input  [(ngModel)]="edadconyuge" formControlName="edadconyuge" [value]="edadconyuge"  id="edadconyuge" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input [(ngModel)]="direccionconyuge" formControlName="direccionconyuge" [value]="direccionconyuge" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input [(ngModel)]="ciudadconyuge" formControlName="ciudadconyuge" [value]="ciudadconyuge" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionconyuge" formControlName="ocupacionconyuge" [value]="ocupacionconyuge" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresosconyuge" formControlName="ingresosconyuge" [value]="ingresosconyuge"  id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div> 
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="hermanoestado=!hermanoestado"><i class="icofont-ui-add"></i> Añadir hermano </button>
+      <div class="row" *ngIf="hermanoestado">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del hermano</mat-label>
+              <input  [(ngModel)]="hermanonombre" formControlName="hermanonombre" [value]="hermanonombre" id="nombreconyuge" matInput  placeholder="Nombre del hermano" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input [(ngModel)]="edadhermano" formControlName="edadhermano" [value]="edadhermano"  id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionhermano" formControlName="direccionhermano" [value]="direccionhermano" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input  [(ngModel)]="ciudadhermano" formControlName="ciudadhermano" [value]="ciudadhermano" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionhermano" formControlName="ocupacionhermano" [value]="ocupacionhermano" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresoshermano" formControlName="ingresoshermano" [value]="ingresoshermano" id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div>    
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="hermanoestado2=!hermanoestado2"><i class="icofont-ui-add"></i> Añadir hermano </button>
+      <div class="row" *ngIf="hermanoestado2">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del hermano2</mat-label>
+              <input  [(ngModel)]="hermanonombre2" formControlName="hermanonombre2" [value]="hermanonombre2" id="nombreconyuge" matInput  placeholder="Nombre del hermano" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input [(ngModel)]="edadhermano2" formControlName="edadhermano2" [value]="edadhermano2"  id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionhermano2" formControlName="direccionhermano2" [value]="direccionhermano2" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input [(ngModel)]="ciudadhermano2" formControlName="ciudadhermano2" [value]="ciudadhermano2" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionhermano2" formControlName="ocupacionhermano2" [value]="ocupacionhermano2" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresoshermano2" formControlName="ingresoshermano2" [value]="ingresoshermano2"  id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div>    
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="hermanoestado3=!hermanoestado3"><i class="icofont-ui-add"></i> Añadir hermano </button>
+      <div class="row" *ngIf="hermanoestado3">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del hermano3</mat-label>
+              <input  [(ngModel)]="hermanonombre3" formControlName="hermanonombre3" [value]="hermanonombre3"id="nombreconyuge" matInput  placeholder="Nombre del hermano" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input  [(ngModel)]="edadhermano3" formControlName="edadhermano3" [value]="edadhermano3" id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionhermano3" formControlName="direccionhermano3" [value]="direccionhermano3" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input  [(ngModel)]="ciudadhermano3" formControlName="ciudadhermano3" [value]="ciudadhermano3" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionhermano3" formControlName="ocupacionhermano3" [value]="ocupacionhermano3" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresoshermano3" formControlName="ingresoshermano3" [value]="ingresoshermano3" id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div>    
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="parentescoestado1=!parentescoestado1"><i class="icofont-ui-add"></i> Añadir parentesco </button>
+      <div class="row" *ngIf="parentescoestado1">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del parentesco</mat-label>
+              <input  [(ngModel)]="parentesco" formControlName="parentesco" [value]="parentesco" id="nombreconyuge" matInput  placeholder="Nombre del parentesco" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input  [(ngModel)]="edadparentesco" formControlName="edadparentesco" [value]="edadparentesco" id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionparentesco" formControlName="direccionparentesco" [value]="direccionparentesco" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input  [(ngModel)]="ciudadparentesco" formControlName="ciudadparentesco" [value]="ciudadparentesco"   id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionparentesco" formControlName="ocupacionparentesco" [value]="ocupacionparentesco" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input   [(ngModel)]="ingresosparentesco" formControlName="ingresosparentesco" [value]="ingresosparentesco" id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div>    
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="parentescoestado2=!parentescoestado2"><i class="icofont-ui-add"></i> Añadir parentesco </button>
+      <div class="row" *ngIf="parentescoestado2">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del parentesco</mat-label>
+              <input  [(ngModel)]="parentesco2" formControlName="parentesco2" [value]="parentesco2" id="nombreconyuge" matInput  placeholder="Nombre del parentesco" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input  [(ngModel)]="edadparentesco2" formControlName="edadparentesco2" [value]="edadparentesco2"  id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionparentesco2" formControlName="direccionparentesco2" [value]="direccionparentesco2" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input  [(ngModel)]="ciudadparentesco2" formControlName="ciudadparentesco2" [value]="ciudadparentesco2" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionparentesco2" formControlName="ocupacionparentesco2" [value]="ocupacionparentesco2" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresosparentesco2" formControlName="ingresosparentesco2" [value]="ingresosparentesco2" id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>  
+       </div>    
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="otrosestado=!otrosestado"><i class="icofont-ui-add"></i> Añadir otro </button>
+      <div class="row" *ngIf="otrosestado">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del otro</mat-label>
+              <input  [(ngModel)]="otro" formControlName="otro" [value]="otro" id="nombreconyuge" matInput  placeholder="Nombre del parentesco" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input  [(ngModel)]="edadotro" formControlName="edadotro" [value]="edadotro" id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionotro" formControlName="direccionotro" [value]="direccionotro" id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input  [(ngModel)]="ciudadotro" formControlName="ciudadotro" [value]="ciudadotro" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionotro" formControlName="ocupacionotro" [value]="ocupacionotro" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresosotro" formControlName="ingresosotro" [value]="ingresosotro" id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div>    
+       <div class="col-10" style="margin-top: 1%;">
+        <button mat-button (click)="otrosestado1=!otrosestado1"><i class="icofont-ui-add"></i> Añadir otro </button>
+      <div class="row" *ngIf="otrosestado1">
+       
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Nombre del otro</mat-label>
+              <input  [(ngModel)]="otro1" formControlName="otro1" [value]="otro1" id="otro1" matInput  placeholder="Nombre del parentesco" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Edad</mat-label>
+              <input  [(ngModel)]="edadotro1" formControlName="edadotro1" [value]="edadotro1" id="edadhermano" matInput placeholder="Edad" type="number">
+          </mat-form-field>
+           </div>
+           <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Direccion</mat-label>
+              <input  [(ngModel)]="direccionotro1" formControlName="direccionotro1" [value]="direccionotro1"  id="direccion" matInput  placeholder="Direccion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ciudad</mat-label>
+              <input  [(ngModel)]="ciudadotro1" formControlName="ciudadotro1" [value]="ciudadotro1" id="ciudad" matInput  placeholder="Ciudad" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label>Ocupacion</mat-label>
+              <input  [(ngModel)]="ocupacionotro1" formControlName="ocupacionotro1" [value]="ocupacionotro1" id="ocupacion" matInput  placeholder="Ocupacion" value="">
+        </mat-form-field>
+          </div>
+          <div class="col-3">
+            <mat-form-field class="example-full-width camposInput" appearance="fill" >
+              <mat-label for="edadpadre">Ingresos</mat-label>
+              <input  [(ngModel)]="ingresosotro1" formControlName="ingresosotro1" [value]="ingresosotro1" id="ingresos" matInput placeholder="Ingresos" type="number">
+          </mat-form-field>
+           </div>
+ 
+        </div>
+       </div>    
+       
+    </div>
+    
+    <div style="margin-top: 5%;"> 
+      <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck(familia1.value)"  matStepperNext >Siguente</button>
+      <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
+    </div>
+  </form>
+</mat-step>
+<mat-step [stepControl]="fiveFormGroup" label="Información SocioEconómica">
+
+  <ng-template matStepLabel>Informacion Familiar</ng-template>
+  <h1>Informacion familiar</h1>
+  <form [formGroup]="fiveFormGroup">
+<div class="row">
+  <div class="col-4">
+  <h4>SU FAMILIA TIENE CASA PROPIA</h4>
+  <mat-radio-group [(ngModel)]="casa" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+    <mat-radio-button class="example-margin estratoCheck" color="warn" [checked]="casa == 'Si'" value="Si">Si</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="No" [checked]="casa == 'No.'">No.</mat-radio-button> 
+  </mat-radio-group>
+ 
+    <mat-radio-group *ngIf="casa == 'Si'" [(ngModel)]="hipoteca" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+      <mat-radio-button class="example-margin estamentoCheck" color="warn" value="hipoteca" [checked]="hipoteca == 'hipoteca'">Con hipoteca.</mat-radio-button>
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="Sin hipoteca" [checked]="hipoteca == 'Sin hipoteca'">Sin hipoteca</mat-radio-button>
+    
+   
+    </mat-radio-group>
+    <mat-form-field class="example-full-width camposInput" appearance="fill"  *ngIf="hipoteca == 'hipoteca' && casa == 'Si'" >
+       <mat-label>VALOR MENSUAL DE AMORTIZACIÓN</mat-label>
+      <input  [(ngModel)]="amortizacion" formControlName="amortizacion" [value]="amortizacion" id="AMORTIZACIÓN" matInput placeholder="AMORTIZACIÓN" type="number">
+  </mat-form-field>
+  <mat-form-field *ngIf="casa == 'No'" class="example-full-width camposInput" appearance="fill" >
+    <mat-label for="edadpadre">VALOR MENSUAL DEL ARRIENDO</mat-label>
+    <input  [(ngModel)]="arriendo" formControlName="arriendo" [value]="arriendo" id="arriendo" matInput placeholder="Edad" type="number">
+</mat-form-field>
+
+
+
+</div>
+
+ 
+
+</div>
+<div class="row">
+<div class="col-5">
+  <h4>QUIÉN ES EL JEFE DE LA FAMILIA</h4>
+  <mat-radio-group [(ngModel)]="jefe" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="padre" [checked]="jefe == 'padre'">Padre</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="madre" [checked]="jefe == 'madre'">Madre</mat-radio-button>
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="hermano" [checked]="jefe == 'hermano'">Hermano(a)</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="abuelo" [checked]="jefe == 'abuelo'">Abuelo(a)</mat-radio-button> 
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="otro" [checked]="jefe == 'otro'">Otro</mat-radio-button> 
+  </mat-radio-group>
+  <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="jefe == 'otro'" >
+    <mat-label  for="cualfuente">¿Cual?</mat-label >
+        <!--<input [(ngModel)]="cualfuente"  matInput formControlName="cualfuente" id="cualfuente" [value]="cualfuente" type="text" class="validate">-->
+        <input [(ngModel)]="cualfuente"  matInput  id="cualfuente" [value]="cual" type="text" class="validate" [ngModelOptions]="{standalone: true}">
+</mat-form-field>
+</div>
+<div class="col-7">
+  <h4>CUAL ES EL NIVEL EDUCATIVO ALCANZADO POR EL JEFE DE LA FAMILIA</h4>
+  <mat-radio-group [(ngModel)]="niveleducativojefe" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="ninguno" [checked]="niveleducativojefe == 'ninguno'">Padre</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="primaria" [checked]="niveleducativojefe == 'primaria'">Primaria</mat-radio-button>
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="secundaria" [checked]="niveleducativojefe == 'secundaria'">Secundaria</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="tecnico" [checked]="niveleducativojefe == 'tecnico'">Tecnico</mat-radio-button> 
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="superior" [checked]="niveleducativojefe == 'superior'">Superior</mat-radio-button> 
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="postgrado" [checked]="niveleducativojefe == 'postgrado'">Postgrado</mat-radio-button> 
+  </mat-radio-group>
+ 
+</div>
+  
+</div>
+
+<div class="row">
+<h4 style="margin-top: 3%;">CUÁL ES EL VALOR APROXIMADO DE INGRESO MENSUAL DEL GRUPO FAMILIAR</h4>
+<div class="col-3">
+  <mat-form-field class="example-full-width camposInput" appearance="fill" >
+    <mat-label>Ingreso familiar</mat-label>
+    <input  [(ngModel)]="ingresofamiliar" formControlName="ingresofamiliar" [value]="ingresofamiliar" id="ingresofamiliar" matInput placeholder="Ingreso familiar" type="number">
+</mat-form-field>
+ </div>
+ <div class="col-10">
+  <h4>¿CUÁL ES LA POSICIÓN SOCIO-ECONÓMICA DEL JEFE DE LA FAMILIA?</h4>
+  <mat-radio-group [(ngModel)]="posicionsocioeconomica" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="obrero no calificado" [checked]="posicionsocioeconomica == 'obrero no calificado'">Obrero no calificado</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="obrero calificado" [checked]="posicionsocioeconomica == 'obrero calificado'">Obrero calificado</mat-radio-button>
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="empleado dependiente" [checked]="posicionsocioeconomica == 'empleado dependiente'">Empleado dependiente</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="atesano o pequeño trabajador independiente con local propio" [checked]="posicionsocioeconomica == 'atesano o pequeño trabajador independiente con local propio'">Atesano o pequeño trabajador independiente con local propio</mat-radio-button> 
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="pequeño campesino propietario" [checked]="posicionsocioeconomica== 'pequeño campesino propietario'">Pequeño campesino propietario</mat-radio-button> 
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="profesional asalariado o empleado de mandos medios" [checked]="posicionsocioeconomica == 'profesional asalariado o empleado de mandos medios'">Profesional asalariado o empleado de mandos medios</mat-radio-button> 
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="profesional independiente, tecnico o trabajador independiente" [checked]="posicionsocioeconomica == 'profesional independiente, tecnico o trabajador independiente'">Profesional independiente, tecnico o trabajador independiente</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="oficial de las fuerzas armadas. indique el grado" [checked]="posicionsocioeconomica == 'oficial de las fuerzas armadas. indique el grado'">Oficial de las fuerzas armadas. indique el grado</mat-radio-button>
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="director, gerente ejecutivo de rango superior" [checked]="posicionsocioeconomica == 'director, gerente ejecutivo de rango superior'">Director, gerente ejecutivo de rango superior</mat-radio-button>
+    <mat-radio-button class="example-margin estamentoCheck" color="warn" value="propietario de empresa o rentista de capital" [checked]="posicionsocioeconomica == 'propietario de empresa o rentista de capital'">Propietario de empresa o rentista de capital</mat-radio-button> 
+  </mat-radio-group>
+ 
+</div>
+
+</div>
+<div style="margin-top: 5%;"> 
+  <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck(familia1.value)"  matStepperNext >Siguente</button>
+  <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
+</div>
+
+  </form>
+</mat-step>
+<mat-step [stepControl]="sixFormGroup" label="Información SocioEconómica">
+
+  <ng-template matStepLabel>Informacion economica</ng-template>
+  <h1>Informacion economica</h1>
+  <form [formGroup]="sixFormGroup">
+
+    <div class="row">
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Empresa</mat-label>
+          <input id="empresa"[(ngModel)]="empesajefe" formControlName="empesajefe" [value]="empesajefe" matInput  placeholder="Empresa" value="">
+    </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label for="sueldo">Sueldo mensual o pension</mat-label>
+          <input  [(ngModel)]="sueldojefe" formControlName="sueldojefe" [value]="sueldojefe" id="arriendo" matInput placeholder="Sueldo" type="number">
+      </mat-form-field>
+       </div>
+       <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Ocupacion</mat-label>
+          <input id="ocupacion" [(ngModel)]="ocupacionjefe" formControlName="ocupacionjefe" [value]="ocupacionjefe" matInput  placeholder="Ocupacion" value="">
+    </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-full-width camposInput" appearance="fill" >
+          <mat-label>Direccion empresa</mat-label>
+          <input id="empresa" [(ngModel)]="direccionempresajefe" formControlName="direccionempresajefe" [value]="direccionempresajefe" matInput  placeholder="Direccion de la empresa" value="">
+    </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-3">
+        <mat-form-field appearance="fill" class="example-full-width  camposInput">
+          <mat-label>Selecciona departamento de la empresa</mat-label>
+          <mat-select #departamento3 (selectionChange)="departamentoselec4($event.value)">
+            <mat-option *ngFor="let depar of departamentos4" [value]="depar.iddepartamento">{{depar.nombre}}</mat-option>
+            
+          </mat-select>
+        </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field appearance="fill" class="example-full-width  camposInput">
+                    <mat-label>Selecciona la ciudad de la empresa</mat-label>
+                    <mat-select #ciudad3>
+                      <mat-option [(ngModel)]="c4" formControlName="c4" [value]="c4" *ngFor="let ciudad of ciud4" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                      
+                    </mat-select>
+                  </mat-form-field>
+              </div>
+              <div class="col-3">
+                <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                  <mat-label for="telefonoempresa">Telefono de la empresa</mat-label>
+                  <input  [(ngModel)]="telefonoempresajefe" formControlName="telefonoempresajefe" [value]="telefonoempresajefe" id="arriendo" matInput placeholder="Telefono de la empresa" type="number">
+              </mat-form-field>
+               </div>
+               <div class="col-3">
+                <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                  <mat-label>Observaciones</mat-label>
+                  <input id="Observaciones" [(ngModel)]="observaciones" formControlName="observaciones" [value]="observaciones" matInput  placeholder="Observaciones" value="">
+            </mat-form-field>
+              </div>
+
+
+    </div>
+
+
+
+    <div>
+      <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">HAGO CONSTAR QUE LOS DATOS AQUÍ CONSIGNADOS SON VERÍDICOS Y ACEPTO QUE SEA RETIRADO EL AUXILIO PARA 
+        ESTUDIANTES DE ESCASOS RECURSOS ECONÓMICOS EN CASO DE SERME ADJUDICADO, CUANDO LA UNIVERSIDAD 
+        ENCUENTRE INCONSISTENCIA U OMISIONES. Y ASUMO LAS CONSECUENCIAS A QUE HAYA LUGAR.
+        </h4>
+    </div>
+
+    <div style="margin-top: 5%;"> 
+      <button mat-raised-button color="primary"style="float:right;"  matStepperNext >Siguente</button>
+      <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
+    </div>
+
+  </form>
+</mat-step>
+
+</mat-horizontal-stepper>
+</div>
+</div>
