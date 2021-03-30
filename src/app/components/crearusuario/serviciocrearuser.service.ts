@@ -11,6 +11,7 @@ export class ServiciocrearuserService {
   url2='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscardepartamentos.php'
   url3='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscarciudades.php';
   url4= 'http://localhost/SIGBEWEB/app/componentes/ubicacion/carreras.php';
+  url5= 'http://localhost/SIGBEWEB/app/componentes/roles/list_roles.php';
   constructor(private http: HttpClient) { }
 
   registrarUsuario(arreglousu:any){
@@ -23,7 +24,9 @@ export class ServiciocrearuserService {
 buscardepartamento(){
  return this.http.get(`${this.url2}`);
 }
-
+buscarroles(){
+  return this.http.get(`${this.url5}`);
+ }
 buscarCiudad(arreglodepar:any){
 return this.http.post(`${this.url3}`,{data: arreglodepar});
 }
