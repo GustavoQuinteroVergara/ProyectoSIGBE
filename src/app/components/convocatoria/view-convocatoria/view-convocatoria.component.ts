@@ -78,6 +78,7 @@ export class ViewConvocatoriaComponent {
 
   //entrevistavariables
   entrevistaPostuFound:any;
+  estadoSelPromedio:any;
   entrevistvalidate=false;
   //FIN VARIABLES DOCUMENTOS
     displayedColumns: string[] = ['estudiante.nombreestudiante', 
@@ -89,6 +90,7 @@ export class ViewConvocatoriaComponent {
     activeForm=false;
     convocatoriaPeriodo: any;
     activeButton=false;
+    estadoArreglopromedio:any;
     estado=true;
     disabledActualizar=true;
     postulacionesest:any;
@@ -736,6 +738,38 @@ export class ViewConvocatoriaComponent {
     },(err)=>{
       this.entrevistvalidate=false;
     });
+  }
+
+  updateEstadoPromedio(valsel:any){
+    this.estadoArreglopromedio = {
+      idpostu:this.postuseltable.consecutivo_postulacion,
+      valsel:valsel
+    };
+    this.postuseltable.estadopromedio = valsel;
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
+    this.serviceviewconvocatoria.actualizarEstadoPromedio(this.estadoArreglopromedio).subscribe(result=>{
+        for (var i = 0; i < this.$postuByIdArray.length; i++) {
+          if(this.$postuByIdArray[i].consecutivo_postulacion == this.postuseltable.consecutivo_postulacion){
+            this.$postuByIdArray[i].estadopromedio = valsel;
+          }
+        }
+         Swal.fire({
+          title: 'Exitoso',
+          text: 'Estado actualizado exitosamente.',
+          icon: 'success'
+        });
+    },(err)=>{
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error al buscar postulación por identificación, ERROR: ' + err.error.text,
+          icon: 'error'
+        });
+    });
+
   }
 
   checkboxEstados(concecutivodoc:any,estadovalor:any){
