@@ -103,7 +103,7 @@ export class ListarticketsComponent {
 	exportAsXLSX():void {
 		this.excelService.exportToExcel(this.ticketes,'ReporteTickets');
 	  }
-	  applyExportarFiltrado(event: Event) {
+	  applyExportarFiltrado() {
 		  this.excelService.exportToExcel(this.dataSource.filteredData, "TicketsFiltrados");
 		/*const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();*/

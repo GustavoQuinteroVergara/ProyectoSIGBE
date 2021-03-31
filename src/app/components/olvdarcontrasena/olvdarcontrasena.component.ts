@@ -18,6 +18,11 @@ export class OlvdarcontrasenaComponent implements OnInit {
   }
 
   olvidecontrasena(email:any){
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
 
   	this.email = {
   		email : email

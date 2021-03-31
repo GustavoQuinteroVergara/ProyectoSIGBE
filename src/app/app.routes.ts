@@ -20,6 +20,7 @@ import { RegistrarSaldoComponent } from './components/registrar-saldo/registrar-
 import { ConfiguracionComponent } from './components/configuracion/configuracion.component';
 import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
+import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 
@@ -88,6 +89,10 @@ export const ROUTES: Routes = [
   expectedRole: '4'
 }},
 {path:'visitadomiciliariaconvo/:idPostu',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'crearanuncio',component:CrearanuncioComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '2'
 }},

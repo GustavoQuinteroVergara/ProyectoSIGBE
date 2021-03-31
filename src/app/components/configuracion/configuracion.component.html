@@ -22,6 +22,14 @@
             <li class="text-align">Horario venta de ticket de refrigerio : <strong>{{configuracionlist.horainicioVentaRefrigerio}} - {{configuracionlist.horaFinVentaRefrigerio}}</strong></li>
           </ul>
         </li>
+        <hr>
+        <li>
+          <h4>Configuración envio correos cuenta</h4>
+          <ul>
+            <li class="text-start">Correo establecido : {{configuracionlist.correoestablecido}}</li>
+            <li class="text-start">Contraseña establecida : ***********************</li>
+          </ul>
+        </li>
       </ul>
     </div>
     <div class="col-6">
@@ -45,13 +53,10 @@
       </div>
       <form *ngIf="showvalor" [formGroup]="formPrecios" novalidate>
         <div class="col-12">
-          <h4>Ingrese un nuevo precio</h4>
+          <h4>Ingrese un nuevo valor</h4>
           <mat-form-field class="example-full-width" appearance="fill" type="number">
-            <mat-label>Nuevo precio</mat-label>
-            <input #valorNuevo id="valorNuevo" matInput placeholder="Valor nuevo" [value]="" pattern="^[0-9]+" formControlName="precios">
-            <mat-error class="help-block form-error text-danger small"
-            *ngIf="formPrecios.controls['precios'].hasError('pattern') && formPrecios.controls['precios'].touched">
-          Solo números. </mat-error>
+            <mat-label>Establece un nuevo valor</mat-label>
+            <input #valorNuevo id="valorNuevo" matInput placeholder="Valor nuevo" [value]="" formControlName="precios">
           <mat-error class="help-block form-error text-danger small"
           *ngIf="formPrecios.controls['precios'].hasError('required') && formPrecios.controls['precios'].touched">
         El campo es obligatorio.</mat-error>
