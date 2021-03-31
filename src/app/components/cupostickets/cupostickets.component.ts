@@ -18,6 +18,7 @@ export class CuposticketsComponent implements OnInit {
 	cuposAsignacionarray:any;
 	success:any;
 	asignacionesBuscadas:any;
+	asignacionSel:any;
 	dataSource: MatTableDataSource<any>;
 	fechaActual= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 	displayedColumns: string[] = ['consecutivo_cupostickets', 
@@ -39,6 +40,34 @@ export class CuposticketsComponent implements OnInit {
 	}
 	public hasError = (controlName: string, errorName: string) =>{
 		return this.formularioCuposAsigna.controls[controlName].hasError(errorName);
+	}
+
+	abrirModalModificar(asignacionsel:any,templateRef){
+		console.log(asignacionsel);
+		this.asignacionSel = asignacionsel;
+		let dialogRef = this.dialog.open( templateRef,{
+			height: '450px',
+			width: '450px',
+		});
+	}
+
+	actualizarAsignacion(fechaact:any,cuposalmuerzoact:any,cuposrefrigerioact:any){
+		this.cuposAsignacionarray= {conceasign:this.asignacionSel.consecutivo_cupostickets, fecha:fechaact,cuposalmuerzo:cuposalmuerzoact,cuposrefrigerio:cuposrefrigerioact};
+		console.log(this.cuposAsignacionarray);
+		this.serviceCuposasign.actualizarAsignacion(this.cuposAsignacionarray).subscribe(result=>{
+			this.buscarAsignaciones();
+			Swal.fire({
+	          title: 'Exitoso',
+	          text: 'Actualizado exitosamente.',
+	          icon: 'success'
+	        });
+		},(err)=>{
+			Swal.fire({
+	          title: 'ERROR',
+	          text: 'Error al actualizar, ERROR: ' + err.error.text,
+	          icon: 'error'
+	        });
+		});
 	}
 
 	registrarAsignacion(fecha:any,cuposalmuerzo:any,cuposrefrigerio:any){
@@ -71,6 +100,10 @@ export class CuposticketsComponent implements OnInit {
 		    this.dataSource.sort = this.sort;
 		    this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
 		});
+	}
+
+	applyFilter(event){
+		this.dataSource.filter = event.trim().toLowerCase();
 	}
 
 }

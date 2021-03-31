@@ -1,6 +1,54 @@
 <app-navbar></app-navbar>
+<ng-template #modificarAsignacion>
+	<div class="row">
+		<h1 class="tituloRegistroConvocatoria">MODIFICAR UNA ASIGNACIÓN</h1>	
+			<form  class="text-center">
+
+				<hr>
+				<div class="row">
+					<div class="col-12">
+
+						<h4>Ingrese fecha</h4>
+						<h4><strong>FECHA SELECCIONADA: {{asignacionSel.fechaasignacion.date | date:'dd/MM/yyyy'}}</strong></h4>
+
+						<mat-form-field appearance="fill">
+							<mat-label>Ingrese fecha</mat-label>
+							<input matInput [matDatepicker]="picker" #fechaact min="{{fechaActual}}" id="start" name="fechaasingacion" required="true">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg">
+						<h4>Ingrese Cupos de almuerzo</h4>
+						<mat-form-field class="example-full-width" appearance="fill">
+							<mat-label>Cupos Almuerzo</mat-label>
+							<input #cuposalmuerzoact type="number" id="cuposalmuerzo" matInput placeholder="Ingrese los cupos de almuerzo" value=""  [value]="asignacionSel.cuposdisponiblesalmuerzo" required="true">
+					</mat-form-field>
+				</div>
+				<div class="col-lg">
+					<h4>Ingrese cupos de refrigerio</h4>
+					<mat-form-field class="example-full-width" appearance="fill">
+						<mat-label>Cupos Refrigerio</mat-label>
+						<input #cuposrefrigerioact type="number" id="cuposrefrigerio" matInput placeholder="Ingrese los cupos de refrigerio" value="" [value]="asignacionSel.cuposdisponiblesrefrigerio" required="true">
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div class="row m-4 text-center">
+			<div class="col-12">
+				<a mat-raised-button color="primary" [class.disabled]="!formularioCuposAsigna.valid"
+				(click)="actualizarAsignacion(fechaact.value,cuposalmuerzoact.value,cuposrefrigerioact.value)"  name="action">Actualizar</a>
+			</div>
+		</div>
+		</form>
+	</div>
+</ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true"> 
-	<form class="formtiq" [formGroup]="formularioCuposAsigna">
+	<div class="formtiq">
+	<form [formGroup]="formularioCuposAsigna">
 		<h1 class="tituloRegistroConvocatoria"> CREAR UNA ASIGNACIÓN DE CUPOS NUEVA</h1>	
 		<hr>
 		<div class="row">
@@ -46,8 +94,15 @@
 		(click)="registrarAsignacion(fecha.value,cuposalmuerzo.value,cuposrefrigerio.value)"  name="action">Registrar</a>
 	</div>
 </div>
-
+</form>
 <div class="row">
+	<div class="col-lg">
+		<h4>Digita y filtra la tabla</h4>
+        <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill" class="inputsEspacio">
+              <mat-label>Digita para filtrar</mat-label>
+              <input   matInput (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+	</div>
 	<div class="col-12">
 		
 
@@ -82,7 +137,7 @@
                       <!-- Color Column -->
                     <ng-container matColumnDef="Acciones">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                      <td mat-cell *matCellDef="let row" > <a data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a></td>
+                      <td mat-cell *matCellDef="let row" > <a data-title="Editar asignación de cupos" style="cursor: pointer;" (click)="abrirModalModificar(row,modificarAsignacion)"><i class="icofont-edit" style="font-size: 20px;"></i></a></td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -101,5 +156,5 @@
 
 	</div>
 </div>
-</form>
+</div>
 </div>
