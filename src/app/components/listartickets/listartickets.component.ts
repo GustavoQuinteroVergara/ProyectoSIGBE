@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {PeriodoServiceService} from './../../services/periodo-service.service';
 import Swal from 'sweetalert2';
+import { ExporterService } from 'src/app/services/exporter.service';
 @Component({
   selector: 'app-listartickets',
   templateUrl: './listartickets.component.html',
@@ -27,7 +28,7 @@ export class ListarticketsComponent {
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort,{static: false}) sort: MatSort;
-  	constructor(private servitickets: ServicesticketsService,private periodoService:PeriodoServiceService) { 
+  	constructor(private servitickets: ServicesticketsService,private periodoService:PeriodoServiceService, private excelService: ExporterService) { 
   		this.buscartickets();
   		this.getsPeriodos();
   	}
@@ -99,7 +100,14 @@ export class ListarticketsComponent {
 		this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
 	  });
 	}
-
+	exportAsXLSX():void {
+		this.excelService.exportToExcel(this.ticketes,'ReporteTickets');
+	  }
+	  applyExportarFiltrado(event: Event) {
+		  this.excelService.exportToExcel(this.dataSource.filteredData, "TicketsFiltrados");
+		/*const filterValue = (event.target as HTMLInputElement).value;
+		this.dataSource.filter = filterValue.trim().toLowerCase();*/
+	  }
 	applyFilter(event){
 		this.dataSource.filter = event.trim().toLowerCase();
 	}

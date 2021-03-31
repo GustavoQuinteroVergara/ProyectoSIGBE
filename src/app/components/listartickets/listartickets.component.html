@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
   <div class="formtiq ">
-    <div class="titulo">
-      <h1>LISTA DE TICKETS</h1>
-    </div>
-    <hr>
-    <div class="row">
+      <div class="titulo">
+        <h1>LISTA DE TICKETS</h1>
+      </div>
+      <hr>
+      <div class="row">
       <div class="col-12">
         <h4>Digita y filtra la tabla</h4>
         <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill" class="inputsEspacio">
@@ -74,6 +74,16 @@
           <a mat-raised-button color="primary" (click)="consultarFiltro()">Consultar</a>
       </div>
     </div>
+   
+                  <div class="row">
+                    <div class="col-12 m-12 text-center">
+                      <h3>Exportar a Excel</h3>
+                      <div class ="container" style="padding-bottom:20px">
+                        <button mat-raised-button color="warning" (click)="applyExportarFiltrado()">Exportar</button>
+                      </div>
+                    </div>
+                  </div>
+
                       <div class="mat-elevation-z8">
                   <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
 
@@ -125,6 +135,6 @@
                     </tr>
                   </table>
                   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
-                  </div>
+                </div>           
   </div>
 </div>
