@@ -169,7 +169,8 @@ export class RegistrarConvocatoriaComponent implements OnInit {
           estadoconvocatoria:estadoconvocatoria,
           enviarCorreo:true,
           asuntocorreo:asuntocorreo,
-          contenidocorreo:contenidocorreo      
+          contenidocorreo:contenidocorreo,
+          documentossel : this.docssel   
         };
       }else{
         this.convocatoriaRegistrar= {fechainicio:fechainicial,
@@ -194,7 +195,8 @@ export class RegistrarConvocatoriaComponent implements OnInit {
           estadoconvocatoria:estadoconvocatoria,
           enviarCorreo:false,
           asuntocorreo:'',
-          contenidocorreo:''      
+          contenidocorreo:'',
+          documentossel : this.docssel   
         };
 
       }else{
@@ -212,19 +214,29 @@ export class RegistrarConvocatoriaComponent implements OnInit {
       }
 
     }
-    console.log(this.convocatoriaRegistrar);
+    this.serviceConvocatoria.buscarListadoConvocatorias(this.convocatoriaPeriodo[0].consecutivo_periodo,becas).subscribe(result=>{
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Ya existe esta beca para el periodo academico',
+        icon: 'error'
+      });
+  },(err)=>{
+    console.log(err.error.text);
+    //console.log(this.convocatoriaRegistrar);
     this.serviceConvocatoria.registrarConvocatoria(this.convocatoriaRegistrar).subscribe(res =>{
       Swal.fire({
         title: 'Exitoso',
-        text: 'Actualizado exitosamente.',
+        text: 'Registrado exitosamente.',
         icon: 'success'
       });
     },(err)=>{
+      console.log("Fallo: "+err.error.text);
       Swal.fire({
         title: 'ERROR',
         text: 'Error al registrar la convocatoria, ERROR: ' + err.error,
         icon: 'error'
       });
     });
+  });
   }
 }
