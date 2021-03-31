@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import {ServiceListarPostuEstService} from './service-listar-postu-est.service';
 import {PostulacionService} from '../../../services/postulacion.service';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms'; 
 import {DocumentoService} from '../../../services/documento.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 @Component({
@@ -21,6 +24,13 @@ export class ListarpostuestComponent {
   listActualizarPostu:any;
   success=false;
   intentosPermitidos=false;
+    dataSource: MatTableDataSource<any>;
+    displayedColumns: string[] = ['nombreestudiante', 
+    'estrato', 'promedio', 
+    'fechapostulacion','estado_postulacion','semestre','Acciones'];
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort,{static: false}) sort: MatSort;
   constructor(private serviceListarPostuEst:ServiceListarPostuEstService,
     private postuservice:PostulacionService,
     public snackBack: MatSnackBar,
@@ -119,6 +129,10 @@ export class ListarpostuestComponent {
   buscarPostusEst(){
 	  this.serviceListarPostuEst.buscarPostuByIdenti(this.userToken.identi).subscribe(result =>{ 
 	  	this.postusBuscadas = result;
+        this.dataSource = new MatTableDataSource(this.postusBuscadas);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
 	  });
   }
 
