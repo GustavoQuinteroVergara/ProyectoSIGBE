@@ -32,7 +32,9 @@ export class ConfiguracionComponent implements OnInit {
       {id:2,name:"Hora inicio almuerzo "},
       {id:3,name:"Hora fin almuerzo "},
       {id:4,name:"Hora inicio refrigerio "},
-      {id:5,name:"Hora fin refrigerio "}
+      {id:5,name:"Hora fin refrigerio "},
+      {id:8,name:"Correo establecido "},
+      {id:9,name:"Contrasena establecido "}
     ];
 
     this.formPrecios = new FormGroup({
@@ -49,7 +51,7 @@ export class ConfiguracionComponent implements OnInit {
     });
   }
   opcionSeleccionada(val:any){
-    if (val==0 || val==1 || val==6 || val == 7) {
+    if (val==0 || val==1 || val==6 || val == 7 || val== 8 || val == 9) {
       this.showvalor= true;
       this.showfecha = false;
     }else{

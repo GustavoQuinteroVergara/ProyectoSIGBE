@@ -57,7 +57,6 @@ export class LoginComponent {
   login(email:string, contrasena:string){
       Swal.fire({
         title: 'Cargando...',
-        text: 'Verificando nuevos cambios.',
         allowOutsideClick: false,
       });
       Swal.showLoading();

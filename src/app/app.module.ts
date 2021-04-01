@@ -52,6 +52,7 @@ import { VisitadomiciliariaComponent } from './components/psicologia/visitadomic
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
 @NgModule({
   declarations: [
   AppComponent,
@@ -79,7 +80,8 @@ import { MatStepperModule } from '@angular/material/stepper';
   CuposticketsComponent,
   VisitadomiciliariaComponent,
   ListicketestComponent,
-  OlvdarcontrasenaComponent
+  OlvdarcontrasenaComponent,
+  CrearanuncioComponent
   ],
   imports: [
   BrowserModule,

@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import {InicioService} from './inicio.service';
+import {AnunciosService} from '../../services/anuncios.service';
 import {ListconvoactivasService} from './../postulacion/registrar-postulacion/listconvoactivas.service';
 import{ActualizarSaldoService} from './../modificarusuario/actualizar-saldo.service';
 import {Router } from '@angular/router';
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 	fechaultperiodo:any;
 	saldoRegistrado:any;
+	anunciosActual:any;
 	periodocaducado:any;
     postulaciones:any;
     convoActivas:any;
@@ -89,13 +91,21 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	constructor(private periodoService:PeriodoServiceService, 
 		public dialog: MatDialog, 
 		private router:Router, 
+		private anunciosservice:AnunciosService,
 		private serviceSaldo:ActualizarSaldoService,
 		private inicioService: InicioService,
 		private listConvoActivas:ListconvoactivasService,
 		private becaService:BecaService) { 
-
+	this.getsAnuncios();
 
 	}
+
+	  getsAnuncios(){
+	    this.anunciosservice.getsPeriodosUlt().subscribe(result=>{
+	      this.anunciosActual = result;
+	    });
+	  }
+
 
 	buscarPostuEnespera(){
 		this.inicioService.buscarPostuEnespera().subscribe(res=>{
