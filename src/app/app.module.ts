@@ -53,6 +53,8 @@ import { ListicketestComponent } from './components/listicketest/listicketest.co
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
+import { ListarencuestasComponent } from './components/encuesta/listarencuestas/listarencuestas.component';
+import { EstadisticasComponent } from './components/encuesta/estadisticas/estadisticas.component';
 @NgModule({
   declarations: [
   AppComponent,
@@ -81,7 +83,9 @@ import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.co
   VisitadomiciliariaComponent,
   ListicketestComponent,
   OlvdarcontrasenaComponent,
-  CrearanuncioComponent
+  CrearanuncioComponent,
+  ListarencuestasComponent,
+  EstadisticasComponent
   ],
   imports: [
   BrowserModule,

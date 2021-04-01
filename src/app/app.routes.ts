@@ -21,6 +21,8 @@ import { ConfiguracionComponent } from './components/configuracion/configuracion
 import { CuposticketsComponent } from './components/cupostickets/cupostickets.component';
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
+import { ListarencuestasComponent } from './components/encuesta/listarencuestas/listarencuestas.component';
+import { EstadisticasComponent } from './components/encuesta/estadisticas/estadisticas.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 
@@ -93,6 +95,14 @@ export const ROUTES: Routes = [
   expectedRole: '2'
 }},
 {path:'crearanuncio',component:CrearanuncioComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'estadisticasencuestas',component:EstadisticasComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2'
+}},
+{path:'listarencuestas',component:ListarencuestasComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '2'
 }},
