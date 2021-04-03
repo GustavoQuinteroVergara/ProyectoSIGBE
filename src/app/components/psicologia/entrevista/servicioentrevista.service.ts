@@ -11,6 +11,7 @@ export class ServicioentrevistaService {
   url2='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscardepartamentos.php';
   url3='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscarciudades.php';
   url4= 'http://localhost/SIGBEWEB/app/componentes/ubicacion/carreras.php';
+  urlCreate='http://localhost/SIGBEWEB/app/componentes/informaciongeneral/createinformaciongeneral.php';
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +24,11 @@ export class ServicioentrevistaService {
     
     
     }
-
+    registrarentrevista(registroVisita:Array<any>){
+      return this.http.post(`${this.urlCreate}`,{data: registroVisita}).
+      pipe(map((res)=>{
+        return  registroVisita
+      }));
+    }
 
 }

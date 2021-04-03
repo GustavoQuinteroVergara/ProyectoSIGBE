@@ -40,7 +40,7 @@
             <div class="col-3">
                 <mat-form-field class="example-full-width camposInput" appearance="fill" >
                   <mat-label for="lugarnacimiento">Lugar de nacimiento</mat-label>
-                  <input id="lugarnacimiento"  matInput placeholder="lugarnacimiento" [(ngModel)]="lugarnacimiento"  formControlName="lugarnacimiento" >
+                  <input id="lugarnacimiento"  matInput placeholder="lugarnacimiento" [(ngModel)]="lugarnacimiento"  formControlName="lugarnacimiento" [value]="lugarnacimiento" >
             </mat-form-field>
               </div>
               <div class="col-3">
@@ -118,7 +118,7 @@
                       <mat-form-field appearance="fill" class="example-full-width  camposInput">
                         <mat-label>Selecciona la ciudad </mat-label>
                         <mat-select  [(ngModel)]="c1"  [ngModelOptions]="{standalone: true}">
-                          <mat-option   *ngFor="let ciudad2 of ciud2" [value]="ciudad2.idciudad">{{ciudad2.nombre}}</mat-option>
+                          <mat-option   *ngFor="let ciudad2 of ciud2" [value]="ciudad2.nombre">{{ciudad2.nombre}}</mat-option>
                           
                         </mat-select>
                       </mat-form-field>
@@ -211,12 +211,12 @@
             
                 <td>Vivienda</td>
             
-                <td><mat-checkbox   #familia1 value="familia" color="warn" class="example-margin"></mat-checkbox></td>
+                <td><mat-checkbox   [(ngModel)]="familia1" formControlName="familia1" [value]="familia1" color="warn" class="example-margin"></mat-checkbox></td>
             
-                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="trab1" formControlName="trab1" [value]="trab1"   color="warn" class="example-margin"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="Ayudas" formControlName="Ayudas" [value]="Ayudas" color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="Prestamos" formControlName="Prestamos" [value]="Prestamos"  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="otras" formControlName="otras" [value]="otras"color="warn" class="example-margin" value="otras"></mat-checkbox></td>
             
               </tr>
             
@@ -224,45 +224,46 @@
         
                 <td>Alimentacion</td>
             
-                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+                <td><mat-checkbox   [(ngModel)]="familia2" formControlName="familia2" [value]="familia2" color="warn" class="example-margin"></mat-checkbox></td>
             
-                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="trab2" formControlName="trab2" [value]="trab2"   color="warn" class="example-margin"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="Ayudas2" formControlName="Ayudas2" [value]="Ayudas2" color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="Prestamos2" formControlName="Prestamos2" [value]="Prestamos2"  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="otras2" formControlName="otras2" [value]="otras2"color="warn" class="example-margin" value="otras"></mat-checkbox></td>
               </tr>
             
               <tr>
             
                 <td>Educacion</td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+                <td><mat-checkbox   [(ngModel)]="familia3" formControlName="familia3" [value]="familia3" color="warn" class="example-margin"></mat-checkbox></td>
+            
+                <td><mat-checkbox [(ngModel)]="trab3" formControlName="trab3" [value]="trab3"   color="warn" class="example-margin"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="Ayudas3" formControlName="Ayudas3" [value]="Ayudas3" color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="Prestamos3" formControlName="Prestamos3" [value]="Prestamos2"  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="otras3" formControlName="otras3" [value]="otras3"color="warn" class="example-margin" value="otras"></mat-checkbox></td>
             
               </tr>
               <tr>
             
                 <td>transporte</td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+                <td><mat-checkbox   [(ngModel)]="familia4" formControlName="familia4" [value]="familia4" color="warn" class="example-margin"></mat-checkbox></td>
             
-                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="trab4" formControlName="trab4" [value]="trab4"   color="warn" class="example-margin"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="Ayudas4" formControlName="Ayudas4" [value]="Ayudas4" color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="Prestamos4" formControlName="Prestamos4" [value]="Prestamos4"  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="otras4" formControlName="otras4" [value]="otras4"color="warn" class="example-margin" value="otras"></mat-checkbox></td>
             
             
               </tr>
               <tr>
             
                 <td>otras</td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="familia"></mat-checkbox></td>
+                <td><mat-checkbox   [(ngModel)]="familia5" formControlName="familia5" [value]="familia5" color="warn" class="example-margin"></mat-checkbox></td>
             
-                <td><mat-checkbox  color="warn" class="example-margin" value="Trab.rentas propias"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
-                <td><mat-checkbox  color="warn" class="example-margin" value="otras"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="trab5" formControlName="trab5" [value]="trab5"   color="warn" class="example-margin"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="Ayudas5" formControlName="Ayudas5" [value]="Ayudas5" color="warn" class="example-margin" value="Ayudas"></mat-checkbox></td>
+                <td><mat-checkbox [(ngModel)]="Prestamos5" formControlName="Prestamos5" [value]="Prestamos5"  color="warn" class="example-margin" value="Prestamos"></mat-checkbox></td>
+                <td><mat-checkbox  [(ngModel)]="otras5" formControlName="otras5" [value]="otras5"color="warn" class="example-margin" value="otras"></mat-checkbox></td>
             
             
               </tr>
@@ -317,8 +318,8 @@
                     <div class="col-3">
                       <mat-form-field appearance="fill" class="example-full-width  camposInput">
                         <mat-label>Selecciona la ciudad</mat-label>
-                        <mat-select #ciudad2>
-                          <mat-option [(ngModel)]="c2" formControlName="c2" [value]="c2" *ngFor="let ciudad of ciud" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                        <mat-select [(ngModel)]="c2"  [ngModelOptions]="{standalone: true}" >
+                          <mat-option  *ngFor="let ciudad of ciud" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
                           
                         </mat-select>
                       </mat-form-field>
@@ -331,6 +332,12 @@
                   </div>
                   <div class="col-3">
                     <mat-form-field class="example-full-width camposInput" appearance="fill" >
+                      <mat-label for="telefono">direccion de Trabajo</mat-label>
+                      <input  id="Valor total de ingresos" [(ngModel)]="direcciontrabajo" formControlName="direcciontrabajo" [value]="direcciontrabajo" matInput placeholder="Valor total de ingresos">
+                  </mat-form-field>
+                  </div>
+                  <div class="col-3">
+                    <mat-form-field class="example-full-width camposInput" appearance="fill" >
                       <mat-label for="telefono">Valor total de ingresos</mat-label>
                       <input  id="Valor total de ingresos" [(ngModel)]="valoringresos" formControlName="valoringresos" [value]="valoringresos" matInput placeholder="Valor total de ingresos" type="number">
                   </mat-form-field>
@@ -339,7 +346,7 @@
         
 
         <div style="margin-top: 5%;"> 
-            <button mat-raised-button (click)="mostracontedidocheck(familia1.value)" color="primary"style="float:right;"  matStepperNext >Siguente</button>
+            <button mat-raised-button (click)="mostracontedidocheck()" color="primary"style="float:right;"  matStepperNext >Siguente</button>
             <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
           </div>
  </form>
@@ -374,8 +381,8 @@
                 <div class="col-3">
                   <mat-form-field appearance="fill" class="example-full-width  camposInput">
                     <mat-label>Selecciona la ciudad</mat-label>
-                    <mat-select >
-                      <mat-option [(ngModel)]="c3" formControlName="c3" [value]="c3"  *ngFor="let ciudad of ciud3" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                    <mat-select [(ngModel)]="c3"  [ngModelOptions]="{standalone: true}" >
+                      <mat-option   *ngFor="let ciudad of ciud3" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
                       
                     </mat-select>
                   </mat-form-field>
@@ -395,7 +402,7 @@
       <div class="col-3">
         <mat-form-field class="example-full-width camposInput" appearance="fill" >
           <mat-label>Bachiller icfes</mat-label>
-          <input [(ngModel)]="bachilericfes" formControlName="bachilericfes"  id="bachilericfes" matInput  placeholder="Bachiller icfes">
+          <input [(ngModel)]="bachilericfes" formControlName="bachilericfes" [value]="bachilericfes"  id="bachilericf" matInput  placeholder="Bachiller icfes">
     </mat-form-field>
       </div>
       <div class="col-3">
@@ -879,7 +886,7 @@
     </div>
     
     <div style="margin-top: 5%;"> 
-      <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck(familia1.value)"  matStepperNext >Siguente</button>
+      <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck()"  matStepperNext >Siguente</button>
       <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
     </div>
   </form>
@@ -938,7 +945,7 @@
 <div class="col-7">
   <h4>CUAL ES EL NIVEL EDUCATIVO ALCANZADO POR EL JEFE DE LA FAMILIA</h4>
   <mat-radio-group [(ngModel)]="niveleducativojefe" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
-    <mat-radio-button class="example-margin estratoCheck" color="warn" value="ninguno" [checked]="niveleducativojefe == 'ninguno'">Padre</mat-radio-button>
+    <mat-radio-button class="example-margin estratoCheck" color="warn" value="ninguno" [checked]="niveleducativojefe == 'ninguno'">ninguno</mat-radio-button>
     <mat-radio-button class="example-margin estamentoCheck" color="warn" value="primaria" [checked]="niveleducativojefe == 'primaria'">Primaria</mat-radio-button>
     <mat-radio-button class="example-margin estratoCheck" color="warn" value="secundaria" [checked]="niveleducativojefe == 'secundaria'">Secundaria</mat-radio-button>
     <mat-radio-button class="example-margin estamentoCheck" color="warn" value="tecnico" [checked]="niveleducativojefe == 'tecnico'">Tecnico</mat-radio-button> 
@@ -977,7 +984,7 @@
 
 </div>
 <div style="margin-top: 5%;"> 
-  <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck(familia1.value)"  matStepperNext >Siguente</button>
+  <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck()"  matStepperNext >Siguente</button>
   <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
 </div>
 
@@ -1029,8 +1036,8 @@
                 <div class="col-3">
                   <mat-form-field appearance="fill" class="example-full-width  camposInput">
                     <mat-label>Selecciona la ciudad de la empresa</mat-label>
-                    <mat-select #ciudad3>
-                      <mat-option [(ngModel)]="c4" formControlName="c4" [value]="c4" *ngFor="let ciudad of ciud4" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                    <mat-select [(ngModel)]="c4"  [ngModelOptions]="{standalone: true}">
+                      <mat-option  *ngFor="let ciudad of ciud4" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
                       
                     </mat-select>
                   </mat-form-field>
@@ -1061,8 +1068,9 @@
     </div>
 
     <div style="margin-top: 5%;"> 
-      <button mat-raised-button color="primary"style="float:right;"  matStepperNext >Siguente</button>
+      <button mat-raised-button color="warn" style="float:right;" (click)="registrarEntrevista()">Registrar</button> 
       <button mat-raised-button color="primary" matStepperPrevious style="float:right;margin-right: 5%;">Regresar</button>
+      
     </div>
 
   </form>
