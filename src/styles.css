@@ -181,6 +181,10 @@ body { margin: 0;font-family: 'Raleway', sans-serif !important;}
 	color:white !important;
 }
 
+.imagefondobody{
+	background: url(assets/imgs/fondo2.png);
+}
+
 .cup1{
 	padding: 3% 20% 8% 20%;
 	background: url(assets/imgs/fondo2.png);
@@ -267,6 +271,10 @@ ul, ol {
 .nav li ul li ul {
 	right:-140px;
 	top:0px;
+}
+
+.containerForm{
+	background: white !important;
 }
 
 /*Slider*/

@@ -1,0 +1,21 @@
+.graficainfo{
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 0;
+    background: white;
+}
+
+.titulografica{
+    padding: 15px;
+    padding-bottom: 5px;
+    background:#d63a2d;
+    color: white;
+    font-weight: 600;
+}
+
+.titulografica > h1{
+    margin: 0;
+}
+.imggrafica{
+    padding: 15px;
+}

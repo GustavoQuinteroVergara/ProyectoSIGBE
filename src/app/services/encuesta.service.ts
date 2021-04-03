@@ -21,4 +21,12 @@ export class EncuestaService {
 			return encuesta;
 		}));
 	}
+
+	getEncuestas(){
+		return this.http.get(`${this.url}/app/componentes/encuesta/getEncuestas.php`);
+	}
+
+	getInformes(opcion:any){
+		return this.http.get(`${this.url}/app/componentes/encuesta/getInformeEncuestas.php?idperiodosel=${opcion}`);	
+	}
 }

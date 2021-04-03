@@ -4,6 +4,7 @@ import {formatDate } from '@angular/common';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ServiceloginService} from './servicelogin.service';
 import {PeriodoServiceService} from '../../services/periodo-service.service';
+import {ListconvoactivasService} from './../postulacion/registrar-postulacion/listconvoactivas.service';
 import {Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -20,12 +21,45 @@ export class LoginComponent {
   ruta:any;
   constructor(private logins:ServiceloginService,
     private periodoService:PeriodoServiceService,
+    private listConvoActivas:ListconvoactivasService,
     public dialog: MatDialog,
     private router:Router) {
 
   }
 
+    actualizarConvosVencidas(){
+
+      this.listConvoActivas.actualizarConvosVencidas(1).subscribe(result=>{
+          if(this.usuario.rol == 2){
+          Swal.fire({
+            title: 'Listo...',
+            text: 'Se han cargado correctamente los datos.',
+            icon: 'success'
+          });
+          console.log(result);
+        }else{
+          Swal.close();
+        }
+      },(err)=>{
+        if(this.usuario.rol == 2){
+          console.log(err);
+        Swal.fire({
+          title: 'Error...',
+          text: 'Se han verificado las convocatorias y ha ocurrido un error.' + err,
+          icon: 'error'
+        });
+      }else{
+        Swal.close();
+      }
+      });
+  }
+
   login(email:string, contrasena:string){
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
     this.logins.buscarUser(email).subscribe(resultuser =>{ 
 
       if(resultuser['roles'] == 2){
@@ -36,7 +70,14 @@ export class LoginComponent {
         'codigoest':resultuser["codigoestudiante"],
         'saldo':resultuser["saldo"],
         'rol':resultuser["roles"],
-        'estadouser':resultuser["estadouser"]};
+        'estadouser':resultuser["estadouser"],
+        'contrasena':resultuser["contrasena"],
+        'estrato':resultuser["estrato"],
+        'zonaresidencial':resultuser["zonaresidencial"],      
+        'direccion':resultuser["direccion"],
+        'fechanacimiento':resultuser["fechanacimiento"],
+        'estadosdatos':resultuser["estadodatos"]
+      };
         if((resultuser["contrasena"] == contrasena) && (resultuser["estadouser"]=='Activo') ) {
           localStorage.setItem('currentUser',JSON.stringify(this.usuario));
           this.router.navigate(['/bienvenida']);
@@ -67,8 +108,17 @@ export class LoginComponent {
             'codigoest':resultuser["codigoestudiante"],
             'saldo':resultuser["saldo"],
             'rol':resultuser["roles"],
-            'estadouser':resultuser["estadouser"]};
+            'estadouser':resultuser["estadouser"],
+            'contrasena':resultuser["contrasena"],
+            'estrato':resultuser["estrato"],
+            'zonaresidencial':resultuser["zonaresidencial"],
+            'direccion':resultuser["direccion"],
+            'fechanacimiento':resultuser["fechanacimiento"],
+            'estadosdatos':resultuser["estadodatos"]
+          };
             if((resultuser["contrasena"] == contrasena) && (resultuser["estadouser"]=='Activo') ) {
+              this.actualizarConvosVencidas();
+              Swal.close();
               localStorage.setItem('currentUser',JSON.stringify(this.usuario));
               this.router.navigate(['/bienvenida']);
             }else{

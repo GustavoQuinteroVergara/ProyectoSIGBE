@@ -1,0 +1,36 @@
+.crearanuncio{
+	padding: 3% 20% 8% 20%;
+}
+/* ESTILO DEL DIV QUE CONTENTRÁ EL INPUT */
+.upload-btn-wrapper {
+position: relative;
+overflow: hidden;
+display: inline-block;
+}
+/* ESTILO DEL INPUT*/
+.upload-btn-wrapper input[type=file] {
+font-size: 100px;
+position: absolute;
+left: 0;
+top: 0;
+opacity: 0;
+}
+/* ESTILO DEL BOTÓN */
+.boton-standar-rw{
+margin: 5px;
+background-color: white;
+color: rgb(245, 61, 58);
+border-radius: 20px;
+font-weight: bold;
+letter-spacing: 1px;
+line-height: 15px;
+border: 2px solid rgb(245, 61, 58);
+transition: all 0.3s ease 0s;
+width: 12em;
+padding: 10px;
+}
+/* ESTILO DEL BOTÓN CON HOVER DE MOUSE */
+.boton-standar-rw:hover{
+  color: white;
+  background-color: rgb(245, 61, 58);
+}

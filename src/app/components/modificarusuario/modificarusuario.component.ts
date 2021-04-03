@@ -5,7 +5,9 @@ import{ActualizarSaldoService} from './actualizar-saldo.service';
 import{UsuariocarreraService} from '../../services/usuariocarrera.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import  {ServiciocrearuserService } from '../crearusuario/serviciocrearuser.service';
 import Swal from 'sweetalert2';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-modificarusuario',
   templateUrl: './modificarusuario.component.html',
@@ -19,12 +21,22 @@ export class ModificarusuarioComponent implements OnInit {
   carrerasest:any;
   dialogCarrera:MatDialog;
   getcarreras:any;
+  hide = true;
+  ciud:any;
+  iddepartamento:any;
+  departamento:any;
+  departamentos:any;
+  ciudades:any;
+  
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
+  fechanacimiento = formatDate(this.$nombreusuario.fechanacimiento, 'yyyy-MM-dd', 'en')
+  ciudad=this.$nombreusuario.ciudad;
   /*VALIDACION FORM*/
   public updateForm: FormGroup;
   constructor(matslider: MatSliderModule, 
     private serviceSaldo:ActualizarSaldoService, 
     private usuariocarreraService:UsuariocarreraService,
+    private actualizaruser:ServiciocrearuserService,
     public dialog: MatDialog) { 
     this.getCarrerasEst();
     this.getCarreras();
@@ -36,11 +48,14 @@ export class ModificarusuarioComponent implements OnInit {
       this.updateForm = new FormGroup({
         nombre: new FormControl(this.$nombreusuario.nombre,[Validators.required, Validators.maxLength(30), Validators.pattern("[a-zA-Z ]*")  , Validators.minLength(3),]),
         apellido: new FormControl(this.$nombreusuario.apellido,[Validators.required,Validators.maxLength(40),Validators.minLength(5),Validators.pattern("[a-zA-Z ]*")]),
-        correo: new FormControl(this.$nombreusuario.correo,[Validators.required])
+        correo: new FormControl(this.$nombreusuario.correo,[Validators.required]),
+        password: new FormControl('',[Validators.required]),
+        direccion: new FormControl(this.$nombreusuario.direccion,[Validators.required]),
       });
     
   }
- 
+  get passwordInput() { return this.updateForm.get('password'); }  
+
   public hasError = (controlName: string, errorName: string) =>{
     return this.updateForm.controls[controlName].hasError(errorName);
   }
@@ -107,33 +122,40 @@ export class ModificarusuarioComponent implements OnInit {
     });
 
   }
-  registrarSaldo(identificacion:any,correo:any,apellido:any,  
-    nombre:any){
+  actualizarUsuario(contrasena:any){
     this.saldoRegistrado= {
-      identificacion:identificacion,
-      correo:correo,
-      apellido:apellido,
-      nombre:nombre
+      identificacion:this.$nombreusuario.identi,
+      correo:this.$nombreusuario.correo,
+      apellido:this.$nombreusuario.apellido,
+      nombre:this.$nombreusuario.nombre,
+      contrasena:contrasena,
+      zonaresidencial:this.$nombreusuario.zonaresidencial,
+      estrato:this.$nombreusuario.estrato,
+      fechanacimiento:formatDate(this.$nombreusuario.fechanacimiento, 'yyyy-MM-dd', 'en'),
+      direccion:this.$nombreusuario.direccion
     };
+    console.log(this.saldoRegistrado);
+    console.log(this.$nombreusuario.fechanacimiento);
+    console.log("prueba1: "+this.$nombreusuario.fechanacimiento);
     this.serviceSaldo.registrarSaldos(this.saldoRegistrado).subscribe
     (res=>{
       Swal.fire({
         title: 'Exitoso',
         text: 'Actualizado exitosamente.',
         icon: 'success'
-      });  
-       this.$nombreusuario.correo=correo;
-       this.$nombreusuario.apellido=apellido;
-       this.$nombreusuario.nombre=nombre;
+      });
+       this.$nombreusuario.fechanacimiento;
+       this.$nombreusuario.contrasena=contrasena;
        localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
     },(err)=>{
+      console.log("prueba2: "+this.$nombreusuario.fechanacimiento);
       Swal.fire({
-        title: 'Exitoso',
+        title: 'Error',
         text: 'Error al actualizar.' + err.error.text,
-        icon: 'success'
+        icon: 'error'
+        
       }); 
     });
   }
-
 
 }

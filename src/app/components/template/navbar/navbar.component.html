@@ -77,6 +77,17 @@
             <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'"><a routerLink="/crearAsignacion">Crear Asignación de cupos</a></li>
           </ul>
         </li>
+        <li *ngIf="this.$nombreusuario.rol =='2'"><a >Anuncios</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/crearanuncio">Crear anuncios</a></li>
+          </ul>
+        </li>
+        <li *ngIf="this.$nombreusuario.rol =='2'"><a >Encuestas</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/estadisticasencuestas">Estadisticas</a></li>
+            <li routerLinkActive="active"><a routerLink="/listarencuestas">Listar encuestas</a></li>
+          </ul>
+        </li>
         <li *ngIf="this.$nombreusuario.rol =='4'"><a >Formatos Psicologia</a>
           <ul>
             <li routerLinkActive="active" ><a routerLink="/visitadomiciliaria">Visita Domiciliaria</a></li>

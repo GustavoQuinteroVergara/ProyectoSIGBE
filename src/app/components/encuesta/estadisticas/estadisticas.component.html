@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<div class="container-fluid" style="margin: 0;padding: 30px;background: #ececec;">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 text-start">
+        <h1>GRAFICAS ENCUESTAS POR PERIODOS</h1>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-end">
+          <mat-form-field appearance="fill" class="inputsEspacio">
+            <mat-label>Seleccione un periodo academico</mat-label>
+            <mat-select required (selectionChange)="getEncuestasInformes($event.value)" >
+              <mat-option value="0">Todos los periodos</mat-option>
+              <mat-option  *ngFor="let periodo of periodosList"  [value]="periodo.consecutivo_periodo">
+                {{periodo.descripcion}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <hr>
+  </div>
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">frecuencia usó el beneficio de la Beca de Alimentación</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta1">{{ chartpregunta1 }}</canvas>
+    			</div>
+  			</div>
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">calidad de los alimentos servidos</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta2">{{ chartpregunta2 }}</canvas>
+    			</div>
+  			</div>		
+		</div>
+  </div>
+  <div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">la cantidad de comida</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta3">{{ chartpregunta3 }}</canvas>
+    			</div>
+  			</div>		
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">variedad en el menu</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta4">{{ chartpregunta4 }}</canvas>
+    			</div>
+  			</div>		
+		</div>
+  </div>
+  <div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">horario actual en él que se sirve el almuerzo</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta5">{{ chartpregunta5 }}</canvas>
+    			</div>
+  			</div>		
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">espacio donde se realiza la entrega de los almuerzos</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta6">{{ chartpregunta6 }}</canvas>
+    			</div>
+  			</div>		
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-4">
+			<div class="graficainfo">
+    			<div class="titulografica">
+      				<h3 style="text-transform: uppercase;">calificación del servicio</h3>
+    			</div>
+    			<div class="imggrafica">
+      				<canvas id="pregunta7">{{ chartpregunta7 }}</canvas>
+    			</div>
+  			</div>		
+		</div>										
+	</div>
+</div>

@@ -26,4 +26,7 @@ export class CuposasignacionService {
 	actualizarCupos(cuposArray:any){
 		return this.http.put(`${this.urlCreateAsign}/actualizarcuposdisp.php`,{data: cuposArray});
 	}
+	actualizarAsignacion(cuposArray:any){
+		return this.http.put(`${this.urlCreateAsign}/actualizarAsignacion.php`,{data: cuposArray});
+	}	
 }

@@ -6,14 +6,20 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ActualizarSaldoService {
-  urlUpdate='http://localhost/SIGBEWEB/app/componentes/usuarios/modificar_user.php'; // disponer url de su servidor que tiene las páginas PHP
+  urlUpdate='http://localhost/SIGBEWEB/'; // disponer url de su servidor que tiene las páginas PHP
   constructor(private http: HttpClient) { }
-  registrarSaldos(registroSaldo:Array<any>){
-    return this.http.post(`${this.urlUpdate}`,{data: registroSaldo}).
-    pipe(map((res)=>{
-      return  registroSaldo
-    }));
-  }
+	  registrarSaldos(registroSaldo:Array<any>){
+	    return this.http.post(`${this.urlUpdate}app/componentes/usuarios/modificar_user.php`,{data: registroSaldo}).
+	    pipe(map((res)=>{
+	      return  registroSaldo
+	    }));
+	  }
+	  actualizarEstadoDatos(registroSaldo:Array<any>){
+	    return this.http.post(`${this.urlUpdate}app/componentes/usuarios/actualizarEstadoDatos.php`,{data: registroSaldo}).
+	    pipe(map((res)=>{
+	      return  registroSaldo
+	    }));
+	  }
 }
   
   
