@@ -52,9 +52,11 @@ import { VisitadomiciliariaComponent } from './components/psicologia/visitadomic
 import { ListicketestComponent } from './components/listicketest/listicketest.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { EntrevistaComponent } from './components/psicologia/entrevista/entrevista.component';
 import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
 import { ListarencuestasComponent } from './components/encuesta/listarencuestas/listarencuestas.component';
 import { EstadisticasComponent } from './components/encuesta/estadisticas/estadisticas.component';
+
 @NgModule({
   declarations: [
   AppComponent,
@@ -83,6 +85,7 @@ import { EstadisticasComponent } from './components/encuesta/estadisticas/estadi
   VisitadomiciliariaComponent,
   ListicketestComponent,
   OlvdarcontrasenaComponent,
+  EntrevistaComponent
   CrearanuncioComponent,
   ListarencuestasComponent,
   EstadisticasComponent
