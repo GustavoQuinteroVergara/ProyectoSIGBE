@@ -1,5 +1,10 @@
 import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import {DocumentoService} from '../../../services/documento.service';
+import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
+import {ServicesViewConvocatoriaService} from '../../convocatoria/view-convocatoria/services-view-convocatoria.service';
+import { MatDialog } from '@angular/material/dialog';
 import {ControlContainer, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import  {ServicioentrevistaService } from '../entrevista/servicioentrevista.service';
 import Swal from 'sweetalert2';
@@ -10,6 +15,44 @@ import Swal from 'sweetalert2';
   styleUrls: ['./entrevista.component.css']
 })
 export class EntrevistaComponent implements OnInit {
+
+
+    circlecolor1={
+      'pasoactive':false
+    };
+    circlecolor2={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false
+    };
+
+    circlecolor3={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false
+    };
+    circlecolor4={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false
+    };
+    circlecolor5={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false,
+      'pasoactivered':false,
+      'pasoactivolinered':false
+    };
+  estadopostusel:any;
+  postuseltable:any;
+  visitaPostuFound:any;
+  documentosFoundpostu:any;
+  entrevistaPostuFound:any;
+  visitavalidate=false;
+  entrevistvalidate=false;
+  $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
+
+
   departamentos:any;
   firstFormGroup: FormGroup;
   isLinear = false;
@@ -193,11 +236,21 @@ Prestamos5:any;
 Ayudas5:any;
 anterior5='';
 otras5:any;
+idPostuSel:any;
+idConvo:any;
 
 
 
-
-  constructor(private registraruser:ServicioentrevistaService) {this.buscardepartamento();
+  constructor(private registraruser:ServicioentrevistaService,
+        private rutaActiva: ActivatedRoute,public dialog: MatDialog,
+            private serviceviewconvocatoria:ServicesViewConvocatoriaService,
+    private documentosService:DocumentoService,
+    private visitadomiciliariaService:VisitadomiciliariaService,) {
+    dialog.closeAll();
+    this.buscardepartamento();
+    this.idPostuSel = this.rutaActiva.snapshot.params.idPostu;
+    this.idConvo = this.rutaActiva.snapshot.params.idConvo;
+    this.getPostu(this.idPostuSel);
     this.firstFormGroup = new FormGroup({
       nombreestudiante: new FormControl(),
       cedula: new FormControl(),
@@ -218,30 +271,30 @@ otras5:any;
    });
    this.thirdFormGroup= new FormGroup({
       familia1: new FormControl(),
-      trab1:new FormControl,
-      Ayudas:new FormControl,
-      otras:new FormControl,
-      Prestamos:new FormControl,
+      trab1:new FormControl(),
+      Ayudas:new FormControl(),
+      otras:new FormControl(),
+      Prestamos:new FormControl(),
       familia2: new FormControl(),
-      trab2:new FormControl,
-      Ayudas2:new FormControl,
-      otras2:new FormControl,
-      Prestamos2:new FormControl,
+      trab2:new FormControl(),
+      Ayudas2:new FormControl(),
+      otras2:new FormControl(),
+      Prestamos2:new FormControl(),
       familia3: new FormControl(),
-      trab3:new FormControl,
-      Ayudas3:new FormControl,
-      otras3:new FormControl,
-      Prestamos3:new FormControl,
+      trab3:new FormControl(),
+      Ayudas3:new FormControl(),
+      otras3:new FormControl(),
+      Prestamos3:new FormControl(),
       familia4: new FormControl(),
-      trab4:new FormControl,
-      Ayudas4:new FormControl,
-      otras4:new FormControl,
-      Prestamos4:new FormControl,
+      trab4:new FormControl(),
+      Ayudas4:new FormControl(),
+      otras4:new FormControl(),
+      Prestamos4:new FormControl(),
       familia5: new FormControl(),
-      trab5:new FormControl,
-      Ayudas5:new FormControl,
-      otras5:new FormControl,
-      Prestamos5:new FormControl,
+      trab5:new FormControl(),
+      Ayudas5:new FormControl(),
+      otras5:new FormControl(),
+      Prestamos5:new FormControl(),
       cargoempresa: new FormControl(),
       empresa: new FormControl(),
       antiguedad: new FormControl(),
@@ -266,6 +319,8 @@ otras5:any;
     ingresopadre: new FormControl(),
     ocupacionpadre: new FormControl(),
     edadmadre: new FormControl(),
+    planestudio : new FormControl(),
+    codigoest : new FormControl(),
     direccionmadre: new FormControl(),
     ciudadmadre: new FormControl(),
     ocupacionmadre:new FormControl(),
@@ -319,14 +374,6 @@ otras5:any;
     ciudadotro1:new FormControl(),
     ingresosotro1: new FormControl(),
     bachilericfes: new FormControl()
-   
-
-
-
-
-
-
-
    });
    this.fiveFormGroup = new FormGroup({
     amortizacion: new FormControl(),
@@ -438,7 +485,11 @@ console.log(this.anterior3);
 
 }
 registrarEntrevista(){
-
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
   /* Establecemos valores de necesidad */
   if(this.familia1==true){
     this.anterior= this.anterior +"," +"Familia";
@@ -529,7 +580,7 @@ registrarEntrevista(){
 
   this.entrevista={
     
-idpostulaciongeneral:2,    
+idpostulaciongeneral:this.idPostuSel,    
 lugarnacimiento: this.lugarnacimiento,
 expedicioncedula: this.fechaexp,
 estadocivil: this.estadocivil,
@@ -672,5 +723,230 @@ telefonojefe: this.telefonoempresajefe
         }); 
       });
   }
+
+//MODAL
+
+  minimizar(){
+    this.dialog.closeAll();
+  }
+
+  getDocumntosPostu(idPostu:any){
+    this.documentosService.getDocumentsPostu(idPostu).subscribe(result=>{
+        this.documentosFoundpostu = result;
+    });
+  }
+
+    getVisitaPostu(idPostu:any){
+    this.visitavalidate=false;
+    this.visitadomiciliariaService.listVisitaPostu(idPostu).subscribe(result=>{
+      this.visitaPostuFound = result;
+      this.visitavalidate =true;
+    },(err)=>{
+      this.visitavalidate=false;
+    });
+  }
+
+    getEntrevistaPostu(idPostu:any){
+    this.entrevistvalidate=false;
+    this.serviceviewconvocatoria.buscarEntrevistaPostu(idPostu).subscribe(result=>{
+      this.entrevistaPostuFound = result;
+      this.entrevistvalidate =true;
+      Swal.close();
+    },(err)=>{
+      console.log(err.error.text);
+      this.entrevistvalidate=false;
+    });
+  }
+
+    getPostu(idpostu:any){
+      Swal.fire({
+        title: 'Cargando',
+        allowOutsideClick: false
+      }); 
+      Swal.showLoading();
+    this.serviceviewconvocatoria.getPostuById(idpostu).subscribe(result=>{
+      this.postuseltable = result;
+      this.getDocumntosPostu(this.idPostuSel);
+      this.getVisitaPostu(this.idPostuSel);
+      this.getEntrevistaPostu(this.idPostuSel);
+    });
+  }
+ verPostuSel(templatePostu){
+    switch (this.postuseltable.estado_postulacion) {
+      case "En espera":
+        this.estadopostusel=3;
+        this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactivoline'] = true;
+        break;
+      case "Revision":
+        this.estadopostusel=4;
+        this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactivoline'] = true;
+        break;
+      case "Entrevista":
+        this.estadopostusel=5;
+            this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivoline'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactivoline'] = true;
+        break;
+      case "Visita":
+        this.estadopostusel=6;
+            this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactive'] = true;
+        this.circlecolor4['pasoactivocomplete'] = true;
+        this.circlecolor5['pasoactivoline'] = true;
+        break;
+      case "Aprobado":
+        this.estadopostusel=1;
+    this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactive'] = true;
+        this.circlecolor4['pasoactivocomplete'] = true;
+        this.circlecolor5['pasoactive'] = true;
+        this.circlecolor5['pasoactivocomplete'] = true;
+        break;
+      case "Rechazado":
+        this.estadopostusel=2;
+
+    this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactive'] = true;
+        this.circlecolor4['pasoactivocomplete'] = true;
+        this.circlecolor5['pasoactivered'] = true;
+        this.circlecolor5['pasoactivolinered'] = true;
+        break;
+      
+      default:
+        // code...
+        break;
+    }
+      let dialogRef = this.dialog.open( templatePostu,{
+       height: '600px',
+       width: '900px',
+     });}
+
+
+
 
 }

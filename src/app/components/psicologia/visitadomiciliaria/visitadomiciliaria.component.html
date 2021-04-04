@@ -1,5 +1,8 @@
 <app-navbar></app-navbar>
-<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
+  <div class="butonMaximizardiv text-end">
+    <a mat-fab color="primary" data-aos="fade-left" data-aos-once="true" data-aos-anchor="#formActivador" data-title="Abrir ventana de la postulación" style="position: fixed;right:15px;bottom: 15px;" (click)="verPostuSel(templateverpostulacion)"> <i class="icofont-maximize" style="font-size: 20px;"></i> </a>
+  </div>
+<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true" id="formActivador"> 
 <div class="formtiq">
 <ng-template #mytemplate>
   <div *ngIf="success" class="dialogSuccess">
@@ -11,7 +14,235 @@
     <h2 class="text-center textoSuccess">Error al Registrar</h2>
   </div>
 </ng-template>
+<ng-template #templateverpostulacion>
+
+  <ng-template #successactualizacion>
+    <div  class="dialogSuccess" >
+      <i class="icofont-ui-check text-center iconSuccessRegister"></i>
+      <h4 class="text-center textoSuccess">Actualizado exitosamente</h4>
+
+    </div>
+  </ng-template>
+  <div class="row" data-aos="fade-down" data-aos-once="true" >
+    <div class="col-12 text-center">
+      <h2 style="display: inline-block;">Estado postulación</h2>
+        <a mat-icon-button color="primary" data-title="Cerrar ventana" class="buttonsiguiente" aria-label="Example icon button with a home icon" (click)="minimizar()">
+        <i class="icofont-close-circled" style="color:#f44336 !important;font-size: 20px;"></i>
+      </a>
+    </div>
+<!-- COMIENZO COPIADA -->
+<div class="pasosestados">
+  <div class="paso mrpaso" [ngClass]="circlecolor1">
+    <div class="circulopaso">
+      <i class="icofont-clock-time iconSearchUser"></i>
+    </div>
+    <p>En espera</p>
+  </div>
+  <div class="paso pasoline2 mrpaso" [ngClass]="circlecolor2">
+    <div class="circulopaso">
+      <i class="icofont-tasks iconSearchUser"></i>
+    </div>
+    <p>Revisión</p>
+  </div>
+  <div class="paso pasoline3 mrpaso" [ngClass]="circlecolor3">
+    <div class="circulopaso">
+      <i class="icofont-address-book iconSearchUser"></i>
+    </div>
+    <p>Entrevista</p>
+  </div>
+  <div class="paso pasoline4 mrpaso4" [ngClass]="circlecolor4">
+    <div class="circulopaso">
+      <i class="icofont-home iconSearchUser"></i>
+    </div>
+    <p>Visita Domiciliaria</p>
+  </div>
+  <div class="paso pasoline5" [ngClass]="circlecolor5">
+    <div class="circulopaso">
+      <i *ngIf="estadopostusel == 1" class="icofont-check-circled iconSearchUser"></i>
+      <i *ngIf="estadopostusel == 2" class="icofont-close-circled iconSearchUser"></i>
+      <i *ngIf="estadopostusel != 1 && estadopostusel != 2 " class="icofont-spinner iconSearchUser"></i>
+    </div>
+    <p>Estado final</p>
+  </div>
+</div>
+<div class="infopostusel">
+  <div class="row">
+  <mat-tab-group mat-align-tabs="start" animationDuration="0ms">
+  <mat-tab label="Información postulación" data-aos="fade-down" data-aos-once="true">
+    <div class="tabinfopostu">
+       <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.consecutivo_postulacion}}</strong> 
+        <p>Código postulación : </p>   
+        <hr>
+        
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.fechapostulacion}}</strong>
+        <p>Fecha postulación : </p>
+        <hr>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.estudiante.nombreestudiante}}</strong>
+        <p>Nombre estudiante :</p>
+        <hr>
+         
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.estudiante.identificacion}}</strong>
+        <p>Identificacición : </p>
+        <hr>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.semestre}}</strong>
+        <p>Semestre : </p>
+        <hr>
+        
+      </div>
+      <div class="col-6">
+        <strong>{{postuseltable.estrato}}</strong>
+        <p>Estrato : </p>
+        <hr>
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <strong>{{postuseltable.codigoestudiante}}</strong>
+        <p>Codigo estudiante : </p>
+        <hr>
+      </div>
+      <div class="col-6">
+          <strong>{{postuseltable.carrera}}</strong>
+          <p>Carrera : </p>          
+        <hr>
+      </div>
+    </div>
+    <div class="col-12">
+    <div class="row">
+      <div class="col-lg">
+            <strong>{{postuseltable.promedio}}</strong>
+            <p>Promedio : </p>
+      </div>
+      <div class="col-lg">
+            <form>
+              <p>¿Cumple o no cumple el promedio?</p>
+              <div class="col-lg" *ngIf="estadopostusel != 4">
+                <mat-radio-group  aria-label="Cumple o no cumple" >
+                  <mat-radio-button #text1 value="1" color="warn"  [disabled]="estadopostusel != 4"  [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
+                  <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="col-lg" *ngIf="estadopostusel == 4">
+                <mat-radio-group  aria-label="Cumple o no cumple" >
+                  <mat-radio-button #text1 value="1" color="warn" (change)="updateEstadoPromedio(text1.value)" [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
+                  <mat-radio-button #checkdos value="2" color="warn" (change)="updateEstadoPromedio(checkdos.value)" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </form>
+          </div>
+    </div>
+    </div>
+    <hr>
+  </div>
+  </mat-tab>
+  <mat-tab label="Documentos" *ngIf="estadopostusel != 3" data-aos="fade-down" data-aos-once="true">
+    <div class="tabinfopostu ">
+      <div class="row">
+        <div class="col-lg" *ngFor="let docspostu of documentosFoundpostu">
+          <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}}</a>
+          <hr>
+          <div class="checkboxs">
+            <mat-radio-group  aria-label="Selecciona si un documento esta correcto" >
+              <mat-radio-button #text1 value="1" color="warn" [disabled]="estadopostusel != 4" (change)="checkboxEstados(docspostu.concecutivodoc,text1.value )" [checked]="docspostu.estado == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4" (change)="checkboxEstados(docspostu.concecutivodoc,checkdos.value )" [checked]="docspostu.estado == 2">Mal diligenciado</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+            <mat-label>Observación</mat-label>
+            <textarea [(ngModel)]="observacion" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" [disabled]="estadopostusel != 4"></textarea>
+          </mat-form-field>
+        </div>
+      </div>  
+      <div class="row mb-4">
+        <div class="col-12" style="text-align: center;" *ngIf="estadopostusel == 4">
+          <a mat-raised-button (click)="actualizarEstadoPostulacion(successactualizacion)">Actualizar estado documentos</a>
+          <hr>
+        </div>
+         <div class="col-12" style="text-align: center;" *ngIf="estadopostusel != 4">
+          <a mat-raised-button [disabled]="estadopostusel != 4">Actualizar estado documentos</a>
+          <hr>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-tab>
+    <mat-tab label="Entrevista" *ngIf="estadopostusel != 3 && estadopostusel != 4" data-aos="fade-down" data-aos-once="true">
+      <div class="tabinfopostu mb-4">
+        <div class="row">
+          <h1>Entrevista</h1>
+          <hr>
+          <a mat-stroked-button color="primary" *ngIf="!entrevistvalidate" [routerLink]="['/entrevista', postuseltable.consecutivo_postulacion,postuseltable.idconvo]">Iniciar entrevista</a>
+          <a mat-stroked-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista</a>
+        </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+ </div>
+  <div class="row">
+
+    <div class="buttonestados col-12">
+        <img src="assets/imgs/loading.gif" *ngIf="loadingcc" alt="Cargando.." width="60px">
+      <div *ngIf="estadopostusel == 3 && $nombreusuario.rol == '2'"> <!-- en espera -->
+        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
+      </div>
+      <div *ngIf="estadopostusel == 4 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Revision -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'En espera')" class="buttonanterior"><i class="icofont-rounded-left"></i>En espera</button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;"  (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonsiguiente">Entrevista<i class="icofont-rounded-right"></i></button>
+        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+      </div>
+      <div *ngIf="estadopostusel == 5"> <!-- Entrevista -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
+      </div>
+      <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
+        <button mat-stroked-button color="primary" *ngIf="$nombreusuario.rol == '2'" style="font-weight: bolder;color:#357b38; margin-right: 20px;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio ">Aprobado</button>
+        <button mat-stroked-button color="warn" *ngIf="$nombreusuario.rol == '2'" style="margin-right: 20px;font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+      </div>
+      <div *ngIf="estadopostusel == 1 && $nombreusuario.rol == '2'" style="text-align: center;">  <!-- Aprobado -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+      </div>
+      <div *ngIf="estadopostusel == 2 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Rechazado -->
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
+        <button mat-stroked-button color="primary"  style="font-weight: bolder;color:#357b38;"(click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio">Aprobar</button>
+      </div>
+    </div><!-- fin -->
+  </div>
+
+</div>
+
+<!-- FIN COPIADA -->
+  </div>
+</ng-template>
 <div>
+        <button mat-icon-button color="primary"  [routerLink]="['/viewConvocatoria',idConvo]" aria-label="Example icon button with a home icon">
+        <i class="icofont-rounded-left" style="color:#f44336 !important;font-size: 20px;"></i>
+        <span style="color: black !important;">Regresar</span>
+      </button>
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
@@ -101,7 +332,7 @@
         </div>
           </div>
       <div>
-        <button mat-raised-button color="primary" matStepperNext >Siguente</button>
+        <button mat-raised-button color="primary" matStepperNext >Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -289,5 +520,8 @@
   <!-- Tercer paso FIN -->
 </mat-horizontal-stepper>
   </div>
+
 </div>
 </div>
+
+

@@ -21,6 +21,7 @@ export class RegistrarPostulacionComponent  {
   documentosarchivos:any;
   success:any;
   myForm: FormGroup;
+  cantDocumentos:any;
   varsel:any;
   convosel:any;
   docsconvosel:any;
@@ -35,29 +36,13 @@ export class RegistrarPostulacionComponent  {
     public documentoService:DocumentoService) { 
   	this.buscarConvoActivas();
     this.getCarrerasEst();
-    this.buscarDocumentos();
     this.actualizarConvosVencidas();
     this.myForm = this.fb.group({
       convo: ['', [Validators.required]],
       promedio: ['', [Validators.required]],
       semestre: ['', [Validators.required]],
-      d10 :['', [Validators.required]],
-      carrera :['', [Validators.required]],
-      factservicio :['', [Validators.required]],
-      cartapeticion :['', [Validators.required]],
-      carnetestudiante :['', [Validators.required]],
-      cedulapadre :['', [Validators.required]],
-      cedulamadre :['', [Validators.required]],
-      promedioacumulado :['', [Validators.required]],
-      tabulado :['', [Validators.required]],
-      constanciaweb :['', [Validators.required]],
-      certificadovencidad :['', [Validators.required]],
-      documentoestudiante :['', [Validators.required]],
-      documentoacudiente :['', [Validators.required]],
-      formatosolicitudbeneficio :['', [Validators.required]],
-      diagnosticomedico  :['', [Validators.required]],
-      recibopagomatricula :['', [Validators.required]],
-      certificadoingresos :['', [Validators.required]],
+      carrera: ['', [Validators.required]],
+      archivos: ['', [Validators.required]]
     });
 
   }
@@ -68,6 +53,9 @@ export class RegistrarPostulacionComponent  {
     this.listDocsupload = [];
 
     this.documentoService.getDocumentsConvo(this.convosel.consecutivoconvo).subscribe(result=>{
+      this.docsconvosel = [result];
+      console.log(this.docsconvosel);
+      this.cantDocumentos = this.docsconvosel[0].length;
       this.docsconvosel = result;
     });
   }
@@ -90,11 +78,7 @@ export class RegistrarPostulacionComponent  {
       this.carrerasest = result;
     });
   }
-  buscarDocumentos(){
-    this.documentoService.listDocumentosSelect().subscribe(result=>{
-      this.documentosarchivos = result;
-    });
-  }
+
 
   buscarConvoActivas(){
     this.listconvoactivas.buscarConvoActivas().subscribe(convoActivas =>{ 
@@ -143,9 +127,7 @@ export class RegistrarPostulacionComponent  {
                                   convocatoria:convocatoria,
                                   listDocumentos:this.listDocsupload
             };
-
-
-
+if( this.listDocsupload.length ==this.cantDocumentos){
     this.registrarpostu.buscarPostuByIdConvo(convocatoria.consecutivoconvo,this.$nombreusuario.identi).subscribe(result=>{
       Swal.fire({
         title: 'ERROR',
@@ -168,6 +150,16 @@ export class RegistrarPostulacionComponent  {
           });
       });
     
+}else{
+              Swal.fire({
+              title: 'ERROR',
+              text: 'Por favor, sube los documentos requeridos.',
+              icon: 'error'
+            }); 
+}
+
+
+
 
 
   }

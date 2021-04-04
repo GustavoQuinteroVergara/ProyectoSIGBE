@@ -36,7 +36,7 @@ export const ROUTES: Routes = [
 }},
 {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2'
+  expectedRole: '2|4'
 }},
 {path:'registrarPostulacion',component: RegistrarPostulacionComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
@@ -65,7 +65,7 @@ export const ROUTES: Routes = [
 }},
 {path:'listarConvocatoria',component: ListarconvocatoriaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2'
+  expectedRole: '2|4'
 }},
 {path:'crearusuariologin',component: CrearusuariologinComponent},
 {path:'listarTickets',component: ListarticketsComponent, canActivate:[ValidacionRutasGuard]
@@ -92,9 +92,9 @@ export const ROUTES: Routes = [
 ,data: { 
   expectedRole: '4'
 }},
-{path:'visitadomiciliariaconvo/:idPostu',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
+{path:'visitadomiciliariaconvo/:idPostu/:idConvo',component:VisitadomiciliariaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2'
+  expectedRole: '2|4'
 }},
 {path:'crearanuncio',component:CrearanuncioComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
@@ -108,11 +108,14 @@ export const ROUTES: Routes = [
 ,data: { 
   expectedRole: '2'
 }},
+{path:'entrevista/:idPostu/:idConvo',component:EntrevistaComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2|4'
+}},
 {path:'listarTicketEst',component:ListicketestComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '1'
 }},
-{path:'entrevista',component:EntrevistaComponent},
 {path:'habilitarUser', component:HabilitaruserComponent},
 
 {path:'olvidarContrasena', component:OlvdarcontrasenaComponent},

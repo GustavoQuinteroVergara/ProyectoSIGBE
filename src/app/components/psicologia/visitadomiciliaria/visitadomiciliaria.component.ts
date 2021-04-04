@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import {DocumentoService} from '../../../services/documento.service';
+import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
+import {ServicesViewConvocatoriaService} from '../../convocatoria/view-convocatoria/services-view-convocatoria.service';
 import { MatDialog } from '@angular/material/dialog';
 import {RegistrarvisitaService} from './registrarvisita.service';
 import Swal from 'sweetalert2';
@@ -10,6 +13,43 @@ import Swal from 'sweetalert2';
   styleUrls: ['./visitadomiciliaria.component.css']
 })
 export class VisitadomiciliariaComponent implements OnInit {
+
+    circlecolor1={
+      'pasoactive':false
+    };
+    circlecolor2={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false
+    };
+
+    circlecolor3={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false
+    };
+    circlecolor4={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false
+    };
+    circlecolor5={
+      'pasoactive':false,
+      'pasoactivoline':false,
+      'pasoactivocomplete':false,
+      'pasoactivered':false,
+      'pasoactivolinered':false
+    };
+  estadopostusel:any;
+  postuseltable:any;
+  visitaPostuFound:any;
+  documentosFoundpostu:any;
+  entrevistaPostuFound:any;
+  visitavalidate=false;
+  entrevistvalidate=false;
+  $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
+
+
   isLinear = false;
   hidden: string = 'false';
   firstFormGroup: FormGroup;
@@ -44,12 +84,19 @@ export class VisitadomiciliariaComponent implements OnInit {
   cuartosolicitante:any;
   cantidadpersonas='';
   idPostuSel:any;
+  idConvo:any;
   descripcionfinal:any;
   constructor(private _formBuilder: FormBuilder,
     private rutaActiva: ActivatedRoute,
     private serviceVisita:RegistrarvisitaService,
+    private serviceviewconvocatoria:ServicesViewConvocatoriaService,
+    private documentosService:DocumentoService,
+    private visitadomiciliariaService:VisitadomiciliariaService,
     public dialog: MatDialog) {
-    this.idPostuSel = this.rutaActiva.snapshot.params.idConvo;
+    dialog.closeAll();
+    this.idPostuSel = this.rutaActiva.snapshot.params.idPostu;
+    this.idConvo = this.rutaActiva.snapshot.params.idConvo;
+    this.getPostu(this.idPostuSel);
 
   }
 
@@ -79,6 +126,8 @@ export class VisitadomiciliariaComponent implements OnInit {
       descripcionfinal: new FormControl('', [Validators.required])
     });
   }
+
+
 
 
   registroVisita(templateRef){
@@ -127,19 +176,232 @@ export class VisitadomiciliariaComponent implements OnInit {
     });
   
   }
-  /*
-  radioChange(event) {
-    this.hidden = event;
-    if (event === "Otro") {
-      this.secondFormGroup.setValidators([Validators.required]);
-      this.secondFormGroup.updateValueAndValidity();
-      this.cualobligacion=this.cualobligacion;
-    } else {
-      this.secondFormGroup.clearValidators();
-      this.secondFormGroup.updateValueAndValidity();
-      this.cualobligacion="";
+
+
+
+//MODAL
+
+  minimizar(){
+    this.dialog.closeAll();
+  }
+
+  getDocumntosPostu(idPostu:any){
+    this.documentosService.getDocumentsPostu(idPostu).subscribe(result=>{
+        this.documentosFoundpostu = result;
+    });
+  }
+
+    getVisitaPostu(idPostu:any){
+    this.visitavalidate=false;
+    this.visitadomiciliariaService.listVisitaPostu(idPostu).subscribe(result=>{
+      this.visitaPostuFound = result;
+      this.visitavalidate =true;
+    },(err)=>{
+      this.visitavalidate=false;
+    });
+  }
+
+    getEntrevistaPostu(idPostu:any){
+    this.entrevistvalidate=false;
+    this.serviceviewconvocatoria.buscarEntrevistaPostu(idPostu).subscribe(result=>{
+      this.entrevistaPostuFound = result;
+      this.entrevistvalidate =true;
+      Swal.close();
+    },(err)=>{
+      console.log(err.error.text);
+      this.entrevistvalidate=false;
+    });
+  }
+
+    getPostu(idpostu:any){
+      Swal.fire({
+        title: 'Cargando',
+        allowOutsideClick: false
+      }); 
+      Swal.showLoading();
+    this.serviceviewconvocatoria.getPostuById(idpostu).subscribe(result=>{
+      this.postuseltable = result;
+      this.getDocumntosPostu(this.idPostuSel);
+      this.getVisitaPostu(this.idPostuSel);
+      this.getEntrevistaPostu(this.idPostuSel);
+    });
+  }
+ verPostuSel(templatePostu){
+    switch (this.postuseltable.estado_postulacion) {
+      case "En espera":
+        this.estadopostusel=3;
+        this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactivoline'] = true;
+        break;
+      case "Revision":
+        this.estadopostusel=4;
+        this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactivoline'] = true;
+        break;
+      case "Entrevista":
+        this.estadopostusel=5;
+            this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivoline'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactivoline'] = true;
+        break;
+      case "Visita":
+        this.estadopostusel=6;
+            this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactive'] = true;
+        this.circlecolor4['pasoactivocomplete'] = true;
+        this.circlecolor5['pasoactivoline'] = true;
+        break;
+      case "Aprobado":
+        this.estadopostusel=1;
+    this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactive'] = true;
+        this.circlecolor4['pasoactivocomplete'] = true;
+        this.circlecolor5['pasoactive'] = true;
+        this.circlecolor5['pasoactivocomplete'] = true;
+        break;
+      case "Rechazado":
+        this.estadopostusel=2;
+
+    this.circlecolor1['pasoactive'] = false;
+        this.circlecolor2['pasoactive'] = false;
+        this.circlecolor2['pasoactivoline'] = false;
+        this.circlecolor2['pasoactivocomplete'] = false;
+        this.circlecolor3['pasoactive'] = false;
+        this.circlecolor3['pasoactivoline'] = false;
+        this.circlecolor3['pasoactivocomplete'] = false;
+        this.circlecolor4['pasoactive'] = false;
+        this.circlecolor4['pasoactivoline'] = false;
+        this.circlecolor4['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactive'] = false;
+        this.circlecolor5['pasoactivoline'] = false;
+        this.circlecolor5['pasoactivocomplete'] = false;
+        this.circlecolor5['pasoactivered'] = false;
+        this.circlecolor5['pasoactivolinered'] = false;
+
+
+        this.circlecolor1['pasoactive'] = true;
+        this.circlecolor2['pasoactive'] = true;
+        this.circlecolor2['pasoactivocomplete'] = true;
+        this.circlecolor3['pasoactive'] = true;
+        this.circlecolor3['pasoactivocomplete'] = true;
+        this.circlecolor4['pasoactive'] = true;
+        this.circlecolor4['pasoactivocomplete'] = true;
+        this.circlecolor5['pasoactivered'] = true;
+        this.circlecolor5['pasoactivolinered'] = true;
+        break;
+      
+      default:
+        // code...
+        break;
     }
-    console.log("Requerido", this.secondFormGroup.errors);
-  }*/
+      let dialogRef = this.dialog.open( templatePostu,{
+       height: '600px',
+       width: '900px',
+     });}
+
+
+
 }
 
