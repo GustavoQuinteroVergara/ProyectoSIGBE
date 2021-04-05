@@ -61,7 +61,7 @@
     position: absolute;
     padding: 3px 20px;
     bottom: -1.6em;
-    left: 100%;
+    right: 100%;
     white-space: nowrap;
     box-shadow: 1px 1px 3px #222222;
     opacity: 0;

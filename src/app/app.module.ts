@@ -85,7 +85,7 @@ import { EstadisticasComponent } from './components/encuesta/estadisticas/estadi
   VisitadomiciliariaComponent,
   ListicketestComponent,
   OlvdarcontrasenaComponent,
-  EntrevistaComponent
+  EntrevistaComponent,
   CrearanuncioComponent,
   ListarencuestasComponent,
   EstadisticasComponent

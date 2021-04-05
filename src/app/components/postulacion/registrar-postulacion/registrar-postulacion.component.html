@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="containerRegisterPostu">
+<div class="container-fluid">
  <ng-template #mytemplate>
     <div *ngIf="success" class="dialogSuccess" >
         <i class="icofont-ui-check text-center iconSuccessRegister"></i>
@@ -21,6 +21,7 @@
     <form [formGroup]="myForm" class="col s12 formtiq" novalidate>
         <div class="row text-center rowImageLogin">
          <h1>POSTULARSE A UNA CONVOCATORIA</h1>
+         <hr>
      </div>
 
      <div class="row">
@@ -142,13 +143,29 @@
 
 
 <div>
-<div class="row" *ngFor="let docsarchivos of docsconvosel">
-        <div class="col-6">
-            <h4>{{docsarchivos.nombredoc}}</h4>
-            <input type="file" accept="application/pdf" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">   
-        </div>
-</div>
+    <div class="row">
+        <hr>
+        <h1>DOCUMENTOS REQUERIDOS POR CONVOCATORIA</h1>
+        <hr>
+        <h4 class="card-subtitle mb-2">El archivo a subir debe ser en formato  <strong>PDF</strong></h4>
+<!--         <div class="row" >
+            <div class="col-6">
+                <h4>{{docsarchivos.nombredoc}}</h4>
+                <input type="file" accept="application/pdf" formControlName="archivos" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">   
+            </div>
+        </div> -->
+        <div class="col-lg" *ngIf="convoActivas != null">
+            <div class="card m-2 cardsconvos" style="width: 18rem;display: inline-block;transition: all 0.2s ease;" *ngFor="let docsarchivos of docsconvosel"> 
+              <div class="card-body">
+                <h3 class="card-title">{{docsarchivos.nombredoc}}</h3>
+                <hr>
+                 <input type="file" accept="application/pdf" formControlName="archivos" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">  
+                <hr>
 
+              </div>
+            </div>
+      </div>
+    </div>
     </div>
 </div>
 
@@ -156,7 +173,8 @@
 
 <div class="row center mt-4">
     <div class="input-field col s12 text-center">
-        <button (click)="registrarPostulacion(promedio.value,semestre.value,carrera.value,identificacion.value,convo.value,mytemplate,errorpostuexistente)" mat-raised-button color="primary" ><i class="icofont-save left"></i> <span class="buttontext">Registrar Postulacion</span></button>
+        <button (click)="registrarPostulacion(promedio.value,semestre.value,carrera.value,identificacion.value,convo.value,mytemplate,errorpostuexistente)" *ngIf="myForm.valid" mat-raised-button color="primary" ><i class="icofont-save left"></i> <span class="buttontext">Registrar Postulacion</span></button>
+        <button disabled="true" *ngIf="!myForm.valid" mat-raised-button color="primary" ><i class="icofont-save left"></i> <span class="buttontext">Registrar Postulacion</span></button>
     </div>
 </div>
 </form>

@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 })
 export class ServicesViewConvocatoriaService {
   url="http://localhost/sigbeweb/app/componentes/postulacion/listarpostubyid.php?";
+  url2="http://localhost/sigbeweb/app/componentes/postulacion/listpostubypsicologia.php?";
+  urlpostubyid="http://localhost/sigbeweb/app/componentes/postulacion/postubyidpostu.php";
   urlConvoById="http://localhost/sigbeweb/app/componentes/convocatorias/list_convobyid.php?";
   urlUpdateConvo="http://localhost/sigbeweb/app/componentes/convocatorias/actualizar_convocatoria.php";
   urlConvoCupos ="http://localhost/sigbeweb/app/componentes/convocatorias/updateCuposConvo.php";
@@ -20,12 +22,19 @@ export class ServicesViewConvocatoriaService {
   buscarPostulacionesByIdConvo(idconvo:any){
     return this.http.get(`${this.url}idconvo=${idconvo}`);
   }
+    buscarPostulacionesByPsicologia(idconvo:any){
+    return this.http.get(`${this.url2}idconvo=${idconvo}`);
+  }
   buscarEntrevistaPostu(idpostu:any){
     return this.http.get(`${this.urlInfoGenPostu}idpostu=${idpostu}`);
   }
 
   buscarConvoById(idconvo:any){
     return this.http.get(`${this.urlConvoById}idconvo=${idconvo}`); 
+  }
+
+  getPostuById(idpostu:any){
+    return this.http.get(`${this.urlpostubyid}?idpostu=${idpostu}`); 
   }
 
   actualizarListConvocatorias(actualizarConvo:Array<any>){

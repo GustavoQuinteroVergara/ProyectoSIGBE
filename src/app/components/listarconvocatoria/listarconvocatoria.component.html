@@ -1,43 +1,94 @@
 <app-navbar></app-navbar>
-<div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
-  <div class="formtiq ">
-    <div>
-      <h1>LISTA DE CONVOCATORIAS</h1>
-      <hr>
-    </div>
-    <div >
-      <table class="table table-bordered table-striped mb-0">
-        <thead>
-          <tr>
-            <th>Fecha <br> de  inicio</th>
-            <th>Fecha fin</th>
-            <th>Estado de <br> convocatoria</th>
-            <th>Beca</th>
-            <th>Periodo</th>
-            <th>Cupos</th>
-            <th>Postulaciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let convoca of convocatorias">
-            <td>{{convoca.fecha_inicio}} </td>  
-            <td>{{convoca.fecha_fin}}</td>
-            <td>{{convoca.estado_convocatoria}}</td>
-            <td>{{convoca.beca}}</td>
-            <td>{{convoca.periodosacademicos}}</td>
-            <td>{{convoca.cupo}}</td>
-            <td> <a [routerLink]="['/viewConvocatoria', convoca.consecutivo_convocatoria]" > <i class="icofont-search-2"></i></a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row">
-      <div class="col-12 m-12 text-center">
-        <h3>Exportar a Excel</h3>
-        <div class ="container" style="padding-bottom:20px">
-          <button mat-raised-button color="warning" (click)="exportAsXLSX()">Exportar</button>
-        </div>
+<div class="container-fluid" data-aos="fade-down" data-aos-once="true">
+  <div class="row">
+
+    <div class="col-md-8 offset-md-2 mt-4 mb-4 formtiq">
+      <div>
+        <h1>LISTA DE CONVOCATORIAS</h1>
+        <hr>
       </div>
+      <div class="col-12">
+        <h4>Digita y filtra la tabla</h4>
+        <mat-form-field class="example-full-width" style="width: 100%;" appearance="fill" class="inputsEspacio">
+              <mat-label>Digita para filtrar</mat-label>
+              <input   matInput (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+      </div>
+                  <div class="row">
+                    <div class="col-12 m-12 text-center">
+                      <div class ="container" style="padding-bottom:20px">
+                        <button mat-raised-button color="warning" (click)="applyExportarFiltrado()">Exportar a excel</button>
+                      </div>
+                    </div>
+                  </div>
+      <div class="table-responsive">
+                  <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource" matSort style="width: 100%;text-align: center;">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="fecha_inicio">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha inicio</th>
+                      <td mat-cell *matCellDef="let row"> {{row.fecha_inicio}}</td>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="fecha_fin">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha fin</th>
+                      <td mat-cell *matCellDef="let row"> {{row.fecha_fin}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="estado_convocatoria">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                      <td mat-cell *matCellDef="let row"> {{row.estado_convocatoria}} </td>
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="beca">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Beca</th>
+                      <td mat-cell *matCellDef="let row" > {{row.beca}} </td>
+                    </ng-container>
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="periodosacademicos">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Periodo academico</th>
+                      <td mat-cell *matCellDef="let row" > {{row.periodosacademicos}} </td>
+                    </ng-container>
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="cupo">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cupos asignados</th>
+                      <td mat-cell *matCellDef="let row" > {{row.cupo}} </td>
+                    </ng-container>                                        
+                      <!-- Color Column -->
+                    <ng-container matColumnDef="Acciones">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                      <td mat-cell *matCellDef="let row" ><a [routerLink]="['/viewConvocatoria', row.consecutivo_convocatoria]" data-title="Ver información convocatoria"  > <i class="icofont-search-2"></i></a></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No hay datos que coincidan con lo digitado</td>
+                    </tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+                  </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
   </div>
 </div>

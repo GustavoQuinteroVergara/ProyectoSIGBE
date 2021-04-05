@@ -27,6 +27,7 @@ export class ViewConvocatoriaComponent {
   $postuByIdArray:any;
   $convoBuscada:any;
   loading=false;
+  $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
   visitarListar:any;
   nuevoarreglo:any;
   dataSource: MatTableDataSource<any>;
@@ -82,9 +83,9 @@ export class ViewConvocatoriaComponent {
   entrevistvalidate=false;
   //FIN VARIABLES DOCUMENTOS
     displayedColumns: string[] = ['estudiante.nombreestudiante', 
-    'codigoestudiante', 'estrato', 
+    'codigoestudiante', 'ciudadresidencia' , 'direccionresidencia'  ,'estrato', 'carrera',
     'promedio','fechapostulacion',
-    'semestre','carrera','estado_postulacion','Acciones'];
+    'semestre','estado_postulacion','Acciones'];
     success:any;
     convocatoriaBeca: any;
     activeForm=false;
@@ -106,9 +107,19 @@ export class ViewConvocatoriaComponent {
    private visitadomiciliariaService:VisitadomiciliariaService,
    private router:Router,
    private excelService: ExporterService ) { 
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
     this.$idConvo = this.rutaActiva.snapshot.params.idConvo;
     this.buscarConvoByIdConvo(this.$idConvo);
-    this.buscarPostulacionesByIdConvo(this.$idConvo);
+    if(this.$nombreusuario.rol == '4'){
+      this.buscarPostulacionesByPsicologia(this.$idConvo);
+    }else{
+      this.buscarPostulacionesByIdConvo(this.$idConvo);
+    }
+    
 
     this.buscarBeca();
     this.buscarPeriodo();
@@ -392,19 +403,19 @@ export class ViewConvocatoriaComponent {
 
     doc.setFont("helvetica","bold");
     switch (this.entrevistaPostuFound.estadocivil) {
-      case "Soltero":
+      case "soltero":
         doc.text("X",56,76);
         break;
-      case "Casado":
+      case "casado":
          doc.text("X",79,76);
         break;
-      case "Viudo":
+      case "viudo":
         doc.text("X",98,76);
         break;
-      case "Union libre":
+      case "unionlibre":
         doc.text("X",129,77);
         break;
-      case "Separado":
+      case "separado":
         doc.text("X",158,77);
         break;                        
       default:
@@ -427,50 +438,121 @@ export class ViewConvocatoriaComponent {
 
     //RESIDE CON
     doc.setFont("helvetica","bold");
-    doc.text("X",80,128);
-    doc.text("X",80,132);
-    doc.text("X",80,136);
-    doc.text("X",80,140);
-    doc.text("X",80,144);
+    switch (this.entrevistaPostuFound.residencia) {
+      case "CON SU FAMILIA DE ORIGEN":
+          doc.text("X",80,128);
+        break;
+      case "CON SU FAMILIA PROPIA (CÓNYUGE)":
+        doc.text("X",80,132);
+        break;
+      case "CON SUS PARIENTES":
+        doc.text("X",80,136);
+        break;
+      case "CON COMPAÑEROS O AMIGOS":
+        doc.text("X",80,140);
+        break;
+      case "SOLO":
+       doc.text("X",80,144);
+        break;                                
+        // code...
+        break;
+      case "EN APARTAMENTO PROPIO":
+        doc.text("X",176,128);
+        break;
+      case "EN APARTAMENTO ALQUILADO":
+        doc.text("X",176,132);
+        break;
+      case "EN PIEZA ARRENDA":
+        doc.text("X",176,136);
+        break;      
+      case "EN PENSIÓN":
+        doc.text("X",176,140);
+        break;                                    
 
-    doc.text("X",176,128);
-    doc.text("X",176,132);
-    doc.text("X",176,136);
-    doc.text("X",176,140);
+      
+      default:
+        // code...
+        break;
+    }
+
 
     //FUENTES DE INGRESO
     doc.setFontSize(20);
-    doc.text("X",65,173);
-    doc.text("X",65,181);
-    doc.text("X",65,189);
-    doc.text("X",65,199);
-    doc.text("X",65,207);
-
-    doc.text("X",105,173);
-    doc.text("X",105,181);
-    doc.text("X",105,189);
-    doc.text("X",105,199);
-    doc.text("X",105,207);
-
-    doc.text("X",143,173);
-    doc.text("X",143,181);
-    doc.text("X",143,189);
-    doc.text("X",143,199);
-    doc.text("X",143,207);
-
-    doc.text("X",180,173);
-    doc.text("X",180,181);
-    doc.text("X",180,189);
-    doc.text("X",180,199);
-    doc.text("X",180,207);
+    console.log(this.entrevistaPostuFound[1][0]);
+    for (var i = 0; i < this.entrevistaPostuFound[1][0].length - 1; i++) {
+      var textoseparado = this.entrevistaPostuFound[1][0][i].nombreayuda.split(",");
+      for (var j = 0; j < textoseparado.length; j++) {
+        if(textoseparado[j] != ""){
+          switch (textoseparado[j]) {
+            case "Familia":
+              if(i == 0){
+                doc.text("X",65,173);
+              }else if( i == 1){
+                doc.text("X",65,181);
+              }else if (i == 2){
+                doc.text("X",65,189);
+              }else if( i == 3){
+                doc.text("X",65,199);
+              }else{
+                doc.text("X",65,207);
+              }
+              break;
+            case "TRAB.RENTASPROPIAS":
+              if(i == 0){
+                doc.text("X",105,173);
+              }else if( i == 1){
+                doc.text("X",105,181);
+              }else if (i == 2){
+                doc.text("X",105,189);
+              }else if( i == 3){
+                doc.text("X",105,199);
+              }else{
+                doc.text("X",105,207);
+              }
+              break;
+            case "Ayudas":
+              if(i == 0){
+                doc.text("X",143,173);
+              }else if( i == 1){
+                doc.text("X",143,181);
+              }else if (i == 2){
+                doc.text("X",143,189);
+              }else if( i == 3){
+                doc.text("X",143,199);
+              }else{
+                doc.text("X",143,207);
+              }
+              break;
+            case "Presatamos":
+              if(i == 0){
+                doc.text("X",180,173);
+              }else if( i == 1){
+                doc.text("X",180,181);
+              }else if (i == 2){
+                doc.text("X",180,189);
+              }else if( i == 3){
+                doc.text("X",180,199);
+              }else{
+                doc.text("X",180,207);
+              }
+              break;                                                     
+            
+            default:
+              // code...
+              break;
+          }
+        }
+      }
+    }
+    
 
     doc.setFontSize(10);
     //TRABAJA?
     switch (this.entrevistaPostuFound.trabaja) {
-      case "Si":
+      case "si":
             doc.text("X",44,216);
         break;
-      case "No":
+      case "no":
         doc.text("X",74,216);
         break;      
       default:
@@ -488,7 +570,7 @@ export class ViewConvocatoriaComponent {
     doc.text("" + this.entrevistaPostuFound.antiguedad,40,229);
     doc.text(this.entrevistaPostuFound.ciudadempresa,25,233);
     doc.text(this.entrevistaPostuFound.direccionempresa,82,233);
-    doc.text("22222222",170,233);
+    doc.text("--------------",170,233);
 
     //VALOR TOTAL DE INGRESOS
     doc.text("" + this.entrevistaPostuFound.valortotalingreso,50,245);
@@ -516,10 +598,10 @@ export class ViewConvocatoriaComponent {
 
     doc.setFont("helvetica","bold");
     switch (this.entrevistaPostuFound.caractercolegio) {
-      case "Publico":
+      case "publico":
         doc.text("X",38,81);
         break;
-      case "Privado":
+      case "privado":
         doc.text("X",129,81);
         break;
       default:
@@ -536,78 +618,101 @@ export class ViewConvocatoriaComponent {
     doc.text(""+ this.entrevistaPostuFound.valorpension,140,98);
 
     //INFO FAMILIA TABLA 1
-    doc.text("X",40,130);
-    doc.text("X",40,140);
-    doc.text("X",40,150);
-    doc.text("X",40,160);
-    doc.text("X",40,170);
-    doc.text("X",40,180);
 
-    doc.text("X",65,130);
-    doc.text("X",65,140);
-    doc.text("X",65,150);
-    doc.text("X",65,160);
-    doc.text("X",65,170);
-    doc.text("X",65,180);
+    var cuentaparentesco = 0;
+    var cuentahermanos = 0;
+    var cuentaOtros = 0;
 
-    doc.text("X",95,130);
-    doc.text("X",95,140);
-    doc.text("X",95,150);
-    doc.text("X",95,160);
-    doc.text("X",95,170);
-    doc.text("X",95,180);
+    for (var i = 0; i < this.entrevistaPostuFound[0][0].length; ++i) {
+      if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Padre"){
+          //padre
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,40,130);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,40,140);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,40,150);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,40,160);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,40,170);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,40,180);
+      }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Madre"){
+              //madre
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,65,130);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,65,140);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,65,150);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,65,160);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,65,170);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,65,180);
+      }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Conyuge"){
+          //conyugue
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,95,130);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,95,140);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,95,150);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,95,160);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,95,170);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,95,180);
+      }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Hermano"){
+        if(cuentahermanos == 0){
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,40,205);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,40,215);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,40,225);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,40,235);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,40,245);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,40,255);
+          cuentahermanos++;
+        }else if(cuentahermanos == 1){
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,80,205);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,80,215);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,80,225);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,80,235);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,80,245);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,80,255);
 
-    doc.text("X",135,130);
-    doc.text("X",135,140);
-    doc.text("X",135,150);
-    doc.text("X",135,160);
-    doc.text("X",135,170);
-    doc.text("X",135,180);
+          cuentahermanos++;
+        }else{
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,120,205);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,120,215);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,120,225);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,120,235);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,120,245);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,120,255);
+        }
+      }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Otro"){
+        if(cuentaOtros == 0){
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,140,205);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,140,215);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,140,225);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,140,235);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,140,245);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,140,255);
 
-
-    doc.text("X",175,130);
-    doc.text("X",175,140);
-    doc.text("X",175,150);
-    doc.text("X",175,160);
-    doc.text("X",175,170);
-    doc.text("X",175,180);
-
-    //INFO TABLA 2
-    doc.text("X",40,205);
-    doc.text("X",40,215);
-    doc.text("X",40,225);
-    doc.text("X",40,235);
-    doc.text("X",40,245);
-    doc.text("X",40,255);
-
-    doc.text("X",80,205);
-    doc.text("X",80,215);
-    doc.text("X",80,225);
-    doc.text("X",80,235);
-    doc.text("X",80,245);
-    doc.text("X",80,255);
-
-    doc.text("X",120,205);
-    doc.text("X",120,215);
-    doc.text("X",120,225);
-    doc.text("X",120,235);
-    doc.text("X",120,245);
-    doc.text("X",120,255);
-
-    doc.text("X",153,205);
-    doc.text("X",153,215);
-    doc.text("X",153,225);
-    doc.text("X",153,235);
-    doc.text("X",153,245);
-    doc.text("X",153,255);
-
-    doc.text("X",185,205);
-    doc.text("X",185,215);
-    doc.text("X",185,225);
-    doc.text("X",185,235);
-    doc.text("X",185,245);
-    doc.text("X",185,255);
-
+          cuentaOtros++;
+        }else{
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,175,205);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,175,215);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,175,225);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,175,235);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,175,245);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,175,255);
+        }
+      }else{
+        if(cuentaparentesco == 0){
+              //p2
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,135,130);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,135,140);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,135,150);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,135,160);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,135,170);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,135,180);
+          cuentaparentesco++;
+        }else {
+              //p1
+          doc.text(this.entrevistaPostuFound[0][0][i].nombre,175,130);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,175,140);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,175,150);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,175,160);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,175,170);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,175,180);
+        }
+      }
+    }
     // FIN PAGINA 2
 
 
@@ -630,10 +735,10 @@ export class ViewConvocatoriaComponent {
         break;
     }
     switch (this.entrevistaPostuFound.hipoteca) {
-      case "Si":
+      case "hipoteca":
         doc.text("X",66,59);
         break;
-      case "no":
+      case "Sin hipoteca":
         doc.text("X",113,59);
         break;        
       
@@ -647,26 +752,26 @@ export class ViewConvocatoriaComponent {
     doc.text("" + this.entrevistaPostuFound.valormensualarriendo,177,67);
 
     switch (this.entrevistaPostuFound.jefefamilia) {
-      case "Padre":
+      case "padre":
         doc.text("X",55,87);
         break;
-      case "Madre":
+      case "madre":
         doc.text("X",55,92);
 
         break;
-      case "Hermano":
+      case "hermano":
         doc.text("X",55,96);
 
         break;
-      case "Abuelo":
+      case "abuelo":
         doc.text("X",55,100);
 
         break;
-      case "Esposo":
+      case "esposo":
         doc.text("X",55,104);
 
         break;
-      case "Otros":
+      case "otro":
         doc.text("X",55,109);
         break;                                       
       
@@ -675,40 +780,88 @@ export class ViewConvocatoriaComponent {
         break;
     }
 
-    doc.text("X",159,87);
-    doc.text("X",159,92);
-    doc.text("X",159,96);
-    doc.text("X",159,100);
-    doc.text("X",159,104);
-    doc.text("X",159,109);
+    switch (this.entrevistaPostuFound.niveleducativojefe) {
+      case "ninguno":
+        doc.text("X",159,87);
+        break;
+      case "primaria":
+        doc.text("X",159,92);
+        break;
+      case "secundaria":
+        doc.text("X",159,96);
+        break;
+      case "tecnico":
+        doc.text("X",159,100);
+        break;
+      case "superior":
+        doc.text("X",159,104);
+        break;
+      case "postgrado":
+         doc.text("X",159,109);
+        break;                                
+
+      
+      default:
+        // code...
+        break;
+    }
+
+
 
     doc.text("" + this.entrevistaPostuFound.ingresomensualfamiliar,145,116);
 
-    doc.text("X",7,136);
-    doc.text("X",7,141);
-    doc.text("X",7,145);
-    doc.text("X",7,149);
-    doc.text("X",7,153);
-    doc.text("X",7,157);
-    doc.text("X",7,161);
-    doc.text("X",7,166);
-    doc.text("X",7,170);
-    doc.text("X",7,174);
+    switch (this.entrevistaPostuFound.posicionjefe) {
+
+      case "obrero no calificado":
+        doc.text("X",7,136);
+        break;
+      case "obrero calificado":
+        doc.text("X",7,141);
+        break;
+      case "empleado dependiente":
+        doc.text("X",7,145);
+        break;
+      case "atesano o pequeño trabajador independiente con local propio":
+        doc.text("X",7,149);
+        break;
+      case "pequeño campesino propietario":
+        doc.text("X",7,153);
+        break;
+      case "profesional asalariado o empleado de mandos medios":
+        doc.text("X",7,157);
+        break;
+      case "profesional independiente, tecnico o trabajador independiente":
+        doc.text("X",7,161);
+        break;
+      case "oficial de las fuerzas armadas. indique el grado":
+        doc.text("X",7,166);
+        break;
+      case "director, gerente ejecutivo de rango superior":
+        doc.text("X",7,170);
+        break;    
+      case "propietario de empresa o rentista de capital":
+        doc.text("X",7,174);
+        break;     
+      default:
+        // code...
+        break;
+    }
+
 
     doc.text(this.entrevistaPostuFound.empresajefe,30,187);
     doc.text("" + this.entrevistaPostuFound.ingresojefe,160,187);
     doc.text(this.entrevistaPostuFound.ocupacionjefe,40,191);
     doc.text(this.entrevistaPostuFound.direccionempresajefe,50,195);
     doc.text(this.entrevistaPostuFound.ciudadjefe,30,199);
-    doc.text("221121212",145,199);
+    doc.text("----------------",145,199);
 
 
     //observaciones
-    var splitText = doc.splitTextToSize("observacion",180);
+    var splitText = doc.splitTextToSize(this.entrevistaPostuFound.observacion,180);
     doc.text(splitText,10,215);
 
 
-    doc.text("" + this.entrevistaPostuFound.fecharegistro,155,262);
+    doc.text("" + this.entrevistaPostuFound.fecharegistro,160,272);
 
     // FIN PAGINA3
     doc.save("Entrevista.pdf");
@@ -736,6 +889,7 @@ export class ViewConvocatoriaComponent {
       this.entrevistaPostuFound = result;
       this.entrevistvalidate =true;
     },(err)=>{
+      console.log(err.error.text);
       this.entrevistvalidate=false;
     });
   }
@@ -851,6 +1005,15 @@ export class ViewConvocatoriaComponent {
 
     });
   }
+  buscarPostulacionesByPsicologia(idConvo:any){
+    this.serviceviewconvocatoria.buscarPostulacionesByPsicologia(idConvo).subscribe(result =>{ 
+      this.$postuByIdArray = result; 
+      this.dataSource = new MatTableDataSource(this.$postuByIdArray);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
+    });
+  }
   actualizarConvocatoria(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
     fecha_inicio:any,fecha_fin:any,estado_convocatoria:any,successactualizacion){
     this.convoActualizado= {
@@ -878,7 +1041,7 @@ export class ViewConvocatoriaComponent {
     this.observacion = this.postuseltable.coments;
     this.getDocumntosPostu(idpostu);
     this.getVisitaPostu(idpostu);
-    this.getEntrevistaPostu(23);
+    this.getEntrevistaPostu(idpostu);
     switch (estado_postu) {
       case "En espera":
         this.estadopostusel=3;
@@ -1059,6 +1222,7 @@ export class ViewConvocatoriaComponent {
   buscarPeriodo(){
     this.serviceConvocatoria.buscarListadoPeriodos().subscribe(convocatoriaPeriodo=>{
       this.convocatoriaPeriodo = convocatoriaPeriodo;
+      Swal.close();
     });}
   cambiarEstadoPostu(idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
     this.loadingcc = true;
@@ -1691,8 +1855,8 @@ export class ViewConvocatoriaComponent {
 
       
     }
-      exportAsXLSX():void {
-    this.excelService.exportToExcel(this.$postuByIdArray,'ReportePostulaciones'); }
+      exportAsXLSX2():void {
+    this.excelService.exportToExcel(this.postulacionesest,'ReportePostulacionesEstudiante'); }
 
   downloadPDF(docsel:any,nombrefile:any){
     var obj = document.createElement('a'); 
@@ -1702,10 +1866,15 @@ export class ViewConvocatoriaComponent {
     obj.click();
   }
 
-  exportAsXLSX2():void {
-    this.excelService.exportToExcel(this.postulacionesest,'ReporteIndividual');
+  exportAsXLSX():void {
+    this.excelService.exportToExcel(this.$postuByIdArray,'ReporteTickets');
+    }
+    applyExportarFiltrado() {
+      this.excelService.exportToExcel(this.dataSource.filteredData, "PostulacionesFiltrados");
+    /*const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();*/
+    }
+  applyFilter(event){
+    this.dataSource.filter = event.trim().toLowerCase();
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.$postuByIdArray.filter = filterValue.trim().toLowerCase();}
   }
