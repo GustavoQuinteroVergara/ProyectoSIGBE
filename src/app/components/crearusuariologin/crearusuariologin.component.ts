@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import  {ServiciocrearuserService } from '../crearusuario/serviciocrearuser.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {formatDate } from '@angular/common';
 import {ServiceloginService} from '../login/servicelogin.service';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
@@ -15,6 +16,7 @@ export class CrearusuariologinComponent{
   success:any;
   formulariologin:FormGroup;
   iddepartamento:any;
+  fechaActual= formatDate(new Date(), 'yyyy-MM-dd', 'en');
   departamento:any;
   ciud:any;
   carreras:any;

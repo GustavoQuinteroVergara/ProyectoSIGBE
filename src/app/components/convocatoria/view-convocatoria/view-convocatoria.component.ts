@@ -1033,7 +1033,11 @@ export class ViewConvocatoriaComponent {
           icon: 'success'
         });
     },(err)=>{
-      //console.log('ERROR: ' + err.error.text);
+              Swal.fire({
+          title: 'ERROR',
+          text: 'Actualizado exitosamente. ERROR: ' + err.error.text,
+          icon: 'error'
+        });
       
     }); }
   verPostuSel(idpostu:any, estado_postu:any, postu:any ,templatePostu){

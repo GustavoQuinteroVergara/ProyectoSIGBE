@@ -171,7 +171,7 @@
         <div class="text-right divbotonexit">
           <a class="buttonCerrarse" data-title="Cerrar sesión" (click)="cerrarSesion()"><i class="icofont-exit iconexitperiodo"></i></a>
         </div>
-        <h1>REGISTRAR UN PERIODO</h1>
+        <h1>REGISTRAR UN PERIODO ACADÉMICO</h1>
 
         <hr>
 
@@ -194,19 +194,26 @@
 						<mat-form-field appearance="fill" class="inputFechas" style="width: 100%;">
 						<mat-label>Selecciona las fechas del periodo</mat-label>
 						<mat-date-range-input [rangePicker]="picker">
-						<input matStartDate #fechaini class="inputFechaIni" placeholder="Fecha incial">
-						<input matEndDate #fechafin placeholder="Fecha final">
+						<input matStartDate #fechaini class="inputFechaIni" placeholder="Fecha incial" formControlName="fechasperiodoini">
+						<input matEndDate #fechafin placeholder="Fecha final" formControlName="fechasperiodofin">
 						</mat-date-range-input>
 						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 						<mat-date-range-picker #picker></mat-date-range-picker>
 						</mat-form-field>
+            <mat-error class="help-block form-error text-danger small"
+              *ngIf="formularioRegistrarPeriodo.controls['fechasperiodoini'].hasError('required') && formularioRegistrarPeriodo.controls['fechasperiodoini'].touched">
+            La fecha inicial es requerida </mat-error>
+            <mat-error class="help-block form-error text-danger small"
+              *ngIf="formularioRegistrarPeriodo.controls['fechasperiodofin'].hasError('required') && formularioRegistrarPeriodo.controls['fechasperiodofin'].touched">
+            La fecha fin es requerida </mat-error>
         </div>
 
 
       </div>
       <div class="row center">
         <div class="col-12">
-          <a mat-raised-button color="primary" (click)="registrarPeriodo(descripcion.value,fechaini.value,fechafin.value,errorRegistrarPeriodo,periodoexitoso)" [class.disabled]="!formularioRegistrarPeriodo.valid" ><i class="icofont-save left"></i>Registrar Postulacion</a>
+          <a mat-raised-button color="primary" disabled="true" *ngIf="!formularioRegistrarPeriodo.valid" ><i class="icofont-save left"></i>Registrar Postulacion</a>
+          <a mat-raised-button color="primary" (click)="registrarPeriodo(descripcion.value,fechaini.value,fechafin.value,errorRegistrarPeriodo,periodoexitoso)" *ngIf="formularioRegistrarPeriodo.valid" ><i class="icofont-save left"></i>Registrar Postulacion</a>
         </div>
       </div>
     </form>
@@ -249,34 +256,36 @@
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button"  data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
               </div>
               <div class="carousel-inner">
                 <div class="carousel-item active" >
                   <img class="d-block w-100" [src]="'data:image/jpg;base64,' + anunciosActual[0].img"  alt="First slide">
                   <div class="carousel-caption d-none d-md-block">
-                    <p>Ingresa aqui: {{anunciosActual[0].link}}</p>
+                    <p>Ingresa aqui: <a href="{{anunciosActual[0].link}}" mat-raised-button color="primary"> {{anunciosActual[0].link}}</a></p>
                   </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" >
                   <img class="d-block w-100" [src]="'data:image/jpg;base64,' + anunciosActual[1].img" alt="Second slide">
                   <div class="carousel-caption d-none d-md-block">
                     <p>Ingresa aqui: <a href="{{anunciosActual[1].link}}" mat-raised-button color="primary">{{anunciosActual[1].link}}</a></p>
                   </div>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" >
                   <img class="d-block w-100" [src]="'data:image/jpg;base64,' + anunciosActual[2].img" alt="Third slide">
                   <div class="carousel-caption d-none d-md-block">
-                    <p>Ingresa aqui: {{anunciosActual[2].link}}</p>
+                    <p>Ingresa aqui: <a href="{{anunciosActual[2].link}}" mat-raised-button color="primary">  {{anunciosActual[2].link}}</a></p>
                   </div>
                 </div>
               </div>
 
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <div class="carousel-item" >
+              <button class="carousel-control-prev" type="button"  data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <div class="carousel-item" >
+              <button class="carousel-control-next" type="button"  data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
@@ -452,7 +461,7 @@
 
   <div class="col-4 tablainfopostus">
     <div class="titulografica">
-      <h1>POSTULACIONES EN ESPERA</h1>
+      <h1>USUARIOS INACTIVOS</h1>
     </div>
     
     <table class="table table-bordered table-striped mb-0">

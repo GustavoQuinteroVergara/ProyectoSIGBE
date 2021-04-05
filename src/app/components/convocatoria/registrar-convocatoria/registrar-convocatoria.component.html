@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="containerconvo">
+<div class="containerconvo container-fluid">
 
 
   <ng-template #mytemplate>
@@ -79,7 +79,7 @@
     <div class="col s6">
       <mat-form-field appearance="fill" class="inputsEspacio">
         <input #fechainicial matInput [ngxMatDatetimePicker]="picker" [min]="minDate"
-        placeholder="Fecha Inicial" [formControl]="dateControl" >
+        placeholder="Fecha Inicial" formControlName="fechaInicial" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
         <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
@@ -91,7 +91,7 @@
   <div class="col s6">
     <mat-form-field appearance="fill" class="inputsEspacio">
       <input #fechafinal matInput [ngxMatDatetimePicker]="picker2" [min]="minDate"
-      placeholder="Fecha final" [formControl]="dateControl" >
+      placeholder="Fecha final" formControlName="fechaFin" >
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
 
       <ngx-mat-datetime-picker #picker2 [showSpinners]="showSpinners" [showSeconds]="showSeconds"
@@ -103,14 +103,6 @@
 
 
 
-</div>
-<!--Checkbox-->
-<div >
-  <div class="row">
-    <div class="col" *ngFor="let docs of documentoscheckbox">
-    <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin" color="warn" (change)="agregarDoc(docs.iddocumento)">{{docs.descripcion}}</mat-checkbox>
-    </div>
-  </div>
 </div>
 <hr>
 <div *ngIf="!formNewDoc">
@@ -133,6 +125,16 @@
       </div>
   </form>
 </div>
+<hr>
+<!--Checkbox-->
+<div >
+  <div class="row">
+    <div class="col-md-6 col-sm-12" *ngFor="let docs of documentoscheckbox">
+    <mat-checkbox [ngModelOptions]="{standalone: true}" class="example-margin" color="warn" (change)="agregarDoc(docs.iddocumento)">{{docs.descripcion}}</mat-checkbox>
+    </div>
+  </div>
+</div>
+
 <hr>
 <!--Fin checkbox-->
 <div class="row mb-10">
@@ -157,7 +159,8 @@
 </div>
 <br>
 <div class="center-align">
-    <a mat-raised-button color="primary" (click)="registrarConvocatoria(fechainicial.value,fechafinal.value,
+    <a mat-raised-button color="primary" disabled="true" *ngIf="!formularioConvocatoria.valid" name="action">Registrar</a>
+    <a mat-raised-button color="primary" *ngIf="formularioConvocatoria.valid" (click)="registrarConvocatoria(fechainicial.value,fechafinal.value,
   beca.value,cupos.value,estadoconvocatoria.value,asuntocorreo.value,contenidocorreo.value, mytemplate)" name="action">Registrar</a>
 </div>
 </form>
