@@ -25,6 +25,7 @@ export class CuposticketsComponent implements OnInit {
     'fechaasignacion', 'cuposdisponiblesalmuerzo', 
     'cuposdisponiblesrefrigerio','Acciones'];
 	public formularioCuposAsigna: FormGroup;
+	public formularioCuposAsignaActualizar: FormGroup;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort,{static: false}) sort: MatSort;
@@ -33,6 +34,12 @@ export class CuposticketsComponent implements OnInit {
 	ngOnInit(): void {
 		this.buscarAsignaciones();
 		this.formularioCuposAsigna = new FormGroup({
+			fecha: new FormControl('',Validators.required),
+			cuposalmuerzo: new FormControl('',Validators.required),
+			cuposrefrigerio: new FormControl('',Validators.required),
+		});
+		this.formularioCuposAsignaActualizar = new FormGroup({
+			fechaactualizar: new FormControl('',Validators.required),
 			cuposAlmuerzo: new FormControl('',Validators.required),
 			cuposRefrigerio: new FormControl('',Validators.required),
 		});
@@ -45,6 +52,7 @@ export class CuposticketsComponent implements OnInit {
 	abrirModalModificar(asignacionsel:any,templateRef){
 		console.log(asignacionsel);
 		this.asignacionSel = asignacionsel;
+
 		let dialogRef = this.dialog.open( templateRef,{
 			height: '450px',
 			width: '450px',

@@ -119,7 +119,7 @@
             <h4>Fecha de nacimiento</h4>
             <mat-form-field appearance="fill" class="example-full-width">
               <mat-label>Fecha de nacimiento</mat-label>
-              <input matInput #fechanacimiento [matDatepicker]="picker">
+              <input matInput #fechanacimiento [matDatepicker]="picker" min="{{fechaActual}}">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>

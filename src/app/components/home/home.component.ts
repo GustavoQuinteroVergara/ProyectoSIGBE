@@ -29,11 +29,12 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 	fechaultperiodo:any;
 	saldoRegistrado:any;
-	anunciosActual:any;
+	anunciosActual=null;
 	periodocaducado:any;
     postulaciones:any;
     convoActivas:any;
     label=[];
+    cantAnuncios=0;
     data=[];
     imgcreada = false;
 	imagenCreada;
@@ -102,7 +103,12 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
 	  getsAnuncios(){
 	    this.anunciosservice.getsPeriodosUlt().subscribe(result=>{
-	      this.anunciosActual = result;
+	      	this.anunciosActual = result;
+	      	this.cantAnuncios = this.anunciosActual.length;
+	      if(this.anunciosActual.length == 0){
+	      	this.anunciosActual = null;
+	      }
+	      
 	    });
 	  }
 
@@ -238,10 +244,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
 			this.fechaultperiodo = formatDate(result['fechafinal']['date'], 'yyyy-MM-dd', 'en');
 			if(this.fechaultperiodo < this.fechaActual2){
 				this.verificacionPeriodoCaducado = true;
-				console.log('llegue aqui');
 				this.formularioRegistrarPeriodo = new FormGroup({
-					fechasperiodo: new FormControl('',Validators.required),
-					descripcionperiodo: new FormControl('',Validators.required),
+					fechasperiodoini: new FormControl('',Validators.required),
+					fechasperiodofin: new FormControl('',Validators.required),
+					descripcionperiodo: new FormControl('',Validators.required)
 				});
 				let dialogRef = this.dialog.open( this.customTemplate,{
 					height: '450px',
@@ -252,10 +258,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
 		},(err)=>{
 			this.verificacionPeriodoCaducado = true;
-			console.log('llegue aqui');
 			this.formularioRegistrarPeriodo = new FormGroup({
-				fechasperiodo: new FormControl('',Validators.required),
-				descripcionperiodo: new FormControl('',Validators.required),
+				fechasperiodoini: new FormControl('',Validators.required),
+				fechasperiodofin: new FormControl('',Validators.required),
+				descripcionperiodo: new FormControl('',Validators.required)
 			});
 			let dialogRef = this.dialog.open( this.customTemplate,{
 				height: '450px',

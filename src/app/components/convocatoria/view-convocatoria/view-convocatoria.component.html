@@ -343,7 +343,7 @@
 
 <ng-template #mytemplate>
   <div >
-    <form >
+    <form>
       <h1>Información Estudiante
       </h1>
       <hr>
@@ -518,7 +518,8 @@
               </div>
             </div>
                     <div *ngIf="activeButton">
-                      <a mat-raised-button color="primary" [disabled]="formularioConvocatoria.invalid" (click)="actualizarConvocatoria
+                      <a mat-raised-button color="primary" disabled="true" *ngIf="!formularioConvocatoria.valid"name="action">Actualizar</a>
+                      <a mat-raised-button color="primary" *ngIf="formularioConvocatoria.valid" (click)="actualizarConvocatoria
                       (consecutivo_convocatoria.value, cupo.value, becas.value,periodosacademicos.value,fecha_inicio.value,fecha_fin.value,estado_convocatoria.value,successactualizacion)" name="action">Actualizar</a>
                     </div>
                 </div>

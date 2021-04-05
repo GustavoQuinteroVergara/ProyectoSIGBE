@@ -119,7 +119,18 @@ export const ROUTES: Routes = [
 {path:'habilitarUser', component:HabilitaruserComponent},
 
 {path:'olvidarContrasena', component:OlvdarcontrasenaComponent},
-{path:'bienvenida', component:HomeComponent},
+{path:'bienvenida',component:HomeComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '1|2|3|4'
+}},
+// {path:'',component:LoginComponent, canActivate:[ValidacionRutasGuard]
+// ,data: { 
+//   expectedRole: '-'
+// }},
+// {path:'**',component:LoginComponent, canActivate:[ValidacionRutasGuard]
+// ,data: { 
+//   expectedRole: '-'
+// }},
 {path:'',component: LoginComponent},
 {path:'**',component: LoginComponent}
 

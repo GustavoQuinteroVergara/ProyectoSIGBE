@@ -89,6 +89,7 @@ export class RegistrarConvocatoriaComponent implements OnInit {
       beca: new FormControl('',Validators.required),
       estadoConvocatoria: new FormControl('',Validators.required),
       fechaInicial: new FormControl('',Validators.required),
+      fechaFin: new FormControl('',Validators.required),
       cupos: new FormControl('',Validators.required),
     });
   }
@@ -110,10 +111,11 @@ export class RegistrarConvocatoriaComponent implements OnInit {
       return;
     }
     this.documentoService.nuevoDocumento(nomdoc).subscribe(result=>{
-      let dialogRef = this.dialog.open( successdoc,{
-         height: '200px',
-         width: '200px',
-       });
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Registrado exitosamente.',
+        icon: 'success'
+      });
       this.buscarDocumentos();
     },(errr)=>{
       console.log(errr);
@@ -158,6 +160,11 @@ export class RegistrarConvocatoriaComponent implements OnInit {
 
   registrarConvocatoria(fechainicial:any,fechafinal:any,becas:any,cupos:any,estadoconvocatoria:any,
     asuntocorreo:any,contenidocorreo:any,templateRef){
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
 
     if(this.opcion){
       if(this.docssel.length == 0){

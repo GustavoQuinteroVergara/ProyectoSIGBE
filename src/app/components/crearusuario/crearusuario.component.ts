@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import  {ServiciocrearuserService } from './serviciocrearuser.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {formatDate } from '@angular/common';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crearusuario',
@@ -16,6 +17,7 @@ success:any;
 iddepartamento:any;
 departamento:any;
 ciud:any;
+fechaActual= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 carreras:any;
 departamentos:any;
 roles:any;
