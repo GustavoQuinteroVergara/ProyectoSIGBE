@@ -132,7 +132,7 @@ export class VisitadomiciliariaComponent implements OnInit {
 
   registroVisita(templateRef){
     this.visitaDomiciliaria={
-      postulacionid:this.postulacionid,
+      postulacionid:this.idPostuSel,
       estamento:this.estamento,
       codigo:this.codigo,
       cedula:this.cedula,
