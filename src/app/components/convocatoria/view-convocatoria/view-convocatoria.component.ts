@@ -479,9 +479,10 @@ export class ViewConvocatoriaComponent {
     //FUENTES DE INGRESO
     doc.setFontSize(20);
     console.log(this.entrevistaPostuFound[1][0]);
-    for (var i = 0; i < this.entrevistaPostuFound[1][0].length - 1; i++) {
+    for (var i = 0; i < this.entrevistaPostuFound[1][0].length; i++) {
       var textoseparado = this.entrevistaPostuFound[1][0][i].nombreayuda.split(",");
       for (var j = 0; j < textoseparado.length; j++) {
+        console.log(textoseparado[j] );
         if(textoseparado[j] != ""){
           switch (textoseparado[j]) {
             case "Familia":
@@ -626,15 +627,17 @@ export class ViewConvocatoriaComponent {
     for (var i = 0; i < this.entrevistaPostuFound[0][0].length; ++i) {
       if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Padre"){
           //padre
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,40,130);
-          doc.text(this.entrevistaPostuFound[0][0][i].edad,40,140);
-          doc.text(this.entrevistaPostuFound[0][0][i].direccion,40,150);
-          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,40,160);
-          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,40,170);
-          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,40,180);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,24);
+          doc.text(splitText,30,128);
+          doc.text(this.entrevistaPostuFound[0][0][i].edad,32,140);
+          doc.text(this.entrevistaPostuFound[0][0][i].direccion,32,150);
+          doc.text(this.entrevistaPostuFound[0][0][i].ciudad,32,160);
+          doc.text(this.entrevistaPostuFound[0][0][i].ocupacion,32,170);
+          doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,32,180);
       }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Madre"){
               //madre
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,65,130);
+              var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,24);
+          doc.text(splitText,65,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,65,140);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,65,150);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,65,160);
@@ -642,7 +645,8 @@ export class ViewConvocatoriaComponent {
           doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,65,180);
       }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Conyuge"){
           //conyugue
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,95,130);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+          doc.text(splitText,95,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,95,140);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,95,150);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,95,160);
@@ -650,7 +654,8 @@ export class ViewConvocatoriaComponent {
           doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,95,180);
       }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Hermano"){
         if(cuentahermanos == 0){
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,40,205);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+          doc.text(splitText,40,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,40,215);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,40,225);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,40,235);
@@ -658,7 +663,8 @@ export class ViewConvocatoriaComponent {
           doc.text("" +this.entrevistaPostuFound[0][0][i].ingresos,40,255);
           cuentahermanos++;
         }else if(cuentahermanos == 1){
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,80,205);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+          doc.text(splitText,80,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,80,215);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,80,225);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,80,235);
@@ -667,7 +673,8 @@ export class ViewConvocatoriaComponent {
 
           cuentahermanos++;
         }else{
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,120,205);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+          doc.text(splitText,120,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,120,215);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,120,225);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,120,235);
@@ -676,7 +683,8 @@ export class ViewConvocatoriaComponent {
         }
       }else if(this.entrevistaPostuFound[0][0][i].tipoparentesco == "Otro"){
         if(cuentaOtros == 0){
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,140,205);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+          doc.text(splitText,140,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,140,215);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,140,225);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,140,235);
@@ -685,7 +693,8 @@ export class ViewConvocatoriaComponent {
 
           cuentaOtros++;
         }else{
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,175,205);
+          var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+          doc.text(splitText,175,128);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,175,215);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,175,225);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,175,235);
@@ -695,7 +704,8 @@ export class ViewConvocatoriaComponent {
       }else{
         if(cuentaparentesco == 0){
               //p2
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,135,130);
+              var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+              doc.text(splitText,135,12);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,135,140);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,135,150);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,135,160);
@@ -704,7 +714,8 @@ export class ViewConvocatoriaComponent {
           cuentaparentesco++;
         }else {
               //p1
-          doc.text(this.entrevistaPostuFound[0][0][i].nombre,175,130);
+              var splitText = doc.splitTextToSize(this.entrevistaPostuFound[0][0][i].nombre,16);
+              doc.text(splitText,175,130);
           doc.text(this.entrevistaPostuFound[0][0][i].edad,175,140);
           doc.text(this.entrevistaPostuFound[0][0][i].direccion,175,150);
           doc.text(this.entrevistaPostuFound[0][0][i].ciudad,175,160);

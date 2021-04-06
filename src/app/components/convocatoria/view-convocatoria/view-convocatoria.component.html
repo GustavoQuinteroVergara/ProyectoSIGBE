@@ -368,6 +368,14 @@
       </div>
     </form>
     <h1>Postulaciones Realizadas</h1>
+    <div class="row">
+      <div class="col-12 m-12 text-center">
+        <div class ="container" style="padding-bottom:20px">
+          <button mat-raised-button color="warning" (click)="exportAsXLSX2()">Exportar a Excel</button>
+          <!--<button mat-raised-button color="accent">Accent</button>-->
+        </div>
+      </div>
+    </div>
     <table class="table table-bordered table-striped mb-0">
       <thead>
         <tr>
@@ -394,14 +402,7 @@
         <button mat-raised-button color="primary">Generar informe estudiante</button>
       </div>
     </div>-->
-    <div class="row">
-      <div class="col-12 m-12 text-center">
-        <div class ="container" style="padding-bottom:20px">
-          <button mat-raised-button color="warning" (click)="exportAsXLSX2()">Exportar a Excel</button>
-          <!--<button mat-raised-button color="accent">Accent</button>-->
-        </div>
-      </div>
-    </div>
+
   </div>
 </ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
