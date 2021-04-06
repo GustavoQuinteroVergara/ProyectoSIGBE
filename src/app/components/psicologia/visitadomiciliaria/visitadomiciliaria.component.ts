@@ -224,6 +224,7 @@ export class VisitadomiciliariaComponent implements OnInit {
       this.getDocumntosPostu(this.idPostuSel);
       this.getVisitaPostu(this.idPostuSel);
       this.getEntrevistaPostu(this.idPostuSel);
+      Swal.close();
     });
   }
  verPostuSel(templatePostu){

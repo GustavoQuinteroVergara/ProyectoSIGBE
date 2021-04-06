@@ -255,7 +255,10 @@ idConvo:any;
       nombreestudiante: new FormControl(),
       cedula: new FormControl(),
       numerohijos:new FormControl(),
-      lugarnacimiento: new FormControl()
+      lugarnacimiento: new FormControl(),
+      
+    planestudio : new FormControl(),
+    codigoest : new FormControl(),
    });
    this.secondFormGroup=new FormGroup({
     barrioest: new FormControl(),
@@ -319,8 +322,6 @@ idConvo:any;
     ingresopadre: new FormControl(),
     ocupacionpadre: new FormControl(),
     edadmadre: new FormControl(),
-    planestudio : new FormControl(),
-    codigoest : new FormControl(),
     direccionmadre: new FormControl(),
     ciudadmadre: new FormControl(),
     ocupacionmadre:new FormControl(),
@@ -766,9 +767,11 @@ telefonojefe: this.telefonoempresajefe
       Swal.showLoading();
     this.serviceviewconvocatoria.getPostuById(idpostu).subscribe(result=>{
       this.postuseltable = result;
+      console.log(this.postuseltable);
       this.getDocumntosPostu(this.idPostuSel);
       this.getVisitaPostu(this.idPostuSel);
       this.getEntrevistaPostu(this.idPostuSel);
+      Swal.close();
     });
   }
  verPostuSel(templatePostu){

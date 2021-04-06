@@ -118,7 +118,23 @@
         <div class="col-lg row" *ngIf="!this.activarUpdate" style="margin:0;">
             <h1>Documentos enviados</h1>
             <hr>
-            <div class="col" *ngFor="let docspostu of documentosFoundpostu">
+            <div class="col-lg" >
+                <div class="card m-2 cardsconvos" style="width: 18rem;display: inline-block;transition: all 0.2s ease;" *ngFor="let docspostu of documentosFoundpostu" > 
+                  <div class="card-body">
+                    <div class="good" *ngIf="docspostu.estado == 1">
+                        Bien diligenciado - <i class="icofont-checked" style="font-size: 15px;"></i>
+                    </div>
+                    <div class="bad" *ngIf="docspostu.estado == 2">
+                        Mal diligenciado     - <i class="icofont-close-squared" style="font-size: 15px;"></i>
+                    </div>
+                    <hr>
+                    <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}} ---</a>
+                    <hr>
+    
+                  </div>
+                </div>
+          </div>
+            <!-- <div class="col" *ngFor="let docspostu of documentosFoundpostu">
               <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}} ---</a>
                 <div class="good" *ngIf="docspostu.estado == 1">
                     Bien diligenciado - <i class="icofont-checked" style="font-size: 15px;"></i>
@@ -126,7 +142,7 @@
                 <div class="bad" *ngIf="docspostu.estado == 2">
                     Mal diligenciado     - <i class="icofont-close-squared" style="font-size: 15px;"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
         <hr>
     </div>
