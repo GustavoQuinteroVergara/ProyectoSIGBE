@@ -26,6 +26,7 @@ export class ModificarusuarioComponent implements OnInit {
   iddepartamento:any;
   departamento:any;
   departamentos:any;
+  cantCarreras=0;
   ciudades:any;
   
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
@@ -63,12 +64,17 @@ export class ModificarusuarioComponent implements OnInit {
 
   getCarrerasEst(){
     this.usuariocarreraService.carrerasEst(this.$nombreusuario.identi).subscribe(result=>{
-      this.carrerasest = [result];
+      this.carrerasest = result;
+      this.cantCarreras = this.carrerasest.length;
+      if(this.carrerasest.length == 0){
+        this.carrerasest = null;
+      }
     });
   }
 
   getCarreras(){
     this.usuariocarreraService.getCarreras().subscribe(result=>{
+
       this.getcarreras = result;
     });
   }
@@ -96,28 +102,46 @@ export class ModificarusuarioComponent implements OnInit {
                 icon: 'error'
           });  
     },(err)=>{
-      if(this.carrerasest[0].length >= 3){
-          Swal.fire({
-              title: 'ERROR',
-              text: 'Error, ya tienes el limite de carreras actuales.',
-              icon: 'error'
-          });  
+      if(this.carrerasest != null ){
+        if(this.cantCarreras >= 3){
+            Swal.fire({
+                title: 'ERROR',
+                text: 'Error, ya tienes el limite de carreras actuales.',
+                icon: 'error'
+            });  
+        }else{
+          this.usuariocarreraService.agregarCarreraEst(this.newCarrera).subscribe(result=>{
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Carrera registrada exitosamente.',
+              icon: 'success'
+            });  
+            this.getCarrerasEst();
+          },(err)=>{
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Error al agregar la carrera.',
+              icon: 'success'
+            }); 
+          });
+        }
       }else{
-        this.usuariocarreraService.agregarCarreraEst(this.newCarrera).subscribe(result=>{
-          Swal.fire({
-            title: 'Exitoso',
-            text: 'Carrera registrada exitosamente.',
-            icon: 'success'
-          });  
-          this.getCarrerasEst();
-        },(err)=>{
-          Swal.fire({
-            title: 'Exitoso',
-            text: 'Error al agregar la carrera.',
-            icon: 'success'
-          }); 
-        });
+          this.usuariocarreraService.agregarCarreraEst(this.newCarrera).subscribe(result=>{
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Carrera registrada exitosamente.',
+              icon: 'success'
+            });  
+            this.getCarrerasEst();
+          },(err)=>{
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Error al agregar la carrera.',
+              icon: 'success'
+            }); 
+          });
       }
+
 
     });
 

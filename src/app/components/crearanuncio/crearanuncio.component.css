@@ -12,8 +12,9 @@ display: inline-block;
 font-size: 100px;
 position: absolute;
 left: 0;
-top: 0;
+top: 12px;
 opacity: 0;
+cursor:pointer;
 }
 /* ESTILO DEL BOTÓN */
 .boton-standar-rw{

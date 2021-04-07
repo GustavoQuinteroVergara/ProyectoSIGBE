@@ -453,6 +453,7 @@
               </mat-radio-group>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="col-12">
 
@@ -475,6 +476,7 @@
            </mat-form-field>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="col-12">
             <strong>Servicios públicos: </strong>
@@ -487,12 +489,13 @@
               </mat-radio-group>
           </div>
         </div>
+        <hr>
         <div class="row mt-4">
           <div class="col-12">
             <h3 >2.2 Cuarto del solicitante</h3>
             <mat-radio-group [(ngModel)]="cuartosolicitante"  aria-label="Select an option" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-margin estratoCheck" value="Solo" [checked]="cuartosolicitante == 'Solo'">Solo</mat-radio-button>
-              <mat-radio-button class="example-margin estratoCheck" value="Compartido" [checked]="cuartosolicitante == 'Compartido'">Compartido</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Solo" [checked]="cuartosolicitante == 'Solo'">Solo</mat-radio-button>
+              <mat-radio-button class="example-margin estratoCheck" color="warn" value="Compartido" [checked]="cuartosolicitante == 'Compartido'">Compartido</mat-radio-button>
             </mat-radio-group>
               <mat-form-field class="example-full-width camposInput" appearance="fill" *ngIf="fuenteingreso == 'Compartido'">
                   <mat-label for="cantidadpersonas">¿Con cuántas personas?</mat-label>

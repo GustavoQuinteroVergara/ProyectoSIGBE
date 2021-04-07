@@ -12,6 +12,7 @@ export class CrearanuncioComponent implements OnInit {
 	imageseleccionada = '';
   infoAnuncio:any;
   anunciosActual:any;
+  cantAnuncios=0;
 
 	archivo = {
 	    nombre: null,
@@ -53,7 +54,12 @@ export class CrearanuncioComponent implements OnInit {
 
   getsAnuncios(){
     this.anunciosservice.getsPeriodosUlt().subscribe(result=>{
-      this.anunciosActual = result;
+          this.anunciosActual = result;
+          this.cantAnuncios = this.anunciosActual.length;
+        if(this.anunciosActual.length == 0){
+          this.anunciosActual = null;
+        }
+        
     });
   }
 

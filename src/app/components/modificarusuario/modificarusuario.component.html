@@ -164,14 +164,19 @@
           <div>
           <a mat-raised-button color="warn" (click)="abrirModalCarrera(agregarCarreraModal)">Agregar una carrera</a>
         </div>
-          <table class="table table-bordered table-striped mb-0">
+        <div class="col-12">
+          <div class="alert alert-info alert-dismissible fade show" *ngIf="carrerasest == null">
+              <strong>Alerta!</strong> No tienes carreras registradas, por favor registra una carrera para usar las funcionalidades del sistema.
+          </div>
+        </div>
+          <table class="table table-bordered table-striped mb-0" *ngIf="carrerasest != null">
             <thead>
               <tr>
                 <th>Carrera</th>
                 <th>Código estudiante</th>
               </tr>
             </thead>
-            <tbody *ngFor="let carreras of carrerasest[0]">
+            <tbody *ngFor="let carreras of carrerasest">
               <tr>
                 <td>{{carreras.carrera}}</td>
                 <td>{{carreras.codigoestudiante}}</td>

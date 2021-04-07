@@ -4,6 +4,25 @@
 
       <a (click)="descargarPDFEntrevista()" mat-stroked-button><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
 </ng-template>
+<!--         Swal.fire({
+        title: '¿Terminaste de realizar la visita domiciliaria?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: "Si, he terminado de realizarla.",
+        cancelButtonText: "Aun no he terminado.",
+        allowOutsideClick: false,
+      }).then(result=>{
+        if(result.value){
+
+
+
+        }else{
+          this.loadingcc = false;
+          Swal.close();
+        }
+      }); -->
+
+
 
 
 <ng-template #visitaPostu>
@@ -220,7 +239,7 @@
             <strong>{{postuseltable.promedio}}</strong>
             <p>Promedio : </p>
       </div>
-      <div class="col-lg">
+      <div class="col-lg" *ngIf="estadopostusel != 3">
             <form>
               <p>¿Cumple o no cumple el promedio?</p>
               <div class="col-lg" *ngIf="estadopostusel != 4">
@@ -313,9 +332,11 @@
         <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
         <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
-      <div *ngIf="estadopostusel == 5"> <!-- Entrevista -->
+      <div *ngIf="estadopostusel == 5" style="text-align: center;"> <!-- Entrevista -->
         <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
         <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
+        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
       <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
         <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>

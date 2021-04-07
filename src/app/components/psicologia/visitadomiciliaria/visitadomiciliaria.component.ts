@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import {Router, ActivatedRoute, Params } from '@angular/router';
 import {DocumentoService} from '../../../services/documento.service';
 import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
 import {ServicesViewConvocatoriaService} from '../../convocatoria/view-convocatoria/services-view-convocatoria.service';
@@ -89,6 +89,7 @@ export class VisitadomiciliariaComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private rutaActiva: ActivatedRoute,
     private serviceVisita:RegistrarvisitaService,
+    private router:Router,
     private serviceviewconvocatoria:ServicesViewConvocatoriaService,
     private documentosService:DocumentoService,
     private visitadomiciliariaService:VisitadomiciliariaService,
@@ -167,6 +168,7 @@ export class VisitadomiciliariaComponent implements OnInit {
         text: 'Registrado exitosamente.',
         icon: 'success'
       }); 
+      this.router.navigate(['/viewConvocatoria/' + this.idConvo]);
     },(err)=>{
       Swal.fire({
         title: 'ERROR',
