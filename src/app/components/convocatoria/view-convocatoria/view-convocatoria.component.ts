@@ -900,7 +900,6 @@ export class ViewConvocatoriaComponent {
       this.entrevistaPostuFound = result;
       this.entrevistvalidate =true;
     },(err)=>{
-      console.log(err.error.text);
       this.entrevistvalidate=false;
     });
   }
@@ -1240,6 +1239,11 @@ export class ViewConvocatoriaComponent {
       Swal.close();
     });}
   cambiarEstadoPostu(idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
+    Swal.fire({
+      title: 'Cargando...',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
     this.loadingcc = true;
     if(estadopostulacionactual == 'En espera'){
         if(estadoseleccionado == 'Revision'){
@@ -1299,121 +1303,104 @@ export class ViewConvocatoriaComponent {
           },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Entrevista'){
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu: estadoseleccionado
-          };
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{  
-            this.loadingcc = false;
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
-            }
-            this.postuseltable.estado_postulacion = estadoseleccionado;
-            this.estadopostusel=5;
-            this.circlecolor1['pasoactive'] = false;
-            this.circlecolor2['pasoactive'] = false;
-            this.circlecolor2['pasoactivocomplete'] = false;
-            this.circlecolor3['pasoactivoline'] = false;
-            this.circlecolor1['pasoactive'] = false;
-            this.circlecolor2['pasoactivoline'] = false;
-
-           //
-            this.circlecolor1['pasoactive'] = true;
-            this.circlecolor2['pasoactive'] = true;
-            this.circlecolor2['pasoactivoline'] = true;
-            this.circlecolor2['pasoactivocomplete'] = true;
-            this.circlecolor3['pasoactive'] = true;
-            this.circlecolor3['pasoactivocomplete'] = true;
-            this.circlecolor4['pasoactivoline'] = true;
             Swal.fire({
-              title: 'Exitoso',
-              text: 'Actualizado exitosamente.',
-              icon: 'success'
-            });            
-          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
-        });
+              title: '¿Terminaste de revisar los documentos?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Si, he terminado de revisar.",
+              cancelButtonText: "Aun no he terminado.",
+              allowOutsideClick: false,
+            }).then(result=>{
+            Swal.fire({
+              title: 'Cargando...',
+              allowOutsideClick: false,
+            });
+            Swal.showLoading();
+              if(result.value){
+                this.updatePostu = {
+                  idpostu:idPostu,
+                  estadopostu: estadoseleccionado
+                };
+                this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+                (res=>{  
+                  this.loadingcc = false;
+                  for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                    if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                      this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                    }
+                  }
+                  this.postuseltable.estado_postulacion = estadoseleccionado;
+                  this.estadopostusel=5;
+                  this.circlecolor1['pasoactive'] = false;
+                  this.circlecolor2['pasoactive'] = false;
+                  this.circlecolor2['pasoactivocomplete'] = false;
+                  this.circlecolor3['pasoactivoline'] = false;
+                  this.circlecolor1['pasoactive'] = false;
+                  this.circlecolor2['pasoactivoline'] = false;
+
+                 //
+                  this.circlecolor1['pasoactive'] = true;
+                  this.circlecolor2['pasoactive'] = true;
+                  this.circlecolor2['pasoactivoline'] = true;
+                  this.circlecolor2['pasoactivocomplete'] = true;
+                  this.circlecolor3['pasoactive'] = true;
+                  this.circlecolor3['pasoactivocomplete'] = true;
+                  this.circlecolor4['pasoactivoline'] = true;
+                  Swal.fire({
+                    title: 'Exitoso',
+                    text: 'Actualizado exitosamente.',
+                    icon: 'success'
+                  });            
+                },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+              });
+              }else{
+                this.loadingcc = false;
+                Swal.close();
+              }
+            });
         }else if(estadoseleccionado == 'Aprobado'){
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu:estadoseleccionado
-          };
-          this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
-          this.convoActualizado={
-            idconvo:this.$convoBuscada.consecutivo_convocatoria,
-            cupos:this.$convoBuscada.cupo
-          };
+          Swal.fire({
+            title: '¿Terminaste de revisar los documentos?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si, he terminado de revisar.",
+            cancelButtonText: "Aun no he terminado.",
+            allowOutsideClick: false,
+          }).then(result=>{
+            if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+              this.updatePostu = {
+                idpostu:idPostu,
+                estadopostu:estadoseleccionado
+              };
+              this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
+              this.convoActualizado={
+                idconvo:this.$convoBuscada.consecutivo_convocatoria,
+                cupos:this.$convoBuscada.cupo
+              };
 
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{ 
-            this.loadingcc = false;
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
-              }
-            this.postuseltable.estado_postulacion = estadoseleccionado;
-            this.estadopostusel=1;
-
-            this.circlecolor1['pasoactive'] = false;
-            this.circlecolor2['pasoactive'] = false;
-            this.circlecolor2['pasoactivoline'] = false;
-            this.circlecolor2['pasoactivocomplete'] = false;
-            this.circlecolor3['pasoactive'] = false;
-            this.circlecolor3['pasoactivocomplete'] = false;
-            this.circlecolor4['pasoactivoline'] = false;
-
-            this.circlecolor1['pasoactive'] = true;
-            this.circlecolor2['pasoactive'] = true;
-            this.circlecolor2['pasoactivocomplete'] = true;
-            this.circlecolor3['pasoactive'] = true;
-            this.circlecolor3['pasoactivocomplete'] = true;
-            this.circlecolor4['pasoactive'] = true;
-            this.circlecolor4['pasoactivocomplete'] = true;
-            this.circlecolor5['pasoactive'] = true;
-            this.circlecolor5['pasoactivocomplete'] = true;
-            Swal.fire({
-              title: 'Exitoso',
-              text: 'Actualizado exitosamente.',
-              icon: 'success'
-            }); 
-            
-          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
-        });
-          //Actualizar Convocatoria
-
-          this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
-          (res=>{console.log(res);},(err)=>{
-          });
-        } else if(estadoseleccionado == 'Rechazado'){
-            this.updatePostu = {
-              idpostu:idPostu,
-              estadopostu:estadoseleccionado
-            };
-            this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-            (res=>{  
-              this.loadingcc = false;
-              for (var i = 0; i < this.$postuByIdArray.length; i++) {
-                if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                  this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-                }
-                }
+              this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+              (res=>{ 
+                this.loadingcc = false;
+                for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                  if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                    this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                  }
+                  }
                 this.postuseltable.estado_postulacion = estadoseleccionado;
-                this.estadopostusel=2;
+                this.estadopostusel=1;
 
                 this.circlecolor1['pasoactive'] = false;
                 this.circlecolor2['pasoactive'] = false;
+                this.circlecolor2['pasoactivoline'] = false;
                 this.circlecolor2['pasoactivocomplete'] = false;
                 this.circlecolor3['pasoactive'] = false;
                 this.circlecolor3['pasoactivocomplete'] = false;
-                this.circlecolor4['pasoactive'] = false;
-                this.circlecolor4['pasoactivocomplete'] = false;
-                this.circlecolor5['pasoactive'] = false;
-                this.circlecolor5['pasoactivocomplete'] = false;
-
-
+                this.circlecolor4['pasoactivoline'] = false;
 
                 this.circlecolor1['pasoactive'] = true;
                 this.circlecolor2['pasoactive'] = true;
@@ -1422,15 +1409,93 @@ export class ViewConvocatoriaComponent {
                 this.circlecolor3['pasoactivocomplete'] = true;
                 this.circlecolor4['pasoactive'] = true;
                 this.circlecolor4['pasoactivocomplete'] = true;
-                this.circlecolor5['pasoactivered'] = true;
-                this.circlecolor5['pasoactivolinered'] = true;
-            Swal.fire({
-              title: 'Exitoso',
-              text: 'Actualizado exitosamente.',
-              icon: 'success'
-            }); 
-            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+                this.circlecolor5['pasoactive'] = true;
+                this.circlecolor5['pasoactivocomplete'] = true;
+                Swal.fire({
+                  title: 'Exitoso',
+                  text: 'Actualizado exitosamente.',
+                  icon: 'success'
+                }); 
+                
+              },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+            });
+              //Actualizar Convocatoria
+
+              this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
+              (res=>{console.log(res);},(err)=>{
+              });
+
+            
+            }else{
+              this.loadingcc = false;
+              Swal.close();
+            }
           });
+        } else if(estadoseleccionado == 'Rechazado'){
+            Swal.fire({
+              title: '¿Terminaste de revisar los documentos?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Si, he terminado de revisar.",
+              cancelButtonText: "Aun no he terminado.",
+              allowOutsideClick: false,
+            }).then(result=>{
+              if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+                  this.updatePostu = {
+                    idpostu:idPostu,
+                    estadopostu:estadoseleccionado
+                  };
+                  this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+                  (res=>{  
+                    this.loadingcc = false;
+                    for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                      if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                        this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                      }
+                      }
+                      this.postuseltable.estado_postulacion = estadoseleccionado;
+                      this.estadopostusel=2;
+
+                      this.circlecolor1['pasoactive'] = false;
+                      this.circlecolor2['pasoactive'] = false;
+                      this.circlecolor2['pasoactivocomplete'] = false;
+                      this.circlecolor3['pasoactive'] = false;
+                      this.circlecolor3['pasoactivocomplete'] = false;
+                      this.circlecolor4['pasoactive'] = false;
+                      this.circlecolor4['pasoactivocomplete'] = false;
+                      this.circlecolor5['pasoactive'] = false;
+                      this.circlecolor5['pasoactivocomplete'] = false;
+
+
+
+                      this.circlecolor1['pasoactive'] = true;
+                      this.circlecolor2['pasoactive'] = true;
+                      this.circlecolor2['pasoactivocomplete'] = true;
+                      this.circlecolor3['pasoactive'] = true;
+                      this.circlecolor3['pasoactivocomplete'] = true;
+                      this.circlecolor4['pasoactive'] = true;
+                      this.circlecolor4['pasoactivocomplete'] = true;
+                      this.circlecolor5['pasoactivered'] = true;
+                      this.circlecolor5['pasoactivolinered'] = true;
+                  Swal.fire({
+                    title: 'Exitoso',
+                    text: 'Actualizado exitosamente.',
+                    icon: 'success'
+                  }); 
+                  },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+                });
+
+
+              
+              }else{
+                Swal.close();
+              }
+            });
         }
       }else if(estadopostulacionactual == 'Entrevista'){
         if(estadoseleccionado == 'Revision'){
@@ -1472,45 +1537,202 @@ export class ViewConvocatoriaComponent {
           },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Visita'){
-            this.updatePostu = {
-              idpostu:idPostu,
-              estadopostu: estadoseleccionado
-            };
-            this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-            (res=>{  
-              this.loadingcc = false;
-              for (var i = 0; i < this.$postuByIdArray.length; i++) {
-                if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                  this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-                }
-              }
-              this.postuseltable.estado_postulacion = estadoseleccionado;
-              this.estadopostusel=6;
-                          this.circlecolor1['pasoactive'] = false;
-              this.circlecolor2['pasoactive'] = false;
-              this.circlecolor2['pasoactivocomplete'] = false;
-              this.circlecolor3['pasoactive'] = false;
-              this.circlecolor3['pasoactivocomplete'] = false;
-              this.circlecolor4['pasoactive'] = false;
-              this.circlecolor4['pasoactivocomplete'] = false;
-              this.circlecolor5['pasoactive'] = false;
-              this.circlecolor5['pasoactivocomplete'] = false;
-
-              this.circlecolor1['pasoactive'] = true;
-              this.circlecolor2['pasoactive'] = true;
-              this.circlecolor2['pasoactivocomplete'] = true;
-              this.circlecolor3['pasoactive'] = true;
-              this.circlecolor3['pasoactivocomplete'] = true;
-              this.circlecolor4['pasoactive'] = true;
-              this.circlecolor4['pasoactivocomplete'] = true;
-              this.circlecolor5['pasoactivoline'] = true;
             Swal.fire({
-              title: 'Exitoso',
-              text: 'Actualizado exitosamente.',
-              icon: 'success'
-            }); 
-            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+              title: '¿Terminaste de realizar la entrevista?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Si, he terminado de realizarla.",
+              cancelButtonText: "Aun no he terminado.",
+              allowOutsideClick: false,
+            }).then(result=>{
+              if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+                this.updatePostu = {
+                  idpostu:idPostu,
+                  estadopostu: estadoseleccionado
+                };
+                this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+                (res=>{  
+                  this.loadingcc = false;
+                  for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                    if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                      this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                    }
+                  }
+                  this.postuseltable.estado_postulacion = estadoseleccionado;
+                  this.estadopostusel=6;
+                              this.circlecolor1['pasoactive'] = false;
+                  this.circlecolor2['pasoactive'] = false;
+                  this.circlecolor2['pasoactivocomplete'] = false;
+                  this.circlecolor3['pasoactive'] = false;
+                  this.circlecolor3['pasoactivocomplete'] = false;
+                  this.circlecolor4['pasoactive'] = false;
+                  this.circlecolor4['pasoactivocomplete'] = false;
+                  this.circlecolor5['pasoactive'] = false;
+                  this.circlecolor5['pasoactivocomplete'] = false;
+
+                  this.circlecolor1['pasoactive'] = true;
+                  this.circlecolor2['pasoactive'] = true;
+                  this.circlecolor2['pasoactivocomplete'] = true;
+                  this.circlecolor3['pasoactive'] = true;
+                  this.circlecolor3['pasoactivocomplete'] = true;
+                  this.circlecolor4['pasoactive'] = true;
+                  this.circlecolor4['pasoactivocomplete'] = true;
+                  this.circlecolor5['pasoactivoline'] = true;
+                Swal.fire({
+                  title: 'Exitoso',
+                  text: 'Actualizado exitosamente.',
+                  icon: 'success'
+                }); 
+                },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+              });
+              }else{
+                this.loadingcc = false;
+                Swal.close();
+              }
+            });
+        }else if(estadoseleccionado == 'Aprobado'){
+
+          Swal.fire({
+            title: '¿Terminaste de realizar la entrevista?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si, he terminado de realizarla.",
+            cancelButtonText: "Aun no he terminado.",
+            allowOutsideClick: false,
+          }).then(result=>{
+            if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+              this.updatePostu = {
+                idpostu:idPostu,
+                estadopostu:estadoseleccionado
+              };
+              this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
+              this.convoActualizado={
+                idconvo:this.$convoBuscada.consecutivo_convocatoria,
+                cupos:this.$convoBuscada.cupo
+              };
+
+              this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+              (res=>{ 
+                this.loadingcc = false;
+                for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                  if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                    this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                  }
+                  }
+                this.postuseltable.estado_postulacion = estadoseleccionado;
+                this.estadopostusel=1;
+
+                this.circlecolor1['pasoactive'] = false;
+                this.circlecolor2['pasoactive'] = false;
+                this.circlecolor2['pasoactivocomplete'] = false;
+                this.circlecolor3['pasoactive'] = false;
+                this.circlecolor3['pasoactivocomplete'] = false;
+                this.circlecolor4['pasoactive'] = false;
+                this.circlecolor4['pasoactivocomplete'] = false;
+                this.circlecolor5['pasoactive'] = false;
+                this.circlecolor5['pasoactivocomplete'] = false;
+
+
+                this.circlecolor1['pasoactive'] = true;
+                this.circlecolor2['pasoactive'] = true;
+                this.circlecolor2['pasoactivocomplete'] = true;
+                this.circlecolor3['pasoactive'] = true;
+                this.circlecolor3['pasoactivocomplete'] = true;
+                this.circlecolor4['pasoactive'] = true;
+                this.circlecolor4['pasoactivocomplete'] = true;
+                this.circlecolor5['pasoactive'] = true;
+                this.circlecolor5['pasoactivocomplete'] = true;
+                Swal.fire({
+                  title: 'Exitoso',
+                  text: 'Actualizado exitosamente.',
+                  icon: 'success'
+                }); 
+                
+              },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+            });
+              //Actualizar Convocatoria
+
+              this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
+              (res=>{console.log(res);},(err)=>{
+              });
+            }else{
+              this.loadingcc = false;
+              Swal.close();
+            }
           });
+        }else if(estadoseleccionado == 'Rechazado'){
+
+            Swal.fire({
+              title: '¿Terminaste de realizar la entrevista?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Si, he terminado de realizarla.",
+              cancelButtonText: "Aun no he terminado.",
+              allowOutsideClick: false,
+            }).then(result=>{
+              if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+                this.updatePostu = {
+                  idpostu:idPostu,
+                  estadopostu:estadoseleccionado
+                };
+                this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+                (res=>{  
+                  this.loadingcc = false;
+                  for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                    if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                      this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                    }
+                  }
+                    this.postuseltable.estado_postulacion = estadoseleccionado;
+                    this.estadopostusel=2;
+
+
+                    this.circlecolor1['pasoactive'] = false;
+                    this.circlecolor2['pasoactive'] = false;
+                    this.circlecolor2['pasoactivocomplete'] = false;
+                    this.circlecolor3['pasoactive'] = false;
+                    this.circlecolor3['pasoactivocomplete'] = false;
+                    this.circlecolor4['pasoactive'] = false;
+                    this.circlecolor4['pasoactivocomplete'] = false;
+                    this.circlecolor5['pasoactive'] = false;
+                    this.circlecolor5['pasoactivocomplete'] = false;
+
+                    this.circlecolor1['pasoactive'] = true;
+                    this.circlecolor2['pasoactive'] = true;
+                    this.circlecolor2['pasoactivocomplete'] = true;
+                    this.circlecolor3['pasoactive'] = true;
+                    this.circlecolor3['pasoactivocomplete'] = true;
+                    this.circlecolor4['pasoactive'] = true;
+                    this.circlecolor4['pasoactivocomplete'] = true;
+                    this.circlecolor5['pasoactivered'] = true;
+                    this.circlecolor5['pasoactivolinered'] = true;
+                  Swal.fire({
+                  title: 'Exitoso',
+                  text: 'Actualizado exitosamente.',
+                  icon: 'success'
+                }); 
+                },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+              });
+              }else{
+                this.loadingcc = false;
+                Swal.close();
+              }
+            });
         }
       }else if(estadopostulacionactual == 'Visita'){
         if(estadoseleccionado == 'Entrevista'){
@@ -1555,103 +1777,143 @@ export class ViewConvocatoriaComponent {
           },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
         });
         }else if(estadoseleccionado == 'Aprobado'){
-          this.updatePostu = {
-            idpostu:idPostu,
-            estadopostu:estadoseleccionado
-          };
-          this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
-          this.convoActualizado={
-            idconvo:this.$convoBuscada.consecutivo_convocatoria,
-            cupos:this.$convoBuscada.cupo
-          };
 
-          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-          (res=>{ 
-            this.loadingcc = false;
-            for (var i = 0; i < this.$postuByIdArray.length; i++) {
-              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-              }
-              }
-            this.postuseltable.estado_postulacion = estadoseleccionado;
-            this.estadopostusel=1;
+          Swal.fire({
+            title: '¿Terminaste de realizar la visita domiciliaria?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: "Si, he terminado de realizarla.",
+            cancelButtonText: "Aun no he terminado.",
+            allowOutsideClick: false,
+          }).then(result=>{
+            if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+                this.updatePostu = {
+                  idpostu:idPostu,
+                  estadopostu:estadoseleccionado
+                };
+                this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
+                this.convoActualizado={
+                  idconvo:this.$convoBuscada.consecutivo_convocatoria,
+                  cupos:this.$convoBuscada.cupo
+                };
 
-            this.circlecolor1['pasoactive'] = false;
-            this.circlecolor2['pasoactive'] = false;
-            this.circlecolor2['pasoactivocomplete'] = false;
-            this.circlecolor3['pasoactive'] = false;
-            this.circlecolor3['pasoactivocomplete'] = false;
-            this.circlecolor4['pasoactive'] = false;
-            this.circlecolor4['pasoactivocomplete'] = false;
-            this.circlecolor5['pasoactive'] = false;
-            this.circlecolor5['pasoactivocomplete'] = false;
+                this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+                (res=>{ 
+                  this.loadingcc = false;
+                  for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                    if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                      this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                    }
+                    }
+                  this.postuseltable.estado_postulacion = estadoseleccionado;
+                  this.estadopostusel=1;
+
+                  this.circlecolor1['pasoactive'] = false;
+                  this.circlecolor2['pasoactive'] = false;
+                  this.circlecolor2['pasoactivocomplete'] = false;
+                  this.circlecolor3['pasoactive'] = false;
+                  this.circlecolor3['pasoactivocomplete'] = false;
+                  this.circlecolor4['pasoactive'] = false;
+                  this.circlecolor4['pasoactivocomplete'] = false;
+                  this.circlecolor5['pasoactive'] = false;
+                  this.circlecolor5['pasoactivocomplete'] = false;
 
 
-            this.circlecolor1['pasoactive'] = true;
-            this.circlecolor2['pasoactive'] = true;
-            this.circlecolor2['pasoactivocomplete'] = true;
-            this.circlecolor3['pasoactive'] = true;
-            this.circlecolor3['pasoactivocomplete'] = true;
-            this.circlecolor4['pasoactive'] = true;
-            this.circlecolor4['pasoactivocomplete'] = true;
-            this.circlecolor5['pasoactive'] = true;
-            this.circlecolor5['pasoactivocomplete'] = true;
-            Swal.fire({
-              title: 'Exitoso',
-              text: 'Actualizado exitosamente.',
-              icon: 'success'
-            }); 
-            
-          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
-        });
-          //Actualizar Convocatoria
+                  this.circlecolor1['pasoactive'] = true;
+                  this.circlecolor2['pasoactive'] = true;
+                  this.circlecolor2['pasoactivocomplete'] = true;
+                  this.circlecolor3['pasoactive'] = true;
+                  this.circlecolor3['pasoactivocomplete'] = true;
+                  this.circlecolor4['pasoactive'] = true;
+                  this.circlecolor4['pasoactivocomplete'] = true;
+                  this.circlecolor5['pasoactive'] = true;
+                  this.circlecolor5['pasoactivocomplete'] = true;
+                  Swal.fire({
+                    title: 'Exitoso',
+                    text: 'Actualizado exitosamente.',
+                    icon: 'success'
+                  }); 
+                  
+                },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+              });
+                //Actualizar Convocatoria
 
-          this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
-          (res=>{console.log(res);},(err)=>{
+                this.serviceviewconvocatoria.actualizarCuposConvo(this.convoActualizado).subscribe
+                (res=>{console.log(res);},(err)=>{
+                });
+            }else{
+              this.loadingcc = false;
+              Swal.close();
+            }
           });
         }else if(estadoseleccionado == 'Rechazado'){
-            this.updatePostu = {
-              idpostu:idPostu,
-              estadopostu:estadoseleccionado
-            };
-            this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
-            (res=>{  
-              this.loadingcc = false;
-              for (var i = 0; i < this.$postuByIdArray.length; i++) {
-                if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
-                  this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
-                }
+            Swal.fire({
+              title: '¿Terminaste de realizar la visita domiciliaria?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: "Si, he terminado de realizarla.",
+              cancelButtonText: "Aun no he terminado.",
+              allowOutsideClick: false,
+            }).then(result=>{
+              if(result.value){
+                Swal.fire({
+                  title: 'Cargando...',
+                  allowOutsideClick: false,
+                });
+                Swal.showLoading();
+               this.updatePostu = {
+                            idpostu:idPostu,
+                            estadopostu:estadoseleccionado
+                          };
+                          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+                          (res=>{  
+                            this.loadingcc = false;
+                            for (var i = 0; i < this.$postuByIdArray.length; i++) {
+                              if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
+                                this.$postuByIdArray[i].estado_postulacion = this.updatePostu.estadopostu;
+                              }
+                            }
+                              this.postuseltable.estado_postulacion = estadoseleccionado;
+                              this.estadopostusel=2;
+
+
+                              this.circlecolor1['pasoactive'] = false;
+                              this.circlecolor2['pasoactive'] = false;
+                              this.circlecolor2['pasoactivocomplete'] = false;
+                              this.circlecolor3['pasoactive'] = false;
+                              this.circlecolor3['pasoactivocomplete'] = false;
+                              this.circlecolor4['pasoactive'] = false;
+                              this.circlecolor4['pasoactivocomplete'] = false;
+                              this.circlecolor5['pasoactive'] = false;
+                              this.circlecolor5['pasoactivocomplete'] = false;
+
+                              this.circlecolor1['pasoactive'] = true;
+                              this.circlecolor2['pasoactive'] = true;
+                              this.circlecolor2['pasoactivocomplete'] = true;
+                              this.circlecolor3['pasoactive'] = true;
+                              this.circlecolor3['pasoactivocomplete'] = true;
+                              this.circlecolor4['pasoactive'] = true;
+                              this.circlecolor4['pasoactivocomplete'] = true;
+                              this.circlecolor5['pasoactivered'] = true;
+                              this.circlecolor5['pasoactivolinered'] = true;
+                            Swal.fire({
+                            title: 'Exitoso',
+                            text: 'Actualizado exitosamente.',
+                            icon: 'success'
+                          }); 
+                          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+                        });
+
+              }else{
+                this.loadingcc = false;
+                Swal.close();
               }
-                this.postuseltable.estado_postulacion = estadoseleccionado;
-                this.estadopostusel=2;
-
-
-                this.circlecolor1['pasoactive'] = false;
-                this.circlecolor2['pasoactive'] = false;
-                this.circlecolor2['pasoactivocomplete'] = false;
-                this.circlecolor3['pasoactive'] = false;
-                this.circlecolor3['pasoactivocomplete'] = false;
-                this.circlecolor4['pasoactive'] = false;
-                this.circlecolor4['pasoactivocomplete'] = false;
-                this.circlecolor5['pasoactive'] = false;
-                this.circlecolor5['pasoactivocomplete'] = false;
-
-                this.circlecolor1['pasoactive'] = true;
-                this.circlecolor2['pasoactive'] = true;
-                this.circlecolor2['pasoactivocomplete'] = true;
-                this.circlecolor3['pasoactive'] = true;
-                this.circlecolor3['pasoactivocomplete'] = true;
-                this.circlecolor4['pasoactive'] = true;
-                this.circlecolor4['pasoactivocomplete'] = true;
-                this.circlecolor5['pasoactivered'] = true;
-                this.circlecolor5['pasoactivolinered'] = true;
-              Swal.fire({
-              title: 'Exitoso',
-              text: 'Actualizado exitosamente.',
-              icon: 'success'
-            }); 
-            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
-          });
+            });
         }
       }else if(estadopostulacionactual == 'Aprobado'){
           if(estadoseleccionado == 'Visita'){

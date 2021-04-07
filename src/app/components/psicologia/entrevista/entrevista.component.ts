@@ -1,6 +1,6 @@
 import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import {Router, ActivatedRoute, Params } from '@angular/router';
 import {DocumentoService} from '../../../services/documento.service';
 import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
 import {ServicesViewConvocatoriaService} from '../../convocatoria/view-convocatoria/services-view-convocatoria.service';
@@ -52,6 +52,11 @@ export class EntrevistaComponent implements OnInit {
   entrevistvalidate=false;
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
 
+  updatePostu:any;
+  loadingcc = false;
+  $postuByIdArray:any;
+  $convoBuscada:any;
+  convoActualizado:any;
 
   departamentos:any;
   firstFormGroup: FormGroup;
@@ -242,8 +247,10 @@ idConvo:any;
 
 
   constructor(private registraruser:ServicioentrevistaService,
-        private rutaActiva: ActivatedRoute,public dialog: MatDialog,
-            private serviceviewconvocatoria:ServicesViewConvocatoriaService,
+        private rutaActiva: ActivatedRoute,
+        private router:Router,
+        public dialog: MatDialog,
+        private serviceviewconvocatoria:ServicesViewConvocatoriaService,
     private documentosService:DocumentoService,
     private visitadomiciliariaService:VisitadomiciliariaService,) {
     dialog.closeAll();
@@ -485,6 +492,7 @@ console.log(this.anterior2);
 console.log(this.anterior3);
 
 }
+
 registrarEntrevista(){
       Swal.fire({
         title: 'Cargando...',
@@ -716,6 +724,7 @@ telefonojefe: this.telefonoempresajefe
           text: 'Registrado exitosamente.',
           icon: 'success'
         }); 
+         this.router.navigate(['/viewConvocatoria/' + this.idConvo]);
       },(err)=>{
         Swal.fire({
           title: 'ERROR',
@@ -950,6 +959,124 @@ telefonojefe: this.telefonoempresajefe
      });}
 
 
+  cambiarEstadoPostu(idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
+    this.loadingcc = true;
+      if(estadopostulacionactual == 'Entrevista'){
+        if(estadoseleccionado == 'Revision'){
+          this.updatePostu = {
+            idpostu:idPostu,
+            estadopostu: estadoseleccionado
+          };
+          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+          (res=>{  
+            this.loadingcc = false;
+            this.postuseltable.estado_postulacion = estadoseleccionado;
+            this.estadopostusel=4;
 
+            this.circlecolor1['pasoactive'] = false;
+            this.circlecolor2['pasoactive'] = false;
+            this.circlecolor2['pasoactivocomplete'] = false;
+            this.circlecolor3['pasoactive'] = false;
+            this.circlecolor3['pasoactivocomplete'] = false;
+            this.circlecolor4['pasoactive'] = false;
+            this.circlecolor4['pasoactivocomplete'] = false;
+            this.circlecolor4['pasoactivoline'] = false;
+            this.circlecolor5['pasoactive'] = false;
+            this.circlecolor5['pasoactivocomplete'] = false;
+
+            this.circlecolor1['pasoactive'] = true;
+            this.circlecolor2['pasoactive'] = true;
+            this.circlecolor2['pasoactivocomplete'] = true;
+            this.circlecolor3['pasoactivoline'] = true;
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Actualizado exitosamente.',
+              icon: 'success'
+            }); 
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+        });
+        }else if(estadoseleccionado == 'Visita'){
+            this.updatePostu = {
+              idpostu:idPostu,
+              estadopostu: estadoseleccionado
+            };
+            this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+            (res=>{  
+              this.loadingcc = false;
+              this.postuseltable.estado_postulacion = estadoseleccionado;
+              this.estadopostusel=6;
+              this.circlecolor1['pasoactive'] = false;
+              this.circlecolor2['pasoactive'] = false;
+              this.circlecolor2['pasoactivocomplete'] = false;
+              this.circlecolor3['pasoactive'] = false;
+              this.circlecolor3['pasoactivocomplete'] = false;
+              this.circlecolor4['pasoactive'] = false;
+              this.circlecolor4['pasoactivocomplete'] = false;
+              this.circlecolor5['pasoactive'] = false;
+              this.circlecolor5['pasoactivocomplete'] = false;
+
+              this.circlecolor1['pasoactive'] = true;
+              this.circlecolor2['pasoactive'] = true;
+              this.circlecolor2['pasoactivocomplete'] = true;
+              this.circlecolor3['pasoactive'] = true;
+              this.circlecolor3['pasoactivocomplete'] = true;
+              this.circlecolor4['pasoactive'] = true;
+              this.circlecolor4['pasoactivocomplete'] = true;
+              this.circlecolor5['pasoactivoline'] = true;
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Actualizado exitosamente.',
+              icon: 'success'
+            }); 
+            },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+          });
+        }
+      }else if(estadopostulacionactual == 'Visita'){
+        if(estadoseleccionado == 'Entrevista'){
+          this.updatePostu = {
+            idpostu:idPostu,
+            estadopostu: estadoseleccionado
+          };
+          this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
+          (res=>{  
+            this.loadingcc = false;
+            this.postuseltable.estado_postulacion = estadoseleccionado;
+            this.estadopostusel=5;
+            this.circlecolor1['pasoactive'] = false;
+            this.circlecolor2['pasoactive'] = false;
+            this.circlecolor2['pasoactivocomplete'] = false;
+            this.circlecolor3['pasoactive'] = false;
+            this.circlecolor3['pasoactivocomplete'] = false;
+            this.circlecolor4['pasoactive'] = false;
+            this.circlecolor4['pasoactivocomplete'] = false;
+            this.circlecolor5['pasoactive'] = false;
+            this.circlecolor5['pasoactivocomplete'] = false;
+            this.circlecolor5['pasoactivoline'] = false;
+
+           //
+            this.circlecolor1['pasoactive'] = true;
+            this.circlecolor2['pasoactive'] = true;
+            this.circlecolor2['pasoactivoline'] = true;
+            this.circlecolor2['pasoactivocomplete'] = true;
+            this.circlecolor3['pasoactive'] = true;
+            this.circlecolor3['pasoactivocomplete'] = true;
+            this.circlecolor4['pasoactivoline'] = true;
+            Swal.fire({
+              title: 'Exitoso',
+              text: 'Actualizado exitosamente.',
+              icon: 'success'
+            }); 
+          },(err)=>{console.log('ERROR: ' + err.error.text);this.loadingcc = false;
+        });
+        }
+      }
+
+      
+    }
 
 }
