@@ -77,6 +77,14 @@ export class ViewConvocatoriaComponent {
   visitaPostuFound:any;
   visitavalidate=false;
 
+
+
+  aprobadolist:any;
+  cantperiodos:any;
+  observacionbene:any;
+
+
+
   //entrevistavariables
   entrevistaPostuFound:any;
   estadoSelPromedio:any;
@@ -1238,7 +1246,27 @@ export class ViewConvocatoriaComponent {
       this.convocatoriaPeriodo = convocatoriaPeriodo;
       Swal.close();
     });}
-  cambiarEstadoPostu(idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
+
+  formEstadoFinal(templateForm,idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
+    this.aprobadolist = {
+      idpostu:idPostu,
+      estadopostu:estadopostulacionactual,
+      estadosel:estadoseleccionado
+    };
+    if(estadoseleccionado == 'Rechazado'){
+      let dialogRef = this.dialog.open( templateForm,{
+         height: '240px',
+         width: '386px',
+       });
+    }else{
+      let dialogRef = this.dialog.open( templateForm,{
+        height: '380px',
+        width: '386px',
+      });
+    }
+
+  }
+  cambiarEstadoPostu(cantperiodos:any, observacion:any,idPostu:any,estadopostulacionactual:any,estadoseleccionado:any){
     Swal.fire({
       title: 'Cargando...',
       allowOutsideClick: false,
@@ -1374,8 +1402,10 @@ export class ViewConvocatoriaComponent {
                 });
                 Swal.showLoading();
               this.updatePostu = {
-                idpostu:idPostu,
-                estadopostu:estadoseleccionado
+                idpostu:this.aprobadolist.idpostu,
+                estadopostu:this.aprobadolist.estadosel,
+                tiempobene:cantperiodos,
+                observacionbene:observacion
               };
               this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
               this.convoActualizado={
@@ -1447,8 +1477,10 @@ export class ViewConvocatoriaComponent {
                 });
                 Swal.showLoading();
                   this.updatePostu = {
-                    idpostu:idPostu,
-                    estadopostu:estadoseleccionado
+                    idpostu:this.aprobadolist.idpostu,
+                    estadopostu:this.aprobadolist.estadosel,
+                    tiempobene:cantperiodos,
+                    observacionbene:observacion
                   };
                   this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                   (res=>{  
@@ -1612,8 +1644,10 @@ export class ViewConvocatoriaComponent {
                 });
                 Swal.showLoading();
               this.updatePostu = {
-                idpostu:idPostu,
-                estadopostu:estadoseleccionado
+                idpostu:this.aprobadolist.idpostu,
+                estadopostu:this.aprobadolist.estadosel,
+                tiempobene:cantperiodos,
+                observacionbene:observacion
               };
               this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
               this.convoActualizado={
@@ -1687,8 +1721,10 @@ export class ViewConvocatoriaComponent {
                 });
                 Swal.showLoading();
                 this.updatePostu = {
-                  idpostu:idPostu,
-                  estadopostu:estadoseleccionado
+                  idpostu:this.aprobadolist.idpostu,
+                  estadopostu:this.aprobadolist.estadosel,
+                  tiempobene:cantperiodos,
+                  observacionbene:observacion
                 };
                 this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                 (res=>{  
@@ -1793,8 +1829,10 @@ export class ViewConvocatoriaComponent {
                 });
                 Swal.showLoading();
                 this.updatePostu = {
-                  idpostu:idPostu,
-                  estadopostu:estadoseleccionado
+                  idpostu:this.aprobadolist.idpostu,
+                  estadopostu:this.aprobadolist.estadosel,
+                  tiempobene:cantperiodos,
+                  observacionbene:observacion
                 };
                 this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
                 this.convoActualizado={
@@ -1866,10 +1904,12 @@ export class ViewConvocatoriaComponent {
                   allowOutsideClick: false,
                 });
                 Swal.showLoading();
-               this.updatePostu = {
-                            idpostu:idPostu,
-                            estadopostu:estadoseleccionado
-                          };
+                  this.updatePostu = {
+                    idpostu:this.aprobadolist.idpostu,
+                    estadopostu:this.aprobadolist.estadosel,
+                    tiempobene:cantperiodos,
+                    observacionbene:observacion
+                  };
                           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                           (res=>{  
                             this.loadingcc = false;
@@ -1917,10 +1957,12 @@ export class ViewConvocatoriaComponent {
         }
       }else if(estadopostulacionactual == 'Aprobado'){
           if(estadoseleccionado == 'Visita'){
-            this.updatePostu = {
-              idpostu:idPostu,
-              estadopostu:estadoseleccionado
-            };
+              this.updatePostu = {
+                idpostu:this.aprobadolist.idpostu,
+                estadopostu:this.aprobadolist.estadosel,
+                tiempobene:cantperiodos,
+                observacionbene:observacion
+              };
             this.$convoBuscada.cupo = this.$convoBuscada.cupo +1;
             this.convoActualizado={
               idconvo:this.$convoBuscada.consecutivo_convocatoria,
@@ -1972,10 +2014,12 @@ export class ViewConvocatoriaComponent {
               console.log('ERROR: ' + err.error.text);
             });
           }else if(estadoseleccionado == 'Rechazado'){
-                        this.updatePostu = {
-              idpostu:idPostu,
-              estadopostu:estadoseleccionado
-            };
+              this.updatePostu = {
+                idpostu:this.aprobadolist.idpostu,
+                estadopostu:this.aprobadolist.estadosel,
+                tiempobene:cantperiodos,
+                observacionbene:observacion
+              };
             this.$convoBuscada.cupo = this.$convoBuscada.cupo +1;
             this.convoActualizado={
               idconvo:this.$convoBuscada.consecutivo_convocatoria,
@@ -2027,8 +2071,10 @@ export class ViewConvocatoriaComponent {
           if(estadoseleccionado == 'Aprobado'){
                 //     // Actualizar el estado postulacion
               this.updatePostu = {
-                idpostu:idPostu,
-                estadopostu:estadoseleccionado
+                idpostu:this.aprobadolist.idpostu,
+                estadopostu:this.aprobadolist.estadosel,
+                tiempobene:cantperiodos,
+                observacionbene:observacion
               };
               this.$convoBuscada.cupo = this.$convoBuscada.cupo -1;
               this.convoActualizado={
@@ -2129,7 +2175,6 @@ export class ViewConvocatoriaComponent {
           });
           }
         }
-
       
     }
       exportAsXLSX2():void {

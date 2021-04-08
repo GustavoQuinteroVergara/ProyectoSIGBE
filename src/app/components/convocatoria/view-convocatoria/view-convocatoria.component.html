@@ -22,7 +22,29 @@
         }
       }); -->
 
-
+<ng-template #formBeneficiario>
+  <h1 mat-dialog-title></h1>
+  <div>
+    <form >
+    <div mat-dialog-content>
+      <p *ngIf="aprobadolist.estadosel == 'Aprobado'">Cantidad de periodos que sera beneficiado</p>
+      <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" *ngIf="aprobadolist.estadosel == 'Aprobado'">
+      <mat-label>Cantidad de periodos beneficiado</mat-label>
+      <input [(ngModel)]="cantperiodos" id="cantperiodos" matInput placeholder="Cantidad de periodos" pattern="^[0-9]+" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <hr *ngIf="aprobadolist.estadosel == 'Aprobado'">
+      <p>Observación</p>
+      <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+        <mat-label>Observacion</mat-label>
+        <textarea [(ngModel)]="observacionbene" matInput placeholder="Contenido" [ngModelOptions]="{standalone: true}"></textarea>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-raised-button color="primary" (click)="cambiarEstadoPostu(cantperiodos,observacionbene, aprobadolist.idpostu ,aprobadolist.estadopostu,aprobadolist.estadosel)" cdkFocusInitial>Guardar</button>
+    </div>
+    </form>
+  </div>
+</ng-template>
 
 
 <ng-template #visitaPostu>
@@ -324,32 +346,34 @@
     <div class="buttonestados col-12">
         <img src="assets/imgs/loading.gif" *ngIf="loadingcc" alt="Cargando.." width="60px">
       <div *ngIf="estadopostusel == 3 && $nombreusuario.rol == '2'"> <!-- en espera -->
-        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
       </div>
       <div *ngIf="estadopostusel == 4 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Revision -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'En espera')" class="buttonanterior"><i class="icofont-rounded-left"></i>En espera</button>
-        <button mat-raised-button color="primary" style="background-color:#2d8230;"  (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonsiguiente">Entrevista<i class="icofont-rounded-right"></i></button>
-        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'En espera')" class="buttonanterior"><i class="icofont-rounded-left"></i>En espera</button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;"  (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonsiguiente">Entrevista<i class="icofont-rounded-right"></i></button>
+<!--         <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button> -->
+        <button mat-stroked-button color="primary" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
       <div *ngIf="estadopostusel == 5" style="text-align: center;"> <!-- Entrevista -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
-        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
-        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
+        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
+        <button mat-stroked-button color="primary" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
       <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
-        <button mat-stroked-button color="primary" *ngIf="$nombreusuario.rol == '2'" style="font-weight: bolder;color:#357b38; margin-right: 20px;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio ">Aprobado</button>
-        <button mat-stroked-button color="warn" *ngIf="$nombreusuario.rol == '2'" style="margin-right: 20px;font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
+        <button mat-stroked-button color="primary" *ngIf="$nombreusuario.rol == '2'" style="font-weight: bolder;color:#357b38; margin-right: 20px;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio ">Aprobado</button>
+        <button mat-stroked-button color="warn" *ngIf="$nombreusuario.rol == '2'" style="margin-right: 20px;font-weight: bolder;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
       <div *ngIf="estadopostusel == 1 && $nombreusuario.rol == '2'" style="text-align: center;">  <!-- Aprobado -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
+        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
       <div *ngIf="estadopostusel == 2 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Rechazado -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
-        <button mat-stroked-button color="primary"  style="font-weight: bolder;color:#357b38;"(click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio">Aprobar</button>
+        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
+        <button mat-stroked-button color="primary"  style="font-weight: bolder;color:#357b38;"(click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio">Aprobar</button>
       </div>
     </div><!-- fin -->
   </div>
@@ -428,14 +452,22 @@
 </ng-template>
 <div class="cuerpopage cup1" data-aos="fade-down" data-aos-once="true">
   <div class="formtiqConvo ">
+
     <div class="container-fluid">
-      <button mat-icon-button color="primary"  [routerLink]="['/listarConvocatoria']" aria-label="Example icon button with a home icon">
-        <i class="icofont-rounded-left" style="color:#f44336 !important;font-size: 20px;"></i>
-        <span style="color: black !important;">Regresar</span>
-      </button>
+
       <div class="row">
         <form [formGroup]="formularioConvocatoria" *ngIf="loading">
           <div>
+          <h1>      
+            <button mat-icon-button color="primary"  [routerLink]="['/listarConvocatoria']" aria-label="Example icon button with a home icon">
+        <i class="icofont-rounded-left" style="color:#f44336 !important;font-size: 20px;"></i>
+        <span style="color: black !important;">Regresar</span>
+      </button>
+      <button mat-icon-button color="primary" style="float: right;margin-right: 200px;"  [routerLink]="['/listadoFinal', $idConvo]" aria-label="Example icon button with a home icon">
+        <span style="color: black !important;">Listado aprobados y rechazados</span>
+        <i class="icofont-rounded-right" style="color:#f44336 !important;font-size: 20px;"></i>
+      </button>
+      </h1>
             <hr>
             <h1>
               Información Convocatoria

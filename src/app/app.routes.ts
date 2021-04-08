@@ -23,6 +23,7 @@ import { ListicketestComponent } from './components/listicketest/listicketest.co
 import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
 import { ListarencuestasComponent } from './components/encuesta/listarencuestas/listarencuestas.component';
 import { EstadisticasComponent } from './components/encuesta/estadisticas/estadisticas.component';
+import {ListadoFinalComponent} from './components/convocatoria/listado-final/listado-final.component';
 import { OlvdarcontrasenaComponent } from './components/olvdarcontrasena/olvdarcontrasena.component';
 import {VisitadomiciliariaComponent} from './components/psicologia/visitadomiciliaria/visitadomiciliaria.component';
 import {EntrevistaComponent} from './components/psicologia/entrevista/entrevista.component';
@@ -115,6 +116,10 @@ export const ROUTES: Routes = [
 {path:'listarTicketEst',component:ListicketestComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
   expectedRole: '1'
+}},
+{path:'listadoFinal/:idConvo',component:ListadoFinalComponent, canActivate:[ValidacionRutasGuard]
+,data: { 
+  expectedRole: '2|4'
 }},
 {path:'habilitarUser', component:HabilitaruserComponent},
 

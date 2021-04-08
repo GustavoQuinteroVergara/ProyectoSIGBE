@@ -56,6 +56,7 @@ import { EntrevistaComponent } from './components/psicologia/entrevista/entrevis
 import { CrearanuncioComponent } from './components/crearanuncio/crearanuncio.component';
 import { ListarencuestasComponent } from './components/encuesta/listarencuestas/listarencuestas.component';
 import { EstadisticasComponent } from './components/encuesta/estadisticas/estadisticas.component';
+import { ListadoFinalComponent } from './components/convocatoria/listado-final/listado-final.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { EstadisticasComponent } from './components/encuesta/estadisticas/estadi
   EntrevistaComponent,
   CrearanuncioComponent,
   ListarencuestasComponent,
-  EstadisticasComponent
+  EstadisticasComponent,
+  ListadoFinalComponent
   ],
   imports: [
   BrowserModule,
