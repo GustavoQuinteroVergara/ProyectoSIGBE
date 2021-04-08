@@ -41,8 +41,7 @@ export class RegistrarPostulacionComponent  {
       convo: ['', [Validators.required]],
       promedio: ['', [Validators.required]],
       semestre: ['', [Validators.required]],
-      carrera: ['', [Validators.required]],
-      archivos: ['', [Validators.required]]
+      carrera: ['', [Validators.required]]
     });
 
   }
@@ -127,7 +126,9 @@ export class RegistrarPostulacionComponent  {
                                   convocatoria:convocatoria,
                                   listDocumentos:this.listDocsupload
             };
-if( this.listDocsupload.length ==this.cantDocumentos){
+            console.log(this.listDocsupload.length);
+            console.log(this.cantDocumentos);
+if( (this.listDocsupload.length == this.cantDocumentos) || (this.cantDocumentos == undefined)){
     this.registrarpostu.buscarPostuByIdConvo(convocatoria.consecutivoconvo,this.$nombreusuario.identi).subscribe(result=>{
       Swal.fire({
         title: 'ERROR',
