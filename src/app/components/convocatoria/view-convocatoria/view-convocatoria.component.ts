@@ -8,6 +8,7 @@ import {PostulacionService} from '../../../services/postulacion.service';
 import {VisitadomiciliariaService} from '../../../services/visitadomiciliaria.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
+import {formatDate} from '@angular/common';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {RegistrarConvoServiceService} from '../registrar-convocatoria/registrar-convo-service.service';
@@ -31,6 +32,7 @@ export class ViewConvocatoriaComponent {
   visitarListar:any;
   nuevoarreglo:any;
   dataSource: MatTableDataSource<any>;
+  dataSource2: MatTableDataSource<any>;
   convoActualizado:any;
   documentosFoundpostu:any;
   listActualizar:any;
@@ -65,7 +67,7 @@ export class ViewConvocatoriaComponent {
     };
 
   //fin Colores barra progreso
-
+  fechaactual = formatDate(new Date(), 'yyyy/MM/dd', 'en');
   updatePostu:any;
   loadingcc = false;
   Docsestados={};
@@ -84,6 +86,9 @@ export class ViewConvocatoriaComponent {
   observacionbene:any;
 
 
+  //imagenes
+  imagenesvisita={idpostu:0, imagencocina:'',imagencuarto:''};
+  idimagensel:any;
 
   //entrevistavariables
   entrevistaPostuFound:any;
@@ -92,6 +97,11 @@ export class ViewConvocatoriaComponent {
   //FIN VARIABLES DOCUMENTOS
     displayedColumns: string[] = ['estudiante.nombreestudiante', 
     'codigoestudiante', 'ciudadresidencia' , 'direccionresidencia'  ,'estrato', 'carrera',
+    'promedio','fechapostulacion',
+    'semestre','estado_postulacion','Acciones'];
+
+    displayedColumns2: string[] = ['estudiante.nombreestudiante', 
+    'codigoestudiante', 'ciudadresidencia', 'visitaencontro','entrevistaencontro','carrera',
     'promedio','fechapostulacion',
     'semestre','estado_postulacion','Acciones'];
     success:any;
@@ -164,6 +174,58 @@ export class ViewConvocatoriaComponent {
       });
 
   }
+  seleccionarArchivo(event,idsel:any) {
+    var files = event.target.files;
+    var file = files[0];
+    this.idimagensel = idsel;
+    
+
+    if(files && file) {
+      var reader = new FileReader();
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvent) {
+    var binaryString = readerEvent.target.result;
+    if(this.idimagensel == 0){
+      this.imagenesvisita.imagencocina = btoa(binaryString);
+    }else{
+      this.imagenesvisita.imagencuarto = btoa(binaryString);
+    }
+    
+  }
+  verimagencuarto(template){
+    let dialogRef = this.dialog.open( template,{
+      panelClass: 'verimagen', 
+       height: '600px',
+       width: '710px',
+    });
+  }
+
+  actualizarImagesPostu(){
+      Swal.fire({
+        title: 'Cargando...',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
+    this.imagenesvisita.idpostu = this.postuseltable.consecutivo_postulacion;
+    console.log(this.imagenesvisita);
+    this.serviceviewconvocatoria.actualizarImagesostulacion(this.imagenesvisita).subscribe(result=>{
+      Swal.fire({
+        title: 'Exitoso',
+        text: 'Subidas las imagenes correctamente',
+        icon:'success',
+      });
+    },(err)=>{
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al subir la imagen, ERROR: ' + err.error.text,
+        icon:'error',
+      });
+    });
+  }
 
   descargarPDFVisita(visitaAListar:any){
     const doc = new jsPDF("p", "mm", "a4");
@@ -179,7 +241,7 @@ export class ViewConvocatoriaComponent {
 
     //Fecha
     doc.setFontSize(10);
-    doc.text("26     03      2021",158,50,align);
+    doc.text(visitaAListar.fechavisita,158,50,align);
     doc.setFontSize(10);
     doc.setFont("helvetica","bold");
     doc.text("X",47,66);
@@ -579,7 +641,7 @@ export class ViewConvocatoriaComponent {
     doc.text("" + this.entrevistaPostuFound.antiguedad,40,229);
     doc.text(this.entrevistaPostuFound.ciudadempresa,25,233);
     doc.text(this.entrevistaPostuFound.direccionempresa,82,233);
-    doc.text("--------------",170,233);
+    doc.text(""+this.entrevistaPostuFound.telefenoempresa,170,233);
 
     //VALOR TOTAL DE INGRESOS
     doc.text("" + this.entrevistaPostuFound.valortotalingreso,50,245);
@@ -755,10 +817,10 @@ export class ViewConvocatoriaComponent {
     }
     switch (this.entrevistaPostuFound.hipoteca) {
       case "hipoteca":
-        doc.text("X",66,59);
+        doc.text("X",113,59);
         break;
       case "Sin hipoteca":
-        doc.text("X",113,59);
+        doc.text("X",66,59);
         break;        
       
       default:
@@ -872,7 +934,7 @@ export class ViewConvocatoriaComponent {
     doc.text(this.entrevistaPostuFound.ocupacionjefe,40,191);
     doc.text(this.entrevistaPostuFound.direccionempresajefe,50,195);
     doc.text(this.entrevistaPostuFound.ciudadjefe,30,199);
-    doc.text("----------------",145,199);
+    doc.text("" +this.entrevistaPostuFound.telefonojefe,145,199);
 
 
     //observaciones
@@ -1026,13 +1088,13 @@ export class ViewConvocatoriaComponent {
   buscarPostulacionesByPsicologia(idConvo:any){
     this.serviceviewconvocatoria.buscarPostulacionesByPsicologia(idConvo).subscribe(result =>{ 
       this.$postuByIdArray = result; 
-      this.dataSource = new MatTableDataSource(this.$postuByIdArray);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
+      this.dataSource2 = new MatTableDataSource(this.$postuByIdArray);
+      this.dataSource2.paginator = this.paginator;
+      this.dataSource2.sort = this.sort;
+      this.dataSource2.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
     });
   }
-  actualizarConvocatoria(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
+  actualizarConvocator222ia(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
     fecha_inicio:any,fecha_fin:any,estado_convocatoria:any,successactualizacion){
     this.convoActualizado= {
       consecutivo_convocatoria:consecutivo_convocatoria,
@@ -1235,7 +1297,7 @@ export class ViewConvocatoriaComponent {
     }
       let dialogRef = this.dialog.open( templatePostu,{
        height: '600px',
-       width: '900px',
+       width: '970px',
      });}
   buscarBeca(){
     this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
@@ -1957,12 +2019,10 @@ export class ViewConvocatoriaComponent {
         }
       }else if(estadopostulacionactual == 'Aprobado'){
           if(estadoseleccionado == 'Visita'){
-              this.updatePostu = {
-                idpostu:this.aprobadolist.idpostu,
-                estadopostu:this.aprobadolist.estadosel,
-                tiempobene:cantperiodos,
-                observacionbene:observacion
-              };
+                        this.updatePostu = {
+              idpostu:idPostu,
+              estadopostu: estadoseleccionado
+            };
             this.$convoBuscada.cupo = this.$convoBuscada.cupo +1;
             this.convoActualizado={
               idconvo:this.$convoBuscada.consecutivo_convocatoria,

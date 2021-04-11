@@ -209,14 +209,16 @@ export class CrearTicketComponent {
 		if(this.tipoBeca == 'Ticket Almuerzo'){
 			this.asignacionEnviar = {
 				conceasign : this.asignacionBuscada.concecutivo,
-				cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo - 1,
-				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio
+				cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo,
+				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio,
+				tipoticket: 'Ticket Almuerzo'
 			}
 		}else{
 			this.asignacionEnviar = {
 				conceasign : this.asignacionBuscada.concecutivo,
 				cuposalmuerzo: this.asignacionBuscada.cuposalmuerzo,
-				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio - 1
+				cuposrefrigerio: this.asignacionBuscada.cuposrefrigerio,
+				tipoticket: 'Ticket Refrigerio'
 			}
 		}
 		this.ticketService.buscarTicketbyFechaUser(this.$nombreusuario.identi,this.ticketArray.tipoTicket).subscribe(result=>{

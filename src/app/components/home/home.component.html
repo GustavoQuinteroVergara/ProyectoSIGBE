@@ -401,7 +401,8 @@
       <div class="row rowpanelbienestar" data-aos="zoom-in-down" data-aos-once="true">
         <div class="col-12">
           <h1 *ngIf="this.$nombreusuario.rol =='2'">PANEL ADMINISTRATIVO - Bienestar Universitario</h1>
-          <h1 *ngIf="this.$nombreusuario.rol !='2'">PANEL ADMINISTRATIVO - Psicología</h1>
+          <h1 *ngIf="this.$nombreusuario.rol =='4'">PANEL ADMINISTRATIVO - Psicología</h1>
+          <h1 *ngIf="this.$nombreusuario.rol =='5'">PANEL ADMINISTRATIVO - Monitoria</h1>
           <hr>
         </div>
         <div class="row col-12" *ngFor="let infocol of infoColores">
