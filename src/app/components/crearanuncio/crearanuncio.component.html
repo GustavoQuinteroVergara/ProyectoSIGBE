@@ -73,15 +73,16 @@
 							</div>
 								<div class="upload-btn-wrapper">
 									 <button class="boton-standar-rw" >Carga un archivo</button>
-									 <input class="upload-file-buton" type="file" (change)="seleccionarArchivo($event)" accept="image/x-png,image/jpeg">
+									 <input class="upload-file-buton" type="file" (change)="seleccionarArchivo($event)" accept="image/x-png,image/jpeg" #imageanuncio>
 									<mat-form-field appearance="none" class="example-full-width">
           						    <mat-label>Nombre imagen</mat-label>
            							 <input matInput type="text" [value]="imageseleccionada" disabled="true">
            							 <i matSuffix class="icofont-id iconito"></i>
          						 </mat-form-field>
+                     <img [src]="'data:image/jpg;base64,' + archivo.base64textString" style="display: none;" alt="" #imagensel (load)="validarImagen()" >
 								</div>
 								<div class="col-lg">
-									<a mat-raised-button color="primary" (click)="registrarAnuncio(linkimagen.value)">Guardar anuncio</a>
+									<a mat-raised-button color="primary" (onload)="registrarAnuncio(linkimagen.value)">Guardar anuncio</a>
 								</div>
 						</form>
 					</div>

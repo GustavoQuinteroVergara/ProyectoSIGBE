@@ -168,6 +168,7 @@
       <i class="icofont-clock-time iconSearchUser"></i>
     </div>
     <p>En espera</p>
+    <p></p>
   </div>
   <div class="paso pasoline2 mrpaso" [ngClass]="circlecolor2">
     <div class="circulopaso">
@@ -180,12 +181,14 @@
       <i class="icofont-address-book iconSearchUser"></i>
     </div>
     <p>Entrevista</p>
+    <p>{{entrevistaPostu.fecharegistro}}</p>
   </div>
   <div class="paso pasoline4 mrpaso4" [ngClass]="circlecolor4">
     <div class="circulopaso">
       <i class="icofont-home iconSearchUser"></i>
     </div>
     <p>Visita Domiciliaria</p>
+    <p>{{visitaPostu.fechavisita}}</p>
   </div>
   <div class="paso pasoline5" [ngClass]="circlecolor5">
     <div class="circulopaso">
@@ -193,7 +196,7 @@
       <i *ngIf="estadopostusel == 2" class="icofont-close-circled iconSearchUser"></i>
       <i *ngIf="estadopostusel != 1 && estadopostusel != 2 " class="icofont-spinner iconSearchUser"></i>
     </div>
-    <p>Estado final</p>
+    <p>Estado Revisión Cali</p>
   </div>
 </div>
 <div class="infopostusel">
@@ -264,13 +267,13 @@
       <div class="col-lg" *ngIf="estadopostusel != 3">
             <form>
               <p>¿Cumple o no cumple el promedio?</p>
-              <div class="col-lg" *ngIf="estadopostusel != 4">
+              <div class="col-lg" *ngIf="estadopostusel != 4 && $nombreusuario.rol == '5'">
                 <mat-radio-group  aria-label="Cumple o no cumple" >
                   <mat-radio-button #text1 value="1" color="warn"  [disabled]="estadopostusel != 4"  [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
                   <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
                 </mat-radio-group>
               </div>
-              <div class="col-lg" *ngIf="estadopostusel == 4">
+              <div class="col-lg" *ngIf="estadopostusel == 4 || $nombreusuario.rol != '5'">
                 <mat-radio-group  aria-label="Cumple o no cumple" >
                   <mat-radio-button #text1 value="1" color="warn" (change)="updateEstadoPromedio(text1.value)" [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
                   <mat-radio-button #checkdos value="2" color="warn" (change)="updateEstadoPromedio(checkdos.value)" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
@@ -291,27 +294,33 @@
           <hr>
           <div class="checkboxs">
             <mat-radio-group  aria-label="Selecciona si un documento esta correcto" >
-              <mat-radio-button #text1 value="1" color="warn" [disabled]="estadopostusel != 4" (change)="checkboxEstados(docspostu.concecutivodoc,text1.value )" [checked]="docspostu.estado == 1">Bien diligenciado</mat-radio-button>
-              <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4" (change)="checkboxEstados(docspostu.concecutivodoc,checkdos.value )" [checked]="docspostu.estado == 2">Mal diligenciado</mat-radio-button>
+              <mat-radio-button #text1 value="1" color="warn" [disabled]="estadopostusel != 4 || $nombreusuario.rol == '5'" (change)="checkboxEstados(docspostu.concecutivodoc,text1.value )" [checked]="docspostu.estado == 1">Bien diligenciado</mat-radio-button>
+              <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4 || $nombreusuario.rol == '5'" (change)="checkboxEstados(docspostu.concecutivodoc,checkdos.value )" [checked]="docspostu.estado == 2">Mal diligenciado</mat-radio-button>
             </mat-radio-group>
           </div>
         </div>
       </div>
       <div class="row mt-4">
         <div class="col-12">
-          <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;">
+          <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;" *ngIf="$nombreusuario.rol != '5'">
             <mat-label>Observación</mat-label>
-            <textarea [(ngModel)]="observacion" [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" [disabled]="estadopostusel != 4"></textarea>
+            <textarea [(ngModel)]="observacion"  [ngModelOptions]="{standalone: true}" matInput placeholder="Contenido" [disabled]="estadopostusel != 4"></textarea>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" style="width: 100%;" *ngIf="$nombreusuario.rol == '5'">
+            <mat-label>Observación</mat-label>
+            <textarea disabled="true"  matInput placeholder="Contenido" ></textarea>
           </mat-form-field>
         </div>
       </div>  
       <div class="row mb-4">
-        <div class="col-12" style="text-align: center;" *ngIf="estadopostusel == 4">
+        <div class="col-12" style="text-align: center;" *ngIf="estadopostusel == 4 && $nombreusuario.rol != '5'">
+          <span style="float: left;">Fecha revisión: {{postuseltable.fecharevision.date | date:'dd/MM/yyyy'}}</span>
           <a mat-raised-button (click)="actualizarEstadoPostulacion(successactualizacion)">Actualizar estado documentos</a>
           <hr>
         </div>
-         <div class="col-12" style="text-align: center;" *ngIf="estadopostusel != 4">
-          <a mat-raised-button [disabled]="estadopostusel != 4">Actualizar estado documentos</a>
+         <div class="col-12" style="text-align: center;" *ngIf="estadopostusel != 4 || $nombreusuario.rol == '5'">
+          <span style="float: left;">Fecha revisión: {{postuseltable.fecharevision.date | date:'dd/MM/yyyy'}}</span>
+          <a mat-raised-button color="primary" [disabled]="estadopostusel != 4">Actualizar estado documentos</a>
           <hr>
         </div>
       </div>
@@ -324,8 +333,14 @@
         <div class="row">
           <h1>Entrevista</h1>
           <hr>
-          <a mat-stroked-button color="primary" *ngIf="!entrevistvalidate" [routerLink]="['/entrevista', postuseltable.consecutivo_postulacion,$idConvo]">Iniciar entrevista</a>
+          <a mat-stroked-button color="primary" *ngIf="!entrevistvalidate && $nombreusuario.rol != '5'" [routerLink]="['/entrevista', postuseltable.consecutivo_postulacion,$idConvo]" >Iniciar entrevista</a>
+          <p *ngIf="!entrevistvalidate && $nombreusuario.rol == '5'">No se ha realizado entrevista actualmente.</p>
           <a mat-stroked-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista</a>
+        </div>
+        <div class="row">
+          <hr>
+        <span style="float: left;" class="mt-4 mb-4">Fecha entrevista: {{entrevistaPostu.fecharegistro}}</span>
+        <hr>
         </div>
     </div>
   </mat-tab>
@@ -334,8 +349,69 @@
       <div class="row">
         <h1>Visita</h1>
         <hr>
-        <a mat-raised-button color="primary" class="mb-4" *ngIf="!visitavalidate" [routerLink]="['/visitadomiciliariaconvo', postuseltable.consecutivo_postulacion,$idConvo]">Iniciar visita domiciliaria</a>
+        <a mat-raised-button color="primary" class="mb-4" *ngIf="!visitavalidate && $nombreusuario.rol != '5'" [routerLink]="['/visitadomiciliariaconvo', postuseltable.consecutivo_postulacion,$idConvo]" >Iniciar visita domiciliaria</a>
+        <p *ngIf="!visitavalidate && $nombreusuario.rol == '5'">No se ha realizado entrevista actualmente.</p>
         <a mat-raised-button color="primary" *ngIf="visitavalidate" (click)="verVisitaModal(visitaPostu)">Ver visita domiciliaria</a>
+      </div>
+      <div class="row">
+        <div>
+          <form>
+            <hr>
+            <h1>Actualizar imagenes del cuarto y cocina del postulante</h1>
+            <hr>
+            <div class="col-lg" >
+              <hr>
+              <h3 *ngIf="$nombreusuario.rol != '5'">Sube la foto de la cocina  del postulante</h3>
+            <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="application/pdf" (change)="seleccionarArchivo($event,0)">
+            <div class="col">
+              <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" style="cursor: zoom-in;" alt="Imagen cocina" width="100px" (click)="verimagencuarto(imagencocinamodal)">
+                <ng-template #imagencocinamodal>
+                  <div class="text-end" mat-dialog-actions>
+                    <button mat-button [mat-dialog-close]="true"><i class="icofont-close-circled" style="font-size: 20px;"></i></button>  
+                  </div>
+                  
+                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" alt="Imagen cuarto" width="650px">
+                </ng-template>
+                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{postuseltable.imagencocina}}"> Descargar imagen</a>
+              </div>
+            </div>
+            <hr>
+            <div class="col-lg" >
+              <h3 *ngIf="$nombreusuario.rol != '5'">Sube la foto del cuarto del postulante</h3>
+              <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="application/pdf" (change)="seleccionarArchivo($event,1)">
+              <div class="col">
+                <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)">
+                <ng-template #imagencuartomodal>
+                  <div class="text-end" mat-dialog-actions>
+                    <button mat-button [mat-dialog-close]="true"><i class="icofont-close-circled" style="font-size: 20px;"></i></button>  
+                  </div>
+                  
+                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" alt="Imagen cuarto" width="650px">
+                </ng-template>
+                <a mat-stroked-button color="primary" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}"> Descargar imagen</a>
+              </div>
+              <hr>
+            </div>
+            <a mat-raised-button color="primary" *ngIf="$nombreusuario.rol != '5'" class="col-12" (click)="actualizarImagesPostu()">Subir fotos.</a>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <hr>
+        <span style="float: left;" class="mt-4 mb-4">Fecha visita: {{visitaPostu.fechavisita}}</span>
+        <hr>
+        </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Información final" *ngIf="estadopostusel == 1 || estadopostusel == 2">
+    <div class="container-fluid">
+      <div class="row">
+        <h1>Información final</h1>
+          <p>Tiempo total beneficiado asignado: {{postuseltable.tiempototalbene || cantperiodos}} </p>
+          <p>Tiempo restante : {{postuseltable.tiemporestantebene || cantperiodos}} </p>
+          <p>Observación:</p>
+          <p>{{postuseltable.observacionbene || observacionbene}}</p>
+        <!-- <p>{{postuseltable.fechabeneficio.date | date:'dd/MM/yyyy' || fechaactual}}</p> -->
       </div>
     </div>
   </mat-tab>
@@ -343,7 +419,7 @@
  </div>
   <div class="row">
 
-    <div class="buttonestados col-12">
+    <div class="buttonestados col-12" *ngIf="$nombreusuario.rol != '5'">
         <img src="assets/imgs/loading.gif" *ngIf="loadingcc" alt="Cargando.." width="60px">
       <div *ngIf="estadopostusel == 3 && $nombreusuario.rol == '2'"> <!-- en espera -->
         <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
@@ -359,8 +435,8 @@
       <div *ngIf="estadopostusel == 5" style="text-align: center;"> <!-- Entrevista -->
         <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
         <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
-        <button mat-stroked-button color="primary" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
+        <button mat-stroked-button color="primary" *ngIf="$nombreusuario.rol == '2'" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
+        <button mat-stroked-button color="warn" *ngIf="$nombreusuario.rol == '2'" style="font-weight: bolder;" (click)="formEstadoFinal(formBeneficiario,postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
       </div>
       <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
         <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(0,'',postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
@@ -583,7 +659,7 @@
                 </div>
                 <div class="card-action">
                   <hr>
-                  <h1 style="text-transform: uppercase;" *ngIf="$nombreusuario.rol == '2'">Postulaciones</h1>
+                  <h1 style="text-transform: uppercase;" *ngIf="$nombreusuario.rol == '2' || $nombreusuario.rol == '5'">Postulaciones</h1>
                   <h1 style="text-transform: uppercase;" *ngIf="$nombreusuario.rol == '4'">Postulaciones a entrevista o Visita Domiciliaria</h1>
                   <hr>
                   <div class="col-12">
@@ -602,7 +678,7 @@
                   </div>
                 <div class="table-responsive">
                   <div class="mat-elevation-z8 table-responsive">
-                  <table mat-table [dataSource]="dataSource" matSort style="width: 100%;text-align: center;">
+                  <table mat-table [dataSource]="dataSource" matSort style="width: 100%;text-align: center;" *ngIf="$nombreusuario.rol != 4">
 
                     <!-- ID Column -->
                     <ng-container matColumnDef="estudiante.nombreestudiante">
@@ -675,7 +751,85 @@
                       <td class="mat-cell" colspan="4">No hay datos que coincidan con lo digitado</td>
                     </tr>
                   </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]"></mat-paginator>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" *ngIf="$nombreusuario.rol != 4"></mat-paginator>
+
+
+                  <table mat-table [dataSource]="dataSource2" matSort style="width: 100%;text-align: center;" *ngIf="$nombreusuario.rol == 4">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="estudiante.nombreestudiante">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre estudiante</th>
+                      <td mat-cell *matCellDef="let row"> {{row.estudiante.nombreestudiante}} <a (click)="buscarEstPostuByIden(row.estudiante.identificacion,mytemplate)" data-title="Ver información del estudiante"><i class="icofont-address-book iconSearchUser"></i></a> </td>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="codigoestudiante">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Código Estudiante</th>
+                      <td mat-cell *matCellDef="let row"> {{row.codigoestudiante}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="ciudadresidencia">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad residencia</th>
+                      <td mat-cell *matCellDef="let row"> {{row.ciudadresidencia}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="visitaencontro">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Visita</th>
+                      <td mat-cell *matCellDef="let row"> <span *ngIf="row.visitaencontro" style="color: #4caf50;">Si</span><span *ngIf="!row.visitaencontro"  style="color: #f44336;">No</span> </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="entrevistaencontro">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Entrevista</th>
+                      <td mat-cell *matCellDef="let row"> <span *ngIf="row.entrevistaencontro" style="color: #4caf50;">Si</span><span *ngIf="!row.entrevistaencontro"  style="color: #f44336;">No</span> </td>
+                    </ng-container>                              
+
+                                        <!-- Color Column -->
+                    <ng-container matColumnDef="carrera">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrera</th>
+                      <td mat-cell *matCellDef="let row" > {{row.carrera}} </td>
+                    </ng-container>                              
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="promedio">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Promedio</th>
+                      <td mat-cell *matCellDef="let row" > {{row.promedio}} </td>
+                    </ng-container>
+                                        <!-- Color Column -->
+                    <ng-container matColumnDef="fechapostulacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha postulación</th>
+                      <td mat-cell *matCellDef="let row" > {{row.fechapostulacion}} </td>
+                    </ng-container>
+                                        <!-- Color Column -->
+                    <ng-container matColumnDef="semestre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Semestre</th>
+                      <td mat-cell *matCellDef="let row" > {{row.semestre}} </td>
+                    </ng-container>
+
+                                        <!-- Color Column -->
+                    <ng-container matColumnDef="estado_postulacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                      <td mat-cell *matCellDef="let row" > {{row.estado_postulacion}} </td>
+                    </ng-container>
+                                                            <!-- Color Column -->
+                    <ng-container matColumnDef="Acciones">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                      <td mat-cell *matCellDef="let row" > <a (click)="verPostuSel(row.consecutivo_postulacion, row.estado_postulacion, row ,templateverpostulacion)" data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a> </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No hay datos que coincidan con lo digitado</td>
+                    </tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" *ngIf="$nombreusuario.rol == 4"></mat-paginator>
+
+
                   </div>
                   </div>
                 </div>

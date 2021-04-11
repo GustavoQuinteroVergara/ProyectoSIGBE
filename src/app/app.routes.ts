@@ -33,11 +33,11 @@ export const ROUTES: Routes = [
 
 {path:'registroConvocatoria', component: RegistrarConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2'
+  expectedRole: '2|5'
 }},
 {path:'viewConvocatoria/:idConvo', component: ViewConvocatoriaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2|4'
+  expectedRole: '2|4|5'
 }},
 {path:'registrarPostulacion',component: RegistrarPostulacionComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
@@ -66,7 +66,7 @@ export const ROUTES: Routes = [
 }},
 {path:'listarConvocatoria',component: ListarconvocatoriaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2|4'
+  expectedRole: '2|4|5'
 }},
 {path:'crearusuariologin',component: CrearusuariologinComponent},
 {path:'listarTickets',component: ListarticketsComponent, canActivate:[ValidacionRutasGuard]
@@ -126,7 +126,7 @@ export const ROUTES: Routes = [
 {path:'olvidarContrasena', component:OlvdarcontrasenaComponent},
 {path:'bienvenida',component:HomeComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '1|2|3|4'
+  expectedRole: '1|2|3|4|5'
 }},
 // {path:'',component:LoginComponent, canActivate:[ValidacionRutasGuard]
 // ,data: { 

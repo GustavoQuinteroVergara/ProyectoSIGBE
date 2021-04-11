@@ -43,10 +43,10 @@
           <ul>
             <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='1'"><a routerLink="/registrarPostulacion">Postularse a una convocatoria</a></li>
             <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='1'"><a routerLink="/listarPostulacionesEst">Ver mis postulaciones</a></li>
-            <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2'">
+            <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2' || this.$nombreusuario.rol =='5'">
               <a routerLink="/registroConvocatoria" >Crear convocatoria</a>
             </li>
-            <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2' || this.$nombreusuario.rol =='4'" >
+            <li routerLinkActive="active" *ngIf="this.$nombreusuario.rol =='2' || this.$nombreusuario.rol =='4' || this.$nombreusuario.rol =='5'" >
               <a routerLink="/listarConvocatoria">Listar convocatorias</a>
             </li>
           </ul>
