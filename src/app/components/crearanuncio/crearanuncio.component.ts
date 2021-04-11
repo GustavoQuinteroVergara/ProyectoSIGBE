@@ -63,10 +63,10 @@ export class CrearanuncioComponent implements OnInit {
     this.valImagen = false;
     var width = (this.imagesel.nativeElement as HTMLImageElement).width;
     var height = (this.imagesel.nativeElement as HTMLImageElement).height;
-    if(width != 1349 || height != 415){
+    if((width < 1339 || width > 1359) || (height < 405 && height > 425)){
       Swal.fire({
         title: 'ERROR',
-        text: 'Por favor, suba una imagen de 1349 pixeles de ancho y 415 pixeles de alto' ,
+        text: 'Por favor, suba una imagen entre 1339 y 1359 pixeles de ancho y entre 405 y 425 pixeles de alto' ,
         icon: 'error'
       });
       this.archivo.nombreArchivo = null;

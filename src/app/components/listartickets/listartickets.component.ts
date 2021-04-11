@@ -20,6 +20,7 @@ export class ListarticketsComponent {
 	periodosAll:any;
 	tipoTicket:any;
 	estadoTicket:any;
+	dinerorecolectado:any;
 	identificacionSel:any;
 	dataSource: MatTableDataSource<any>;
 	displayedColumns: string[] = ['consecutivoticket', 
@@ -94,6 +95,9 @@ export class ListarticketsComponent {
  	buscartickets(){
 	   this.servitickets.buscartickets().subscribe(result =>{ 
 	    this.ticketes=result;
+	    // for (var i = 0; i < this.ticketes.length; ++i) {
+	    // 	this.dinerorecolectado = this.dinerorecolectado + this.ticketes[i].valorticket;
+	    // }
 	    this.dataSource = new MatTableDataSource(this.ticketes);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;

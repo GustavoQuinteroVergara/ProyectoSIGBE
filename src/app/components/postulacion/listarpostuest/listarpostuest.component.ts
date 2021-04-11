@@ -120,7 +120,7 @@ export class ListarpostuestComponent {
     }else{
       Swal.fire({
         title: 'ERROR',
-        text: 'Error al actualizar.',
+        text: 'Error, ya has llegado al limite de actualizaciones',
         icon: 'error'
       }); 
     }

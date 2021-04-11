@@ -71,7 +71,7 @@ export const ROUTES: Routes = [
 {path:'crearusuariologin',component: CrearusuariologinComponent},
 {path:'listarTickets',component: ListarticketsComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 
-  expectedRole: '2'
+  expectedRole: '2|5'
 }},
 {path:'crearTBeca',component:TipobecaComponent, canActivate:[ValidacionRutasGuard]
 ,data: { 

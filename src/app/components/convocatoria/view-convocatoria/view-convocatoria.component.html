@@ -1,8 +1,398 @@
 <app-navbar></app-navbar>
 
 <ng-template #entrevistaPostu>
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-lg-3">
       <a (click)="descargarPDFEntrevista()" mat-stroked-button><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
+    </div>
+    <div class="col">
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="primerpaso">
+          <ng-template matStepLabel>Info. basica</ng-template>
+          <h1>Información basica</h1>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Nombre completo del estudiante:
+                <strong>{{entrevistaPostuFound.nombrepostulante}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Plan de estudio del postulante:
+                <strong>{{entrevistaPostuFound.codigocarrerapostulante}}</strong>
+                <hr>
+              </div>           
+            </div>  
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Codigo estudiante registrado:
+                <strong>{{entrevistaPostuFound.codigopostulante}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Fecha de nacimiento postulante:
+                <strong>{{entrevistaPostuFound.fechanacimientopostulante}}</strong>
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Lugar de nacimiento del postulante:
+                <strong>{{entrevistaPostuFound.lugarnacimiento}}</strong>
+                <hr>
+              </div>    
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Numero de documento de identidad del postulante:
+                <strong>{{entrevistaPostuFound.cedulapostulante}}</strong>
+                <hr>
+              </div> 
+            </div> 
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Fecha de expedición del documento de identidad del postulante:
+                <strong>{{entrevistaPostuFound.expedicioncedula}}</strong>
+                <hr>
+              </div>  
+              <div class="col-12 col-sm-12 col-lg-3">
+                <hr>
+                Estado civil postulante:
+                <strong>{{entrevistaPostuFound.estadocivil}}</strong>
+                <hr>
+              </div>  
+              <div class="col-12 col-sm-12 col-lg-3">
+                <hr>
+                Cantidad de hijos del postulante:
+                <strong>{{entrevistaPostuFound.numerohijos}}</strong>
+                <hr>
+              </div>                            
+            </div>
+
+          </div>
+        <div class="col-12 col-sm-12 col-lg-6">
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+        </mat-step>
+        <mat-step [stepControl]="segundopaso">
+          <ng-template matStepLabel>Info. Basica</ng-template>
+          <h1>Información basica</h1>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Ciudad del postulante
+                <strong>{{entrevistaPostuFound.municipioprocedencia}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Dirección del postulante
+                <strong>{{entrevistaPostuFound.direccion}}</strong>
+                <hr>                
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Barrio del postulante
+                <strong>{{entrevistaPostuFound.barrio}}</strong>
+                <hr>                   
+              </div>
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Telefono del postulante
+                <strong>{{entrevistaPostuFound.telefono}}</strong>
+                <hr>                 
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Dirección Cali del postulante
+                <strong>{{entrevistaPostuFound.direccioncali}}</strong>
+                <hr>                 
+              </div>
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Barrio Cali del postulante
+                <strong>{{entrevistaPostuFound.barriocali}}</strong>
+                <hr>                 
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Telefono Cali del postulante
+                <strong>{{entrevistaPostuFound.telefonocali}}</strong>
+                <hr>                 
+              </div>
+              <div class="col-12 col-sm-12 col-lg-6">
+                <hr>
+                Con quien reside el postulante
+                <strong>{{entrevistaPostuFound.residencia}}</strong>
+                <hr>                   
+              </div>              
+            </div>                                               
+          </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+        </mat-step>
+        <mat-step [stepControl]="tercerpaso">
+          <ng-template matStepLabel>Ingresos</ng-template>
+          <h1>Fuentes de ingreso</h1>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-12">
+                <hr>
+                Fuentes de ingreso:
+                <div *ngFor="let entrevistafuente of entrevistaPostuFound[1][0];" class="alert alert-secondary">
+                  {{entrevistafuente.tiponecesidad}} : <strong> {{entrevistafuente.nombreayuda}} </strong>
+                </div>
+                <hr>
+              </div>            
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-12">
+                <hr>
+                ¿Trabaja?
+                <strong *ngIf="entrevistaPostuFound.trabaja == 'si'">SI</strong>
+                <strong *ngIf="entrevistaPostuFound.trabaja == 'no'">NO</strong>
+                <hr>
+              </div>  
+              <div class="col-12 col-sm-12 col-lg-12" *ngIf="entrevistaPostuFound.trabaja == 'si'">
+                <hr>
+                Info trabajo
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Cargo trabajo
+                    <strong>{{entrevistaPostuFound.cargotrabajador}}</strong>
+                  </div>
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Nombre empresa
+                    <strong>{{entrevistaPostuFound.nombreempresa}}</strong>                
+                  </div>
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Antiguedad
+                    <strong>{{entrevistaPostuFound.antiguedad}}</strong>                  
+                  </div>
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Ciudad empresa
+                    <strong>{{entrevistaPostuFound.ciudadempresa}}</strong>                  
+                  </div>
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Direccion empresa
+                    <strong>{{entrevistaPostuFound.direccionempresa}}</strong>                  
+                  </div>       
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Telefono
+                    <strong>{{entrevistaPostuFound.telefenoempresa}}</strong>                  
+                  </div>  
+                  <div class="col-12 col-sm-12 col-lg-6 alert alert-secondary">
+                    Valor total ingreso
+                    <strong>{{entrevistaPostuFound.valortotalingreso}}</strong>                  
+                  </div>  
+                </div>                       
+                <hr>
+              </div>  
+            </div>  
+          </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+        </mat-step>
+        <mat-step [stepControl]="cuartopaso">
+          <ng-template matStepLabel>Familiar</ng-template>
+          <h1>Información familiar</h1>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Colegio del postulante:
+                <strong>{{entrevistaPostuFound.colegio}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Año graduación del colegio del postulante:
+                <strong>{{entrevistaPostuFound.aniogrado}}</strong>
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Pais colegio del postulante:
+                <strong>{{entrevistaPostuFound.pais}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Ciudad colegio del postulante:
+                <strong>{{entrevistaPostuFound.municipio}}</strong>
+                <hr>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Puntaje icfes:
+                <strong>{{entrevistaPostuFound.bachillericfes}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Año icfes:
+                <strong>{{entrevistaPostuFound.anioicfes}}</strong>
+                <hr>
+              </div>
+            </div>    
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-12">
+                <hr>
+                Caracter del colegio donde realizo los estudios:
+                <strong>{{entrevistaPostuFound.caractercolegio}}</strong>
+                <hr>
+              </div>
+            </div>    
+            <div class="row">
+              <hr>
+              <h5>Información familiar</h5>
+              <div *ngFor="let entrevistaparentesco of entrevistaPostuFound[0][0];" class="alert alert-secondary">
+                  <div class="col-12">Nombre : <strong> {{entrevistaparentesco.nombre}} </strong></div>
+                  <div class="col-12">Edad : <strong> {{entrevistaparentesco.edad}} </strong></div>
+                  <div class="col-12">Parentesco : <strong> {{entrevistaparentesco.tipoparentesco}} </strong></div>
+                  <div class="col-12">Ciudad : <strong> {{entrevistaparentesco.ciudad}} </strong></div>
+                  <div class="col-12">Direccion: <strong> {{entrevistaparentesco.direccion}} </strong></div>
+                  <div class="col-12">Ocupación : <strong> {{entrevistaparentesco.ocupacion}} </strong></div>   <div class="col-12">Ingresos : <strong> {{entrevistaparentesco.ingresos}} </strong></div>                                                                        
+                </div>
+              <hr>
+            </div>                               
+          </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+        </mat-step>
+        <mat-step [stepControl]="quintopaso">
+          <ng-template matStepLabel>Familiar 2</ng-template>
+          <h1>Información familiar</h1>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Casa propia:<strong>{{entrevistaPostuFound.casapropia}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6" *ngIf="entrevistaPostuFound.casapropia == 'Si'">
+                <hr>
+                Tiene hipoteca:<strong>{{entrevistaPostuFound.hipoteca}}</strong>
+                <div class="col-12" *ngIf="entrevistaPostuFound.hipoteca == 'hipoteca'">
+                 Valor amortización:<strong>{{entrevistaPostuFound.valormensualamortizacion}}</strong>
+                </div>               
+                <hr>
+              </div>  
+              <div class="col-12" *ngIf="entrevistaPostuFound.casapropia == 'No'">
+                  Valor arriendo:<strong>{{entrevistaPostuFound.valormensualarriendo}}</strong>
+              </div>                           
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Jefe de la familia:<strong>{{entrevistaPostuFound.jefefamilia}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6" *ngIf="entrevistaPostuFound.casapropia == 'Si'">
+                <hr>
+                Nivel educativo:<strong>{{entrevistaPostuFound.niveleducativojefe}}</strong>
+                <hr>
+              </div>              
+            </div>            
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Valor aproximado ingreso familiar:<strong>{{entrevistaPostuFound.ingresomensualfamiliar}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6" *ngIf="entrevistaPostuFound.casapropia == 'Si'">
+                <hr>
+                Posición socio-economica del jefe familiar:<strong>{{entrevistaPostuFound.posicionjefe}}</strong>
+                <hr>
+              </div>              
+            </div>             
+          </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+        </mat-step>
+        <mat-step [stepControl]="sextopaso">
+          <ng-template matStepLabel>Info. jefe</ng-template>
+          <div class="col">
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Empresa del jefe de la familia: <strong>{{entrevistaPostuFound.empresajefe}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Ocupación del jefe de la familia: <strong>{{entrevistaPostuFound.ocupacionjefe}}</strong>
+                <hr>
+              </div>              
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Sueldo del jefe de la familia: <strong>{{entrevistaPostuFound.ingresojefe}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Dirección de la empresa: <strong>{{entrevistaPostuFound.direccionempresajefe}}</strong>
+                <hr>
+              </div>              
+            </div>        
+            <div class="row">
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Ciudad ubicación de la empresa: <strong>{{entrevistaPostuFound.ciudadjefe}}</strong>
+                <hr>
+              </div>
+              <div class="col-12 col-sm-6 col-lg-6">
+                <hr>
+                Telefono de la empresa: <strong>{{entrevistaPostuFound.telefonojefe}}</strong>
+                <hr>
+              </div>              
+            </div>   
+            <div class="row">
+              <div class="col-12 col-sm-12 col-lg-12">
+                <hr>
+                Observación Final: <strong>{{entrevistaPostuFound.observacion}}</strong>
+                <hr>                
+              </div>
+            </div>                          
+          </div>
+          
+      <div class="col-12 col-sm-6 col-lg-3">
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+        </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+
+    </div>
+  </div>
+</div>
+
 </ng-template>
 <!--         Swal.fire({
         title: '¿Terminaste de realizar la visita domiciliaria?',
@@ -48,103 +438,151 @@
 
 
 <ng-template #visitaPostu>
-  <div>
-    <h1>Visita domiciliaria</h1>
-    <a (click)="descargarPDFVisita(visitaPostuFound)" style="cursor: pointer;"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3">
+      <a (click)="descargarPDFVisita(visitaPostuFound)" style="cursor: pointer;"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
+      </div>
+      </div>
+      <div class="col">
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+          <mat-step [stepControl]="primerpasovisita">
+            <ng-template matStepLabel>Info. Basica</ng-template>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6">
+                  <hr>
+                  Codigo Visita: <strong>{{visitaPostuFound.idvisita}}</strong>
+                  <hr>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6">
+                  <hr>
+                   Codigo postulación: <strong>{{visitaPostuFound.postulacionid}</strong>}
+                   <hr>
+                </div>
+              </div>
+              <hr>
+               <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Estamento: <strong>{{visitaPostuFound.estamento}}</strong>
+                    <hr>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Nombre barrio: <strong>{{visitaPostuFound.barrio}}</strong>
+                    <hr>
+                  </div>
+                 
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                     Comuna: <strong>{{visitaPostuFound.comuna}}</strong><hr>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Nombre del que atendio: <strong>{{visitaPostuFound.nombreatencion}}</strong><hr>
+                  </div>
+                  
+                </div>
+                <hr>
+                <div class="row">
+                 <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Parentesco: <strong>{{visitaPostuFound.parentesco}}</strong><hr>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Obligación: <strong>{{visitaPostuFound.obligacion}</strong>}<hr>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Cual (obligación): <strong>{{visitaPostuFound.cualobligacion}}</strong><hr>
+                  </div>
+                  <div class="col-12 col-sm-6 col-lg-6"><hr>
+                    Estrato DANE: <strong>{{visitaPostuFound.estratodane}}</strong><hr>
+                  </div>
+                </div>
+                <hr>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <hr>
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>                
+          </mat-step>
+          <mat-step [stepControl]="segundopasovisita">
+            <ng-template matStepLabel>Info. socioeconomica</ng-template>
+             <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  ¿Paga arriendo?: <strong>{{visitaPostuFound.pagoarriendo}}</strong><hr>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Valor del arriendo: <strong>{{visitaPostuFound.valorarriendo}</strong>}<hr>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Que cubre arriendo: <strong>{{visitaPostuFound.cubrearriendo}</strong>}<hr>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Otro (Arriendo) : <strong>{{visitaPostuFound.otroarriendo}}</strong><hr>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Fuente de ingreso: <strong>{{visitaPostuFound.fuenteingreso}}</strong><hr>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Cual (Fuente de ingreso): <strong>{{visitaPostuFound.cualfuente}}</strong><hr>
+                </div>
+                
+              </div>
+              <hr>
+               <div class="col-12 col-sm-6 col-lg-3">
+                <hr>
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+          <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+        </div>
+          </mat-step>
+          <mat-step [stepControl]="tercerpasovisita">
+            <ng-template matStepLabel>Vivienda</ng-template>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Apecto de la vivienda: <strong>{{visitaPostuFound.aspectocasa}}</strong><hr>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                   Cual (Aspecto vivienda): <strong>{{visitaPostuFound.cualaspecto}}</strong><hr>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Servicio publico:
+                  <div class="alert alert-secondary">
+                    <strong>{{visitaPostuFound.serviciopublico}}</strong><hr>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6"><hr>
+                  Cuarto del solicitante: <strong>{{visitaPostuFound.cuartosolicitante}}</strong><hr>
+                </div>
+              </div>            
+              <div class="row">
+               <div class="col-12 col-sm-6 col-lg-12"><hr>
+                  Descripción final: <strong>{{visitaPostuFound.descripcionfinal}}</strong><hr>
+                </div>
+              </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <hr>
+          <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
+        </div>              
+          </mat-step>                    
+        </mat-horizontal-stepper>
+    </div>
   </div>
+  <div class="container-fluid" id="visitaListar" #visitarListar>
+    <div class="col">
+ 
+ 
+
   <hr>
-  <div id="visitaListar" #visitarListar>
-  <div class="row">
-    Codigo Visita: {{visitaPostuFound.idvisita}}
-  </div>
-  <hr>
-  <div class="row">
-    Codigo postulación: {{visitaPostuFound.postulacionid}}
-  </div>
-  <hr>
-  <div class="row">
-    Estamento: {{visitaPostuFound.estamento}}
-  </div>
-  <hr>
-  <div class="row">
-    Nombre barrio: {{visitaPostuFound.barrio}}
-  </div>
-  <hr>
-  <div class="row">
-    Comuna: {{visitaPostuFound.comuna}}
-  </div>
-  <hr>
-  <div class="row">
-    Nombre del que atendio: {{visitaPostuFound.nombreatencion}}
-  </div>
-  <hr>
-  <div class="row">
-    Parentesco: {{visitaPostuFound.parentesco}}
-  </div>
-  <hr>
-  <div class="row">
-    Obligación: {{visitaPostuFound.obligacion}}
-  </div>
-  <hr>
-  <div class="row">
-    Cual (obligación): {{visitaPostuFound.cualobligacion}}
-  </div>
-  <hr>
-  <div class="row">
-    Estrato DANE: {{visitaPostuFound.estratodane}}
-  </div>
-  <hr>
-  <hr>
-  <div class="row">
-    ¿Paga arriendo?: {{visitaPostuFound.pagoarriendo}}
-  </div>
-  <hr>
-  <div class="row">
-    Valor del arriendo: {{visitaPostuFound.valorarriendo}}
-  </div>
-  <hr>
-  <div class="row">
-    Que cubre arriendo: {{visitaPostuFound.cubrearriendo}}
-  </div>
-  <hr>
-  <div class="row">
-    Otro (Arriendo) : {{visitaPostuFound.otroarriendo}}
-  </div>
-  <hr>
-  <div class="row">
-    Fuente de ingreso: {{visitaPostuFound.fuenteingreso}}
-  </div>
-  <hr>
-  <div class="row">
-    Cual (Fuente de ingreso): {{visitaPostuFound.cualfuente}}
-  </div>
-  <hr>
-  <div class="row">
-    Tipo de vivienda: {{visitaPostuFound.tipocasa}}
-  </div>
-  <hr>
-  <div class="row">
-    Apecto de la vivienda: {{visitaPostuFound.aspectocasa}}
-  </div>
-  <hr>
-  <div class="row">
-    Cual (Aspecto vivienda): {{visitaPostuFound.cualaspecto}}
-  </div>
-  <hr>
-  <div class="row">
-    Servicio publico: {{visitaPostuFound.serviciopublico}}
-  </div>
-  <hr>
-  <div class="row">
-    Cuarto del solicitante: {{visitaPostuFound.cuartosolicitante}}
-  </div>
-  <hr>
-  <div class="row">
-    Cantidad de personas en la vivienda: {{visitaPostuFound.cantidadpersonas}}
-  </div>
-  <hr>
-  <div class="row">
-    Descripción final: {{visitaPostuFound.descripcionfinal}}
   </div>
   </div>
 </ng-template>
@@ -181,14 +619,12 @@
       <i class="icofont-address-book iconSearchUser"></i>
     </div>
     <p>Entrevista</p>
-    <p>{{entrevistaPostu.fecharegistro}}</p>
   </div>
   <div class="paso pasoline4 mrpaso4" [ngClass]="circlecolor4">
     <div class="circulopaso">
       <i class="icofont-home iconSearchUser"></i>
     </div>
     <p>Visita Domiciliaria</p>
-    <p>{{visitaPostu.fechavisita}}</p>
   </div>
   <div class="paso pasoline5" [ngClass]="circlecolor5">
     <div class="circulopaso">
@@ -267,13 +703,13 @@
       <div class="col-lg" *ngIf="estadopostusel != 3">
             <form>
               <p>¿Cumple o no cumple el promedio?</p>
-              <div class="col-lg" *ngIf="estadopostusel != 4 && $nombreusuario.rol == '5'">
+              <div class="col-lg" *ngIf="estadopostusel != 4 || $nombreusuario.rol == '5'">
                 <mat-radio-group  aria-label="Cumple o no cumple" >
                   <mat-radio-button #text1 value="1" color="warn"  [disabled]="estadopostusel != 4"  [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
                   <mat-radio-button #checkdos value="2" color="warn" [disabled]="estadopostusel != 4" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
                 </mat-radio-group>
               </div>
-              <div class="col-lg" *ngIf="estadopostusel == 4 || $nombreusuario.rol != '5'">
+              <div class="col-lg" *ngIf="estadopostusel == 4 && $nombreusuario.rol != '5'">
                 <mat-radio-group  aria-label="Cumple o no cumple" >
                   <mat-radio-button #text1 value="1" color="warn" (change)="updateEstadoPromedio(text1.value)" [checked]="postuseltable.estadopromedio == 1"><i class="icofont-check-circled" style="font-size: 20px;"></i></mat-radio-button>
                   <mat-radio-button #checkdos value="2" color="warn" (change)="updateEstadoPromedio(checkdos.value)" [checked]="postuseltable.estadopromedio == 2"><i class="icofont-close-circled" style="font-size: 20px;"></i></mat-radio-button>
@@ -335,11 +771,13 @@
           <hr>
           <a mat-stroked-button color="primary" *ngIf="!entrevistvalidate && $nombreusuario.rol != '5'" [routerLink]="['/entrevista', postuseltable.consecutivo_postulacion,$idConvo]" >Iniciar entrevista</a>
           <p *ngIf="!entrevistvalidate && $nombreusuario.rol == '5'">No se ha realizado entrevista actualmente.</p>
-          <a mat-stroked-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista</a>
+          <a mat-stroked-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista realizada</a>
         </div>
         <div class="row">
           <hr>
-        <span style="float: left;" class="mt-4 mb-4">Fecha entrevista: {{entrevistaPostu.fecharegistro}}</span>
+        <span style="float: left;" class="mt-4 mb-4" *ngIf="entrevistaPostuFound == undefined">Fecha entrevista: --/--/--</span>
+        <span style="float: left;" class="mt-4 mb-4" *ngIf="entrevistaPostuFound != undefined">Fecha entrevista: {{entrevistaPostuFound.fecharegistro}}</span>
+
         <hr>
         </div>
     </div>
@@ -351,7 +789,7 @@
         <hr>
         <a mat-raised-button color="primary" class="mb-4" *ngIf="!visitavalidate && $nombreusuario.rol != '5'" [routerLink]="['/visitadomiciliariaconvo', postuseltable.consecutivo_postulacion,$idConvo]" >Iniciar visita domiciliaria</a>
         <p *ngIf="!visitavalidate && $nombreusuario.rol == '5'">No se ha realizado entrevista actualmente.</p>
-        <a mat-raised-button color="primary" *ngIf="visitavalidate" (click)="verVisitaModal(visitaPostu)">Ver visita domiciliaria</a>
+        <a mat-raised-button color="primary" *ngIf="visitavalidate" (click)="verVisitaModal(visitaPostu)">Ver visita domiciliaria realizada</a>
       </div>
       <div class="row">
         <div>
@@ -361,9 +799,12 @@
             <hr>
             <div class="col-lg" >
               <hr>
-              <h3 *ngIf="$nombreusuario.rol != '5'">Sube la foto de la cocina  del postulante</h3>
-            <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="application/pdf" (change)="seleccionarArchivo($event,0)">
+              <h3 *ngIf="$nombreusuario.rol != '5'">Actualiza la foto de la cocina  del postulante</h3>
+            <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="image/x-png,image/jpeg" (change)="seleccionarArchivo($event,0)">
+            <hr>
             <div class="col">
+              <h5>Imagen actual subida</h5>
+              <hr>
               <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" style="cursor: zoom-in;" alt="Imagen cocina" width="100px" (click)="verimagencuarto(imagencocinamodal)">
                 <ng-template #imagencocinamodal>
                   <div class="text-end" mat-dialog-actions>
@@ -377,9 +818,12 @@
             </div>
             <hr>
             <div class="col-lg" >
-              <h3 *ngIf="$nombreusuario.rol != '5'">Sube la foto del cuarto del postulante</h3>
-              <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="application/pdf" (change)="seleccionarArchivo($event,1)">
+              <h3 *ngIf="$nombreusuario.rol != '5'">Actualiza la foto del cuarto del postulante</h3>
+              <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="image/x-png,image/jpeg" (change)="seleccionarArchivo($event,1)">
+              <hr>
               <div class="col">
+                <h5>Imagen actual subida</h5>
+                <hr>
                 <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)">
                 <ng-template #imagencuartomodal>
                   <div class="text-end" mat-dialog-actions>
@@ -398,7 +842,8 @@
       </div>
       <div class="row">
         <hr>
-        <span style="float: left;" class="mt-4 mb-4">Fecha visita: {{visitaPostu.fechavisita}}</span>
+        <span style="float: left;" class="mt-4 mb-4" *ngIf="visitaPostuFound != undefined">Fecha visita: {{visitaPostu.fechavisita}}</span>
+        <span style="float: left;" class="mt-4 mb-4" *ngIf="visitaPostuFound == undefined">Fecha visita: --/--/--</span>
         <hr>
         </div>
     </div>

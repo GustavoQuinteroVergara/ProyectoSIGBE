@@ -161,6 +161,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	    };
 	    this.serviceSaldo.actualizarEstadoDatos(this.saldoRegistrado).subscribe
 	    (res=>{
+	    	this.$nombreusuario.estadodatos = 1;
+	    	localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
 	      Swal.fire({
 	        title: 'Exitoso',
 	        text: 'Actualizado exitosamente.',
@@ -200,7 +202,6 @@ export class HomeComponent implements OnInit,AfterViewInit {
 			       this.$nombreusuario.contrasena=contrasena;
 			       localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
 			    },(err)=>{
-			      console.log("prueba2: "+this.$nombreusuario.fechanacimiento);
 			      Swal.fire({
 			        title: 'Error',
 			        text: 'Error al actualizar.' + err.error.text,
