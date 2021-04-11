@@ -73,6 +73,13 @@ export class VisitadomiciliariaComponent implements OnInit {
   estratodane:any;
   pagoarriendo='';
   valorarriendo='';
+  checkboxarriendo=[{selected:false, label:'Cocina'},{selected:false,label:'Alimentación'}];
+  checkboxservicios=[{selected:false, label:'Agua'},
+                     {selected:false,label:'Energía'},
+                     {selected:false,label:'Alcantarillado'},
+                     {selected:false,label:'Teléfono'},  
+                     {selected:false,label:'Gas Domiciliario'}                                                             
+                    ];
   cubrearriendo:any;
   otroarriendo='';
   fuenteingreso:any;
@@ -129,9 +136,67 @@ export class VisitadomiciliariaComponent implements OnInit {
   }
 
 
+  onChange(e){
+    if(this.checkboxarriendo[0].selected){
+      this.cubrearriendo = 'Cuarto';
+      if(this.checkboxarriendo[1].selected){
+        this.cubrearriendo = this.cubrearriendo + ',Alimentación';
+      }
+    }else if(this.checkboxarriendo[1].selected){
+      this.cubrearriendo = 'Alimentación';
+    }else{
+      this.cubrearriendo = '';
+    }
+  }
+  onChangeServicios(e){
 
+    if(this.checkboxservicios[0].selected){
+      this.serviciopublico = 'Agua';
+      if(this.checkboxservicios[1].selected){
+        this.serviciopublico = this.serviciopublico + ',Energía';
+      }
+      if(this.checkboxservicios[2].selected){
+        this.serviciopublico = this.serviciopublico + ',Alcantarillado';
+      }
+      if(this.checkboxservicios[3].selected){
+        this.serviciopublico = this.serviciopublico + ',Teléfono';
+      }
+      if(this.checkboxservicios[4].selected){
+        this.serviciopublico = this.serviciopublico + ',Gas Domiciliario';
+      }      
+    }else if(this.checkboxservicios[1].selected){
+      this.serviciopublico = 'Energía';
+      if(this.checkboxservicios[2].selected){
+        this.serviciopublico = this.serviciopublico + ',Alcantarillado';
+      }
+      if(this.checkboxservicios[3].selected){
+        this.serviciopublico = this.serviciopublico + ',Teléfono';
+      }
+      if(this.checkboxservicios[4].selected){
+        this.serviciopublico = this.serviciopublico + ',Gas Domiciliario';
+      }       
+    }else if(this.checkboxservicios[2].selected){
+      this.serviciopublico = 'Alcantarillado';
+      if(this.checkboxservicios[3].selected){
+        this.serviciopublico = this.serviciopublico + ',Teléfono';
+      }
+      if(this.checkboxservicios[4].selected){
+        this.serviciopublico = this.serviciopublico + ',Gas Domiciliario';
+      } 
+    }else if(this.checkboxservicios[3].selected){
+      this.serviciopublico = 'Teléfono';
+      if(this.checkboxservicios[4].selected){
+        this.serviciopublico = this.serviciopublico + ',Gas Domiciliario';
+      } 
+    }else if(this.checkboxservicios[4].selected){
+      this.serviciopublico = 'Gas Domiciliario';
+    }else{
+      this.serviciopublico = '';
+    }
+  }  
 
   registroVisita(templateRef){
+
     this.visitaDomiciliaria={
       postulacionid:this.idPostuSel,
       estamento:this.estamento,

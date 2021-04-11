@@ -200,38 +200,6 @@
   </mat-tab>
 </mat-tab-group>
  </div>
-  <div class="row">
-
-    <div class="buttonestados col-12">
-        <img src="assets/imgs/loading.gif" *ngIf="loadingcc" alt="Cargando.." width="60px">
-      <div *ngIf="estadopostusel == 3 && $nombreusuario.rol == '2'"> <!-- en espera -->
-        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
-      </div>
-      <div *ngIf="estadopostusel == 4 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Revision -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'En espera')" class="buttonanterior"><i class="icofont-rounded-left"></i>En espera</button>
-        <button mat-raised-button color="primary" style="background-color:#2d8230;"  (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonsiguiente">Entrevista<i class="icofont-rounded-right"></i></button>
-        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
-      </div>
-      <div *ngIf="estadopostusel == 5"> <!-- Entrevista -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
-        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
-      </div>
-      <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
-        <button mat-stroked-button color="primary" *ngIf="$nombreusuario.rol == '2'" style="font-weight: bolder;color:#357b38; margin-right: 20px;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio ">Aprobado</button>
-        <button mat-stroked-button color="warn" *ngIf="$nombreusuario.rol == '2'" style="margin-right: 20px;font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
-      </div>
-      <div *ngIf="estadopostusel == 1 && $nombreusuario.rol == '2'" style="text-align: center;">  <!-- Aprobado -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
-      </div>
-      <div *ngIf="estadopostusel == 2 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Rechazado -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
-        <button mat-stroked-button color="primary"  style="font-weight: bolder;color:#357b38;"(click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio">Aprobar</button>
-      </div>
-    </div><!-- fin -->
-  </div>
 
 </div>
 
@@ -345,12 +313,14 @@
         <h1 class="titulosVisita">Información SocioEconómica</h1>
         <div class="row">
           <div class="col-6">
+            <h3>Nombre de la persona que atendió la entrevista</h3>
             <mat-form-field class="example-full-width camposInput" appearance="fill">
               <mat-label for="nombreatencion">Nombre de la persona que atendió la entrevista</mat-label>
                   <input [(ngModel)]="nombreatencion" matInput formControlName="nombreatencion"  id="nombreatencion" [value]="nombreatencion" type="text" class="validate">
          </mat-form-field>
           </div>
           <div class="col-6">
+            <h3>Parentesco</h3>
             <mat-form-field class="example-full-width camposInput" appearance="fill">
               <mat-label for="parentesco">Parentesco</mat-label >
                   <input [(ngModel)]="parentesco"  matInput formControlName="parentesco" id="parentesco" [value]="parentesco" type="text" class="validate">
@@ -374,6 +344,7 @@
           </mat-form-field>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="col-12">
             <h3 style="text-align: left; margin-left: 2%;" >1.2 Estrato según DANE</h3>
@@ -387,6 +358,7 @@
             </mat-radio-group>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="col-6">
             <h3  >1.3 ¿Paga Arriendo? </h3>
@@ -402,10 +374,12 @@
           </div>
           <div class="col-6">
             <h3 >¿Qué cubre el arriendo? </h3>
-            <mat-radio-group [(ngModel)]="cubrearriendo" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+<!--             <mat-radio-group [(ngModel)]="cubrearriendo" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="Cuarto" [checked]="cubrearriendo == 'Cuarto'">Cuarto</mat-radio-button>
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="Alimentación" [checked]="cubrearriendo == 'Alimentación'">Alimentación</mat-radio-button>
-            </mat-radio-group>
+            </mat-radio-group> -->
+              <mat-checkbox [ngModelOptions]="{standalone: true}"  [checked]="checkboxarriendo[0].selected"  [(ngModel)]="checkboxarriendo[0].selected" (change)="onChange($event)" class="example-margin" color="warn" value="Cuarto">Cuarto</mat-checkbox>
+              <mat-checkbox [ngModelOptions]="{standalone: true}" [checked]="checkboxarriendo[1].selected" [(ngModel)]="checkboxarriendo[1].selected" (change)="onChange($event)" class="example-margin" color="warn" value="Alimentación">Alimentación</mat-checkbox>
             <mat-form-field class="example-full-width camposInput" appearance="fill">
               <mat-label  for="otroarriendo">Otros</mat-label >
                   <!--<input [(ngModel)]="otroarriendo"  matInput formControlName="otroarriendo" id="otroarriendo"  [value]="otroarriendo" type="text" class="validate">-->
@@ -413,6 +387,7 @@
           </mat-form-field>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="col-12" style="margin-bottom: 2%;">
             <h3 style="text-align: left; margin-left: 2%;" >1.4 Fuentes de ingreso del solicitante</h3>
@@ -428,6 +403,7 @@
           </mat-form-field>  
           </div>
         </div>
+        <hr>
       </div>
       <div>
         <button mat-raised-button color="primary" matStepperPrevious style="margin-right: 5%;">Atras</button>
@@ -480,13 +456,24 @@
         <div class="row">
           <div class="col-12">
             <strong>Servicios públicos: </strong>
-            <mat-radio-group [(ngModel)]="serviciopublico"   aria-label="Select an option" [ngModelOptions]="{standalone: true}">
+<!--             <mat-radio-group [(ngModel)]="serviciopublico"   aria-label="Select an option" [ngModelOptions]="{standalone: true}">
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Agua" [checked]="serviciopublico == 'Agua'">Agua</mat-radio-button>
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Energía" [checked]="serviciopublico == 'Energía'">Energía</mat-radio-button>
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Alcantarillado" [checked]="serviciopublico == 'Alcantarillado'">Alcantarillado</mat-radio-button>
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Teléfono" [checked]="serviciopublico == 'Teléfono'">Teléfono</mat-radio-button>
                 <mat-radio-button class="example-margin estratoCheck" color="warn" value="Gas Domiciliario" [checked]="serviciopublico == 'Gas Domiciliario'">Gas Domiciliario</mat-radio-button>
-              </mat-radio-group>
+              </mat-radio-group> -->
+
+              <mat-checkbox [ngModelOptions]="{standalone: true}"  [checked]="checkboxservicios[0].selected"  [(ngModel)]="checkboxservicios[0].selected" (change)="onChangeServicios($event)" class="example-margin" color="warn" value="Cuarto">Agua</mat-checkbox>
+
+              <mat-checkbox [ngModelOptions]="{standalone: true}" [checked]="checkboxservicios[1].selected" [(ngModel)]="checkboxservicios[1].selected" (change)="onChangeServicios($event)" class="example-margin" color="warn" value="Alimentación">Energía</mat-checkbox>
+
+              <mat-checkbox [ngModelOptions]="{standalone: true}" [checked]="checkboxservicios[2].selected" [(ngModel)]="checkboxservicios[2].selected" (change)="onChangeServicios($event)" class="example-margin" color="warn" value="Alimentación">Alcantarillado</mat-checkbox>
+
+              <mat-checkbox [ngModelOptions]="{standalone: true}" [checked]="checkboxservicios[3].selected" [(ngModel)]="checkboxservicios[3].selected" (change)="onChangeServicios($event)" class="example-margin" color="warn" value="Alimentación">Teléfono</mat-checkbox>
+
+              <mat-checkbox [ngModelOptions]="{standalone: true}" [checked]="checkboxservicios[4].selected" [(ngModel)]="checkboxservicios[4].selected" (change)="onChangeServicios($event)" class="example-margin" color="warn" value="Alimentación">Gas Domiciliario</mat-checkbox>
+              
           </div>
         </div>
         <hr>

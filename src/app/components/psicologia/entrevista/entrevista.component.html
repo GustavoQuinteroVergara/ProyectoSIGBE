@@ -190,38 +190,6 @@
   </mat-tab>
 </mat-tab-group>
  </div>
-  <div class="row">
-
-    <div class="buttonestados col-12">
-        <img src="assets/imgs/loading.gif" *ngIf="loadingcc" alt="Cargando.." width="60px">
-      <div *ngIf="estadopostusel == 3 && $nombreusuario.rol == '2'"> <!-- en espera -->
-        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" class="buttonsiguiente">Revisión<i class="icofont-rounded-right"></i></button>
-      </div>
-      <div *ngIf="estadopostusel == 4 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Revision -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'En espera')" class="buttonanterior"><i class="icofont-rounded-left"></i>En espera</button>
-        <button mat-raised-button color="primary" style="background-color:#2d8230;"  (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonsiguiente">Entrevista<i class="icofont-rounded-right"></i></button>
-        <button mat-stroked-button color="primary" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" style="margin-right: 20px;font-weight: bolder;color:#357b38;" class="buttonmedio">Aprobado</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
-      </div>
-      <div *ngIf="estadopostusel == 5"> <!-- Entrevista -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Revision')" *ngIf="$nombreusuario.rol == '2'" class="buttonanterior"><i class="icofont-rounded-left"></i>Revision</button>
-        <button mat-raised-button color="primary" style="background-color:#2d8230;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonsiguiente">Visita<i class="icofont-rounded-right"></i></button>
-      </div>
-      <div *ngIf="estadopostusel == 6" style="text-align: center;"><!-- Visita -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Entrevista')" class="buttonanterior"><i class="icofont-rounded-left"></i>Entrevista</button>
-        <button mat-stroked-button color="primary" *ngIf="$nombreusuario.rol == '2'" style="font-weight: bolder;color:#357b38; margin-right: 20px;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio ">Aprobado</button>
-        <button mat-stroked-button color="warn" *ngIf="$nombreusuario.rol == '2'" style="margin-right: 20px;font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
-      </div>
-      <div *ngIf="estadopostusel == 1 && $nombreusuario.rol == '2'" style="text-align: center;">  <!-- Aprobado -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
-        <button mat-stroked-button color="warn" style="font-weight: bolder;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Rechazado')" class="buttonmedio">Rechazado</button>
-      </div>
-      <div *ngIf="estadopostusel == 2 && $nombreusuario.rol == '2'" style="text-align: center;"> <!-- Rechazado -->
-        <button mat-flat-button color="primary" style="background-color: rgba(0,0,0,.12);color: black;" (click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Visita')" class="buttonanterior"><i class="icofont-rounded-left"></i>Visita</button>
-        <button mat-stroked-button color="primary"  style="font-weight: bolder;color:#357b38;"(click)="cambiarEstadoPostu(postuseltable.consecutivo_postulacion,postuseltable.estado_postulacion,'Aprobado')" class="buttonmedio">Aprobar</button>
-      </div>
-    </div><!-- fin -->
-  </div>
 
 </div>
 
@@ -576,7 +544,7 @@
                       <mat-form-field appearance="fill" class="example-full-width  camposInput">
                         <mat-label>Selecciona la ciudad</mat-label>
                         <mat-select [(ngModel)]="c2"  [ngModelOptions]="{standalone: true}" >
-                          <mat-option  *ngFor="let ciudad of ciud" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                          <mat-option  *ngFor="let ciudad of ciud" [value]="ciudad.nombre">{{ciudad.nombre}}</mat-option>
                           
                         </mat-select>
                       </mat-form-field>
@@ -685,6 +653,7 @@
           <mat-radio-button class="example-margin estamentoCheck" color="warn" value="publico" [checked]="caractercolegio == 'publico'">Publico.</mat-radio-button>
          
         </mat-radio-group>
+        <hr>
       </div>
          <div *ngIf="caractercolegio=='privado'" class="col-lg" style="margin-top: 3%;">
           <mat-form-field  class="example-full-width camposInput" appearance="fill" >
@@ -702,7 +671,7 @@
          </div>
      </div>
          <div class="row">
-         
+         <h1>Información familiar</h1>
          
        <div class="col-lg">
           <button mat-button  (click)="fuenteingreso=!fuenteingreso"><i class="icofont-ui-add"></i> Añadir padre</button>
@@ -1162,13 +1131,14 @@
     <mat-radio-button class="example-margin estratoCheck" color="warn" [checked]="casa == 'Si'" value="Si">Si</mat-radio-button>
     <mat-radio-button class="example-margin estamentoCheck" color="warn" value="No" [checked]="casa == 'No.'">No.</mat-radio-button> 
   </mat-radio-group>
- 
     <mat-radio-group *ngIf="casa == 'Si'" [(ngModel)]="hipoteca" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
       <mat-radio-button class="example-margin estamentoCheck" color="warn" value="hipoteca" [checked]="hipoteca == 'hipoteca'">Con hipoteca.</mat-radio-button>
     <mat-radio-button class="example-margin estratoCheck" color="warn" value="Sin hipoteca" [checked]="hipoteca == 'Sin hipoteca'">Sin hipoteca</mat-radio-button>
-    
+
    
     </mat-radio-group>
+
+
     <mat-form-field class="example-full-width camposInput" appearance="fill"  *ngIf="hipoteca == 'hipoteca' && casa == 'Si'" >
        <mat-label>VALOR MENSUAL DE AMORTIZACIÓN</mat-label>
       <input  [(ngModel)]="amortizacion" formControlName="amortizacion" [value]="amortizacion" id="AMORTIZACIÓN" matInput placeholder="AMORTIZACIÓN" type="number">
@@ -1177,7 +1147,7 @@
     <mat-label for="edadpadre">VALOR MENSUAL DEL ARRIENDO</mat-label>
     <input  [(ngModel)]="arriendo" formControlName="arriendo" [value]="arriendo" id="arriendo" matInput placeholder="Edad" type="number">
 </mat-form-field>
-
+ <hr>
 
 
 </div>
@@ -1214,7 +1184,7 @@
   </mat-radio-group>
  
 </div>
-  
+   <hr>
 </div>
 
 <div class="row">
@@ -1225,6 +1195,7 @@
     <input  [(ngModel)]="ingresofamiliar" formControlName="ingresofamiliar" [value]="ingresofamiliar" id="ingresofamiliar" matInput placeholder="Ingreso familiar" type="number">
 </mat-form-field>
  </div>
+  <hr>
  <div class="col-10">
   <h4>¿CUÁL ES LA POSICIÓN SOCIO-ECONÓMICA DEL JEFE DE LA FAMILIA?</h4>
   <mat-radio-group [(ngModel)]="posicionsocioeconomica" aria-label="Select an option" [ngModelOptions]="{standalone: true}"> 
@@ -1261,7 +1232,7 @@
   </mat-radio-group>
  
 </div>
-
+ <hr>
 </div>
 <div style="margin-top: 5%;"> 
   <button mat-raised-button color="primary"style="float:right;" (click)="mostracontedidocheck()"  matStepperNext >Siguente</button>
@@ -1318,7 +1289,7 @@
                   <mat-form-field appearance="fill" class="example-full-width  camposInput">
                     <mat-label>Selecciona la ciudad de la empresa</mat-label>
                     <mat-select [(ngModel)]="c4"  [ngModelOptions]="{standalone: true}">
-                      <mat-option  *ngFor="let ciudad of ciud4" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
+                      <mat-option  *ngFor="let ciudad of ciud4" [value]="ciudad.nombre">{{ciudad.nombre}}</mat-option>
                       
                     </mat-select>
                   </mat-form-field>

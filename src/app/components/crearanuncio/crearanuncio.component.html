@@ -82,7 +82,7 @@
                      <img [src]="'data:image/jpg;base64,' + archivo.base64textString" style="display: none;" alt="" #imagensel (load)="validarImagen()" >
 								</div>
 								<div class="col-lg">
-									<a mat-raised-button color="primary" (onload)="registrarAnuncio(linkimagen.value)">Guardar anuncio</a>
+									<a mat-raised-button color="primary" (click)="registrarAnuncio(linkimagen.value)">Guardar anuncio</a>
 								</div>
 						</form>
 					</div>

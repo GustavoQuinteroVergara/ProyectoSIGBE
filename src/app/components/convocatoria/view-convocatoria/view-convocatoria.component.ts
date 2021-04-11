@@ -324,18 +324,22 @@ export class ViewConvocatoriaComponent {
     }
 
     doc.text(""+visitaAListar.valorarriendo,130,157);
-    switch (visitaAListar.cubrearriendo) {
-      case "Cuarto":
-        doc.text("X",75,170);
-        break;
-      case "Alimentación":
-        doc.text("X",123,170);
-        break;
-      
-      default:
-        // code...
-        break;
+    var cubreariendosel = visitaAListar.cubrearriendo.split(",");
+    for (var i = 0; i < cubreariendosel.length; ++i) {
+      switch (cubreariendosel[i]) {
+        case "Cuarto":
+          doc.text("X",75,170);
+          break;
+        case "Alimentación":
+          doc.text("X",123,170);
+          break;
+        
+        default:
+          // code...
+          break;
+      }
     }
+
     doc.text(""+visitaAListar.otroarriendo,170,170);
 
     switch (visitaAListar.fuenteingreso) {
@@ -394,7 +398,9 @@ export class ViewConvocatoriaComponent {
         break;
     }
     //SERVICIOS PUBLICOS
-    switch (visitaAListar.serviciopublico) {
+    var serviciospublicossel = visitaAListar.serviciopublico.split(",");
+    for (var i = 0; i < serviciospublicossel.length; ++i) {
+        switch (serviciospublicossel[i]) {
          case "Agua":
            doc.text("X",75,228);
            break;
@@ -414,7 +420,9 @@ export class ViewConvocatoriaComponent {
          default:
            // code...
            break;
-       }      
+       }    
+    }
+  
 
     //CUARTO DEL SOLICITANTE
        switch (visitaAListar.cuartosolicitante) {
@@ -968,6 +976,7 @@ export class ViewConvocatoriaComponent {
     this.entrevistvalidate=false;
     this.serviceviewconvocatoria.buscarEntrevistaPostu(idPostu).subscribe(result=>{
       this.entrevistaPostuFound = result;
+      console.log(this.entrevistaPostuFound);
       this.entrevistvalidate =true;
     },(err)=>{
       this.entrevistvalidate=false;
@@ -1026,14 +1035,14 @@ export class ViewConvocatoriaComponent {
 
   verVisitaModal(visitaModal){
     let dialogRef = this.dialog.open( visitaModal,{
-       height: '500px',
+       height: '600px',
        width: '1024px',
     });
   }
 
   verEntrevistaModal(entrevistaPostu){
     let dialogRef = this.dialog.open( entrevistaPostu,{
-       height: '500px',
+       height: '600px',
        width: '1024px',
     });
   }
