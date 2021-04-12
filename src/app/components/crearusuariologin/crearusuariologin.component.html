@@ -19,7 +19,7 @@
   </ng-template>
 
   <div class="mobiledescarga" data-aos="fade-down" data-aos-once="true">
-    <a href="assets/apk/app-debug.apk" download="app-debug.apk">
+    <a href="assets/apk/app-debug.apk" download="SIGBE.apk">
       <div class="imagedescargarapk">
         <img src="assets/imgs/apkt.png" width="40px">
       </div>
@@ -113,7 +113,7 @@
             <h4>Fecha de nacimiento</h4>
             <mat-form-field appearance="fill" class="example-full-width">
               <mat-label>Fecha de nacimiento</mat-label>
-              <input matInput #fechanacimiento [matDatepicker]="picker" min="{{fechaActual}}"> 
+              <input matInput #fechanacimiento [matDatepicker]="picker" > 
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>

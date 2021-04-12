@@ -28,10 +28,15 @@
       </mat-form-field>
     </div>
 
-    <div class="center-align">
+    <div class="col-12">
+      <a mat-raised-button color="primary"  [disabled]="true" *ngIf="!formularioBeca.valid"  name="action">Registrar</a>				
+      <a mat-raised-button color="primary" *ngIf="formularioBeca.valid"
+      (click)="registrarBeca(tipobeca.value,descripcion.value)"  name="action">Registrar</a>
+    </div>
+    <!--<div class="center-align">
       <a mat-raised-button color="primary" [class.disabled]="!formularioBeca.valid"
       (click)="registrarBeca(tipobeca.value,descripcion.value)" name="action">Registrar</a>
-    </div>
+    </div>-->
   </div>
 </form>
 </div>

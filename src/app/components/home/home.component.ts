@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	success:any;
 
 	$nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
+	fechanacimiento = formatDate(this.$nombreusuario.fechanacimiento, 'yyyy-MM-dd', 'en')
 	verificacionPeriodoCaducado = false;
 	fechaActual2= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 	fechaultperiodo:any;

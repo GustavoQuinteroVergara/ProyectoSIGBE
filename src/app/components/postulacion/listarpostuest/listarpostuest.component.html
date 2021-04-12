@@ -122,13 +122,13 @@
                 <div class="card m-2 cardsconvos" style="width: 18rem;display: inline-block;transition: all 0.2s ease;" *ngFor="let docspostu of documentosFoundpostu" > 
                   <div class="card-body">
                     <div class="good" *ngIf="docspostu.estado == 1">
-                        Bien diligenciado - <i class="icofont-checked" style="font-size: 15px;"></i>
+                        Bien diligenciado - <i class="icofont-checked good" style="font-size: 15px;"></i>
                     </div>
                     <div class="bad" *ngIf="docspostu.estado == 2">
                         Mal diligenciado     - <i class="icofont-close-squared" style="font-size: 15px;"></i>
                     </div>
                     <hr>
-                    <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}} ---</a>
+                    <a (click)="downloadPDF(docspostu.archivo,docspostu.nombredoc)" class="buttonsdownloaddoc" style="cursor: pointer;"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">{{docspostu.nombredoc}} ---</a>
                     <hr>
     
                   </div>

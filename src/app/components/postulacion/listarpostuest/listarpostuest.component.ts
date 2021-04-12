@@ -113,14 +113,14 @@ export class ListarpostuestComponent {
 
       Swal.fire({
         title: 'ERROR',
-        text: 'Error al actualizar, se han alcazado el limite de intentos.',
+        text: 'Error al actualizar, se han alcazado el límite de intentos.',
         icon: 'error'
       }); 
     });
     }else{
       Swal.fire({
         title: 'ERROR',
-        text: 'Error, ya has llegado al limite de actualizaciones',
+        text: 'Error, ya has llegado al límite de actualizaciones',
         icon: 'error'
       }); 
     }
