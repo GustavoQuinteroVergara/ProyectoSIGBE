@@ -145,7 +145,7 @@
             <h4>Asignar Rol</h4>
               <mat-form-field appearance="fill" class="example-full-width">
               <mat-label>Seleccione un rol</mat-label>
-              <mat-select #rol (selectionChange)="departamentoselec($event.value)">
+              <mat-select #rol >
               <mat-option *ngFor="let rol of roles" [value]="rol.IdRol">{{rol.descripcion}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -240,7 +240,7 @@
           <a mat-raised-button color="primary" [disabled]="formulariologin.invalid" >Registrar</a>
         </div>
         <div class="input-field col s12 col-sm col-md col-xl" *ngIf="!formulariologin.invalid">
-          <a (click)="registrouser(identificacion.value,nombre.value,apellido.value,direccion.value,email.value,contrasena.value,1,'Inactivo',zonaresidencial.value,ciudad.value,fechanacimiento.value,estrato.value,codigo.value,carrera.value,mytemplate,emailexistente)" mat-raised-button color="primary" >Registrar</a>
+          <a (click)="registrouser(identificacion.value,nombre.value,apellido.value,direccion.value,email.value,contrasena.value,rol.value,'Inactivo',zonaresidencial.value,ciudad.value,fechanacimiento.value,estrato.value,codigo.value,carrera.value,mytemplate,emailexistente)" mat-raised-button color="primary" >Registrar</a>
         </div>
        </div>
      </form>

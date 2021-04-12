@@ -45,6 +45,35 @@
             
         </div>
     </div>
+    <div class="row" *ngIf="postuSeleccionada.estado_postulacion == 'Aprobado' || postuSeleccionada.estado_postulacion == 'Rechazado'">
+        <div class="col-12 col-sm-12 col-lg-12" style="padding: 30px;">
+            <hr>
+            <h1>Información final del estado {{postuSeleccionada.estado_postulacion}} - <h3 style="display: inline-block;" class="text-muted">{{postuSeleccionada.fechabeneficio.date | date:'dd/MM/yyyy'}}</h3></h1>
+            <hr>
+            <div class="row" *ngIf="postuSeleccionada.estado_postulacion == 'Aprobado'">
+                <div class="col-6 col-sm-6 col-lg-6">
+                    Tiempo asignado de beneficio
+                    <div class="alert alert-secondary">
+                        <strong style="font-size: 20px">{{postuSeleccionada.tiempototalbene}}</strong>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-lg-6">
+                    Tiempo restante de beneficio
+                    <div class="alert alert-secondary">
+                        <strong style="font-size: 20px">{{postuSeleccionada.tiemporestantebene}}</strong>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-12 col-sm-12 col-lg-12">
+                Observación:
+                <div class="alert alert-secondary">
+                    {{postuSeleccionada.observacionbene}}
+                </div>
+            </div>
+
+            <hr>
+        </div>
+    </div>
     <div *ngIf="!this.activarUpdate">
         <hr>
         <div class="col-12 col-sm-12 row"  style="margin:0;">

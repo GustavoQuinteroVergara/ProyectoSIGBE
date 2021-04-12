@@ -93,7 +93,7 @@ export class CuposticketsComponent implements OnInit {
 		},(err)=>{
 			Swal.fire({
 	          title: 'ERROR',
-	          text: 'Error al registrar.' + err.error.text,
+	          text: 'Error al registrar, ERROR: ' + err.error.text,
 	          icon: 'error'
 	        });
 		});

@@ -82,11 +82,27 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-sm-6 col-lg-12">
-                    <div class="alert alert-info alert-dismissible fade show">
-                      Dinero recolectado en la tabla: "FALTA POR HACER" {{dinerorecolectado}}
+                  <div class="row">
+                    <div class="col-6 col-sm-6 col-lg-6">
+                      <div class="alert alert-info alert-dismissible fade show">
+                        Dinero recolectado total: {{dinerorecolectado}}
+                      </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-lg-6">
+                      <div class="alert alert-info alert-dismissible fade show">
+                        Dinero al filtrar la tabla: {{dinerofiltrado}}
+                      </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-12">
+                      Cantidad de tickets actuales consultados:
+                      <div class="alert alert-secondary">
+                        {{this.dataSource.filteredData.length}}
+                      </div>
+                    </div>
+                  </div>
+
                       <div class="mat-elevation-z8">
                   <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
 

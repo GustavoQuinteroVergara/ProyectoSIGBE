@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';  
 import { MatSnackBar} from '@angular/material/snack-bar';
+import {Router, ActivatedRoute, Params } from '@angular/router';
 import {ListconvoactivasService} from './listconvoactivas.service';
 import {DocumentoService} from '../../../services/documento.service';
 import {ServRegPostuService} from './serv-reg-postu.service';
@@ -31,6 +32,7 @@ export class RegistrarPostulacionComponent  {
     public fb: FormBuilder,
     private registrarpostu:ServRegPostuService,
     public dialog: MatDialog,
+    private router:Router,
     public snackBack: MatSnackBar,
     public usuariocarreraService:UsuariocarreraService,
     public documentoService:DocumentoService) { 
@@ -142,6 +144,7 @@ if( (this.listDocsupload.length == this.cantDocumentos) || (this.cantDocumentos 
             text: 'Registrado exitosamente.',
             icon: 'success'
           }); 
+          this.router.navigate(['/listarPostulacionesEst']);
         },(errr)=>{
             Swal.fire({
               title: 'ERROR',
