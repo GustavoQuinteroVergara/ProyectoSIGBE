@@ -3,6 +3,7 @@ import {ServicesticketsService} from './serviciolistarticket.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {formatDate } from '@angular/common';
 import {PeriodoServiceService} from './../../services/periodo-service.service';
 import Swal from 'sweetalert2';
 import { ExporterService } from 'src/app/services/exporter.service';
@@ -20,6 +21,8 @@ export class ListarticketsComponent {
 	periodosAll:any;
 	tipoTicket:any;
 	estadoTicket:any;
+	fechaini:any;
+	fechafin:any;
 	dinerorecolectado=0;
 	dinerofiltrado=0;
 	cantticketsconsultados=0;
@@ -45,8 +48,14 @@ export class ListarticketsComponent {
   	consultarFiltro(){
   		switch (this.opcionSeleccionada) {
   			case "Periodo":
+  			      Swal.fire({
+			        title: 'Cargando...',
+			        allowOutsideClick: false,
+			      });
+			      Swal.showLoading();
   				this.periodoService.ticketsByPeriodo(this.periodoSel).subscribe(result=>{
   					this.ticketes=result;
+  					Swal.close();
   					this.dinerofiltrado = 0;
   					for (var i = 0; i < this.ticketes.length; ++i) {
 				    	this.dinerofiltrado = this.dinerofiltrado + this.ticketes[i].valorticket;
@@ -54,11 +63,26 @@ export class ListarticketsComponent {
 				    this.dataSource = new MatTableDataSource(this.ticketes);
 					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
+					this.cantticketsconsultados = this.dataSource.filteredData.length;
+  				},(err)=>{
+  					this.fechaini = '';
+  					this.fechafin = '';
+  					Swal.fire({
+				      title: 'ERROR.',
+				      text: 'No se encontro tickets.',
+				      icon: 'error'
+				    });
   				});
   				break;
   			case "Tipo":
+  			  	  Swal.fire({
+			        title: 'Cargando...',
+			        allowOutsideClick: false,
+			      });
+			      Swal.showLoading();
   				this.servitickets.ticketsByTipo(this.tipoTicket).subscribe(result=>{
   					this.ticketes=result;
+  					Swal.close();
   					this.dinerofiltrado = 0;
   					for (var i = 0; i < this.ticketes.length; ++i) {
 				    	this.dinerofiltrado = this.dinerofiltrado + this.ticketes[i].valorticket;
@@ -66,11 +90,24 @@ export class ListarticketsComponent {
 				    this.dataSource = new MatTableDataSource(this.ticketes);
 					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
+					this.cantticketsconsultados = this.dataSource.filteredData.length;
+  				},(err)=>{
+  					Swal.fire({
+				      title: 'ERROR.',
+				      text: 'No se encontro tickets.' ,
+				      icon: 'error'
+				    });
   				});
   				break;
   			case "Estado":
+  			  	  Swal.fire({
+			        title: 'Cargando...',
+			        allowOutsideClick: false,
+			      });
+			      Swal.showLoading();
   				this.servitickets.ticketsByEstado(this.estadoTicket).subscribe(result=>{
   					this.ticketes=result;
+  					Swal.close();
   					this.dinerofiltrado = 0;
   					for (var i = 0; i < this.ticketes.length; ++i) {
 				    	this.dinerofiltrado = this.dinerofiltrado + this.ticketes[i].valorticket;
@@ -78,11 +115,24 @@ export class ListarticketsComponent {
 				    this.dataSource = new MatTableDataSource(this.ticketes);
 					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
+					this.cantticketsconsultados = this.dataSource.filteredData.length;
+  				},(err)=>{
+  					Swal.fire({
+				      title: 'ERROR.',
+				      text: 'No se encontro tickets.',
+				      icon: 'error'
+				    });
   				});
   				break;
   			case "identi":
+  			  		Swal.fire({
+			        title: 'Cargando...',
+			        allowOutsideClick: false,
+			      });
+			      Swal.showLoading();
   				this.servitickets.ticketsByIdenti(this.identificacionSel).subscribe(result=>{
   					this.ticketes=result;
+  					Swal.close();
   					this.dinerofiltrado = 0;
   					for (var i = 0; i < this.ticketes.length; ++i) {
 				    	this.dinerofiltrado = this.dinerofiltrado + this.ticketes[i].valorticket;
@@ -90,6 +140,7 @@ export class ListarticketsComponent {
 				    this.dataSource = new MatTableDataSource(this.ticketes);
 					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
+					this.cantticketsconsultados = this.dataSource.filteredData.length;
   				},(err)=>{
   					Swal.fire({
 				      title: 'ERROR.',
@@ -98,6 +149,37 @@ export class ListarticketsComponent {
 				    });
   				});
   				break; 	
+			case "fechas":
+			  	  Swal.fire({
+			        title: 'Cargando...',
+			        allowOutsideClick: false,
+			      });
+			      Swal.showLoading();
+				this.fechaini= formatDate(this.fechaini, 'yyyy-MM-dd', 'en');
+				this.fechafin= formatDate(this.fechafin, 'yyyy-MM-dd', 'en');
+				this.servitickets.ticketsByFechas(this.fechaini,this.fechafin).subscribe(result=>{
+  					this.ticketes=result;
+  					Swal.close();
+  					this.fechaini = '';
+  					this.fechafin = '';
+  					this.dinerofiltrado = 0;
+  					for (var i = 0; i < this.ticketes.length; ++i) {
+				    	this.dinerofiltrado = this.dinerofiltrado + this.ticketes[i].valorticket;
+				    }  					
+				    this.dataSource = new MatTableDataSource(this.ticketes);
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+					this.cantticketsconsultados = this.dataSource.filteredData.length;
+  				},(err)=>{
+  					this.fechaini = '';
+  					this.fechafin = '';
+  					Swal.fire({
+				      title: 'ERROR.',
+				      text: 'No se encontro tickets.' ,
+				      icon: 'error'
+				    });
+  				});
+				break;  				
   			case "sinfiltro":
   				this.buscartickets();
   			break;			  				  				  			
@@ -107,6 +189,7 @@ export class ListarticketsComponent {
   		}
   	}
  	buscartickets(){
+ 		this.dinerorecolectado = 0;
 	   this.servitickets.buscartickets().subscribe(result =>{ 
 	    this.ticketes=result;
 	    console.log(this.ticketes);
@@ -117,6 +200,7 @@ export class ListarticketsComponent {
 	    this.dataSource = new MatTableDataSource(this.ticketes);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
+		this.cantticketsconsultados = this.dataSource.filteredData.length;
 	  });
 	}
 	exportAsXLSX():void {
@@ -137,5 +221,6 @@ export class ListarticketsComponent {
 		for (var i = 0; i < this.dataSource.filteredData.length; ++i) {
 	    	this.dinerofiltrado = this.dinerofiltrado + this.dataSource.filteredData[i].valorticket;
 	    }
+	    this.cantticketsconsultados = this.dataSource.filteredData.length;
 	}
 }
