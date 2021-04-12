@@ -23,9 +23,9 @@
         La descripción es requerida </mat-error>
       </mat-form-field>
     </div>
-
-    <div class="center-align">
-      <a mat-raised-button color="primary" [class.disabled]="!formularioTipoBeca.valid"
+    <div class="col-12">
+      <a mat-raised-button color="primary"  [disabled]="true" *ngIf="!formularioTipoBeca.valid"  name="action">Registrar</a>				
+      <a mat-raised-button color="primary" *ngIf="formularioTipoBeca.valid"
       (click)="registrarTBeca(descripcion.value,mytemplate)"  name="action">Registrar</a>
     </div>
   </div>

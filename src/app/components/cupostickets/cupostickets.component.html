@@ -97,7 +97,30 @@
 		</mat-form-field>
 	</div>
 </div>
+<!-- Validaciones campos cupos
+                    <div class="col-lg">
+                        <h4>Ingrese Cupos de almuerzo</h4>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Cupos Almuerzo</mat-label>
+                            <input #cuposalmuerzoact type="number" id="cuposalmuerzo" matInput placeholder="Ingrese los cupos de almuerzo" value=""  [value]="asignacionSel.cuposdisponiblesalmuerzo" required="true" formControlName="cuposAlmuerzo">
+                    </mat-form-field>
+                                            <mat-error class="help-block form-error text-danger small" *ngIf="formularioCuposAsignaActualizar.controls['cuposAlmuerzo'].hasError('required') &&
+            formularioCuposAsignaActualizar.controls['cuposAlmuerzo'].touched">Los cupos de almuerzo son requeridos</mat-error>
+                </div>
 
+                <div class="col-lg">
+                    <h4>Ingrese cupos de refrigerio</h4>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Cupos Refrigerio</mat-label>
+                        <input #cuposrefrigerioact type="number" id="cuposrefrigerio" matInput placeholder="Ingrese los cupos de refrigerio" value="" [value]="asignacionSel.cuposdisponiblesrefrigerio" required="true" formControlName="cuposRefrigerio">
+                </mat-form-field>
+                                        <mat-error class="help-block form-error text-danger small" *ngIf="formularioCuposAsignaActualizar.controls['cuposRefrigerio'].hasError('required') &&
+            formularioCuposAsignaActualizar.controls['cuposRefrigerio'].touched">Los cupos de refrigerio son requeridos</mat-error>
+            </div>
+        </div>
+
+
+-->
 <div class="row m-4 text-center">
 	<div class="col-12">
 		<a mat-raised-button color="primary" [disabled]="true" *ngIf="!formularioCuposAsigna.valid" name="action">Registrar</a>

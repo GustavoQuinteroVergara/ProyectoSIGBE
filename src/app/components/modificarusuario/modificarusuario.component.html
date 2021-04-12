@@ -4,26 +4,41 @@
     <div class="col s12 text-center">
       <h1>AGREGAR UNA CARRERA</h1>
       <hr>
-      <form>
+      <form [formGroup]="formularioCarrera">
         <div class="col s6" >
           <h4>Selecciona una carrera</h4>
               <mat-form-field appearance="fill">
-                <mat-select #carreraselss required >
+                <mat-select #carreraselss required formControlName="nombreCarrera" >
                   <mat-option>-- Selecciona una carrera --</mat-option>
                   <mat-option *ngFor="let carreras of getcarreras" [value]="carreras" >
                   {{carreras.carreranombre}}</mat-option>
               </mat-select>
+              <mat-error class="help-block form-error text-danger small" *ngIf="formularioCarrera.controls['nombreCarrera'].hasError('required') &&
+              formularioCarrera.controls['nombreCarrera'].touched">Seleccione una carrera</mat-error>
               <mat-label> <b> Carreras</b></mat-label>
           </mat-form-field>
         </div>
-        <div class="col s6">
+        <!--<div class="col s6">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Código estudiante</mat-label>
-            <input matInput #codigoestss class="matfontbolder" id="codigoest"  placeholder="Codigo estudiante" type="number">
+            <input matInput #codigoestss class="matfontbolder" id="codigoest"  placeholder="Código estudiante" type="number">
           </mat-form-field>
+        </div>-->
+        <div class="col s6">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Código estudiante</mat-label>
+              <input matInput #codigoestss formControlName="codigoCarrera" class="matfontbolder" placeholder="Código estudiante" pattern="^[0-9]+" id="codigoest" type="text" class="validate">
+            </mat-form-field>
+            <div *ngIf="formularioCarrera.get('codigoCarrera').errors && formularioCarrera.get('codigoCarrera').dirty">
+              <mat-error *ngIf="formularioCarrera.get('codigoCarrera').hasError('required')">Este campo es obligatorio</mat-error>
+              <mat-error *ngIf="formularioCarrera.get('codigoCarrera').hasError('minlength')">Se debe ingresar mínimo 5 caracteres </mat-error>
+              <mat-error *ngIf="formularioCarrera.get('codigoCarrera').hasError('pattern')"> <br>Solo números</mat-error>
+            </div>
         </div>
-        <div class="col s12">
-          <a (click)="agregarCarrera(carreraselss.value,codigoestss.value)" mat-stroked-button color="primary">Guardar carrera</a>
+        <div class="col-12">
+          <a mat-raised-button color="primary"  [disabled]="true" *ngIf="!formularioCarrera.valid"  name="action">Guardar carrera</a>				
+          <a mat-raised-button color="primary" *ngIf="formularioCarrera.valid"
+          (click)="agregarCarrera(carreraselss.value,codigoestss.value)"  name="action">Guardar carrera</a>
         </div>
       </form>
     </div>

@@ -4,7 +4,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import{ActualizarSaldoService} from './actualizar-saldo.service';
 import{UsuariocarreraService} from '../../services/usuariocarrera.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import  {ServiciocrearuserService } from '../crearusuario/serviciocrearuser.service';
 import Swal from 'sweetalert2';
 import { formatDate } from '@angular/common';
@@ -28,7 +28,7 @@ export class ModificarusuarioComponent implements OnInit {
   departamentos:any;
   cantCarreras=0;
   ciudades:any;
-  
+  public formularioCarrera: FormGroup;
   $nombreusuario= JSON.parse(localStorage.getItem('currentUser'));
   fechanacimiento = formatDate(this.$nombreusuario.fechanacimiento, 'yyyy-MM-dd', 'en')
   ciudad=this.$nombreusuario.ciudad;
@@ -38,12 +38,14 @@ export class ModificarusuarioComponent implements OnInit {
     private serviceSaldo:ActualizarSaldoService, 
     private usuariocarreraService:UsuariocarreraService,
     private actualizaruser:ServiciocrearuserService,
-    public dialog: MatDialog) { 
+    public dialog: MatDialog,
+    public form:FormBuilder,) { 
     this.getCarrerasEst();
     this.getCarreras();
     
   }
 /*INICIO VALIDACIONES*/ 
+
   ngOnInit(): void {
     
       this.updateForm = new FormGroup({
@@ -53,13 +55,22 @@ export class ModificarusuarioComponent implements OnInit {
         password: new FormControl('',[Validators.required]),
         direccion: new FormControl(this.$nombreusuario.direccion,[Validators.required]),
       });
-    
+      this.formularioCarrera= this.form.group({
+        codigoCarrera:['', [Validators.required,Validators.minLength(5)]],
+        nombreCarrera:['', [Validators.required]],
+      });
   }
   get passwordInput() { return this.updateForm.get('password'); }  
 
   public hasError = (controlName: string, errorName: string) =>{
     return this.updateForm.controls[controlName].hasError(errorName);
+    
   }
+  public hasErrors = (controlName: string, errorName: string) =>{
+    return this.formularioCarrera.controls[controlName].hasError(errorName);
+  }
+  
+  
   /*FIN VALIDACIONES*/ 
 
   getCarrerasEst(){
@@ -98,7 +109,7 @@ export class ModificarusuarioComponent implements OnInit {
     this.usuariocarreraService.foundCarreraByIdenCarr(this.$nombreusuario.identi,carrerasel.idcarrera).subscribe(result=>{
           Swal.fire({
                 title: 'ERROR',
-                text: 'Error, ya tienes guardado esa carrera',
+                text: 'Error, ya tienes registrada esa carrera',
                 icon: 'error'
           });  
     },(err)=>{
@@ -106,7 +117,7 @@ export class ModificarusuarioComponent implements OnInit {
         if(this.cantCarreras >= 3){
             Swal.fire({
                 title: 'ERROR',
-                text: 'Error, ya tienes el limite de carreras actuales.',
+                text: 'Error, ya tienes el límite de carreras actuales.',
                 icon: 'error'
             });  
         }else{
