@@ -22,6 +22,8 @@ export class ServicesticketsService {
 	ticketsByIdenti(identi:any){
 		return this.http.get(`${this.url}app/componentes/tickets/ticketsByIdenti.php?identi=${identi}`);
 	}
-
+	ticketsByFechas(fechaini:any,fechafin:any){
+		return this.http.get(`${this.url}app/componentes/tickets/ticketsByFechas.php?fechaini=${fechaini}&fechafin=${fechafin}`);
+	}
 
 }

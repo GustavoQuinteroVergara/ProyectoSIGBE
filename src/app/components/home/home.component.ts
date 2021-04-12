@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	    };
 	    this.serviceSaldo.actualizarEstadoDatos(this.saldoRegistrado).subscribe
 	    (res=>{
-	    	this.$nombreusuario.estadodatos = 1;
+	    	this.$nombreusuario.estadosdatos = true;
 	    	localStorage.setItem('currentUser',JSON.stringify(this.$nombreusuario));
 	      Swal.fire({
 	        title: 'Exitoso',

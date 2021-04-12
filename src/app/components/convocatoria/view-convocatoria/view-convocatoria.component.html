@@ -750,12 +750,14 @@
       </div>  
       <div class="row mb-4">
         <div class="col-12" style="text-align: center;" *ngIf="estadopostusel == 4 && $nombreusuario.rol != '5'">
-          <span style="float: left;">Fecha revisión: {{postuseltable.fecharevision.date | date:'dd/MM/yyyy'}}</span>
+          <span style="float: left;" *ngIf="postuseltable.fecharevision != null">Fecha revisión: {{postuseltable.fecharevision.date | date:'dd/MM/yyyy'}}</span>
+          <span style="float: left;" *ngIf="postuseltable.fecharevision == null">Fecha revisión: {{fechaactual | date:'dd/MM/yyyy'}}</span>          
           <a mat-raised-button (click)="actualizarEstadoPostulacion(successactualizacion)">Actualizar estado documentos</a>
           <hr>
         </div>
          <div class="col-12" style="text-align: center;" *ngIf="estadopostusel != 4 || $nombreusuario.rol == '5'">
-          <span style="float: left;">Fecha revisión: {{postuseltable.fecharevision.date | date:'dd/MM/yyyy'}}</span>
+          <span style="float: left;" *ngIf="postuseltable.fecharevision != null">Fecha revisión: {{postuseltable.fecharevision.date | date:'dd/MM/yyyy'}}</span>
+          <span style="float: left;" *ngIf="postuseltable.fecharevision == null">Fecha revisión: {{fechaactual | date:'dd/MM/yyyy'}}</span>   
           <a mat-raised-button color="primary" [disabled]="estadopostusel != 4">Actualizar estado documentos</a>
           <hr>
         </div>
@@ -769,9 +771,9 @@
         <div class="row">
           <h1>Entrevista</h1>
           <hr>
-          <a mat-stroked-button color="primary" *ngIf="!entrevistvalidate && $nombreusuario.rol != '5'" [routerLink]="['/entrevista', postuseltable.consecutivo_postulacion,$idConvo]" >Iniciar entrevista</a>
+          <a mat-raised-button color="primary" *ngIf="!entrevistvalidate && $nombreusuario.rol != '5'" [routerLink]="['/entrevista', postuseltable.consecutivo_postulacion,$idConvo]" >Iniciar entrevista</a>
           <p *ngIf="!entrevistvalidate && $nombreusuario.rol == '5'">No se ha realizado entrevista actualmente.</p>
-          <a mat-stroked-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista realizada</a>
+          <a mat-raised-button color="primary" *ngIf="entrevistvalidate" (click)="verEntrevistaModal(entrevistaPostu)">Ver entrevista realizada</a>
         </div>
         <div class="row">
           <hr>
@@ -806,14 +808,17 @@
               <h5>Imagen actual subida</h5>
               <hr>
               <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" style="cursor: zoom-in;" alt="Imagen cocina" width="100px" (click)="verimagencuarto(imagencocinamodal)">
+              <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencocina" (click)="verimagencuarto(imagencocinamodal)" style="cursor: zoom-in;" alt="Imagen cuarto" width="100px"> 
                 <ng-template #imagencocinamodal>
                   <div class="text-end" mat-dialog-actions>
                     <button mat-button [mat-dialog-close]="true"><i class="icofont-close-circled" style="font-size: 20px;"></i></button>  
                   </div>
                   
-                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" alt="Imagen cuarto" width="650px">
+                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencocina != null">
+                  <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencocina" alt="Imagen cuarto" width="650px">                  
                 </ng-template>
-                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{postuseltable.imagencocina}}"> Descargar imagen</a>
+                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{postuseltable.imagencocina}}" *ngIf="postuseltable.imagencocina != 'null'"> Descargar imagen</a>
+                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{imagenesvisita.imagencocina}}" *ngIf="postuseltable.imagencocina == 'null' && imagenesvisita.imagencocina != 'null'"> Descargar imagen</a>                
               </div>
             </div>
             <hr>
@@ -824,15 +829,18 @@
               <div class="col">
                 <h5>Imagen actual subida</h5>
                 <hr>
-                <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)">
+                <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto != 'null'">
+                <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" style="cursor: zoom-in;" alt="Imagen cuarto" width="100px" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto == 'null'">                 
                 <ng-template #imagencuartomodal>
                   <div class="text-end" mat-dialog-actions>
                     <button mat-button [mat-dialog-close]="true"><i class="icofont-close-circled" style="font-size: 20px;"></i></button>  
                   </div>
                   
-                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" alt="Imagen cuarto" width="650px">
+                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencuarto != null">
+                  <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" alt="Imagen cuarto" width="650px">
                 </ng-template>
-                <a mat-stroked-button color="primary" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}"> Descargar imagen</a>
+                <a mat-stroked-button color="primary" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}" *ngIf="postuseltable.imagencuarto != 'null'"> Descargar imagen</a>
+                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{imagenesvisita.imagencuarto}}" *ngIf="postuseltable.imagencuarto == 'null' && imagenesvisita.imagencuarto != 'null'"> Descargar imagen</a>                  
               </div>
               <hr>
             </div>
@@ -842,8 +850,9 @@
       </div>
       <div class="row">
         <hr>
-        <span style="float: left;" class="mt-4 mb-4" *ngIf="visitaPostuFound != undefined">Fecha visita: {{visitaPostu.fechavisita}}</span>
-        <span style="float: left;" class="mt-4 mb-4" *ngIf="visitaPostuFound == undefined">Fecha visita: --/--/--</span>
+        <span style="float: left;" class="mt-4 mb-4" *ngIf="visitaPostuFound == undefined">Fecha visita: --/--/--</span>        
+        <span style="float: left;" class="mt-4 mb-4" *ngIf="visitaPostuFound != undefined">Fecha visita: {{visitaPostuFound.fechavisita}}</span>
+
         <hr>
         </div>
     </div>
@@ -1128,7 +1137,7 @@
                     <!-- ID Column -->
                     <ng-container matColumnDef="estudiante.nombreestudiante">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre estudiante</th>
-                      <td mat-cell *matCellDef="let row"> {{row.estudiante.nombreestudiante}} <a (click)="buscarEstPostuByIden(row.estudiante.identificacion,mytemplate)" data-title="Ver información del estudiante"><i class="icofont-address-book iconSearchUser"></i></a> </td>
+                      <td mat-cell *matCellDef="let row"> {{row.estudiante.nombreestudiante}} <a (click)="buscarEstPostuByIden(row.estudiante.identificacion,mytemplate)" data-title-a="Ver información del estudiante"><i class="icofont-address-book iconSearchUser"></i></a> </td>
                     </ng-container>
 
                     <!-- Progress Column -->
