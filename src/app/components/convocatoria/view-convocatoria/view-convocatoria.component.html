@@ -937,7 +937,7 @@
 
           <mat-form-field class="example-full-width" disabled appearance="none">
             <mat-label>Correo electrónico</mat-label>
-            <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest">
+            <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest" style="width: 100%;">
           </mat-form-field>
         </div>
       </div>
@@ -1065,7 +1065,9 @@
                     [value]="$convoBuscada.fechainicio" formControlName="fechaini">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 
-                    <ngx-mat-datetime-picker  #picker  >
+                    <ngx-mat-datetime-picker  #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                    [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+                    [color]="color" [enableMeridian]="enableMeridian" >
                     </ngx-mat-datetime-picker>
                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['fechaini'].hasError('required') &&
                     formularioConvocatoria.controls['fechaini'].touched">Por favor, Indique una fecha inicio</mat-error>
@@ -1078,9 +1080,11 @@
                   <mat-form-field appearance="fill">
                     <input #fecha_fin style="font-weight: bolder;" [disabled]="disabledActualizar" matInput [ngxMatDatetimePicker]="picker2" placeholder="Selecciona Fecha final" 
                     [value]="$convoBuscada.fechafin" formControlName="fechafin">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
 
-                    <ngx-mat-datetime-picker  #picker2  >
+                    <ngx-mat-datetime-picker  #picker2  [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                    [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+                    [color]="color" [enableMeridian]="enableMeridian">
                     </ngx-mat-datetime-picker>
                     <mat-error class="help-block form-error text-danger small" *ngIf="formularioConvocatoria.controls['fechafin'].hasError('required') &&
                     formularioConvocatoria.controls['fechafin'].touched">Por favor, Indique una fecha fin</mat-error>
