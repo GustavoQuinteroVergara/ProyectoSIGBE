@@ -144,7 +144,9 @@ if( (this.listDocsupload.length == this.cantDocumentos) || (this.cantDocumentos 
             text: 'Registrado exitosamente.',
             icon: 'success'
           }); 
-          this.router.navigate(['/listarPostulacionesEst']);
+          setTimeout(() =>{
+            this.router.navigate(['/listarPostulacionesEst']);
+          },1000);
         },(errr)=>{
             Swal.fire({
               title: 'ERROR',
