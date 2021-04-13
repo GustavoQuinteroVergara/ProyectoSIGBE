@@ -19,6 +19,8 @@ export class ListarpostuestComponent {
 	postusBuscadas:any;
   postuSeleccionada:any;
   documentosFoundpostu:any;
+  varsel:any;
+  listDocsupload=[];
   activarUpdate = false;
   myForm: FormGroup;
   listActualizarPostu:any;
@@ -91,6 +93,45 @@ export class ListarpostuestComponent {
         panelClass: ['redNoMatch']
       });
     }
+  }
+
+
+  seleccionarArchivo(event,variable:any) {
+  var files = event.target.files;
+  var file = files[0];                                                       
+  this.varsel = variable;
+    if(files && file) {
+      var reader = new FileReader();
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvent) {
+    var binaryString = readerEvent.target.result;
+    // this.listDocsupload[this.varsel] = btoa(binaryString);
+    this.varsel =  this.varsel + '|-|' + btoa(binaryString) ;
+    this.listDocsupload.push(this.varsel);
+  }
+
+  actualizarDocumentos(){
+    this.varsel = {
+      idpost:this.postuSeleccionada.consecutivo_postulacion,
+      listEstadosDocs:this.listDocsupload
+    };
+    this.documentoServicie.actualizarDocumentos(this.varsel).subscribe(result=>{
+          Swal.fire({
+            title: 'Exitoso',
+            text: 'Actualizado exitosamente.',
+            icon: 'success'
+          }); 
+    },(err)=>{
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error al actualizar. ' + err.error.text,
+        icon: 'error'
+      }); 
+    });
   }
 
   actualizarPostu(semestre:any,promedio:any){

@@ -6,14 +6,14 @@ import { map } from 'rxjs/operators';
 })
 export class ServicioshabilitarService {
 
-  url='http://localhost/sigbeweb/app/componentes/usuarios/buscar_user.php?';
+  url='http://localhost/sigbeweb/app/componentes/usuarios/list_usuarios.php';
   url2='http://localhost/sigbeweb/app/componentes/usuarios/habilitar_user.php?';
   
 
   constructor(private http: HttpClient) { }
 
-buscarUser(codigoestudiante:any){
-  return this.http.get(`${this.url}identificacion=${codigoestudiante}`);
+buscarUser(){
+  return this.http.get(`${this.url}`);
 }
 
 updateuser(Actualizaruser:Array<any> ){

@@ -252,13 +252,30 @@
             </div>
         </div>
         </div>
-
-
-        <div class="row" *ngIf="activarUpdate">
+                <div class="row" *ngIf="activarUpdate">
             <div class="col s12 center">
-                <button mat-raised-button color="primary"(click)="actualizarPostu(semestre.value,promedio?.value)" [disabled]="myForm.invalid"><i class="icofont-check right lapizUpdatePostu"></i> Editar postulacion</button>
+                <button mat-raised-button color="primary" (click)="actualizarPostu(semestre.value,promedio?.value)" [disabled]="myForm.invalid"><i class="icofont-check right lapizUpdatePostu"></i> Editar postulacion</button>
             </div>
         </div>
+
+        </form>
+        <form >
+            <div class="row">
+            <h1 class="card-title">Documentos mal diligenciados</h1>
+            <hr>
+            <div  *ngFor="let docspostu of documentosFoundpostu">
+                <div class="col-6 col-sm-6 col-lg-6" *ngIf="docspostu.estado == 2">
+                  <div class="card-body">
+                    <h3 class="card-title">{{docspostu.nombredoc}}</h3>
+                    <hr>
+                     <input type="file" accept="application/pdf" (change)="seleccionarArchivo($event,docspostu.concecutivodoc)">  
+                    <hr>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <a mat-raised-button color="primary" (click)="actualizarDocumentos()">Actualizar documentos</a>
+
         </form>
         <hr>
     </div>

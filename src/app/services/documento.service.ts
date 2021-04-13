@@ -19,6 +19,12 @@ export class DocumentoService {
 			return nuevoDoc;
 		}));
 	}
+	actualizarDocumentos(docs:any){
+		return this.http.put(`${this.url}/app/componentes/documento/actualizarDocumentos.php`,{data: docs})
+		.pipe(map((res)=>{
+			return docs;
+		}));
+	}
 	getDocumentsConvo(idConvo:any){
 		return this.http.get(`${this.url}/app/componentes/documento/documentosbyidconvo.php?idconvo=${idConvo}`);
 	}

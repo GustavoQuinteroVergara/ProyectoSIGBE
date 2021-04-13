@@ -456,7 +456,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-lg-6">
                   <hr>
-                   Codigo postulación: <strong>{{visitaPostuFound.postulacionid}</strong>}
+                   Codigo postulación: <strong>{{visitaPostuFound.postulacionid}}</strong>
                    <hr>
                 </div>
               </div>
@@ -488,7 +488,7 @@
                     Parentesco: <strong>{{visitaPostuFound.parentesco}}</strong><hr>
                   </div>
                   <div class="col-12 col-sm-6 col-lg-6"><hr>
-                    Obligación: <strong>{{visitaPostuFound.obligacion}</strong>}<hr>
+                    Obligación: <strong>{{visitaPostuFound.obligacion}}</strong><hr>
                   </div>
                 </div>
                 <hr>
@@ -513,13 +513,13 @@
                   ¿Paga arriendo?: <strong>{{visitaPostuFound.pagoarriendo}}</strong><hr>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-6"><hr>
-                  Valor del arriendo: <strong>{{visitaPostuFound.valorarriendo}</strong>}<hr>
+                  Valor del arriendo: <strong>{{visitaPostuFound.valorarriendo}}</strong><hr>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-12 col-sm-6 col-lg-6"><hr>
-                  Que cubre arriendo: <strong>{{visitaPostuFound.cubrearriendo}</strong>}<hr>
+                  Que cubre arriendo: <strong>{{visitaPostuFound.cubrearriendo}}</strong><hr>
                 </div>
                 <div class="col-12 col-sm-6 col-lg-6"><hr>
                   Otro (Arriendo) : <strong>{{visitaPostuFound.otroarriendo}}</strong><hr>
@@ -799,16 +799,16 @@
             <hr>
             <h1>Actualizar imagenes del cuarto y cocina del postulante</h1>
             <hr>
-            <div class="col-lg" >
+<!--             <div class="col-lg" >
               <hr>
               <h3 *ngIf="$nombreusuario.rol != '5'">Actualiza la foto de la cocina  del postulante</h3>
             <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="image/x-png,image/jpeg" (change)="seleccionarArchivo($event,0)">
             <hr>
             <div class="col">
-              <h5>Imagen actual subida</h5>
+              <h5>Imagen actual de cocina subida</h5>
               <hr>
               <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" style="cursor: zoom-in;" alt="Imagen cocina" width="100px" (click)="verimagencuarto(imagencocinamodal)" *ngIf="postuseltable.imagencocina != null">
-              <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencocina" (click)="verimagencuarto(imagencocinamodal)" style="cursor: zoom-in;" alt="Imagen cuarto" width="100px" *ngIf="postuseltable.imagencocina == null"> 
+              <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencocina" (click)="verimagencuarto(imagencocinamodal)" style="cursor: zoom-in;" alt="Imagen cocina" width="100px" *ngIf="postuseltable.imagencocina == null"> 
                 <ng-template #imagencocinamodal>
                   <div class="text-end" mat-dialog-actions>
                     <button mat-button [mat-dialog-close]="true"><i class="icofont-close-circled" style="font-size: 20px;"></i></button>  
@@ -820,31 +820,79 @@
                 <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{postuseltable.imagencocina}}" *ngIf="postuseltable.imagencocina != null"> Descargar imagen</a>
                 <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{imagenesvisita.imagencocina}}" *ngIf="postuseltable.imagencocina == null && imagenesvisita.imagencocina != null"> Descargar imagen</a>                
               </div>
+            </div> -->
+<div class="row text-center">
+  <div class="col-12 col-sm-6 col-lg-6">
+    
+
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+              <h5 class="card-title">Actualizar imagene cocina del postulante</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Imagen actual cocina subida</h6>                
+              <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" style="cursor: zoom-in;" alt="Imagen cocina" class="card-img-top" width="100px" (click)="verimagencuarto(imagencocinamodal)" *ngIf="postuseltable.imagencocina != null">
+              <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencocina" (click)="verimagencuarto(imagencocinamodal)" class="card-img-top" style="cursor: zoom-in;" alt="Imagen cocina" width="100px" *ngIf="postuseltable.imagencocina == null"> 
+                <hr>
+                <h5>Actualizar imagen</h5>
+                     <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="image/x-png,image/jpeg" (change)="seleccionarArchivo($event,0)">    
+                <ng-template #imagencocinamodal>
+              
+                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencocina" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencocina != null">
+                  <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencocina" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencocina == null">                  
+                </ng-template>  
+                <hr>              
+                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{postuseltable.imagencocina}}" *ngIf="postuseltable.imagencocina != null"> Descargar imagen</a>
+              </div>
             </div>
-            <hr>
-            <div class="col-lg" >
+  </div>            
+<!--             <div class="col-lg" >
               <h3 *ngIf="$nombreusuario.rol != '5'">Actualiza la foto del cuarto del postulante</h3>
               <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="image/x-png,image/jpeg" (change)="seleccionarArchivo($event,1)">
               <hr>
               <div class="col">
                 <h5>Imagen actual subida</h5>
                 <hr>
-                <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto != 'null'">
-                <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" style="cursor: zoom-in;" alt="Imagen cuarto" width="100px" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto == 'null'">                 
+                <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto != null">
+                <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" style="cursor: zoom-in;" alt="Imagen cuarto" width="100px" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto == null">                 
                 <ng-template #imagencuartomodal>
                   <div class="text-end" mat-dialog-actions>
                     <button mat-button [mat-dialog-close]="true"><i class="icofont-close-circled" style="font-size: 20px;"></i></button>  
                   </div>
                   
                   <img [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencuarto != null">
-                  <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" alt="Imagen cuarto" width="650px">
+                  <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencuarto == null">
                 </ng-template>
-                <a mat-stroked-button color="primary" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}" *ngIf="postuseltable.imagencuarto != 'null'"> Descargar imagen</a>
-                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{imagenesvisita.imagencuarto}}" *ngIf="postuseltable.imagencuarto == 'null' && imagenesvisita.imagencuarto != 'null'"> Descargar imagen</a>                  
+                <a mat-stroked-button color="primary" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}" *ngIf="postuseltable.imagencuarto != null"> Descargar imagen</a>
+                <a mat-stroked-button color="primary" download="imagencocina.png" href="data:image/png;base64,{{imagenesvisita.imagencuarto}}" *ngIf="postuseltable.imagencuarto == null && imagenesvisita.imagencuarto != null"> Descargar imagen</a>                  
               </div>
               <hr>
+            </div> -->
+  <div class="col-12 col-sm-6 col-lg-6">            
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Actualiza la foto del cuarto del postulante</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Imagen actual subida</h6>
+                <img  [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" style="cursor: zoom-in;" width="100px" class="card-img-top" alt="Imagen cuarto" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto != null">
+                <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" style="cursor: zoom-in;" alt="Imagen cuarto" class="card-img-top" width="100px" (click)="verimagencuarto(imagencuartomodal)" *ngIf="postuseltable.imagencuarto == null"> 
+                <hr>
+                <h5>Actualizar imagen</h5>
+                <input type="file" *ngIf="$nombreusuario.rol != '5'" accept="image/x-png,image/jpeg" (change)="seleccionarArchivo($event,1)" id="inputimagencuarto">         
+                <ng-template #imagencuartomodal>                  
+                  <img [src]="'data:image/jpg;base64,' + postuseltable.imagencuarto" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencuarto != null">
+                  <img [src]="'data:image/jpg;base64,' + imagenesvisita.imagencuarto" alt="Imagen cuarto" width="650px" *ngIf="postuseltable.imagencuarto == null">
+                </ng-template> 
+                <hr>               
+                <a mat-stroked-button color="primary" class="card-link" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}" *ngIf="postuseltable.imagencuarto != null"> Descargar imagen</a>
+                <a mat-stroked-button color="primary" class="card-link" download="imagencuarto.png" href="data:image/png;base64,{{postuseltable.imagencuarto}}" *ngIf="postuseltable.imagencuarto == null && imagenesvisita.imagencuarto != null"> Descargar imagen</a>                
+              </div>
             </div>
-            <a mat-raised-button color="primary" *ngIf="$nombreusuario.rol != '5'" class="col-12" (click)="actualizarImagesPostu()">Subir fotos.</a>
+</div>
+
+
+          </div>  
+          <div class="col-12 text-center mb-4 mt-4">
+            <a mat-raised-button color="primary" *ngIf="$nombreusuario.rol != '5'" (click)="actualizarImagesPostu()">Subir fotos.</a>            
+          </div>          
+
           </form>
         </div>
       </div>
@@ -860,13 +908,36 @@
   <mat-tab label="Información final" *ngIf="estadopostusel == 1 || estadopostusel == 2">
     <div class="container-fluid">
       <div class="row">
-        <h1>Información final</h1>
-          <p>Tiempo total beneficiado asignado: {{postuseltable.tiempototalbene || cantperiodos}} </p>
-          <p>Tiempo restante : {{postuseltable.tiemporestantebene || cantperiodos}} </p>
-          <p>Observación:</p>
+        <h1 class="card-title mt-4">Información final</h1>
+        <hr>
+        <div class="col-6 col-sm-6 col-lg-6">
+          <h3>Tiempo total beneficiado asignado:</h3>
+          <div class="alert alert-secondary">
+            <p *ngIf="postuseltable.tiempototalbene != null || cantperiodos != null"> {{postuseltable.tiempototalbene || cantperiodos}} </p>
+          </div>
+          <hr>
+        </div>
+      <div class="col-6 col-sm-6 col-lg-6">
+        <h3>Tiempo restante :</h3>
+        <div class="alert alert-secondary">
+          <p *ngIf="postuseltable.tiemporestantebene != null || cantperiodos != null"> {{postuseltable.tiemporestantebene || cantperiodos}} </p>
+        </div>
+        <hr>        
+      </div>
+
+        <div class="col-12 col-sm-12 col-lg-12">
+        <h3>Observación:</h3>
+        <div class="alert alert-secondary">
           <p>{{postuseltable.observacionbene || observacionbene}}</p>
-        <span *ngIf="postuseltable.fechabeneficio != null">{{postuseltable.fechabeneficio}}</span>
-        <span *ngIf="postuseltable.fechabeneficio == null">{{fechaactual | date:'dd/MM/yyyy'}}</span>
+        </div>
+        <hr>          
+        </div>
+
+        <div class="alert alert-secondary alert-dismissible fade show">
+          <span *ngIf="postuseltable.fechabeneficio != null">Fecha estado final: {{postuseltable.fechabeneficio.date | date:'dd/MM/yyyy'}}</span>
+          <span *ngIf="postuseltable.fechabeneficio == null">Fecha estado final:  {{fechaactual | date:'dd/MM/yyyy'}}</span>
+        </div>
+        <hr>
       </div>
     </div>
   </mat-tab>

@@ -80,7 +80,7 @@ export class VisitadomiciliariaComponent implements OnInit {
                      {selected:false,label:'Teléfono'},  
                      {selected:false,label:'Gas Domiciliario'}                                                             
                     ];
-  cubrearriendo:any;
+  cubrearriendo='-';
   otroarriendo='';
   fuenteingreso:any;
   cualfuente='';
