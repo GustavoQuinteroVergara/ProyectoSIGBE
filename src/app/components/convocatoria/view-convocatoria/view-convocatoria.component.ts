@@ -1534,6 +1534,8 @@ export class ViewConvocatoriaComponent {
 
               this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
               (res=>{ 
+                let dialogRef = this.dialog.openDialogs[1];
+                dialogRef.close();
                 this.loadingcc = false;
                 for (var i = 0; i < this.$postuByIdArray.length; i++) {
                   if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -1603,6 +1605,8 @@ export class ViewConvocatoriaComponent {
                   };
                   this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                   (res=>{  
+                    let dialogRef = this.dialog.openDialogs[1];
+                    dialogRef.close();                    
                     this.loadingcc = false;
                     for (var i = 0; i < this.$postuByIdArray.length; i++) {
                       if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -1776,6 +1780,8 @@ export class ViewConvocatoriaComponent {
 
               this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
               (res=>{ 
+                let dialogRef = this.dialog.openDialogs[1];
+                dialogRef.close();                
                 this.loadingcc = false;
                 for (var i = 0; i < this.$postuByIdArray.length; i++) {
                   if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -1847,6 +1853,8 @@ export class ViewConvocatoriaComponent {
                 };
                 this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                 (res=>{  
+                  let dialogRef = this.dialog.openDialogs[1];
+                  dialogRef.close();                  
                   this.loadingcc = false;
                   for (var i = 0; i < this.$postuByIdArray.length; i++) {
                     if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -1961,6 +1969,8 @@ export class ViewConvocatoriaComponent {
 
                 this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                 (res=>{ 
+                let dialogRef = this.dialog.openDialogs[1];
+                dialogRef.close();                  
                   this.loadingcc = false;
                   for (var i = 0; i < this.$postuByIdArray.length; i++) {
                     if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -2031,6 +2041,8 @@ export class ViewConvocatoriaComponent {
                   };
                           this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
                           (res=>{  
+                            let dialogRef = this.dialog.openDialogs[1];
+                            dialogRef.close();                            
                             this.loadingcc = false;
                             for (var i = 0; i < this.$postuByIdArray.length; i++) {
                               if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -2145,6 +2157,8 @@ export class ViewConvocatoriaComponent {
 
             this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
             (res =>{ 
+                let dialogRef = this.dialog.openDialogs[1];
+                dialogRef.close();              
               this.loadingcc = false;
               for (var i = 0; i < this.$postuByIdArray.length; i++) {
                 if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){
@@ -2201,6 +2215,8 @@ export class ViewConvocatoriaComponent {
 
               this.serviceviewconvocatoria.actualizarEstadoPostulacion(this.updatePostu).subscribe
               (res=>{ 
+                let dialogRef = this.dialog.openDialogs[1];
+                dialogRef.close();                
                 this.loadingcc = false;
                 for (var i = 0; i < this.$postuByIdArray.length; i++) {
                   if(this.$postuByIdArray[i].consecutivo_postulacion == idPostu){

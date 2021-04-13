@@ -127,6 +127,9 @@ export class ModificarusuarioComponent implements OnInit {
               text: 'Carrera registrada exitosamente.',
               icon: 'success'
             });  
+            let dialogRef = this.dialog.openDialogs[0];
+
+            dialogRef.close();             
             this.getCarrerasEst();
           },(err)=>{
             Swal.fire({

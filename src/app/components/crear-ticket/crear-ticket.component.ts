@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {formatDate } from '@angular/common';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import {Router, ActivatedRoute, Params } from '@angular/router';
 import {TicketService} from '../../services/ticket.service';
 import {UsuarioService} from '../../services/usuario.service';
 import {ConfiguracionService} from '../configuracion/configuracion.service';
@@ -56,6 +56,7 @@ export class CrearTicketComponent {
 		private configuracionService:ConfiguracionService,
 		private postulacionService:PostulacionService,
 		public snackBack: MatSnackBar,
+		private router:Router,
 		private usuarioService:UsuarioService,public dialog: MatDialog, 
 		private periodoService:PeriodoServiceService,
 		private encuestaService:EncuestaService,
@@ -224,7 +225,7 @@ export class CrearTicketComponent {
 		this.ticketService.buscarTicketbyFechaUser(this.$nombreusuario.identi,this.ticketArray.tipoTicket).subscribe(result=>{
 			Swal.fire({
 	          title: 'ERROR',
-	          text: 'Lo siento, ya reservaste el día de hoy.',
+	          text: 'Lo siento, ya reservaste el día de hoy ese tipo de ticket.',
 	          icon: 'error'
 	        });
 		},(err)=>{
@@ -236,7 +237,9 @@ export class CrearTicketComponent {
 			          text: 'Reservado exitosamente.',
 			          icon: 'success'
 			        });
-
+				      setTimeout(() =>{
+				        this.router.navigate(['/listarTicketEst']);
+				      },1000);					
 				},(errors)=>{
 					Swal.fire({
 			          title: 'ERROR',
