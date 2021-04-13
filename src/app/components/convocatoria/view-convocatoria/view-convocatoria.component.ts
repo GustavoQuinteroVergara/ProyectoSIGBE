@@ -17,6 +17,7 @@ import {ExporterService} from '../../../services/exporter.service';
 import jsPDF from 'jspdf';
 import html2canvas from "html2canvas";
 import Swal from 'sweetalert2';
+import { ThemePalette } from '@angular/material/core';
 @Component({
   selector: 'app-view-convocatoria',
   templateUrl: './view-convocatoria.component.html',
@@ -38,6 +39,38 @@ export class ViewConvocatoriaComponent {
   listActualizar:any;
   listadoDocsActualizar:any;
   observacion='';
+  public disabled = false;
+  public showSpinners = false;
+  public showSeconds = false;
+  public touchUi = false;
+  public enableMeridian = false;
+
+  
+  public stepHour = 1;
+  public stepMinute = 1;
+  public stepSecond = 1;
+  public color: ThemePalette = 'primary';
+
+  public formGroup = new FormGroup({
+    date: new FormControl(null, [Validators.required]),
+    date2: new FormControl(null, [Validators.required])
+  });
+  public dateControl = new FormControl(new Date('now'));
+  public dateControlMinMax = new FormControl(new Date());
+  date = new Date(2020, 1, 1);
+  minDate = new Date();
+  
+  public options = [
+  { value: true, label: 'True' },
+  { value: false, label: 'False' }
+  ];
+
+  public listColors = ['primary', 'accent', 'warn'];
+
+  public stepHours = [1, 2, 3, 4, 5];
+  public stepMinutes = [1, 5, 10, 15, 20, 25];
+  public stepSeconds = [1, 5, 10, 15, 20, 25];
+
   //Colores barra progreso
     circlecolor1={
       'pasoactive':false
@@ -1103,7 +1136,7 @@ export class ViewConvocatoriaComponent {
       this.dataSource2.paginator._intl.itemsPerPageLabel = "Cantidad por paginas";
     });
   }
-  actualizarConvocator222ia(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
+  actualizarConvocatoria(consecutivo_convocatoria:any,cupo:any,becas:any,periodosacademicos:any,
     fecha_inicio:any,fecha_fin:any,estado_convocatoria:any,successactualizacion){
     this.convoActualizado= {
       consecutivo_convocatoria:consecutivo_convocatoria,

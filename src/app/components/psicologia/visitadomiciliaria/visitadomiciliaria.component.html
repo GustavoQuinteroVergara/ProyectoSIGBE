@@ -372,7 +372,7 @@
               </mat-form-field>
             </mat-radio-group>
           </div>
-          <div class="col-6">
+          <div class="col-6" *ngIf="pagoarriendo == 'Si'">
             <h3 >¿Qué cubre el arriendo? </h3>
 <!--             <mat-radio-group [(ngModel)]="cubrearriendo" aria-label="Select an option" [ngModelOptions]="{standalone: true}">
               <mat-radio-button class="example-margin estratoCheck" color="warn" value="Cuarto" [checked]="cubrearriendo == 'Cuarto'">Cuarto</mat-radio-button>
