@@ -233,7 +233,10 @@ export class VisitadomiciliariaComponent implements OnInit {
         text: 'Registrado exitosamente.',
         icon: 'success'
       }); 
-      this.router.navigate(['/viewConvocatoria/' + this.idConvo]);
+      setTimeout(() =>{
+           this.router.navigate(['/viewConvocatoria/' + this.idConvo]);
+          },1000);        
+      
     },(err)=>{
       Swal.fire({
         title: 'ERROR',

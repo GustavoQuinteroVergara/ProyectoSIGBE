@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RegistrarConvoServiceService} from './registrar-convo-service.service';
 import {DocumentoService} from '../../../services/documento.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Router, ActivatedRoute, Params } from '@angular/router';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
@@ -81,6 +82,7 @@ export class RegistrarConvocatoriaComponent implements OnInit {
 
   constructor(private serviceConvocatoria:RegistrarConvoServiceService,
     public dialog: MatDialog,
+    private router:Router,
     public documentoService:DocumentoService) { 
     this.buscarBeca();
     this.buscarPeriodo();
@@ -236,6 +238,10 @@ export class RegistrarConvocatoriaComponent implements OnInit {
         text: 'Registrado exitosamente.',
         icon: 'success'
       });
+      setTimeout(() =>{
+        this.router.navigate(['/listarConvocatoria']);
+      },1000);
+      
     },(err)=>{
       console.log("Fallo: "+err.error.text);
       Swal.fire({
