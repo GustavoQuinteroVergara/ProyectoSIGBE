@@ -235,6 +235,7 @@ export class ViewConvocatoriaComponent {
        height: '600px',
        width: '710px',
     });
+    console.log(dialogRef);
   }
 
   actualizarImagesPostu(){
@@ -1078,6 +1079,18 @@ export class ViewConvocatoriaComponent {
        height: '600px',
        width: '1024px',
     });
+    console.log(this.dialog);
+  }
+
+  cerrarEntrevista(){
+    let dialogRef = this.dialog.openDialogs[1];
+
+    dialogRef.close();
+  }
+  cerrarPostulacion(){
+    let dialogRef = this.dialog.openDialogs[0];
+
+    dialogRef.close();    
   }
 
   //Metodo actualizar formconvo
@@ -1340,7 +1353,9 @@ export class ViewConvocatoriaComponent {
       let dialogRef = this.dialog.open( templatePostu,{
        height: '600px',
        width: '970px',
-     });}
+     });
+      console.log(dialogRef);
+    }
   buscarBeca(){
     this.serviceConvocatoria.buscarListadoBecas().subscribe(convocatoriaBeca=>{
       this.convocatoriaBeca = convocatoriaBeca;

@@ -4,6 +4,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-sm-6 col-lg-3">
+      <a mat-icon-button color="primary" data-title="Cerrar ventana" class="buttonsiguiente" aria-label="Example icon button with a home icon" (click)="cerrarEntrevista()">
+        <i class="icofont-close-circled" style="color:#f44336 !important;font-size: 20px;"></i>
+      </a>
       <a (click)="descargarPDFEntrevista()" mat-stroked-button><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
     </div>
     <div class="col">
@@ -417,6 +420,9 @@
   <div>
     <form >
     <div mat-dialog-content>
+      <a mat-icon-button color="primary" data-title="Cerrar ventana" class="buttonsiguiente" aria-label="Example icon button with a home icon" (click)="cerrarEntrevista()">
+        <i class="icofont-close-circled" style="color:#f44336 !important;font-size: 20px;"></i>
+      </a>      
       <p *ngIf="aprobadolist.estadosel == 'Aprobado'">Cantidad de periodos que sera beneficiado</p>
       <mat-form-field class="example-full-width" appearance="fill" class="inputsEspacio" *ngIf="aprobadolist.estadosel == 'Aprobado'">
       <mat-label>Cantidad de periodos beneficiado</mat-label>
@@ -441,6 +447,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-3">
+      <a mat-icon-button color="primary" data-title="Cerrar ventana" class="buttonsiguiente" aria-label="Example icon button with a home icon" (click)="cerrarEntrevista()">
+        <i class="icofont-close-circled" style="color:#f44336 !important;font-size: 20px;"></i>
+      </a>        
       <a (click)="descargarPDFVisita(visitaPostuFound)" style="cursor: pointer;"><img src="assets/imgs/icopdf.png" alt="icopdf" width="40px">Descargar como PDF</a>
       </div>
       </div>
@@ -597,7 +606,10 @@
   </ng-template>
   <div class="row" data-aos="fade-down" data-aos-once="true">
     <div class="col-12 text-center">
-      <h2>Estado postulación</h2>
+      <h1>Estado postulación</h1>
+      <a mat-icon-button color="primary" data-title="Cerrar ventana" class="buttonsiguiente" aria-label="Example icon button with a home icon" (click)="cerrarPostulacion()">
+        <i class="icofont-close-circled" style="color:#f44336 !important;font-size: 20px;"></i>
+      </a>         
     </div>
 <!-- COMIENZO COPIADA -->
 <div class="pasosestados">
