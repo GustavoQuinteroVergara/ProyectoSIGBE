@@ -447,8 +447,9 @@
 </div>
 
 <br>
+<div class="container-fluid">
 <div class="row col-12 rowpanelbienestargrafica" data-aos="zoom-in-down" data-aos-once="true">
-  <div class="col-7 graficainfo">
+  <div class="col-12 col-sm-7 col-lg-7 graficainfo" *ngIf="this.$nombreusuario.rol =='4'">
     <div class="titulografica">
       <h1>POSTULACIONES POR ZONAS RESIDENCIALES</h1>
     </div>
@@ -457,10 +458,27 @@
       <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
     </div>
   </div>
-
-  <div class="col-4 tablainfopostus">
+  <div class="col-12 col-sm-4 col-lg-4 graficainfo" *ngIf="this.$nombreusuario.rol =='2'">
     <div class="titulografica">
-      <h1>USUARIOS INACTIVOS</h1>
+      <h1>POSTULACIONES POR ZONAS RESIDENCIALES</h1>
+    </div>
+    <div class="imggrafica">
+       <canvas id="realtime" style="margin-top: 15%;">{{ chart }}</canvas>
+      <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
+    </div>
+  </div>  
+  <div class="col-12 col-sm-7 col-lg-7 tablainfopostus" *ngIf="this.$nombreusuario.rol =='2'">
+    <div class="titulografica">
+      <h1>DINERO DE TICKETS LOS ULTIMOS 7 DIAS</h1>
+    </div>
+    <div class="imggrafica">
+       <canvas id="ticketsvalores">{{ charttickets }}</canvas>
+      <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
+    </div>
+  </div>
+  <div class="col-4 tablainfopostus" *ngIf="this.$nombreusuario.rol =='4'">
+    <div class="titulografica">
+      <h1>Postulaciones entrevista y visita domiciliaria</h1>
     </div>
     
     <table class="table table-bordered table-striped mb-0">
@@ -472,21 +490,26 @@
           <th scope="col">Revisión</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="postulaciones == null">
+        <tr>
+          <td>No hay postulaciones en entrevista o visita</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="postulaciones != null">
         <tr *ngFor="let postus of  postulaciones">
-          <th scope="row">{{postus.nombre}}</th>
+          <th scope="row">{{postus.estudiante.nombreestudiante}}</th>
           <td>{{postus.estrato}}</td>
-          <td>{{postus.convocatoria}}</td>
-          <td>{{postus.estado}}</td>
-          <td><a (click)="buscarEstPostuByIden(mytemplate)"><i class="icofont-ui-search iconSearchUser"></i></a></td>
+          <td>{{postus.becanombre}}</td>
+          <td>{{postus.estado_postulacion}}</td>
+          <td><a [routerLink]="['/viewConvocatoria',postus.idconvo]"><i class="icofont-ui-search iconSearchUser"></i></a></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<div class="row col-12 rowpanelbienestargrafica mt-4" data-aos="zoom-in-down" data-aos-once="true">
-    <div class="col-7 graficainfo">
+<div class="row col-12 justify-content-md-center rowpanelbienestargrafica mt-4" data-aos="zoom-in-down" data-aos-once="true">
+    <div class="col-9 graficainfo">
     <div class="titulografica">
       <h1>POSTULACIONES POR CARRERA Y BECA</h1>
     </div>
@@ -512,6 +535,7 @@
       <!-- <img src="assets/imgs/grafica.png" width="560px"> -->
     </div>
   </div>
+    </div>
     </div>
   </div>
 </div>
