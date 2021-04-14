@@ -1218,6 +1218,13 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-12 col-sm-8 col-lg-8">
+                    <div class="alert alert-info alert-dismissible fade show">
+                      <strong style="color: #4caf50;">Si</strong><span  >: Indica que ya realizo la entrevista o visita domiciliaria</span>
+                      <hr>
+                      <strong style="color: #f44336;">No</strong><span  >: Indica que no se ha realizado la entrevista o visita domiciliaria</span>                      
+                    </div>
+                  </div>                  
                 <div class="table-responsive">
                   <div class="mat-elevation-z8 table-responsive">
                   <table mat-table [dataSource]="dataSource" matSort style="width: 100%;text-align: center;" *ngIf="$nombreusuario.rol != 4">
@@ -1294,6 +1301,7 @@
                     </tr>
                   </table>
                   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" *ngIf="$nombreusuario.rol != 4"></mat-paginator>
+
 
 
                   <table mat-table [dataSource]="dataSource2" matSort style="width: 100%;text-align: center;" *ngIf="$nombreusuario.rol == 4">

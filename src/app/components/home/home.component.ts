@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	fechaultperiodo:any;
 	saldoRegistrado:any;
 	anunciosActual=null;
+	datostickts:any;
 	periodocaducado:any;
     postulaciones:any;
     convoActivas:any;
@@ -59,6 +60,30 @@ export class HomeComponent implements OnInit,AfterViewInit {
     number1:any = 0;
     number2:any = 0;
     chart = [];
+    charttickets = new Chart('ticketsvalores', {
+			   type: 'bar',
+			   data: {
+			    labels: this.label,
+			    datasets: [
+			      {
+			     label: 'Dinero de tickets ultimos 7 dias',
+			     fill: false,
+			     data: this.data,            
+			     backgroundColor:  this.colorgrafica,
+	            borderColor:  this.colorgrafica,
+	            borderWidth: 1
+			      }
+			    ]
+			     },options: {
+				    scales: {
+				        yAxes: [{
+				            ticks: {
+				                beginAtZero: true
+				            }
+				        }]
+				    }
+				}
+		});
     chartCarreras = new Chart('postus', {
 			   type: 'pie',
 			   data: {
@@ -114,11 +139,65 @@ export class HomeComponent implements OnInit,AfterViewInit {
 	  }
 
 
-	buscarPostuEnespera(){
-		this.inicioService.buscarPostuEnespera().subscribe(res=>{
+	buscarPostuEntrevista(){
+		this.inicioService.buscarPostuEntrevista().subscribe(res=>{
              this.postulaciones=res;
 		})
 	}
+	datosGraficaTickets(){
+		this.inicioService.datosTicketsDinero().subscribe(res=>{
+             this.datostickts=res;
+             console.log(this.datostickts);
+             var labels=[];
+             var datas=[];
+             labels.push(this.datostickts[0].diaactual.split("|")[0]);
+             labels.push(this.datostickts[0].diamenosuno.split("|")[0]);
+             labels.push(this.datostickts[0].diamenosdos.split("|")[0]);
+             labels.push(this.datostickts[0].diamenostres.split("|")[0]);
+             labels.push(this.datostickts[0].diamenoscuatro.split("|")[0]);
+             labels.push(this.datostickts[0].diamenoscinco.split("|")[0]);
+             labels.push(this.datostickts[0].diamenosseis.split("|")[0]);
+
+             datas.push(this.datostickts[0].diaactual.split("|")[1]);
+             datas.push(this.datostickts[0].diamenosuno.split("|")[1]);
+             datas.push(this.datostickts[0].diamenosdos.split("|")[1]);
+             datas.push(this.datostickts[0].diamenostres.split("|")[1]);
+             datas.push(this.datostickts[0].diamenoscuatro.split("|")[1]);
+             datas.push(this.datostickts[0].diamenoscinco.split("|")[1]);
+             datas.push(this.datostickts[0].diamenosseis.split("|")[1]);
+
+             
+			this.charttickets = new Chart('ticketsvalores', {
+						   type: 'bar',
+						   data: {
+						    labels: labels,
+						    datasets: [
+						      {
+						     label: 'Postulaciones por carreras y beca',
+						     fill: false,
+						     data: datas,            
+						     backgroundColor:  this.colors,
+				            borderColor:  this.colors,
+				            borderWidth: 1
+						      }
+						    ]
+						     },options: {
+						     	animation: {
+								         onComplete: function() {
+								            this.isChartRendered = true
+								         }
+								      },
+							    scales: {
+							        yAxes: [{
+							            ticks: {
+							                beginAtZero: true
+							            }
+							        }]
+							    }
+							}
+					});             
+		})
+	}	
 
 	ngOnInit(): void {
 
@@ -128,9 +207,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
 		if(this.$nombreusuario.rol != 1){
 			this.buscarBeca();
 			this.buscarUltimoperiodo();
-			this.buscarPostuEnespera();
+			this.buscarPostuEntrevista();
 			this.buscarInfoColores();
 			this.buscarGraficaInfo();
+			this.datosGraficaTickets();
 		} else{
 			if(this.$nombreusuario.estadosdatos != 1){
 				this.abrirActualizarDatos();

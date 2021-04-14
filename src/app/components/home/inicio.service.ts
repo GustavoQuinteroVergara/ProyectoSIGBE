@@ -8,9 +8,13 @@ export class InicioService {
   url = 'http://localhost/SIGBEWEB/';
 
   constructor(private http:HttpClient) { }
-buscarPostuEnespera(){
-  return this.http.get(`${this.url}app/componentes/postulacion/listarpostuactivas.php`);
+buscarPostuEntrevista(){
+  return this.http.get(`${this.url}app/componentes/postulacion/postubyentrevista.php`);
 }
+datosTicketsDinero(){
+  return this.http.get(`${this.url}app/componentes/tickets/dineroTicketssietedias.php`);
+}
+
 infoColores(){
   return this.http.get(`${this.url}app/componentes/usuarios/consultashomebienestar.php`);
 }
