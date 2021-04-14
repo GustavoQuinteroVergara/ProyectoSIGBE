@@ -173,7 +173,7 @@
 </form>
 </div>
   </mat-tab>
-    <mat-tab label="Mis carreras" data-aos="fade-down" data-aos-once="true">
+    <mat-tab label="Mis carreras" data-aos="fade-down" data-aos-once="true" *ngIf="$nombreusuario.rol == '1'">
       <div class="row formsmodificaruser">
         <div class="col-12">
           <div>
