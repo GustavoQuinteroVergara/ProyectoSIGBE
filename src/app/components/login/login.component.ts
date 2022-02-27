@@ -84,7 +84,7 @@ export class LoginComponent {
         }else{
           Swal.fire({
             title: 'ERROR!',
-            text: 'Error contrasena invalida o usuario inactivo',
+            text: 'Error contraseña inválida o usuario inactivo',
             icon: 'error'
           });
         }
@@ -124,7 +124,7 @@ export class LoginComponent {
             }else{
               Swal.fire({
                 title: 'ERROR!',
-                text: 'Error contrasena invalida o usuario inactivo',
+                text: 'Error contraseña inválida o usuario inactivo',
                 icon: 'error'
               });
 

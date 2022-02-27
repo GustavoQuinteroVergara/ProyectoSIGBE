@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../../environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioshabilitarService {
 
-  url='http://localhost/sigbeweb/app/componentes/usuarios/list_usuarios.php';
-  url2='http://localhost/sigbeweb/app/componentes/usuarios/habilitar_user.php?';
+  url=environment.URL_LOCAL+'/app/componentes/usuarios/list_usuarios.php';
+  url2=environment.URL_LOCAL+'/app/componentes/usuarios/habilitar_user.php?';
   
 
   constructor(private http: HttpClient) { }

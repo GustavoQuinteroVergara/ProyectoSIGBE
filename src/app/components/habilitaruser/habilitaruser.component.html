@@ -60,9 +60,9 @@
                     <ng-container matColumnDef="estadouser">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado del usuario</th>
                       <td mat-cell *matCellDef="let row" >              
-                       <a *ngIf="row.estadouser=='Inactivo'" class="" (click)="updateuser(row.identificacion,false)"><i class="icofont-checked iconcheckAprobar botoninvactivo"></i>{{row.estadouser}}</a>
+                       <a *ngIf="row.estadouser=='Inactivo'" class="botoninvactivo" style="font-size:15px;" (click)="updateuser(row.identificacion,false)"><i class="icofont-checked iconcloseAprobar botoninvactivo"></i>{{row.estadouser}}</a>
                         
-                        <a *ngIf="row.estadouser =='Activo'" class="" (click)="updateuser(row.identificacion,true)"><i class="icofont-close-squared-alt iconcloseAprobar botoninvactivo botoninvactivo"></i>{{row.estadouser}}</a>   
+                        <a *ngIf="row.estadouser =='Activo'" class="botoninvactivo" style="font-size:15px;" (click)="updateuser(row.identificacion,true)"><i class="icofont-close-squared-alt iconcheckAprobar  botoninvactivo botoninvactivo"></i>{{row.estadouser}}</a>   
                       </td>
                     </ng-container>
 

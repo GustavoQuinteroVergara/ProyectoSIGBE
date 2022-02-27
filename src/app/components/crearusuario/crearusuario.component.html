@@ -9,7 +9,7 @@
     <div *ngIf="!success" class="dialogSuccess">
       <i class="icofont-close-circled text-center iconErrRegister"></i>
       <h2 class="text-center textoSuccess">Error al registrar</h2>
-    </div>
+    </div>  
   </ng-template>
 
   <ng-template #emailexistente>
@@ -29,10 +29,10 @@
         <h1 class="text-center">REGISTRO ESTUDIANTIL </h1>
       </div>
       <div class="row"> 
-        <div class="input-field col-lg col-sm col-md col-xl">
+        <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
 
           <h4>Identificación</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Identificación</mat-label>
             <input matInput formControlName="identificacion" pattern="^[0-9]+"  maxlength="10" #identificacion type="text"  id="identificacion">
             <i matSuffix class="icofont-id iconito"></i>
@@ -44,12 +44,12 @@
           </div>
         </div> 
 
-        <div class="input-field col-lg col-sm col-md col-xl">
+        <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
 
           <h4>Nombre</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Nombre</mat-label>
-            <input matInput formControlName="nombre" #nombre id="first_name" type="text" class="validate">
+            <input matInput formControlName="nombre" #nombre id="first_name" type="text" class="validate" >
             <i  matSuffix class="icofont-id iconito"></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('nombre').errors && formulariologin.get('nombre').dirty">
@@ -58,9 +58,9 @@
             <mat-error *ngIf="formulariologin.get('nombre').hasError('pattern')">Solo letras</mat-error>
           </div>
         </div>
-        <div class="input-field col-lg col-sm col-md col-xl">
+        <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Apellido</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Apellido</mat-label>
             <input matInput formControlName="apellido" #apellido id="last_name" type="text" class="validate">
             <i matSuffix class="icofont-id iconito"></i>
@@ -71,9 +71,9 @@
             <mat-error *ngIf="formulariologin.get('apellido').hasError('pattern')"><br>Solo letras</mat-error>
           </div>
         </div>
-                <div class="input-field col-lg col-sm col-md col-xl">
+                <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Dirección</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Dirección</mat-label>
             <input matInput formControlName="direccion" #direccion id="direccion" type="text" class="validate">
             <i matSuffix class="icofont-id iconito"></i>
@@ -88,9 +88,9 @@
         
       </div>
       <div class="row divInputssrow">
-        <div class="col-lg col-sm col-md col-xl">
+        <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Estrato</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Estrato </mat-label>
             <mat-select #estrato>
               <mat-option value="1">
@@ -115,9 +115,9 @@
             </mat-select>
           </mat-form-field>
           </div>
-          <div class="col-lg col-sm col-md col-xl">
+          <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
             <h4>Fecha de nacimiento</h4>
-            <mat-form-field appearance="fill" class="example-full-width">
+            <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
               <mat-label>Fecha de nacimiento</mat-label>
               <input matInput #fechanacimiento [matDatepicker]="picker" >
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -126,9 +126,9 @@
           </div>
       </div>
           <div class="row divInputssrow">
-          <div class="col-lg col-sm col-md col-xl">
+          <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
             <h4>Zona residencial</h4>
-            <mat-form-field appearance="fill" class="example-full-width">
+            <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
               <mat-label>Zona residencial </mat-label>
               <mat-select #zonaresidencial>
                 <mat-option value="Rural">
@@ -141,9 +141,9 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-lg col-sm col-md col-xl">
+          <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
             <h4>Asignar Rol</h4>
-              <mat-form-field appearance="fill" class="example-full-width">
+              <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
               <mat-label>Seleccione un rol</mat-label>
               <mat-select #rol >
               <mat-option *ngFor="let rol of roles" [value]="rol.IdRol">{{rol.descripcion}}</mat-option>
@@ -152,9 +152,9 @@
     </div>
           </div>
           <div class="row divInputssrow">
-        <div class="col-lg col-sm col-md col-xl">
+        <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
                   <h4>Departamento</h4>
-            <mat-form-field appearance="fill" class="example-full-width">
+            <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
               <mat-label>Selecciona departamento</mat-label>
               <mat-select #departamento (selectionChange)="departamentoselec($event.value)">
                 <mat-option *ngFor="let depar of departamentos" [value]="depar.iddepartamento">{{depar.nombre}}</mat-option>
@@ -162,9 +162,9 @@
               </mat-select>
             </mat-form-field>
           </div>
-         <div class="col-lg col-sm col-md col-xl">
+         <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
             <h4>Ciudad</h4>
-            <mat-form-field appearance="fill" class="example-full-width">
+            <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
               <mat-label>Selecciona la ciudad</mat-label>
               <mat-select #ciudad>
                 <mat-option *ngFor="let ciudad of ciud" [value]="ciudad.idciudad">{{ciudad.nombre}}</mat-option>
@@ -175,9 +175,9 @@
           </div>
 
       <div class="row divInputssrow">
-        <div class="input-field col-lg col-sm col-md col-xl">
+        <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Email</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" #email pattern="[a-z]+.+[a-z]@correounivalle.edu.co" id="email" type="email" class="validate">
             <i matSuffix class="icofont-email iconito "></i>
@@ -188,9 +188,9 @@
             <mat-error *ngIf="formulariologin.get('email').hasError('required')">Este campo es obligatoria</mat-error>
           </div>
         </div>
-        <div class="input-field col-lg col-sm col-md col-xl">
+        <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Contraseña</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Contraseña</mat-label>
             <input matInput #contrasena formControlName="contrasena" id="password" type="password" class="validate">
             <i matSuffix class="icofont-key iconocontrasenas"></i>
@@ -201,9 +201,9 @@
           
           </div>
         </div>
-        <div class="col-lg col-sm col-md col-xl">
+        <div class="col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Seleccione su carrera</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Selecciona su carrera</mat-label>
             <mat-select #carrera>
               <mat-option *ngFor="let carrer of carreras" [value]="carrer.codigocarrera">{{carrer.nombre_carrera}}</mat-option>
@@ -211,9 +211,9 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="input-field col-lg col-sm col-md col-xl">
+        <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Código estudiante</h4>
-          <mat-form-field appearance="fill" class="example-full-width">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Código estudiante</mat-label>
             <input matInput #codigo formControlName="codigo" pattern="^[0-9]+" id="codigo" type="text" class="validate">
             <i matSuffix class="icofont-graduate iconito"></i>

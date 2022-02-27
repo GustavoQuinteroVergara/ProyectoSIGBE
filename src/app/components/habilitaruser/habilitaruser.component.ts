@@ -51,7 +51,8 @@ updateuser(identificacion:any,estadoseleccionado:any){
       this.serviciohabilitar.updateuser(this.updateestudiante)
       .subscribe(res=>{
         this.buscarEstudiantes();
-        this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser;
+        console.log(this.estudiante[0]);
+        this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser.estadouser ? this.updateestudiante.estadouser.estadouser : this.updateestudiante.estadouser;
           Swal.fire({
                 title: 'Exitoso',
                 text: 'Actualizado exitosamente.',
@@ -73,8 +74,8 @@ updateuser(identificacion:any,estadoseleccionado:any){
     };
     this.serviciohabilitar.updateuser(this.updateestudiante)
     .subscribe(res=>{
-      console.log(res);
-       this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser;
+      this.buscarEstudiantes();
+       this.estudiante[0].estadoestudiante = this.updateestudiante.estadouser ;
           Swal.fire({
                 title: 'Exitoso',
                 text: 'Actualizado exitosamente.',

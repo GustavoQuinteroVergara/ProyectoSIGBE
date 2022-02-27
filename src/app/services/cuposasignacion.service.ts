@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../environment';
 @Injectable({
 	providedIn: 'root'
 })
 export class CuposasignacionService {
-	urlCreateAsign ='http://localhost/SIGBEWEB/app/componentes/cupostickets';
+	urlCreateAsign =environment.URL_LOCAL+'/app/componentes/cupostickets';
 	constructor(private http: HttpClient) { }
 
 	registrarAsignacionCupos(registroAsign:Array<any>){

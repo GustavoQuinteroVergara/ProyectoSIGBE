@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../../environment';
 @Injectable({
   providedIn: 'root'
 })
 export class BecaService {
-  urlCreateBeca=  'http://localhost/sigbeweb/app/componentes/becas/create_becas.php';
-  urlListTBeca = 'http://localhost/sigbeweb/app/componentes/tipobecas/list_tipobecas.php';
+  urlCreateBeca=  environment.URL_LOCAL+'/app/componentes/becas/create_becas.php';
+  urlListTBeca = environment.URL_LOCAL+'/app/componentes/tipobecas/list_tipobecas.php';
   constructor(private http: HttpClient) { }
 
   

@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../../../environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesViewConvocatoriaService {
-  url="http://localhost/sigbeweb/app/componentes/postulacion/listarpostubyid.php?";
-  url2="http://localhost/sigbeweb/app/componentes/postulacion/listpostubypsicologia.php?";
-  urlpostubyid="http://localhost/sigbeweb/app/componentes/postulacion/postubyidpostu.php";
-  urlbeneficiopostu = "http://localhost/sigbeweb/app/componentes/beneficarios/listBeneficioByPostu.php";
-  urlimagespostu="http://localhost/sigbeweb/app/componentes/postulacion/updateImagenesPostu.php";
-  urlConvoById="http://localhost/sigbeweb/app/componentes/convocatorias/list_convobyid.php?";
-  urlUpdateConvo="http://localhost/sigbeweb/app/componentes/convocatorias/actualizar_convocatoria.php";
-  urlConvoCupos ="http://localhost/sigbeweb/app/componentes/convocatorias/updateCuposConvo.php";
-  urlPostuEstado ="http://localhost/sigbeweb/app/componentes/postulacion/updateEstadoPostu.php";
-  urlEstadoPromedio = "http://localhost/sigbeweb/app/componentes/postulacion/updateEstadoPromedio.php";
-  urlInfoGenPostu = "http://localhost/sigbeweb/app/componentes/informaciongeneral/listarinformaciongeneral.php?";
+  url=environment.URL_LOCAL+"/app/componentes/postulacion/listarpostubyid.php?";
+  url2=environment.URL_LOCAL+"/app/componentes/postulacion/listpostubypsicologia.php?";
+  urlpostubyid=environment.URL_LOCAL+"/app/componentes/postulacion/postubyidpostu.php";
+  urlbeneficiopostu = environment.URL_LOCAL+"/app/componentes/beneficarios/listBeneficioByPostu.php";
+  urlimagespostu=environment.URL_LOCAL+"/app/componentes/postulacion/updateImagenesPostu.php";
+  urlConvoById=environment.URL_LOCAL+"/app/componentes/convocatorias/list_convobyid.php?";
+  urlUpdateConvo=environment.URL_LOCAL+"/app/componentes/convocatorias/actualizar_convocatoria.php";
+  urlConvoCupos =environment.URL_LOCAL+"/app/componentes/convocatorias/updateCuposConvo.php";
+  urlPostuEstado =environment.URL_LOCAL+"/app/componentes/postulacion/updateEstadoPostu.php";
+  urlEstadoPromedio = environment.URL_LOCAL+"/app/componentes/postulacion/updateEstadoPromedio.php";
+  urlInfoGenPostu = environment.URL_LOCAL+"/app/componentes/informaciongeneral/listarinformaciongeneral.php?";
 
   constructor(private http: HttpClient) { }
 

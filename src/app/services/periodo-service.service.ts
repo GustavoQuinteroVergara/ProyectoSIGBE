@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../environment';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class PeriodoServiceService {
 
-	url="http://localhost/sigbeweb";
+	url=environment.URL_LOCAL;
 
 	constructor(private http: HttpClient) { }
 

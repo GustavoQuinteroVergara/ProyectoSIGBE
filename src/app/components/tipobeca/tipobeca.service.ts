@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../../environment';
 @Injectable({
   providedIn: 'root'
 })
 export class TipobecaService {
-  urlCreateTBeca ='http://localhost/SIGBEWEB/app/componentes/tipobecas/create_tipobecas.php';
+  urlCreateTBeca =environment.URL_LOCAL+'/app/componentes/tipobecas/create_tipobecas.php';
   constructor(private http: HttpClient) { }
 
   registrarTipoBeca(registroTBeca:Array<any>){

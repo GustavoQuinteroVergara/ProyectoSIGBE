@@ -3,6 +3,7 @@ import  {ServiciocrearuserService } from './serviciocrearuser.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {formatDate } from '@angular/common';
+import {Router } from '@angular/router';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crearusuario',
@@ -21,7 +22,7 @@ fechaActual= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 carreras:any;
 departamentos:any;
 roles:any;
-  constructor(private registraruser:ServiciocrearuserService, public form:FormBuilder, public dialog: MatDialog) {
+  constructor(private registraruser:ServiciocrearuserService, public form:FormBuilder, public dialog: MatDialog,private router:Router) {
     this.formulariologin= this.form.group({
       identificacion:['', [Validators.required,Validators.minLength(6)]],
       nombre:['', [Validators.required,Validators.minLength(3),Validators.pattern("[a-zA-Z ]*")] ],
@@ -87,6 +88,7 @@ console.log(this.formulariologin.value);
         text: 'Registro exitoso.',
         icon: 'success'
       });
+      this.router.navigate(['/bienvenida']);
     },(err)=>{
       Swal.fire({
         title: 'Exitoso',

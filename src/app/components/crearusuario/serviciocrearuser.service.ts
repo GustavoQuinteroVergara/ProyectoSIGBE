@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from './../../../../environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ServiciocrearuserService {
 
-  url='http://localhost/sigbeweb/app/componentes/usuarios/create_user.php';
-  url2='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscardepartamentos.php'
-  url3='http://localhost/SIGBEWEB/app/componentes/ubicacion/buscarciudades.php';
-  url4= 'http://localhost/SIGBEWEB/app/componentes/ubicacion/carreras.php';
-  url5= 'http://localhost/SIGBEWEB/app/componentes/roles/list_roles.php';
+  url=environment.URL_LOCAL+'/app/componentes/usuarios/create_user.php';
+  url2=environment.URL_LOCAL+'/app/componentes/ubicacion/buscardepartamentos.php'
+  url3=environment.URL_LOCAL+'/app/componentes/ubicacion/buscarciudades.php';
+  url4= environment.URL_LOCAL+'/app/componentes/ubicacion/carreras.php';
+  url5= environment.URL_LOCAL+'/app/componentes/roles/list_roles.php';
   constructor(private http: HttpClient) { }
 
   registrarUsuario(arreglousu:any){
