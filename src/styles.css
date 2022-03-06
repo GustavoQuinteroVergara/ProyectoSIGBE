@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 *{
 	margin: 0;
 	padding: 0;
@@ -20,6 +21,40 @@
 /* You can add global styles to this file, and also import other style files */
 
 body { margin: 0;font-family: 'Raleway', sans-serif !important;}
+
+@font-face {
+	font-family: 'custom-material';
+	src: url('./assets/fonts/MaterialIcons-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+  
+ngx-mat-datetime-content .material-icons
+	{
+	font-family: 'custom-material' !important;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+}
+
+ngx-mat-datetime-content  .mat-icon{
+	background-repeat: no-repeat;
+	display: inline-block;
+	fill: currentColor;
+	height: 24px;
+	width: 24px;
+}
+
 
 .imglogo1, .imglogo2{
 	width: 120px;

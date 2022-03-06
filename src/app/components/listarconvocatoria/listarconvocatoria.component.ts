@@ -19,12 +19,13 @@ export class ListarconvocatoriaComponent  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort,{static: false}) sort: MatSort;  
   constructor(private listarservicio:ServiciolistarconvoService, private excelService: ExporterService) { 
+
     this.buscarconvocatorias();
   }
 
   buscarconvocatorias(){
    this.listarservicio.buscarConvocatorias().subscribe(res=>{
-    this.convocatorias=res;
+      this.convocatorias=res;
       this.dataSource = new MatTableDataSource(this.convocatorias);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

@@ -1009,7 +1009,7 @@
 
       <div class="row">
         <div class="col-6">
-          <mat-form-field class="example-full-width" disabled appearance="none">
+          <mat-form-field class="example-full-width" disabled appearance="none" style="width: 100%;">
             <mat-label>Identificación</mat-label>
             <input #beca id="identificacionest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.identificacion">
           </mat-form-field>
@@ -1019,7 +1019,7 @@
       <div class="row">
         <div class="col-12">
 
-          <mat-form-field class="example-full-width" disabled appearance="none">
+          <mat-form-field class="example-full-width" disabled appearance="none" style="width: 100%;">
             <mat-label>Correo electrónico</mat-label>
             <input #beca id="correoest" matInput placeholder="cupos" disabled [value]="postulacionesest[0].estudiante.correoest" style="width: 100%;">
           </mat-form-field>
@@ -1226,13 +1226,13 @@
                     </div>
                   </div>                  
                 <div class="table-responsive">
-                  <div class="mat-elevation-z8 table-responsive">
+                  <div class="mat-elevation-z8 table-responsive" style="overflow-x: hidden;">
                   <table mat-table [dataSource]="dataSource" matSort style="width: 100%;text-align: center;" *ngIf="$nombreusuario.rol != 4">
 
                     <!-- ID Column -->
                     <ng-container matColumnDef="estudiante.nombreestudiante">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre estudiante</th>
-                      <td mat-cell *matCellDef="let row"> {{row.estudiante.nombreestudiante}} <a (click)="buscarEstPostuByIden(row.estudiante.identificacion,mytemplate)" data-title-a="Ver información del estudiante"><i class="icofont-address-book iconSearchUser"></i></a> </td>
+                      <td mat-cell *matCellDef="let row"> {{row.estudiante.nombreestudiante}}  </td>
                     </ng-container>
 
                     <!-- Progress Column -->
@@ -1246,19 +1246,6 @@
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad residencia</th>
                       <td mat-cell *matCellDef="let row"> {{row.ciudadresidencia}} </td>
                     </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="direccionresidencia">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Direccion residencia</th>
-                      <td mat-cell *matCellDef="let row"> {{row.direccionresidencia}} </td>
-                    </ng-container>
-
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="estrato">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estrato</th>
-                      <td mat-cell *matCellDef="let row"> {{row.estrato}} </td>
-                    </ng-container>                              
-
                                         <!-- Color Column -->
                     <ng-container matColumnDef="carrera">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Carrera</th>
@@ -1289,7 +1276,10 @@
                                                             <!-- Color Column -->
                     <ng-container matColumnDef="Acciones">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                      <td mat-cell *matCellDef="let row" > <a (click)="verPostuSel(row.consecutivo_postulacion, row.estado_postulacion, row ,templateverpostulacion)" data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a> </td>
+                      <td mat-cell *matCellDef="let row" > 
+                        <a (click)="verPostuSel(row.consecutivo_postulacion, row.estado_postulacion, row ,templateverpostulacion)" data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i>
+                        </a> <a (click)="buscarEstPostuByIden(row.estudiante.identificacion,mytemplate)" data-title-a="Ver información del estudiante"><i class="icofont-address-book iconSearchUser"></i></a>
+                      </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -1300,6 +1290,7 @@
                       <td class="mat-cell" colspan="4">No hay datos que coincidan con lo digitado</td>
                     </tr>
                   </table>
+                  <p class="m-2" *ngIf="dataSource === undefined">No hay postulaciones para mostrar</p>
                   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" *ngIf="$nombreusuario.rol != 4"></mat-paginator>
 
 
@@ -1366,20 +1357,23 @@
                                                             <!-- Color Column -->
                     <ng-container matColumnDef="Acciones">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
-                      <td mat-cell *matCellDef="let row" > <a (click)="verPostuSel(row.consecutivo_postulacion, row.estado_postulacion, row ,templateverpostulacion)" data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a> </td>
+                      <td mat-cell *matCellDef="let row" > 
+                        <a (click)="verPostuSel(row.consecutivo_postulacion, row.estado_postulacion, row ,templateverpostulacion)" data-title="Ver postulación"><i class="icofont-attachment iconSearchUser"></i></a> </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
 
                     <!-- Row shown when there is no matching data. -->
+                    
                     <tr class="mat-row" *matNoDataRow>
                       <td class="mat-cell" colspan="4">No hay datos que coincidan con lo digitado</td>
                     </tr>
                   </table>
+                  
                   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" *ngIf="$nombreusuario.rol == 4"></mat-paginator>
 
-
+                  
                   </div>
                   </div>
                 </div>

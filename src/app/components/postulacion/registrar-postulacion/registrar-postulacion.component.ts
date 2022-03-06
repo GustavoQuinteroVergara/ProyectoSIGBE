@@ -108,7 +108,7 @@ export class RegistrarPostulacionComponent  {
 
   promedioMessage(promediosel:any){
     if(promediosel < 3.0){
-      this.snackBack.open('El promedio seleccionado no es el recomendado.','Aceptar',{
+      this.snackBack.open('El promedio seleccionado no es el recomendado pero puedes inscribirte.','Aceptar',{
         duration: 3000,
         horizontalPosition: 'right',
         verticalPosition: 'top',

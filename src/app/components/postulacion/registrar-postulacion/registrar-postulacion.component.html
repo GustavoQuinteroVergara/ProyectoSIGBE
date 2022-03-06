@@ -26,9 +26,9 @@
 
      <div class="row">
         <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field  col-lg-12 col-sm-6 col-md-6 col-xl-6">
             <h4>Selecciona una convocatoria</h4>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-select #convo required formControlName="convo" (selectionChange)="cambiarConvo($event.value)">
                 <mat-option>-- Selecciona una Convocatoria --</mat-option>
                 <mat-option *ngFor="let convos of convoActivas" [value]="convos" >
@@ -42,9 +42,9 @@
     </div>
 <!-- fin estrato -->
 
-<div class="input-field col s6">
+<div class="input-field col-lg-12 col-sm-6 col-md-6 col-xl-6">
     <h4>Selecciona tu semestre</h4>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 100%;">
       <mat-select #semestre required formControlName="semestre">
         <mat-option>-- Selecciona el semestre cursando --</mat-option>
         <mat-option value="1">1</mat-option>
@@ -73,7 +73,7 @@
     <h4>Selecciona tu promedio acumulado</h4>
     
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 100%;">
       <mat-select #promedio required formControlName="promedio" (selectionChange)="promedioMessage($event.value)">
         <mat-option>-- Selecciona tu promedio acumulado --</mat-option>
         <mat-option value="2">2</mat-option>
@@ -120,14 +120,14 @@
 <!-- FIN PROMEDIO -->
 <div class="input-field col s6">
     <h4>Verifica tu número de identificación</h4>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" style="width: 100%;">
       <mat-label>Identificacion</mat-label>
       <input matInput #identificacion id="icon_prefix" style="font-weight: 600;" value="{{this.$nombreusuario.identi}}" disabled="true" readonly type="text" class="validate inputidenuser">
   </mat-form-field>
 </div>
         <div class="input-field col s12">
             <h4>Selecciona tu carrera para postularte</h4>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-select #carrera required formControlName="carrera">
                 <mat-option>-- Selecciona una carrera --</mat-option>
                 <mat-option *ngFor="let carrera of carrerasest" [value]="carrera.idusuariocarrera" >
@@ -154,12 +154,15 @@
                 <input type="file" accept="application/pdf" formControlName="archivos" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">   
             </div>
         </div> -->
-        <div class="col-lg" *ngIf="convoActivas != null">
+        <div class="col-lg text-center" *ngIf="convoActivas != null">
             <div class="card m-2 cardsconvos" style="width: 18rem;display: inline-block;transition: all 0.2s ease;" *ngFor="let docsarchivos of docsconvosel"> 
               <div class="card-body">
-                <h3 class="card-title">{{docsarchivos.nombredoc}}</h3>
+                <h3 class="card-title fw-bold">{{docsarchivos.nombredoc}}</h3>
                 <hr>
-                 <input type="file" accept="application/pdf" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">  
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Sube el documento requerido</label>
+                    <input class="form-control" type="file" id="formFile" accept="application/pdf" (change)="seleccionarArchivo($event,docsarchivos.concecutivodoc)">
+                  </div> 
                 <hr>
 
               </div>

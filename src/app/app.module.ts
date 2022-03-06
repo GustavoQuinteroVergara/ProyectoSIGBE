@@ -127,6 +127,7 @@ import { ListadoFinalComponent } from './components/convocatoria/listado-final/l
   HttpClientModule,
   BrowserAnimationsModule
   ],
+  exports:[MatIconModule],
   providers: [
   MatDatepickerModule,
   MatNativeDateModule,

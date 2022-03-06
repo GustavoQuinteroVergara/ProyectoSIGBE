@@ -129,7 +129,7 @@ export class ViewConvocatoriaComponent {
   entrevistvalidate=false;
   //FIN VARIABLES DOCUMENTOS
     displayedColumns: string[] = ['estudiante.nombreestudiante', 
-    'codigoestudiante', 'ciudadresidencia' , 'direccionresidencia'  ,'estrato', 'carrera',
+    'codigoestudiante', 'ciudadresidencia' , 'carrera',
     'promedio','fechapostulacion',
     'semestre','estado_postulacion','Acciones'];
 
@@ -163,6 +163,7 @@ export class ViewConvocatoriaComponent {
         allowOutsideClick: false,
       });
       Swal.showLoading();
+      console.log(this.dataSource2);
     this.$idConvo = this.rutaActiva.snapshot.params.idConvo;
     this.buscarConvoByIdConvo(this.$idConvo);
     if(this.$nombreusuario.rol == '4'){
@@ -1111,7 +1112,7 @@ export class ViewConvocatoriaComponent {
       this.postulacionesest = result;
       let dialogRef = this.dialog.open( templateRef,{
        height: '500px',
-       width: '500px',
+       width: '800px',
      });
     },(err)=>{
         Swal.fire({
@@ -1455,7 +1456,7 @@ export class ViewConvocatoriaComponent {
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: "Si, he terminado de revisar.",
-              cancelButtonText: "Aun no he terminado.",
+              cancelButtonText: "Aún no he terminado.",
               allowOutsideClick: false,
             }).then(result=>{
             Swal.fire({
@@ -1511,7 +1512,7 @@ export class ViewConvocatoriaComponent {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: "Si, he terminado de revisar.",
-            cancelButtonText: "Aun no he terminado.",
+            cancelButtonText: "Aún no he terminado.",
             allowOutsideClick: false,
           }).then(result=>{
             if(result.value){
@@ -1588,7 +1589,7 @@ export class ViewConvocatoriaComponent {
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: "Si, he terminado de revisar.",
-              cancelButtonText: "Aun no he terminado.",
+              cancelButtonText: "Aún no he terminado.",
               allowOutsideClick: false,
             }).then(result=>{
               if(result.value){
@@ -1697,7 +1698,7 @@ export class ViewConvocatoriaComponent {
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: "Si, he terminado de realizarla.",
-              cancelButtonText: "Aun no he terminado.",
+              cancelButtonText: "Aún no he terminado.",
               allowOutsideClick: false,
             }).then(result=>{
               if(result.value){
@@ -1757,7 +1758,7 @@ export class ViewConvocatoriaComponent {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: "Si, he terminado de realizarla.",
-            cancelButtonText: "Aun no he terminado.",
+            cancelButtonText: "Aún no he terminado.",
             allowOutsideClick: false,
           }).then(result=>{
             if(result.value){
@@ -1836,7 +1837,7 @@ export class ViewConvocatoriaComponent {
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: "Si, he terminado de realizarla.",
-              cancelButtonText: "Aun no he terminado.",
+              cancelButtonText: "Aún no he terminado.",
               allowOutsideClick: false,
             }).then(result=>{
               if(result.value){
@@ -1946,7 +1947,7 @@ export class ViewConvocatoriaComponent {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: "Si, he terminado de realizarla.",
-            cancelButtonText: "Aun no he terminado.",
+            cancelButtonText: "Aún no he terminado.",
             allowOutsideClick: false,
           }).then(result=>{
             if(result.value){
@@ -2024,7 +2025,7 @@ export class ViewConvocatoriaComponent {
               icon: 'warning',
               showCancelButton: true,
               confirmButtonText: "Si, he terminado de realizarla.",
-              cancelButtonText: "Aun no he terminado.",
+              cancelButtonText: "Aún no he terminado.",
               allowOutsideClick: false,
             }).then(result=>{
               if(result.value){

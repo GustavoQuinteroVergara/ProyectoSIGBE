@@ -22,6 +22,7 @@ fechaActual= formatDate(new Date(), 'yyyy-MM-dd', 'en');
 carreras:any;
 departamentos:any;
 roles:any;
+codigocarrera:any;
   constructor(private registraruser:ServiciocrearuserService, public form:FormBuilder, public dialog: MatDialog,private router:Router) {
     this.formulariologin= this.form.group({
       identificacion:['', [Validators.required,Validators.minLength(6)]],
@@ -64,7 +65,7 @@ console.log(this.formulariologin.value);
      this.carreras=res;
     });
    }
-  registrouser(identificacion:any,nombre:any,apellido:any,direccion:any,email:any,contrasena:any,roles:any,estadouser:any,zonaresidencial:any,ciudad:any,fechanacimiento:any,estrato:any,codigo:any,codigocarrera:any,templateRef,emailexistente){
+  registrouser(identificacion:any,nombre:any,apellido:any,direccion:any,email:any,contrasena:any,roles:any,estadouser:any,zonaresidencial:any,ciudad:any,fechanacimiento:any,estrato:any,codigo:any,templateRef,emailexistente,codigocarrera:any){
     this.usuario={
       identificacion:identificacion,
       nombre:nombre,
@@ -88,7 +89,7 @@ console.log(this.formulariologin.value);
         text: 'Registro exitoso.',
         icon: 'success'
       });
-      this.router.navigate(['/bienvenida']);
+      // this.router.navigate(['/bienvenida']);
     },(err)=>{
       Swal.fire({
         title: 'Exitoso',
