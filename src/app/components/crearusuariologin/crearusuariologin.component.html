@@ -190,7 +190,7 @@
           <h4>Email</h4>
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" #email pattern="[a-z]+.+[a-z]@correounivalle.edu.co" id="email" type="email" class="validate">
+            <input matInput formControlName="email" #email pattern="[a-z0-9]+.+[a-z0-9]@correounivalle.edu.co" id="email" type="email" class="validate">
             <i matSuffix class="icofont-email iconito "></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('email').errors && formulariologin.get('email').dirty">

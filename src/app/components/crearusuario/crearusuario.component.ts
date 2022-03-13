@@ -31,7 +31,6 @@ codigocarrera:any;
       direccion:['', [Validators.required,Validators.minLength(3)]],
       acceptTerms: [false, Validators.requiredTrue],
       email:['', [Validators.email,Validators.required]],
-      codigo:['', [Validators.required,Validators.minLength(5)]],
       contrasena:['', [Validators.required,Validators.minLength(7)]],
       
     });
@@ -89,7 +88,7 @@ console.log(this.formulariologin.value);
         text: 'Registro exitoso.',
         icon: 'success'
       });
-      // this.router.navigate(['/bienvenida']);
+      this.router.navigate(['/habilitarUser']);
     },(err)=>{
       Swal.fire({
         title: 'Exitoso',

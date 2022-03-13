@@ -179,7 +179,7 @@
           <h4>Email</h4>
           <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" #email pattern="[a-z]+.+[a-z]@correounivalle.edu.co" id="email" type="email" class="validate">
+            <input matInput formControlName="email" #email pattern="[a-z0-9]+.+[a-z0-9]@correounivalle.edu.co" id="email" type="email" class="validate">
             <i matSuffix class="icofont-email iconito "></i>
           </mat-form-field>
           <div *ngIf="formulariologin.get('email').errors && formulariologin.get('email').dirty">
@@ -214,16 +214,11 @@
 
         <div class="input-field col-lg-12 col-sm-12 col-md-6 col-xl-6">
           <h4>Código estudiante</h4>
-          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;">
+          <mat-form-field appearance="fill" class="example-full-width" style="width: 100%;" >
             <mat-label>Código estudiante</mat-label>
-            <input matInput #codigo formControlName="codigo" pattern="^[0-9]+" id="codigo" type="text" class="validate">
+            <input matInput #codigo formControlName="codigo" pattern="^[0-9]+" id="codigo" type="text" class="validate" [disabled]="rol.value !== 1">
             <i matSuffix class="icofont-graduate iconito"></i>
           </mat-form-field>
-          <div *ngIf="formulariologin.get('codigo').errors && formulariologin.get('codigo').dirty">
-            <mat-error *ngIf="formulariologin.get('codigo').hasError('required')">Este campo es obligatorio</mat-error>
-            <mat-error *ngIf="formulariologin.get('codigo').hasError('minlength')">Se debe ingresar mínimo 5 caracteres </mat-error>
-            <mat-error *ngIf="formulariologin.get('codigo').hasError('pattern')"> <br>Solo números</mat-error>
-          </div>
         </div>
       </div>  
      <div class="row ">

@@ -128,12 +128,12 @@ export class ViewConvocatoriaComponent {
   estadoSelPromedio:any;
   entrevistvalidate=false;
   //FIN VARIABLES DOCUMENTOS
-    displayedColumns: string[] = ['estudiante.nombreestudiante', 
+    displayedColumns: string[] = ['nameestusearch', 
     'codigoestudiante', 'ciudadresidencia' , 'carrera',
     'promedio','fechapostulacion',
     'semestre','estado_postulacion','Acciones'];
 
-    displayedColumns2: string[] = ['estudiante.nombreestudiante', 
+    displayedColumns2: string[] = ['nameestusearch', 
     'codigoestudiante', 'ciudadresidencia', 'visitaencontro','entrevistaencontro','carrera',
     'promedio','fechapostulacion',
     'semestre','estado_postulacion','Acciones'];
