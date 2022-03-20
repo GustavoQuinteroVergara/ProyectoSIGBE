@@ -35,13 +35,13 @@ export class CuposticketsComponent implements OnInit {
 		this.buscarAsignaciones();
 		this.formularioCuposAsigna = new FormGroup({
 			fecha: new FormControl('',Validators.required),
-			cuposalmuerzo: new FormControl('',Validators.required),
-			cuposrefrigerio: new FormControl('',Validators.required),
+			cuposalmuerzo: new FormControl('',[Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+			cuposrefrigerio: new FormControl('',[Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
 		});
 		this.formularioCuposAsignaActualizar = new FormGroup({
 			fechaactualizar: new FormControl('',Validators.required),
-			cuposAlmuerzo: new FormControl('',Validators.required),
-			cuposRefrigerio: new FormControl('',Validators.required),
+			cuposAlmuerzo: new FormControl('',[Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
+			cuposRefrigerio: new FormControl('',[Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),
 		});
 		
 	}

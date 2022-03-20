@@ -68,8 +68,7 @@ export class ListarticketsComponent {
   					this.fechaini = '';
   					this.fechafin = '';
   					Swal.fire({
-				      title: 'ERROR.',
-				      text: 'No se encontro tickets.',
+				      text: 'No se encontró tickets.',
 				      icon: 'error'
 				    });
   				});
